@@ -1,0 +1,16 @@
+.login-page {
+  background-color: green;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page_form {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  padding: 1rem;
+  background-color: black;
+  color: #ffffff;
+}
