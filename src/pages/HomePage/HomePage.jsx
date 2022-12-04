@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
-export default function HomePage({ userProfile, handleLogout }) {
+
+export default function HomePage({ userProfile, handleLogout, loginState }) {
   const navigate = useNavigate();
   const logoutAndComeBackLogin = function () {
     handleLogout();
     navigate("/login");
   };
-  return (
-    <div>
-      <div> Welcome back {userProfile.username}</div>
-      <button onClick={logoutAndComeBackLogin}>Log out</button>
-    </div>
-  );
+  if (loginState) {
+    return (
+      <div>
+        <div> Welcome back {userProfile.username}</div>
+        <button onClick={logoutAndComeBackLogin}>Log out</button>
+      </div>
+    );
+  }
 }

@@ -1,8 +1,6 @@
 import "./LoginPage.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-const URL = process.env.REACT_APP_API_URL || "";
 
 export default function LoginPage({
   handleLogin,
@@ -11,12 +9,10 @@ export default function LoginPage({
   email,
   password,
   loginState,
+  userProfile,
 }) {
-  //FUNCTION TO COME BACK HOMEPAGE
+  //DEFINE NAVIGATE
   const navigate = useNavigate();
-  const backToHome = function () {
-    navigate("/");
-  };
   //STATES FOR INPUT BOXES
   const [passwordConfirm, setPasswordConfirm] = useState("");
   //FUNCTIONS TO UPDATES INPUT DATA IN BOXES TO INPUT STATES
@@ -66,6 +62,11 @@ export default function LoginPage({
       </div>
     );
   } else {
-    backToHome();
+    // return (
+    //   <div>
+    //     <h1>Welcome {userProfile.username}</h1>
+    //   </div>
+    // )
+    navigate("/");
   }
 }
