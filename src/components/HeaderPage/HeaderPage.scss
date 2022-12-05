@@ -1,0 +1,81 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.logo {
+  width: 15%;
+}
+
+.logo--header-page {
+  margin: 0 auto;
+  @include desktop {
+    margin: inherit;
+  }
+}
+
+.menu {
+  width: 5%;
+}
+
+.menu--header-page {
+  margin-right: 82px;
+  @include desktop {
+    display: none;
+  }
+}
+
+.header-page__user-profile {
+  width: 30%;
+  @include desktop {
+    width: 3%;
+    margin-left: auto;
+  }
+}
+
+.header-page {
+  background-color: $Burgundy;
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.header-page__wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  width: 120px;
+  @include desktop {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+
+.header-page__build-macro,
+.header-page_recipe-library {
+  display: none;
+  @include desktop {
+    display: block;
+  }
+}
+
+.header-page__track,
+.header-page__macro-list,
+.header-page__recipe-list {
+  display: none;
+  @include desktop {
+    display: block;
+  }
+}
+
+.header-page__link:link,
+.header-page__link:active,
+.header-page__link:hover,
+.header-page__link:visited {
+  text-decoration: none;
+  color: #ffffff;
+}
