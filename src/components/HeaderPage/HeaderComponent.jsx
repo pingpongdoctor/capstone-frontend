@@ -1,10 +1,10 @@
-import "./HeaderPage.scss";
+import "./HeaderComponent.scss";
 import logo from "../../assets/logos/logo.png";
 import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
 import { Link } from "react-router-dom";
 
-export default function HeaderPage({ loginState, handleLogout }) {
+export default function HeaderComponent({ loginState, handleLogout }) {
   return (
     <div className="header-page">
       <img className="menu menu--header-page" alt="menu" src={menu} />
