@@ -10,7 +10,6 @@ export default function HomePage({ userProfile, handleLogout, loginState }) {
     return (
       <div>
         <div> Welcome back {userProfile.username}</div>
-        <button onClick={logoutAndComeBackLogin}>Log out</button>
       </div>
     );
   }

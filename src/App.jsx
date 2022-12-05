@@ -4,6 +4,8 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import HomePage from "./pages/HomePage/HomePage";
+import HeaderPage from "./components/HeaderPage/HeaderPage";
+import SideMenu from "./components/SiteMenu/SideMenu";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -65,6 +67,8 @@ function App() {
   };
   return (
     <BrowserRouter>
+      <HeaderPage loginState={loginState} handleLogout={handleLogout} />
+      <SideMenu />
       <div className="App">
         <Routes>
           <Route
