@@ -1,0 +1,42 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.side-menu {
+  background-color: #ed1c5b;
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  overflow-y: hidden;
+
+  @include desktop {
+    display: none;
+  }
+}
+
+.side-menu--appear {
+  transition: transform 1s;
+  transform: translate(0);
+}
+
+.side-menu--hidden {
+  transition: transform 1s;
+  transform: translate(-400px);
+}
+
+.side-menu__list {
+  padding-left: 0;
+  list-style: none;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 0;
+}
+
+.side-menu__item {
+  padding: 1rem;
+  &:hover {
+    background-color: black;
+    color: #ed1c5b;
+  }
+}

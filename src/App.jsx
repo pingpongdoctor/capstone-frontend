@@ -65,10 +65,24 @@ function App() {
     setUserProfile(null);
     localStorage.removeItem("jwt_token");
   };
+  //STATE FOR THE SIDE MENU
+  const [sideMenuState, setSideMenuState] = useState("side-menu--hidden");
+  //FUNCTION TO POP OUT THE SIDE MENU
+  const popOutSideMenu = function () {
+    const newState =
+      sideMenuState === "side-menu--hidden"
+        ? "side-menu--appear"
+        : "side-menu--hidden";
+    setSideMenuState(newState);
+  };
   return (
     <BrowserRouter>
-      <HeaderComponent loginState={loginState} handleLogout={handleLogout} />
-      <SideMenu />
+      <HeaderComponent
+        loginState={loginState}
+        handleLogout={handleLogout}
+        popOutSideMenu={popOutSideMenu}
+      />
+      <SideMenu sideMenuState={sideMenuState} popOutSideMenu={popOutSideMenu} />
       <div className="App">
         <Routes>
           <Route

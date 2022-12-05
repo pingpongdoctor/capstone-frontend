@@ -4,10 +4,19 @@ import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
 import { Link } from "react-router-dom";
 
-export default function HeaderComponent({ loginState, handleLogout }) {
+export default function HeaderComponent({
+  loginState,
+  handleLogout,
+  popOutSideMenu,
+}) {
   return (
     <div className="header-page">
-      <img className="menu menu--header-page" alt="menu" src={menu} />
+      <img
+        onClick={popOutSideMenu}
+        className="menu menu--header-page"
+        alt="menu"
+        src={menu}
+      />
 
       <img className="logo logo--header-page" src={logo} alt="logo" />
       <div className="header-page__wrapper">

@@ -9,7 +9,7 @@ export default function HomePage({ userProfile, handleLogout, loginState }) {
   if (loginState) {
     return (
       <div>
-        <div> Welcome back {userProfile.username}</div>
+        <div>Welcome back {userProfile.username}</div>
       </div>
     );
   }
