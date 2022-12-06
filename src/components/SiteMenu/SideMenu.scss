@@ -7,7 +7,7 @@
   width: 300px;
   height: 100vh;
   overflow-y: hidden;
-
+  z-index: 100;
   @include desktop {
     display: none;
   }

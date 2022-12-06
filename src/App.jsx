@@ -6,6 +6,7 @@ import axios from "axios";
 import HomePage from "./pages/HomePage/HomePage";
 import HeaderComponent from "./components/HeaderPage/HeaderComponent";
 import SideMenu from "./components/SiteMenu/SideMenu";
+import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -92,11 +93,12 @@ function App() {
                 userProfile={userProfile}
                 handleLogout={handleLogout}
                 loginState={loginState}
+                sideMenuState={sideMenuState}
               />
             }
           />
           <Route
-            path="/Login"
+            path="/login"
             element={
               <LoginPage
                 handleLogin={handleLogin}
@@ -110,8 +112,15 @@ function App() {
               />
             }
           />
-
-          <Route />
+          <Route
+            path="/build-macro"
+            element={
+              <BuildMacroPage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
