@@ -8,9 +8,6 @@
   height: 100vh;
   overflow-y: hidden;
   z-index: 100;
-  @include desktop {
-    display: none;
-  }
 }
 
 .side-menu--appear {

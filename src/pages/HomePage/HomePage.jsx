@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import SliderComponent from "../../components/Carousel/SliderComponent";
+import SliderComponent from "../../components/SliderComponent/SliderComponent";
 import "./HomePage.scss";
 
 export default function HomePage({ userProfile, loginState, sideMenuState }) {

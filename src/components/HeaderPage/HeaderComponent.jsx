@@ -11,16 +11,17 @@ export default function HeaderComponent({
 }) {
   return (
     <div className="header-page">
-      <img
-        onClick={popOutSideMenu}
-        className="menu menu--header-page"
-        alt="menu"
-        src={menu}
-      />
+      <div className="header-page__container">
+        <img
+          onClick={popOutSideMenu}
+          className="menu menu--header-page"
+          alt="menu"
+          src={menu}
+        />
 
-      <img className="logo logo--header-page" src={logo} alt="logo" />
-      <div className="header-page__wrapper">
-        <Link className="header-page__link header-page__build-macro">
+        <img className="logo logo--header-page" src={logo} alt="logo" />
+        <div className="header-page__wrapper">
+          {/* <Link className="header-page__link header-page__build-macro">
           Build Macronutrients
         </Link>
         {loginState && (
@@ -40,25 +41,26 @@ export default function HeaderComponent({
         )}
         <Link className="header-page__link header-page_recipe-library">
           Recipe Library
-        </Link>
-        {!loginState && <Link className="header-page__link">Sign Up</Link>}
-        {!loginState && (
-          <Link to={"/login"} className="header-page__link">
-            Log in
-          </Link>
-        )}
-        {loginState && (
-          <img
-            className="header-page__user-profile"
-            src={userProfile}
-            alt="user-profile"
-          />
-        )}
-        {loginState && (
-          <Link onClick={handleLogout} className="header-page__link">
-            Log out
-          </Link>
-        )}
+        </Link> */}
+          {!loginState && <Link className="header-page__link">Sign Up</Link>}
+          {!loginState && (
+            <Link to={"/login"} className="header-page__link">
+              Log in
+            </Link>
+          )}
+          {loginState && (
+            <img
+              className="header-page__user-profile"
+              src={userProfile}
+              alt="user-profile"
+            />
+          )}
+          {loginState && (
+            <Link onClick={handleLogout} className="header-page__link">
+              Log out
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

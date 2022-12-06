@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import HomePage from "./pages/HomePage/HomePage";
 import HeaderComponent from "./components/HeaderPage/HeaderComponent";
-import SideMenu from "./components/SiteMenu/SideMenu";
+import SideMenu from "./components/SideMenu/SideMenu";
 import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
