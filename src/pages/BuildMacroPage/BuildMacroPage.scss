@@ -1,6 +1,115 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.pie {
-  width: 30%;
+.button--macro-page {
+  border: none;
+  border-radius: 20px;
+  background-color: $Button-Color;
+  color: #ffffff;
+  &:hover {
+    background-color: $Button-Hover-Color;
+  }
+  padding: 1rem;
+}
+
+.button--macro-page-first-error,
+.button--macro-page-second-error,
+.button--macro-page-third-error {
+  border: 1px solid red;
+}
+
+.maro-page__input {
+  outline: none;
+  border-radius: 20px;
+  background-color: hsla(211, 48%, 44%, 0.227);
+  padding: 0.2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  display: block;
+  min-width: 155px;
+}
+
+.macro-page {
+  margin: 0 1rem;
+  h3 {
+    @include tablet {
+      margin-top: 0;
+    }
+  }
+  @include tablet {
+    margin: 0 2rem;
+  }
+}
+
+.macro-page__container {
+  @include desktop {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+}
+
+.macro-page_list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.macro-page__steps {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid $Button-Color;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #e26e5c41;
+  align-items: center;
+  @include tablet {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+.macro-page__chart {
+  border: 2px solid $Button-Color;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  background-color: #e26e5c41;
+  height: 458px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    margin: 0;
+  }
+  @include tablet {
+    flex-direction: row;
+    gap: 3rem;
+    height: 390px;
+  }
+}
+
+.macro-page__image {
+  width: 50%;
+  height: auto;
+  @include tablet {
+    width: 40%;
+  }
+}
+
+.macro-page__welcome {
+  border: 2px solid $Button-Color;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #e26e5c41;
+  margin-top: 1rem;
+  ul {
+    font-weight: bold;
+  }
+  @include tablet {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
 }
