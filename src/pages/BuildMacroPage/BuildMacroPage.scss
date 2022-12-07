@@ -1,5 +1,27 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
+@keyframes animate {
+  0% {
+    opacity: 0;
+    border-radius: 100%;
+    filter: grayscale(100%);
+  }
+  30% {
+    opacity: 0.3;
+    border-radius: 50%;
+    filter: grayscale(50%);
+  }
+  60% {
+    opacity: 0.6;
+    border-radius: 25%;
+    filter: grayscale(25%);
+  }
+  100% {
+    opacity: 1;
+    border-radius: 0;
+    filter: grayscale(0);
+  }
+}
 
 .button--macro-page {
   border: none;
@@ -43,7 +65,7 @@
 
 .macro-page__container {
   @include desktop {
-    max-width: 1180px;
+    max-width: 1212px;
     margin: 0 auto;
   }
 }
@@ -56,20 +78,24 @@
 .macro-page__steps {
   display: flex;
   flex-direction: column;
-  border: 2px solid $Button-Color;
+  // border: 2px solid $Button-Color;
+  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
   margin-bottom: 1rem;
   padding: 1rem;
   background-color: #e26e5c41;
   align-items: center;
+  animation: animate 1.5s;
   @include tablet {
     flex-direction: row;
+    margin-bottom: 2rem;
     gap: 3rem;
   }
 }
 
 .macro-page__chart {
-  border: 2px solid $Button-Color;
+  // border: 2px solid $Button-Color;
+  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
   margin-bottom: 1rem;
   padding: 2rem;
@@ -80,12 +106,14 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
+  animation: animate 1.5s;
   h3 {
     margin: 0;
   }
   @include tablet {
     flex-direction: row;
     gap: 3rem;
+    margin-bottom: 2rem;
     height: 390px;
   }
 }
@@ -99,7 +127,8 @@
 }
 
 .macro-page__welcome {
-  border: 2px solid $Button-Color;
+  // border: 2px solid $Button-Color;
+  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
   margin-bottom: 1rem;
   padding: 1rem;

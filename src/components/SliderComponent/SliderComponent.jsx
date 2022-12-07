@@ -22,11 +22,18 @@ export default function SliderComponent() {
   //   }
   // }, []);
   //FUNCTION TO FIND THE CURRENT SLIDE
+  const [cardArr, setCardArr] = useState([]);
+
   const carousel = useRef();
-  const slideCardArr = document.querySelectorAll(".slick-slide");
+
+  useEffect(() => {
+    const slideCardArr = document.querySelectorAll(".slick-slide");
+    setCardArr(slideCardArr);
+  }, []);
+
   const findCurrentSlide = function () {
-    for (let i = 0; i < slideCardArr.length; i++) {
-      if (slideCardArr[i].classList.contains("slick-current")) {
+    for (let i = 0; i < cardArr.length; i++) {
+      if (cardArr[i].classList.contains("slick-current")) {
         return i;
       }
     }
@@ -49,7 +56,7 @@ export default function SliderComponent() {
 
     if (currentSlide < 3) {
       carousel.current.slickGoTo(3);
-      console.log(slideCardArr.length);
+      console.log(cardArr.length);
     } else {
       carousel.current.slickGoTo(currentSlide - 3);
     }

@@ -26,6 +26,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const [macroFirstBtnState, setMacroFirstBtnState] = useState("");
   const [macroSecondBtnState, setMacroSecondBtnState] = useState("");
   const [macroThirdBtnState, setMacroThirdBtnState] = useState("");
+  const [macroName, setMacroName] = useState("");
   //FUNCTION TO SET PROTEIN, CARB AND FAT RATIOS
   const handleRatios = function () {
     //Ectomorph body type
@@ -54,7 +55,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setMacroThirdBtnState("button--macro-page-third-error");
     }
   };
-  console.log(proteinRatio, carbRatio, fatRatio, tdee);
   //FUNCTION TO SET PROTEIN, CARB AND FAT QUANTITIES
   const handleQuantities = function () {
     console.log(proteinRatio, carbRatio, fatRatio, tdee);
@@ -88,6 +88,10 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     setCarb("");
     setFat("");
   }, [proteinRatio, carbRatio, fatRatio, bodyType, goal, activity]);
+  //FUNCTION TO HADNLE THE MACRO NAME
+  const handleMacroName = function (event) {
+    setMacroName(event.target.value);
+  };
   //FUNCTION TO HANDLE THE BODY TYPE STATE
   const handleBodyType = function (event) {
     setBodyType(event.target.value);
@@ -387,6 +391,24 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </div>
             </div>
           )}
+
+          {/* STEP 5 */}
+          <div>
+            <h3>Let's name and save your macro to your macro list</h3>
+            <input
+              type="text"
+              name="macro-name"
+              placeholder="Name your macro here"
+              id="macro-name"
+              value={macroName}
+              onChange={handleMacroName}
+            />
+            <p>
+              You have chosen the name {macroName} for your new macro. Click the
+              button below to save your new macro to your macro list
+            </p>
+            <button>Save</button>
+          </div>
         </div>
       </div>
     );
