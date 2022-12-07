@@ -14,7 +14,6 @@ export default function HomePage({ userProfile, loginState, sideMenuState }) {
   }, [sideMenuState]);
   return (
     <div className={`home-page ${homePageState}`}>
-      {loginState && <div>Welcome back {userProfile.username}</div>}
       <div className="home-page__carousel"></div>
       <SliderComponent loginState={loginState} />
     </div>
