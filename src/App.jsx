@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import HomePage from "./pages/HomePage/HomePage";
 import HeaderComponent from "./components/HeaderPage/HeaderComponent";
-import SideMenu from "./components/SiteMenu/SideMenu";
+import SideMenu from "./components/SideMenu/SideMenu";
 import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
@@ -36,6 +36,8 @@ function App() {
         if (response.data) {
           localStorage.setItem("jwt_token", response.data);
           loadProfile(response.data);
+          setEmail("");
+          setPassword("");
         }
       })
       .catch((error) => console.log(error));
@@ -60,6 +62,7 @@ function App() {
       loadProfile(jwtToken);
     }
   }, []);
+
   //FUNCTION TO LOG OUT
   const handleLogout = function () {
     setLoginState(false);
@@ -112,15 +115,17 @@ function App() {
               />
             }
           />
-          <Route
-            path="/build-macro"
-            element={
-              <BuildMacroPage
-                userProfile={userProfile}
-                loginState={loginState}
-              />
-            }
-          />
+          {loginState && (
+            <Route
+              path="/build-macro"
+              element={
+                <BuildMacroPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+          )}
         </Routes>
       </div>
     </BrowserRouter>

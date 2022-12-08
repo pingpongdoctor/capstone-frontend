@@ -1,47 +1,32 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.logo {
-  width: 15%;
-}
-
-.logo--header-page {
-  margin: 0 auto;
-  @include desktop {
-    margin: inherit;
+.header-page {
+  background-color: $Burgundy;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @include tablet {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
-.menu {
-  width: 5%;
-}
-
-.menu--header-page {
-  margin-right: 82px;
+.header-page__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include tablet {
+    flex-direction: row;
+  }
   @include desktop {
-    display: none;
+    max-width: 1216px;
+    margin: 0 auto;
   }
 }
 
 .header-page__user-profile {
   width: 20%;
   margin-left: 1.6rem;
-  @include desktop {
-    width: 3%;
-    margin-left: auto;
-  }
-}
-
-.header-page {
-  background-color: $Burgundy;
-  display: flex;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  @include tablet {
-    flex-direction: row;
-  }
 }
 
 .header-page__wrapper {
@@ -50,10 +35,6 @@
   gap: 1rem;
   align-items: center;
   width: 120px;
-  @include desktop {
-    width: auto;
-    justify-content: flex-start;
-  }
 }
 
 .header-page__build-macro,
@@ -79,4 +60,23 @@
 .header-page__link:visited {
   text-decoration: none;
   color: #ffffff;
+}
+
+.logo {
+  width: 15%;
+}
+
+.logo--header-page {
+  margin: 0 auto;
+  @include desktop {
+    margin: inherit;
+  }
+}
+
+.menu {
+  width: 5%;
+}
+
+.menu--header-page {
+  margin-right: 82px;
 }

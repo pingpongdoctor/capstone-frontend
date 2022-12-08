@@ -4,6 +4,10 @@
 .slider {
   position: relative;
   overflow: hidden;
+  @include desktop {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 }
 
 .slider__card {
@@ -24,9 +28,20 @@
 
 .slick-track {
   display: flex;
-  gap: 3rem;
+  align-items: stretch;
+  gap: 1rem;
   padding: 1rem 0;
-  background-color: rgba(0, 0, 0, 0.027);
+  // > div {
+  //   height: 100%;
+  //   position: relative;
+  //   background: red;
+
+  //   div {
+  //     display: flex;
+  //     flex-direction: column;
+  //     height: 100%;
+  //   }
+  // }
 }
 
 .slider__text {
