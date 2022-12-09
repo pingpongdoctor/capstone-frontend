@@ -5,19 +5,39 @@
   background-color: #ffffff;
   margin: 1rem;
   overflow: hidden;
-}
-
-.profile-page__text:first-child {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.162);
+  @include tablet {
+    margin: 2rem;
+  }
 }
 
 .profile-page__text {
   border-top: 1px solid rgba(128, 128, 128, 0.162);
   padding: 1rem;
   display: flex;
+  justify-content: center;
+  height: 133px;
   flex-direction: column;
+  &:hover {
+    background-color: rgba(237, 28, 91, 0.17);
+    border-radius: 10px;
+  }
+  &:first-child {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.162);
+  }
   @include tablet {
+    height: 93px;
+    justify-content: flex-start;
     flex-direction: row;
+    padding: 1rem 2rem;
+    align-items: center;
+  }
+}
+
+.profile-page__wrapper {
+  @include tablet {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -31,14 +51,22 @@
 }
 
 .profile-page__field {
-  width: 85px;
+  width: 100px;
+  font-weight: 600;
+  margin: 0;
+  padding-bottom: 1rem;
   @include tablet {
     width: 40%;
+    padding-bottom: 0;
   }
 }
 
 .profile-page__value {
-  width: 60px;
+  width: 80px;
+  margin: 0;
+  @include tablet {
+    text-align: center;
+  }
 }
 
 .profile-page__modal-box {

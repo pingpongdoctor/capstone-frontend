@@ -8,6 +8,7 @@
   height: 100vh;
   overflow: hidden;
   z-index: 100;
+  // top: 103.05px;
 }
 
 .side-menu--appear {
@@ -17,13 +18,12 @@
 
 .side-menu--hidden {
   transition: transform 1s;
-  transform: translate(-400px);
+  transform: translate(-100%);
 }
 
 .side-menu__list {
   padding-left: 0;
   list-style: none;
-  color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -32,6 +32,8 @@
 
 .side-menu__item {
   padding: 1rem;
+  text-decoration: none;
+  color: #ffffff;
   &:hover {
     background-color: black;
     color: #ed1c5b;

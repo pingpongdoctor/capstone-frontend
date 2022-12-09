@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .header-page {
-  background-color: $Burgundy;
+  background-color: black;
   padding-left: 1rem;
   padding-right: 1rem;
   @include tablet {
@@ -24,9 +24,8 @@
   }
 }
 
-.header-page__user-profile {
-  width: 20%;
-  margin-left: 1.6rem;
+.header-page__user-profile-pic {
+  width: 100%;
 }
 
 .header-page__wrapper {
@@ -35,6 +34,10 @@
   gap: 1rem;
   align-items: center;
   width: 120px;
+}
+
+.header-page__profile-link {
+  width: 30%;
 }
 
 .header-page__build-macro,

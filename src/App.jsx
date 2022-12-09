@@ -31,7 +31,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //STATE FOR THE CURRENT PATH
-  const [currentPath, setCurrentPath] = useState("");
+  // const [currentPath, setCurrentPath] = useState("");
   //FUNCTION TO HANDLE EMAIL AND PASSWORD STATES
   const handleEmail = function (event) {
     setEmail(event.target.value);
@@ -94,25 +94,23 @@ function App() {
   };
 
   //FUNCTION TO SET CURRENT PATH
-  const handleCurrentPath = function (path) {
-    setCurrentPath(path);
-  };
+  // const handleCurrentPath = function (path) {
+  //   setCurrentPath(path);
+  // };
 
   return (
     <BrowserRouter>
       {/* HEADER COMPONENT */}
-      {currentPath !== "/login" && (
-        <HeaderComponent
-          loginState={loginState}
-          handleLogout={handleLogout}
-          popOutSideMenu={popOutSideMenu}
-          closeMenu={closeMenu}
-          handleCurrentPath={handleCurrentPath}
-        />
-      )}
+
+      <HeaderComponent
+        loginState={loginState}
+        handleLogout={handleLogout}
+        popOutSideMenu={popOutSideMenu}
+      />
+
       {/* SIDE MENU */}
       <SideMenu sideMenuState={sideMenuState} />
-      <div className="App">
+      <div onMouseEnter={closeMenu} className="App">
         <div className={appPageState}>
           <Routes>
             {/* HOME PAGE ROUTE */}
@@ -124,7 +122,6 @@ function App() {
                   handleLogout={handleLogout}
                   loginState={loginState}
                   sideMenuState={sideMenuState}
-                  handleCurrentPath={handleCurrentPath}
                 />
               }
             />
@@ -159,19 +156,18 @@ function App() {
             />
 
             {/* BUILD MACRO PAGE ROUTE */}
-            {loginState && (
-              <Route
-                path="/build-macro"
-                element={
-                  <BuildMacroPage
-                    handleCurrentPath={handleCurrentPath}
-                    sideMenuState={sideMenuState}
-                    userProfile={userProfile}
-                    loginState={loginState}
-                  />
-                }
-              />
-            )}
+            {/* {loginState && ( */}
+            <Route
+              path="/build-macro"
+              element={
+                <BuildMacroPage
+                  sideMenuState={sideMenuState}
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+            {/* )} */}
           </Routes>
         </div>
       </div>

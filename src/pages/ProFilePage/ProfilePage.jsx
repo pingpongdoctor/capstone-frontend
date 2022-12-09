@@ -103,7 +103,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
         <div className="profile-page__container">
           <div className="profile-page__wrapper">
             <Avatar avatarClassName="avatar avatar--main" />
-            <h3>Profile Details</h3>
+            <h3>Profile Details Of {userProfile.username}</h3>
           </div>
           <div className="profile-page__texts">
             <div className="profile-page__text">

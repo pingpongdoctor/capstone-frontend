@@ -37,11 +37,7 @@ ChartJS.register(
 const URL = process.env.REACT_APP_API_URL || "";
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
-export default function BuildMacroPage({
-  userProfile,
-  loginState,
-  handleCurrentPath,
-}) {
+export default function BuildMacroPage({ userProfile, loginState }) {
   //GET JWT TOKEN FROM LOCAL STRING
   const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR THE ACTIVITY INTENSE LEVEL
@@ -69,10 +65,6 @@ export default function BuildMacroPage({
   //GET THE CURRENT ROUTE
   const location = useLocation();
   const currentRoute = location.pathname;
-  //USE EFFECT TO SET THE CURRENT ROUTE WHEN THE PAGE LOADS
-  useEffect(() => {
-    handleCurrentPath(currentRoute);
-  }, []);
   //USE USENAVIGATE
   const navigate = useNavigate();
   //FUNCTION TO SET PROTEIN, CARB AND FAT RATIOS
@@ -164,8 +156,10 @@ export default function BuildMacroPage({
   console.log(estimatedWeekArr);
   //USE EFFECT TO GET CURRENT WEIGHT
   useEffect(() => {
-    setCurrentWeight(userProfile.weight);
-  }, []);
+    if (loginState) {
+      setCurrentWeight(userProfile.weight);
+    }
+  }, [loginState]);
 
   //FUNCTION TO HANDLE THE TARGETED WEIGHT STATE
   const handleTargetedWeight = function (event) {
@@ -396,22 +390,7 @@ export default function BuildMacroPage({
       },
     ],
   };
-  // console.log(user_id, macroName, targeted_weight,
-  //   activity,
-  //   tdee,
-  //   tdee_need);
-
-  console.log(
-    userProfile.id,
-    macroName,
-    targetedWeight,
-    activity,
-    tdee,
-    neededIntake,
-    proteinRatio,
-    carbRatio,
-    fatRatio
-  );
+  console.log("loginState", loginState);
   if (loginState) {
     return (
       <div className="macro-page">
