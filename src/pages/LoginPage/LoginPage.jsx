@@ -18,10 +18,6 @@ export default function LoginPage({
       <div className="login-page">
         <form onSubmit={handleLogin} className="login-page_form">
           <h1 className="login-page_heading">Glad To See You Here</h1>
-          {/* EMAIL BOX */}
-          {/* <label className="login-page_labels" htmlFor="email">
-            Email
-          </label> */}
           <input
             id="email"
             className="login-page__input-box login-page__input-box-email"
@@ -31,10 +27,6 @@ export default function LoginPage({
             value={email}
             onChange={handleEmail}
           />
-          {/* PASSWORD BOX */}
-          {/* <label className="login-page_labels" htmlFor="password">
-            Password
-          </label> */}
           <input
             className="login-page__input-box login-page__input-box-password"
             type="password"

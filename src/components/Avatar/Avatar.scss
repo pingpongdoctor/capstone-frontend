@@ -1,0 +1,14 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.avatar {
+  width: 50px;
+}
+
+.avatar--main {
+  width: 100px;
+}
+
+.avatar--profile-value {
+  width: 60px;
+}

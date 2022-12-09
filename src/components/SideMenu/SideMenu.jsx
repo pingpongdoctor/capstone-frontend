@@ -1,5 +1,4 @@
 import "./SideMenu.scss";
-import { useState } from "react";
 
 export default function SiteMenu({ sideMenuState }) {
   return (
