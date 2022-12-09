@@ -1,0 +1,31 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.button {
+  border: none;
+  border-radius: 20px;
+  background-color: $Button-Color;
+  color: #ffffff;
+  &:hover {
+    background-color: $Button-Hover-Color;
+  }
+  padding: 1rem;
+}
+
+.button--macro-page-first-error,
+.button--macro-page-second-error,
+.button--macro-page-third-error,
+.button--macro-page-fifth-error {
+  border: 1px solid red;
+}
+
+.button--profile {
+  padding: 0.5rem;
+  height: 35px;
+  width: 80px;
+  border-radius: 10px;
+}
+
+.button--profile-modal-box {
+  width: 100%;
+}

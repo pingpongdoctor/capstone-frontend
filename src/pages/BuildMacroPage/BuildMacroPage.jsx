@@ -1,6 +1,6 @@
 import "./BuildMacroPage.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Pie, Line } from "react-chartjs-2";
 import { useEffect } from "react";
 import workoutPic1 from "../../assets/images/workout-1.png";
@@ -37,7 +37,11 @@ ChartJS.register(
 const URL = process.env.REACT_APP_API_URL || "";
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
-export default function BuildMacroPage({ userProfile, loginState }) {
+export default function BuildMacroPage({
+  userProfile,
+  loginState,
+  handleCurrentPath,
+}) {
   //GET JWT TOKEN FROM LOCAL STRING
   const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR THE ACTIVITY INTENSE LEVEL
@@ -62,6 +66,13 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const [estimatedWeightArr, setEstimatedWeightArr] = useState([]);
   const [currentWeight, setCurrentWeight] = useState("");
   const [showSaveMacro, setShowSaveMacro] = useState(false);
+  //GET THE CURRENT ROUTE
+  const location = useLocation();
+  const currentRoute = location.pathname;
+  //USE EFFECT TO SET THE CURRENT ROUTE WHEN THE PAGE LOADS
+  useEffect(() => {
+    handleCurrentPath(currentRoute);
+  }, []);
   //USE USENAVIGATE
   const navigate = useNavigate();
   //FUNCTION TO SET PROTEIN, CARB AND FAT RATIOS
@@ -634,21 +645,15 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 />
                 <div className="macro-page__big-wrapper">
                   <h3>
-                    In this step, we will see how much is the estimated time
-                    amount that you need to achieve your goal based on your
-                    targeted weight
+                    Step 5: We will see how much is the estimated time amount
+                    that you need to achieve your goal based on your targeted
+                    weight
                   </h3>
 
                   <label htmlFor="targeted-weight">
                     Type your targeted weight here
                   </label>
                   <div className="macro-page__wrapper">
-                    <button
-                      className={`button--macro-page ${macroFifthBtnState}`}
-                      onClick={handleEstimatedWeekArr}
-                    >
-                      Show the line chart now
-                    </button>
                     <input
                       className="maro-page__input-box"
                       type="number"
@@ -658,6 +663,12 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                       value={targetedWeight}
                       onChange={handleTargetedWeight}
                     />
+                    <button
+                      className={`button--macro-page ${macroFifthBtnState}`}
+                      onClick={handleEstimatedWeekArr}
+                    >
+                      Show the line chart now
+                    </button>
                   </div>
                 </div>
               </div>
@@ -706,7 +717,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   alt="meditation-pic"
                 />
                 <div className="macro-page__big-wrapper">
-                  <h3>Let's name and save your macro to your macro list</h3>
+                  <h3>
+                    Last step: Let's name and save your macro to your macro list
+                  </h3>
                   <input
                     type="text"
                     name="macro-name"
