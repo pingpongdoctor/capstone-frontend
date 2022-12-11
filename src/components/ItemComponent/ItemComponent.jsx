@@ -5,11 +5,12 @@ import deleteIcon from "../../assets/icons/delete.png";
 import editIcon from "../../assets/icons/edit.png";
 
 export default function ItemComponent({
-  id,
+  macroId,
   macroName,
   macroGoal,
   macroEnergy,
   macroTime,
+  handleDeleteMacro,
 }) {
   //STATE FOR THE GOAL TEXT
   const [goalText, setGoalText] = useState("");
@@ -54,7 +55,14 @@ export default function ItemComponent({
       </p>
       <div className="item__icons">
         <img className="item__icon" src={editIcon} alt="edit-icon" />
-        <img className="item__icon" src={deleteIcon} alt="delete-icon" />
+        <img
+          onClick={() => {
+            handleDeleteMacro(macroId);
+          }}
+          className="item__icon"
+          src={deleteIcon}
+          alt="delete-icon"
+        />
       </div>
     </li>
   );

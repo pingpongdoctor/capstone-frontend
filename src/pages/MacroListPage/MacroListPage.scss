@@ -28,6 +28,7 @@
   padding-right: 2rem;
   text-align: center;
   margin: 0;
+  cursor: pointer;
   &:first-child {
     width: 125px;
   }
@@ -43,6 +44,7 @@
   }
   &:last-child {
     width: 85px;
+    cursor: auto;
   }
 }
 
