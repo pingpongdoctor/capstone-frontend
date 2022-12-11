@@ -4,7 +4,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import closePic from "../../assets/icons/close.png";
-const URL = process.env.REACT_APP_API_URL;
+const URL = process.env.REACT_APP_API_URL || "";
 
 export default function ProFilePage({ loginState, userProfile, loadProfile }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
@@ -103,7 +103,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
         <div className="profile-page__container">
           <div className="profile-page__wrapper">
             <Avatar avatarClassName="avatar avatar--main" />
-            <h3>Profile Details</h3>
+            <h3>Profile Details Of {userProfile.username}</h3>
           </div>
           <div className="profile-page__texts">
             <div className="profile-page__text">
@@ -112,7 +112,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
                 <p className="profile-page__value"> {userProfile.username}</p>
                 <ButtonComponent
                   onClickHandler={handleModalBoxAppear}
-                  btnClassName="button button--profile"
+                  btnClassName="btn btn--profile"
                   btnContent="Update"
                   btnName="username"
                 />
@@ -124,7 +124,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
               <div className="profile-page__small-wrapper">
                 <Avatar avatarClassName="avatar avatar--profile-value" />
                 <ButtonComponent
-                  btnClassName="button button--profile"
+                  btnClassName="btn btn--profile"
                   btnContent="Update"
                   btnName="photo"
                 />
@@ -137,7 +137,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
                 <p className="profile-page__value">{userProfile.weight} kg</p>
                 <ButtonComponent
                   onClickHandler={handleModalBoxAppear}
-                  btnClassName="button button--profile"
+                  btnClassName="btn btn--profile"
                   btnContent="Update"
                   btnName="weight"
                 />
@@ -150,7 +150,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
                 <p className="profile-page__value">{userProfile.height} cm</p>
                 <ButtonComponent
                   onClickHandler={handleModalBoxAppear}
-                  btnClassName="button button--profile"
+                  btnClassName="btn btn--profile"
                   btnContent="Update"
                   btnName="height"
                 />
@@ -163,7 +163,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
                 <p className="profile-page__value">{userProfile.age}</p>
                 <ButtonComponent
                   onClickHandler={handleModalBoxAppear}
-                  btnClassName="button button--profile"
+                  btnClassName="btn btn--profile"
                   btnContent="Update"
                   btnName="age"
                 />
@@ -230,7 +230,7 @@ export default function ProFilePage({ loginState, userProfile, loadProfile }) {
               <ButtonComponent
                 btnType="submit"
                 btnContent="Save"
-                btnClassName="button button--profile button--profile-modal-box"
+                btnClassName="btn btn--profile btn--profile-modal-box"
               />
             </form>
           </div>

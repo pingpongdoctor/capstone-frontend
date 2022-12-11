@@ -9,49 +9,50 @@ export default function HeaderComponent({
   loginState,
   handleLogout,
   popOutSideMenu,
-  closeMenu,
-  handleCurrentPath,
 }) {
   //GET THE CURRENT ROUTE
   const location = useLocation();
   const currentRoute = location.pathname;
-  //USE EFFECT TO SET THE CURRENT ROUTE WHEN THE PAGE LOADS
-  useEffect(() => {
-    handleCurrentPath(currentRoute);
-  }, []);
 
-  return (
-    <div className="header-page header-page--login">
-      <div className="header-page__container">
-        <img
-          onMouseEnter={popOutSideMenu}
-          onMouseLeave={closeMenu}
-          className="menu menu--header-page"
-          alt="menu"
-          src={menu}
-        />
-        <img className="logo logo--header-page" src={logo} alt="logo" />
-        <div className="header-page__wrapper">
-          {!loginState && <Link className="header-page__link">Sign Up</Link>}
-          {!loginState && (
-            <Link to={"/login"} className="header-page__link">
-              Log in
-            </Link>
-          )}
-          {loginState && (
-            <img
-              className="header-page__user-profile"
-              src={userProfile}
-              alt="user-profile"
-            />
-          )}
-          {loginState && (
-            <Link onClick={handleLogout} className="header-page__link">
-              Log out
-            </Link>
-          )}
+  if (currentRoute !== "/login") {
+    return (
+      <div className="header-page header-page--login">
+        <div className="header-page__container">
+          <img
+            onMouseEnter={popOutSideMenu}
+            className="menu menu--header-page"
+            alt="menu"
+            src={menu}
+          />
+          <img className="logo logo--header-page" src={logo} alt="logo" />
+          <div className="header-page__wrapper">
+            {!loginState && <Link className="header-page__link">Sign Up</Link>}
+            {!loginState && (
+              <Link to={"/login"} className="header-page__link">
+                Log in
+              </Link>
+            )}
+            {loginState && (
+              <Link className="header-page__profile-link" to={"/profile"}>
+                <img
+                  className="header-page__user-profile-pic"
+                  src={userProfile}
+                  alt="user-profile"
+                />
+              </Link>
+            )}
+            {loginState && (
+              <Link
+                to={"/"}
+                onClick={handleLogout}
+                className="header-page__link"
+              >
+                Log out
+              </Link>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

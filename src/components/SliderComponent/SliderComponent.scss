@@ -13,8 +13,10 @@
 .slider__card {
   border: 0.3px solid rgba(0, 0, 0, 0.108);
   border-radius: 10px;
-  box-shadow: 1px 2px 13px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 13px 1px rgba(0, 0, 0, 0.15);
   outline: none;
+  height: 500px;
+  overflow: hidden;
 }
 
 .slider__image {
@@ -28,20 +30,8 @@
 
 .slick-track {
   display: flex;
-  align-items: stretch;
   gap: 1rem;
   padding: 1rem 0;
-  // > div {
-  //   height: 100%;
-  //   position: relative;
-  //   background: red;
-
-  //   div {
-  //     display: flex;
-  //     flex-direction: column;
-  //     height: 100%;
-  //   }
-  // }
 }
 
 .slider__text {

@@ -13,14 +13,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function SliderComponent() {
-  // const [slideNumber, setSlideNumber] = useState(1);
-  // useEffect(() => {
-  //   if (document.body.clientWidth < 768) {
-  //     setSlideNumber(1);
-  //   } else {
-  //     setSlideNumber(2);
-  //   }
-  // }, []);
   //FUNCTION TO FIND THE CURRENT SLIDE
   const [cardArr, setCardArr] = useState([]);
 

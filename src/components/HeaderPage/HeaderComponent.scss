@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .header-page {
-  background-color: $Burgundy;
+  background-color: black;
   padding-left: 1rem;
   padding-right: 1rem;
   @include tablet {
@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 70px;
   @include tablet {
     flex-direction: row;
   }
@@ -24,9 +25,8 @@
   }
 }
 
-.header-page__user-profile {
-  width: 20%;
-  margin-left: 1.6rem;
+.header-page__user-profile-pic {
+  width: 100%;
 }
 
 .header-page__wrapper {
@@ -35,6 +35,10 @@
   gap: 1rem;
   align-items: center;
   width: 120px;
+}
+
+.header-page__profile-link {
+  width: 30%;
 }
 
 .header-page__build-macro,
@@ -63,7 +67,10 @@
 }
 
 .logo {
-  width: 15%;
+  width: 20%;
+  @include tablet {
+    width: 15%;
+  }
 }
 
 .logo--header-page {
@@ -74,7 +81,13 @@
 }
 
 .menu {
-  width: 5%;
+  width: 6%;
+  @include tablet {
+    width: 4%;
+  }
+  @include desktop {
+    width: 3%;
+  }
 }
 
 .menu--header-page {

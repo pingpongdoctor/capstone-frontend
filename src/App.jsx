@@ -8,6 +8,8 @@ import HeaderComponent from "./components/HeaderPage/HeaderComponent";
 import SideMenu from "./components/SideMenu/SideMenu";
 import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
 import ProFilePage from "./pages/ProFilePage/ProfilePage";
+import MacroListPage from "./pages/MacroListPage/MacroListPage";
+import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -31,7 +33,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //STATE FOR THE CURRENT PATH
-  const [currentPath, setCurrentPath] = useState("");
+  // const [currentPath, setCurrentPath] = useState("");
   //FUNCTION TO HANDLE EMAIL AND PASSWORD STATES
   const handleEmail = function (event) {
     setEmail(event.target.value);
@@ -93,26 +95,18 @@ function App() {
     setSideMenuState("side-menu--hidden");
   };
 
-  //FUNCTION TO SET CURRENT PATH
-  const handleCurrentPath = function (path) {
-    setCurrentPath(path);
-  };
-
   return (
     <BrowserRouter>
       {/* HEADER COMPONENT */}
-      {currentPath !== "/login" && (
-        <HeaderComponent
-          loginState={loginState}
-          handleLogout={handleLogout}
-          popOutSideMenu={popOutSideMenu}
-          closeMenu={closeMenu}
-          handleCurrentPath={handleCurrentPath}
-        />
-      )}
+      <HeaderComponent
+        loginState={loginState}
+        handleLogout={handleLogout}
+        popOutSideMenu={popOutSideMenu}
+      />
+
       {/* SIDE MENU */}
       <SideMenu sideMenuState={sideMenuState} />
-      <div className="App">
+      <div onMouseEnter={closeMenu} className="App">
         <div className={appPageState}>
           <Routes>
             {/* HOME PAGE ROUTE */}
@@ -123,8 +117,6 @@ function App() {
                   userProfile={userProfile}
                   handleLogout={handleLogout}
                   loginState={loginState}
-                  sideMenuState={sideMenuState}
-                  handleCurrentPath={handleCurrentPath}
                 />
               }
             />
@@ -159,19 +151,38 @@ function App() {
             />
 
             {/* BUILD MACRO PAGE ROUTE */}
-            {loginState && (
-              <Route
-                path="/build-macro"
-                element={
-                  <BuildMacroPage
-                    handleCurrentPath={handleCurrentPath}
-                    sideMenuState={sideMenuState}
-                    userProfile={userProfile}
-                    loginState={loginState}
-                  />
-                }
-              />
-            )}
+
+            <Route
+              path="/build-macro"
+              element={
+                <BuildMacroPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* MACRO LIST ROUTE */}
+            <Route
+              path="/macro-list"
+              element={
+                <MacroListPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* MACRO LIST ROUTE */}
+            <Route
+              path="/add-macro"
+              element={
+                <AddMacroPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

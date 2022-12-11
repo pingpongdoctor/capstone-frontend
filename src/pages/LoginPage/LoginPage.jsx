@@ -36,7 +36,7 @@ export default function LoginPage({
             value={password}
             onChange={handlePassword}
           />
-          <button className="login-page__button" type="submit">
+          <button className="login-page__btn" type="submit">
             Login
           </button>
         </form>

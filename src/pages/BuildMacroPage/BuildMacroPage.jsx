@@ -37,11 +37,7 @@ ChartJS.register(
 const URL = process.env.REACT_APP_API_URL || "";
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
-export default function BuildMacroPage({
-  userProfile,
-  loginState,
-  handleCurrentPath,
-}) {
+export default function BuildMacroPage({ userProfile, loginState }) {
   //GET JWT TOKEN FROM LOCAL STRING
   const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR THE ACTIVITY INTENSE LEVEL
@@ -66,13 +62,6 @@ export default function BuildMacroPage({
   const [estimatedWeightArr, setEstimatedWeightArr] = useState([]);
   const [currentWeight, setCurrentWeight] = useState("");
   const [showSaveMacro, setShowSaveMacro] = useState(false);
-  //GET THE CURRENT ROUTE
-  const location = useLocation();
-  const currentRoute = location.pathname;
-  //USE EFFECT TO SET THE CURRENT ROUTE WHEN THE PAGE LOADS
-  useEffect(() => {
-    handleCurrentPath(currentRoute);
-  }, []);
   //USE USENAVIGATE
   const navigate = useNavigate();
   //FUNCTION TO SET PROTEIN, CARB AND FAT RATIOS
@@ -100,7 +89,7 @@ export default function BuildMacroPage({
     }
 
     if (!bodyType) {
-      setMacroThirdBtnState("button--macro-page-third-error");
+      setMacroThirdBtnState("btn--macro-page-third-error");
     }
   };
 
@@ -116,7 +105,7 @@ export default function BuildMacroPage({
     }
     if (goal === "maintain") {
       setShowSaveMacro(true);
-      setTargetedWeight(80);
+      setTargetedWeight(currentWeight);
     } else {
       setShowSaveMacro(false);
       setTargetedWeight("");
@@ -146,12 +135,13 @@ export default function BuildMacroPage({
     setFat("");
   }, [proteinRatio, carbRatio, fatRatio, bodyType, goal, activity]);
 
-  //USE EFFECT TO RESET LINE CHART DATA AND MACRO NAME
+  //USE EFFECT TO RESET LINE CHART DATA, SHOWS STATE OF THE LAST STEP AND MACRO NAME
   useEffect(() => {
     setEstimatedWeekArr([]);
     setEstimatedWeightArr([]);
     setMacroFifthBtnState("");
     setMacroName("");
+    setShowSaveMacro(false);
   }, [
     proteinRatio,
     carbRatio,
@@ -164,8 +154,10 @@ export default function BuildMacroPage({
   console.log(estimatedWeekArr);
   //USE EFFECT TO GET CURRENT WEIGHT
   useEffect(() => {
-    setCurrentWeight(userProfile.weight);
-  }, []);
+    if (loginState) {
+      setCurrentWeight(userProfile.weight);
+    }
+  }, [loginState]);
 
   //FUNCTION TO HANDLE THE TARGETED WEIGHT STATE
   const handleTargetedWeight = function (event) {
@@ -232,7 +224,7 @@ export default function BuildMacroPage({
         setShowSaveMacro(true);
       }
     } else {
-      setMacroFifthBtnState("button--macro-page-fifth-error");
+      setMacroFifthBtnState("btn--macro-page-fifth-error");
       setShowSaveMacro(false);
     }
   };
@@ -275,7 +267,7 @@ export default function BuildMacroPage({
       setTdee(balancedTdee);
       setMacroFirstBtnState("");
     } else {
-      setMacroFirstBtnState("button--macro-page-first-error");
+      setMacroFirstBtnState("btn--macro-page-first-error");
     }
   };
 
@@ -302,7 +294,7 @@ export default function BuildMacroPage({
       setMacroSecondBtnState("");
     }
     if (!goal) {
-      setMacroSecondBtnState("button--macro-page-second-error");
+      setMacroSecondBtnState("btn--macro-page-second-error");
     }
   };
 
@@ -315,9 +307,8 @@ export default function BuildMacroPage({
       activity &&
       tdee &&
       neededIntake &&
-      proteinRatio &&
-      carbRatio &&
-      fatRatio
+      goal &&
+      bodyType
     ) {
       axios
         .post(
@@ -329,9 +320,8 @@ export default function BuildMacroPage({
             activity: activity,
             tdee: tdee,
             tdee_need: neededIntake,
-            protein_ratio: proteinRatio,
-            carb_ratio: carbRatio,
-            fat_ratio: fatRatio,
+            goal: goal,
+            body_type: bodyType,
           },
           {
             headers: {
@@ -396,22 +386,7 @@ export default function BuildMacroPage({
       },
     ],
   };
-  // console.log(user_id, macroName, targeted_weight,
-  //   activity,
-  //   tdee,
-  //   tdee_need);
-
-  console.log(
-    userProfile.id,
-    macroName,
-    targetedWeight,
-    activity,
-    tdee,
-    neededIntake,
-    proteinRatio,
-    carbRatio,
-    fatRatio
-  );
+  console.log("loginState", loginState);
   if (loginState) {
     return (
       <div className="macro-page">
@@ -478,7 +453,7 @@ export default function BuildMacroPage({
                   </option>
                 </select>
                 <button
-                  className={`button--macro-page ${macroFirstBtnState}`}
+                  className={`btn--macro-page ${macroFirstBtnState}`}
                   onClick={handleBalancedTdee}
                 >
                   Calculate your TDEE now
@@ -523,7 +498,7 @@ export default function BuildMacroPage({
                     <option value="maintain">Maintain Weight</option>
                   </select>
                   <button
-                    className={`button--macro-page ${macroSecondBtnState}`}
+                    className={`btn--macro-page ${macroSecondBtnState}`}
                     onClick={handleNeededEnergy}
                   >
                     Calculate your needed daily energy intake
@@ -555,13 +530,13 @@ export default function BuildMacroPage({
                 </h3>
                 {/* OPTION BOX */}
                 <div>
-                  <label htmlFor="training">What is your body type?</label>
+                  <label htmlFor="body-type">What is your body type?</label>
                   <select
                     className="maro-page__input"
                     value={bodyType}
                     onChange={handleBodyType}
-                    name="training"
-                    id="training"
+                    name="body-type"
+                    id="body-type"
                   >
                     <option value="">Choose here</option>
                     <option value="ectomorph">Ectomorph</option>
@@ -569,7 +544,7 @@ export default function BuildMacroPage({
                     <option value="endomorph">Endomorph</option>
                   </select>
                   <button
-                    className={`button--macro-page ${macroThirdBtnState}`}
+                    className={`btn--macro-page ${macroThirdBtnState}`}
                     onClick={handleRatios}
                   >
                     Show your macro ratios in a pie chart
@@ -607,10 +582,7 @@ export default function BuildMacroPage({
                   much protein, carb and fat you should eat everyday to achieve
                   your goal
                 </h3>
-                <button
-                  className="button--macro-page"
-                  onClick={handleQuantities}
-                >
+                <button className="btn--macro-page" onClick={handleQuantities}>
                   Calculate nutritional quantities now
                 </button>
                 {protein && carb && fat && (
@@ -628,62 +600,44 @@ export default function BuildMacroPage({
 
           {/* STEP 5 */}
 
-          {goal !== "maintain" &&
-            tdee &&
-            neededIntake &&
-            proteinRatio &&
-            carbRatio &&
-            fatRatio &&
-            protein &&
-            carb &&
-            fat && (
-              <div className="macro-page__steps">
-                <img
-                  className="macro-page__image"
-                  src={barChartPic}
-                  alt="bar-chart-pic"
-                />
-                <div className="macro-page__big-wrapper">
-                  <h3>
-                    Step 5: We will see how much is the estimated time amount
-                    that you need to achieve your goal based on your targeted
-                    weight
-                  </h3>
+          {goal !== "maintain" && protein && carb && fat && (
+            <div className="macro-page__steps">
+              <img
+                className="macro-page__image"
+                src={barChartPic}
+                alt="bar-chart-pic"
+              />
+              <div className="macro-page__big-wrapper">
+                <h3>
+                  Step 5: We will see how much is the estimated time amount that
+                  you need to achieve your goal based on your targeted weight
+                </h3>
 
-                  <label htmlFor="targeted-weight">
-                    Type your targeted weight here
-                  </label>
-                  <div className="macro-page__wrapper">
-                    <input
-                      className="maro-page__input-box"
-                      type="number"
-                      name="targeted-weight"
-                      placeholder="Type weight in kg"
-                      id="targeted-weight"
-                      value={targetedWeight}
-                      onChange={handleTargetedWeight}
-                    />
-                    <button
-                      className={`button--macro-page ${macroFifthBtnState}`}
-                      onClick={handleEstimatedWeekArr}
-                    >
-                      Show the line chart now
-                    </button>
-                  </div>
+                <label htmlFor="targeted-weight">
+                  Type your targeted weight here
+                </label>
+                <div className="macro-page__wrapper">
+                  <input
+                    className="maro-page__input-box"
+                    type="number"
+                    name="targeted-weight"
+                    placeholder="Type weight in kg"
+                    id="targeted-weight"
+                    value={targetedWeight}
+                    onChange={handleTargetedWeight}
+                  />
+                  <button
+                    className={`btn--macro-page ${macroFifthBtnState}`}
+                    onClick={handleEstimatedWeekArr}
+                  >
+                    Show the line chart now
+                  </button>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-          {goal !== "maintain" &&
-            tdee &&
-            neededIntake &&
-            proteinRatio &&
-            carbRatio &&
-            fatRatio &&
-            protein &&
-            carb &&
-            fat &&
-            targetedWeight &&
+          {targetedWeight &&
             estimatedWeekArr.length > 0 &&
             estimatedWeightArr.length > 0 &&
             currentWeight !== targetedWeight && (
@@ -700,52 +654,43 @@ export default function BuildMacroPage({
             )}
 
           {/* STEP 6 */}
-          {showSaveMacro &&
-            tdee &&
-            neededIntake &&
-            proteinRatio &&
-            carbRatio &&
-            fatRatio &&
-            protein &&
-            carb &&
-            fat &&
-            targetedWeight && (
-              <div className="macro-page__steps">
-                <img
-                  className="macro-page__image"
-                  src={meditationPic}
-                  alt="meditation-pic"
+          {showSaveMacro && (
+            <div className="macro-page__steps">
+              <img
+                className="macro-page__image"
+                src={meditationPic}
+                alt="meditation-pic"
+              />
+              <div className="macro-page__big-wrapper">
+                <h3>
+                  Last step: Let's name and save your macro to your macro list
+                </h3>
+                <input
+                  type="text"
+                  name="macro-name"
+                  placeholder="Name your macro here"
+                  id="macro-name"
+                  value={macroName}
+                  onChange={handleMacroName}
                 />
-                <div className="macro-page__big-wrapper">
-                  <h3>
-                    Last step: Let's name and save your macro to your macro list
-                  </h3>
-                  <input
-                    type="text"
-                    name="macro-name"
-                    placeholder="Name your macro here"
-                    id="macro-name"
-                    value={macroName}
-                    onChange={handleMacroName}
-                  />
-                  {macroName && (
-                    <div>
-                      <p>
-                        You have chosen the name <strong>{macroName}</strong>{" "}
-                        for your new macro. Click the button below to save your
-                        new macro to your macro list
-                      </p>
-                      <button
-                        onClick={handlePostNewMacro}
-                        className="button--macro-page"
-                      >
-                        Save
-                      </button>
-                    </div>
-                  )}
-                </div>
+                {macroName && (
+                  <div>
+                    <p>
+                      You have chosen the name <strong>{macroName}</strong> for
+                      your new macro. Click the button below to save your new
+                      macro to your macro list
+                    </p>
+                    <button
+                      onClick={handlePostNewMacro}
+                      className="btn--macro-page"
+                    >
+                      Save
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+          )}
         </div>
       </div>
     );
