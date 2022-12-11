@@ -7,7 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import HeaderComponent from "./components/HeaderPage/HeaderComponent";
 import SideMenu from "./components/SideMenu/SideMenu";
 import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
-import ProFilePage from "./pages/ProFilePage/ProfilePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import MacroListPage from "./pages/MacroListPage/MacroListPage";
 import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
@@ -125,7 +125,7 @@ function App() {
             <Route
               path="/profile"
               element={
-                <ProFilePage
+                <ProfilePage
                   loadProfile={loadProfile}
                   userProfile={userProfile}
                   loginState={loginState}
@@ -173,7 +173,7 @@ function App() {
               }
             />
 
-            {/* MACRO LIST ROUTE */}
+            {/* ADD MACRO ROUTE */}
             <Route
               path="/add-macro"
               element={

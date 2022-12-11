@@ -6,7 +6,7 @@ import axios from "axios";
 import closePic from "../../assets/icons/close.png";
 const URL = process.env.REACT_APP_API_URL || "";
 
-export default function ProFilePage({ loginState, userProfile, loadProfile }) {
+export default function ProfilePage({ loginState, userProfile, loadProfile }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR INPUT BOXES
