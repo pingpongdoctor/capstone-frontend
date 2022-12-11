@@ -1,6 +1,6 @@
 @use "./variables" as *;
 
-@mixin small-tablet {
+@mixin small-mobile {
   @media (min-width: 465px) {
     @content;
   }

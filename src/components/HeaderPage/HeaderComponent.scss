@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 70px;
   @include tablet {
     flex-direction: row;
   }
@@ -66,7 +67,10 @@
 }
 
 .logo {
-  width: 15%;
+  width: 20%;
+  @include tablet {
+    width: 15%;
+  }
 }
 
 .logo--header-page {
@@ -77,7 +81,13 @@
 }
 
 .menu {
-  width: 5%;
+  width: 6%;
+  @include tablet {
+    width: 4%;
+  }
+  @include desktop {
+    width: 3%;
+  }
 }
 
 .menu--header-page {

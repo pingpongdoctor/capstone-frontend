@@ -23,21 +23,22 @@
   }
 }
 
-.button--macro-page {
+.btn--macro-page {
   border: none;
   border-radius: 20px;
   background-color: $Button-Color;
   color: #ffffff;
   &:hover {
     background-color: $Button-Hover-Color;
+    color: #ffffff;
   }
   padding: 1rem;
 }
 
-.button--macro-page-first-error,
-.button--macro-page-second-error,
-.button--macro-page-third-error,
-.button--macro-page-fifth-error {
+.btn--macro-page-first-error,
+.btn--macro-page-second-error,
+.btn--macro-page-third-error,
+.btn--macro-page-fifth-error {
   border: 1px solid red;
 }
 
@@ -154,7 +155,7 @@
 
 .macro-page__wrapper-line-chart {
   height: 150px;
-  @include small-tablet {
+  @include small-mobile {
     height: 230px;
   }
   @include tablet {

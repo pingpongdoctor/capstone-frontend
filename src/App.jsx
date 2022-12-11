@@ -8,6 +8,8 @@ import HeaderComponent from "./components/HeaderPage/HeaderComponent";
 import SideMenu from "./components/SideMenu/SideMenu";
 import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
 import ProFilePage from "./pages/ProFilePage/ProfilePage";
+import MacroListPage from "./pages/MacroListPage/MacroListPage";
+import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -93,15 +95,9 @@ function App() {
     setSideMenuState("side-menu--hidden");
   };
 
-  //FUNCTION TO SET CURRENT PATH
-  // const handleCurrentPath = function (path) {
-  //   setCurrentPath(path);
-  // };
-
   return (
     <BrowserRouter>
       {/* HEADER COMPONENT */}
-
       <HeaderComponent
         loginState={loginState}
         handleLogout={handleLogout}
@@ -121,7 +117,6 @@ function App() {
                   userProfile={userProfile}
                   handleLogout={handleLogout}
                   loginState={loginState}
-                  sideMenuState={sideMenuState}
                 />
               }
             />
@@ -156,18 +151,38 @@ function App() {
             />
 
             {/* BUILD MACRO PAGE ROUTE */}
-            {/* {loginState && ( */}
+
             <Route
               path="/build-macro"
               element={
                 <BuildMacroPage
-                  sideMenuState={sideMenuState}
                   userProfile={userProfile}
                   loginState={loginState}
                 />
               }
             />
-            {/* )} */}
+
+            {/* MACRO LIST ROUTE */}
+            <Route
+              path="/macro-list"
+              element={
+                <MacroListPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* MACRO LIST ROUTE */}
+            <Route
+              path="/add-macro"
+              element={
+                <AddMacroPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

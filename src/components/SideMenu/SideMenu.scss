@@ -4,11 +4,14 @@
 .side-menu {
   background-color: #ed1c5b;
   position: absolute;
-  width: 300px;
+  width: 200px;
   height: 100vh;
   overflow: hidden;
   z-index: 100;
-  // top: 103.05px;
+  border-bottom-right-radius: 20px;
+  @include tablet {
+    width: 300px;
+  }
 }
 
 .side-menu--appear {
@@ -28,12 +31,18 @@
   flex-direction: column;
   gap: 1rem;
   padding-left: 0;
+  margin: 0;
+  margin-top: 1rem;
 }
 
 .side-menu__item {
   padding: 1rem;
+  padding-left: 2rem;
   text-decoration: none;
   color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
   &:hover {
     background-color: black;
     color: #ed1c5b;

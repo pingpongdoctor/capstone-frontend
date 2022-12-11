@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.button {
+.btn {
   border: none;
   border-radius: 20px;
   background-color: $Button-Color;
@@ -12,20 +12,34 @@
   padding: 1rem;
 }
 
-.button--macro-page-first-error,
-.button--macro-page-second-error,
-.button--macro-page-third-error,
-.button--macro-page-fifth-error {
+.btn--macro-page-first-error,
+.btn--macro-page-second-error,
+.btn--macro-page-third-error,
+.btn--macro-page-fifth-error {
   border: 1px solid red;
 }
 
-.button--profile {
+.btn--profile {
   padding: 0.5rem;
   height: 35px;
   width: 80px;
   border-radius: 10px;
 }
 
-.button--profile-modal-box {
+.btn--profile-modal-box {
   width: 100%;
+}
+
+.btn--macro-list {
+  height: 45px;
+  padding: 0.5rem 1rem;
+}
+
+.btn--add-macro {
+  padding: 0.5rem;
+  height: 36px;
+  width: 100%;
+  @include tablet {
+    width: 100px;
+  }
 }

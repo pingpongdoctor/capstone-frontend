@@ -11,22 +11,22 @@ export const timeConvDetail = function (timestamp) {
   const yearAgo = dayAgo / 365;
 
   if (mitnuteAgo < 1) {
-    const timeDisplayDetail = `Posted ${Math.round(secondAgo)} seconds ago`;
+    const timeDisplayDetail = `${Math.round(secondAgo)} seconds ago`;
     return timeDisplayDetail;
   } else if (mitnuteAgo >= 1 && mitnuteAgo < 60) {
-    const timeDisplayDetail = `Posted ${Math.round(mitnuteAgo)} minutes ago`;
+    const timeDisplayDetail = `${Math.round(mitnuteAgo)} minutes ago`;
     return timeDisplayDetail;
   } else if (mitnuteAgo >= 60 && dayAgo < 1) {
-    const timeDisplayDetail = `Posted ${Math.round(hourAgo)} hours ago`;
+    const timeDisplayDetail = `${Math.round(hourAgo)} hours ago`;
     return timeDisplayDetail;
   } else if (dayAgo >= 1 && dayAgo < 30) {
-    const timeDisplayDetail = `Posted ${Math.round(dayAgo)} days ago`;
+    const timeDisplayDetail = `${Math.round(dayAgo)} days ago`;
     return timeDisplayDetail;
   } else if (monthAgo >= 1 && monthAgo < 12) {
-    const timeDisplayDetail = `Posted ${Math.round(monthAgo)} months ago`;
+    const timeDisplayDetail = `${Math.round(monthAgo)} months ago`;
     return timeDisplayDetail;
   } else if (yearAgo >= 1) {
-    const timeDisplayDetail = `Posted ${Math.trunc(yearAgo)} years ago`;
+    const timeDisplayDetail = `${Math.trunc(yearAgo)} years ago`;
     return timeDisplayDetail;
   }
 };
