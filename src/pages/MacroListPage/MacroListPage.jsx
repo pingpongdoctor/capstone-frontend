@@ -16,28 +16,48 @@ export default function MacroLisPage({ userProfile, loginState }) {
   const [macroArr, setMacroArr] = useState([]);
   //GET JWT TOKEN
   const jwtToken = localStorage.getItem("jwt_token");
-  //USE EFFECT TO GET ALL MACROS
-  useEffect(() => {
+  //DECLARE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
+  //FUNCTION TO GET ALL MACROS
+  const handleGetAllMacros = function () {
     if (loginState) {
       axios
-        .get(`${URL}/macros-list`, {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        })
+        .get(`${URL}/macros-list`, headers)
         .then((response) => {
           setMacroArr(response.data);
+          console.log("running");
         })
         .catch((error) => console.log(error));
     }
-  }, [loginState, jwtToken]);
+  };
+  //USE EFFECT TO GET ALL MACROS
+  useEffect(() => {
+    handleGetAllMacros();
+  }, [loginState]);
+
+  //FUNCTION TO DELETE A MACRO
+  const handleDeleteMacro = function (macroId) {
+    if (loginState) {
+      axios
+        .delete(`${URL}/macros-list/${macroId}`, headers)
+        .then((response) => {
+          handleGetAllMacros();
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
+  };
+
   //FUNCTION TO SHORT MACROS BASED ON MACRO NAME
   const handleShortMacroName = function () {
     if (loginState && macroArr.length > 0) {
-      const newMacroArr = macroArr.sort((a, b) =>
+      const newMacroArr = [...macroArr].sort((a, b) =>
         a.macro_name.toLowerCase().localeCompare(b.macro_name.toLowerCase())
       );
-      console.log(newMacroArr);
       setMacroArr(newMacroArr);
     }
   };
@@ -45,10 +65,9 @@ export default function MacroLisPage({ userProfile, loginState }) {
   //FUNCTION TO SHORT MACROS BASED ON GOAL
   const handleShortMacroGoal = function () {
     if (loginState && macroArr.length > 0) {
-      const newMacroArr = macroArr.sort((a, b) =>
+      const newMacroArr = [...macroArr].sort((a, b) =>
         a.goal.toLowerCase().localeCompare(b.goal.toLowerCase())
       );
-      console.log(newMacroArr);
       setMacroArr(newMacroArr);
     }
   };
@@ -56,8 +75,10 @@ export default function MacroLisPage({ userProfile, loginState }) {
   //FUNCTION TO SHORT MACROS BASED ON TIME
   const handleShortMacroTime = function () {
     if (loginState && macroArr.length > 0) {
-      const newMacroArr = macroArr.sort((a, b) => a.updated_at - b.updated_at);
-      console.log(newMacroArr);
+      const newMacroArr = [...macroArr].sort(
+        (a, b) =>
+          new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+      );
       setMacroArr(newMacroArr);
     }
   };
@@ -65,8 +86,9 @@ export default function MacroLisPage({ userProfile, loginState }) {
   //FUNCTION TO SHORT MACROS BASED ON ENERGY
   const handleShortMacroEnergy = function () {
     if (loginState && macroArr.length > 0) {
-      const newMacroArr = macroArr.sort((a, b) => a.tdee_need - b.tdee_need);
-      console.log(newMacroArr);
+      const newMacroArr = [...macroArr].sort(
+        (a, b) => a.tdee_need - b.tdee_need
+      );
       setMacroArr(newMacroArr);
     }
   };
@@ -136,11 +158,12 @@ export default function MacroLisPage({ userProfile, loginState }) {
               .map((macroItem) => (
                 <ItemComponent
                   key={macroItem.id}
-                  id={macroItem.id}
+                  macroId={macroItem.id}
                   macroName={macroItem.macro_name}
                   macroGoal={macroItem.goal}
                   macroEnergy={macroItem.tdee_need}
                   macroTime={macroItem.updated_at}
+                  handleDeleteMacro={handleDeleteMacro}
                 />
               ))}
           </ul>
