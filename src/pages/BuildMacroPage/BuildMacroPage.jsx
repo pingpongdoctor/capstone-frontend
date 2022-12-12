@@ -1,6 +1,6 @@
 import "./BuildMacroPage.scss";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Pie, Line } from "react-chartjs-2";
 import { useEffect } from "react";
 import workoutPic1 from "../../assets/images/workout-1.png";
@@ -11,6 +11,7 @@ import pieChartPic from "../../assets/images/pie-chart.png";
 import barChartPic from "../../assets/images/bar-chart.png";
 import lineChartPic from "../../assets/images/line-chart.png";
 import meditationPic from "../../assets/images/meditation.png";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -452,12 +453,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     Extreme - about 6 days doing exercise a week
                   </option>
                 </select>
-                <button
-                  className={`btn--macro-page ${macroFirstBtnState}`}
-                  onClick={handleBalancedTdee}
-                >
-                  Calculate your TDEE now
-                </button>
+                <ButtonComponent
+                  btnClassName={`btn ${macroFirstBtnState}`}
+                  onClickHandler={handleBalancedTdee}
+                  btnContent="Calculate your TDEE now"
+                />
                 {/* RESULT */}
                 {activity && tdee && (
                   <p>Your Balanced TDEE is: {tdee} calories</p>
@@ -497,12 +497,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     <option value="fast-gain">Fast Gain Weight</option>
                     <option value="maintain">Maintain Weight</option>
                   </select>
-                  <button
-                    className={`btn--macro-page ${macroSecondBtnState}`}
-                    onClick={handleNeededEnergy}
-                  >
-                    Calculate your needed daily energy intake
-                  </button>
+                  <ButtonComponent
+                    btnClassName={`btn ${macroSecondBtnState}`}
+                    onClickHandler={handleNeededEnergy}
+                    btnContent="Calculate your needed daily energy intake"
+                  />
                   {/* RESULT */}
                   {neededIntake && tdee && (
                     <p>
@@ -543,12 +542,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     <option value="mesomorph">Mesomorph</option>
                     <option value="endomorph">Endomorph</option>
                   </select>
-                  <button
-                    className={`btn--macro-page ${macroThirdBtnState}`}
-                    onClick={handleRatios}
-                  >
-                    Show your macro ratios in a pie chart
-                  </button>
+                  <ButtonComponent
+                    btnClassName={`btn ${macroThirdBtnState}`}
+                    onClickHandler={handleRatios}
+                    btnContent="Show your macro ratios in a pie chart"
+                  />
                 </div>
               </div>
             </div>
@@ -582,9 +580,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   much protein, carb and fat you should eat everyday to achieve
                   your goal
                 </h3>
-                <button className="btn--macro-page" onClick={handleQuantities}>
-                  Calculate nutritional quantities now
-                </button>
+                <ButtonComponent
+                  btnClassName="btn"
+                  onClickHandler={handleQuantities}
+                  btnContent="Calculate nutritional quantities now"
+                />
                 {protein && carb && fat && (
                   <p>Your daily needed protein quantity is {protein} gram</p>
                 )}
@@ -626,12 +626,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     value={targetedWeight}
                     onChange={handleTargetedWeight}
                   />
-                  <button
-                    className={`btn--macro-page ${macroFifthBtnState}`}
-                    onClick={handleEstimatedWeekArr}
-                  >
-                    Show the line chart now
-                  </button>
+                  <ButtonComponent
+                    btnClassName={`btn ${macroFifthBtnState}`}
+                    onClickHandler={handleEstimatedWeekArr}
+                    btnContent="Show the line chart now"
+                  />
                 </div>
               </div>
             </div>

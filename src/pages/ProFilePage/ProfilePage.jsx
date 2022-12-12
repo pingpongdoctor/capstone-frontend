@@ -14,8 +14,9 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
   const [newHeight, setNewHeight] = useState("");
   const [newWeight, setNewWeight] = useState("");
   const [newAge, setNewAge] = useState("");
+  const [profileInputError, setProfileInputError] = useState("");
   //STATE FOR THE UPDATED FIELD
-  const [updateField, setUpdateField] = useState("");
+  // const [updateField, setUpdateField] = useState("");
   //STATE FOR MODAL BOX APPEARANCE
   const [modalBoxAppear, setModalBoxAppear] = useState(false);
   //STATE FOR THE INPUT BOX APPEARANCE (name, weight, height, age)
@@ -36,7 +37,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
   const handleNewAge = function (event) {
     setNewAge(event.target.value);
   };
-  console.log(modalBoxAppear, inputType);
+
   //FUNCTION TO POP OUT THE MODAL BOX
   const handleModalBoxAppear = function (event) {
     setModalBoxAppear(true);
@@ -69,24 +70,29 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
     if (inputType === "age") {
       body = { age: newAge };
     }
-    axios
-      .put(`${URL}/user-profile`, body, {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      })
-      .then((response) => {
-        alert(`Your ${inputType} has been updated`);
-        setModalBoxAppear(false);
-        setInputType("");
-        //GET A NEW JWT TOKEN AND LOAD A NEW USER PROFILE
-        localStorage.setItem("jwt_token", response.data);
-        loadProfile(response.data);
-      })
-      .catch((error) => {
-        setModalBoxAppear(false);
-        setInputType("");
-      });
+    if (newUserName || newWeight || newWeight || newAge) {
+      axios
+        .put(`${URL}/user-profile`, body, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        })
+        .then((response) => {
+          alert(`Your ${inputType} has been updated`);
+          setModalBoxAppear(false);
+          setInputType("");
+          //GET A NEW JWT TOKEN AND LOAD A NEW USER PROFILE
+          localStorage.setItem("jwt_token", response.data);
+          loadProfile(response.data);
+          setProfileInputError("");
+        })
+        .catch((error) => {
+          setModalBoxAppear(false);
+          setInputType("");
+        });
+    } else {
+      setProfileInputError("profile-page__input--error");
+    }
   };
   //FUNCTION TO HANDLE THE CLOSE ICON
   const handleCloseIcon = function () {
@@ -97,6 +103,17 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
     setNewWeight("");
     setNewAge("");
   };
+  //USE EFFECT TO CLEAR THE ERROR STATE
+  useEffect(() => {
+    if (newUserName || newWeight || newWeight || newAge) {
+      setProfileInputError("");
+    }
+  }, [newUserName, newAge, newHeight, newWeight]);
+
+  useEffect(() => {
+    setProfileInputError("");
+  }, [modalBoxAppear]);
+
   if (loginState) {
     return (
       <div className="profile-page">
@@ -191,7 +208,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <input
                   value={newUserName}
                   onChange={handleNewUserName}
-                  className="profile-page__input"
+                  className={`profile-page__input ${profileInputError}`}
                   type="text"
                   name="username"
                   placeholder="New username"
@@ -201,7 +218,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <input
                   value={newHeight}
                   onChange={handleNewHeight}
-                  className="profile-page__input"
+                  className={`profile-page__input ${profileInputError}`}
                   type="number"
                   name="height"
                   placeholder="Type new height in cm"
@@ -211,7 +228,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <input
                   value={newWeight}
                   onChange={handleNewWeight}
-                  className="profile-page__input"
+                  className={`profile-page__input ${profileInputError}`}
                   type="number"
                   name="weight"
                   placeholder="Type new weight in kg"
@@ -221,7 +238,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <input
                   value={newAge}
                   onChange={handleNewAge}
-                  className="profile-page__input"
+                  className={`profile-page__input ${profileInputError}`}
                   type="number"
                   name="age"
                   placeholder="New age"

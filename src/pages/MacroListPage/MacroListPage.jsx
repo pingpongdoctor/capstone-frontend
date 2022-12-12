@@ -2,10 +2,17 @@ import "./MacroListPage.scss";
 import ItemComponent from "../../components/ItemComponent/ItemComponent";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function MacroLisPage({ userProfile, loginState }) {
+  //APPLY THE USE NAVIGATE
+  const navigate = useNavigate();
+  //FUNCTION TO NAVIGATE TO THE ADD MACRO PAGE
+  const handleNavigateAddMacroPage = function () {
+    navigate("/add-macro");
+  };
   //STATE FOR THE INPUT DATA OF THE SEARCH BOX
   const [searchData, setSearchData] = useState("");
   //FUNCTION TO HANDLE THE SEARCH DATA
@@ -99,6 +106,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
         <div className="macro-list__wrapper">
           <h1 className="macro-list__heading">Macro List</h1>
           <ButtonComponent
+            onClickHandler={handleNavigateAddMacroPage}
             btnClassName="btn btn--macro-list"
             btnContent="Add New Macro"
           />
