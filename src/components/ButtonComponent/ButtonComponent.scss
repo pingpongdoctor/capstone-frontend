@@ -6,6 +6,7 @@
   border-radius: 20px;
   background-color: $Button-Color;
   color: #ffffff;
+  cursor: pointer;
   &:hover {
     background-color: $Button-Hover-Color;
   }
@@ -35,7 +36,8 @@
   padding: 0.5rem 1rem;
 }
 
-.btn--add-macro {
+.btn--add-macro,
+.btn--edit-macro {
   padding: 0.5rem;
   height: 36px;
   width: 100%;

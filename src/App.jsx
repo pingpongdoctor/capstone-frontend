@@ -10,6 +10,7 @@ import BuildMacroPage from "./pages/BuildMacroPage/BuildMacroPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import MacroListPage from "./pages/MacroListPage/MacroListPage";
 import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
+import EditMacroPage from "./pages/EditMacroPage/EditMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -178,6 +179,17 @@ function App() {
               path="/add-macro"
               element={
                 <AddMacroPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* EDIT MACRO ROUTE */}
+            <Route
+              path="/edit-macro/:macroId"
+              element={
+                <EditMacroPage
                   userProfile={userProfile}
                   loginState={loginState}
                 />

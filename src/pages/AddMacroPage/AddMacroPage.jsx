@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./AddMacroPage.scss";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
-import { ne } from "faker/lib/locales";
 import { useEffect } from "react";
 const URL = process.env.REACT_APP_API_URL || "";
 
@@ -153,7 +152,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
     if (goal === "maintain") {
       setNeededIntake(tdee);
     }
-  }, [tdee, neededIntake]);
+  }, [tdee, neededIntake, goal]);
 
   //USE EFFECT TO CLEAR THE ERROR
   useEffect(() => {

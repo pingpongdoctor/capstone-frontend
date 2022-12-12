@@ -110,6 +110,13 @@
   }
 }
 
+.profile-page__input--error {
+  box-shadow: 1px 2px 6px 1px rgb(255, 0, 0, 0.2);
+  &:focus {
+    box-shadow: 1px 2px 6px 1px rgb(255, 0, 0, 0.2);
+  }
+}
+
 .profile-page__close-pic {
   width: 8%;
   margin-left: auto;

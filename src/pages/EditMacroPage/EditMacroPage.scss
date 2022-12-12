@@ -1,0 +1,53 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.edit-macro {
+  margin: 0 1rem;
+  @include tablet {
+    margin: 0 2rem;
+  }
+}
+
+.edit-macro__flex-container {
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.edit-macro__flex-item {
+  @include tablet {
+    width: 45%;
+  }
+}
+
+.edit-macro__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.edit-macro__label {
+  margin-bottom: 0.3rem;
+}
+
+.edit-macro__input {
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  &:focus {
+    box-shadow: 1px 2px 6px 1px rgba(0, 0, 255, 0.2);
+  }
+}
+
+.edit-macro__input--error {
+  box-shadow: 1px 2px 6px 1px rgb(255, 0, 0, 0.2);
+  &:focus {
+    box-shadow: 1px 2px 6px 1px rgb(255, 0, 0, 0.2);
+  }
+}
