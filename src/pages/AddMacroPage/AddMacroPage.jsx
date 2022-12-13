@@ -217,31 +217,31 @@ export default function AddMacroPage({ loginState, userProfile }) {
     } else {
       alert("Please fulfill all correct fields");
       if (!isMacroNameValid()) {
-        setMacroNameError("add-macro__input-name--error");
+        setMacroNameError("add-macro__input--error");
       }
 
       if (!isBodyTypeValid()) {
-        setMacroBodyError("add-macro__input-body--error");
+        setMacroBodyError("add-macro__input--error");
       }
 
       if (!isGoalValid()) {
-        setGoalError("add-macro__input-goal--error");
+        setGoalError("add-macro__input--error");
       }
 
       if (!isTargetedWeightValid()) {
-        setTargetedWeightError("add-macro__input-weight--error");
+        setTargetedWeightError("add-macro__input--error");
       }
 
       if (!isActivityValid()) {
-        setActivityError("add-macro__input-activity--error");
+        setActivityError("add-macro__input--error");
       }
 
       if (!isTdeeValid()) {
-        setTdeeError("add-macro__input-tdee--error");
+        setTdeeError("add-macro__input--error");
       }
 
       if (!isNeededIntakeValid()) {
-        setNeededIntakeError("add-macro__input-energy--error");
+        setNeededIntakeError("add-macro__input--error");
       }
     }
   };
@@ -385,6 +385,18 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   type="number"
                   name="needed-intake"
                   placeholder="Daily Energy Needed"
+                />
+              </div>
+
+              <div className="edit-macro__wrapper">
+                <label className={"edit-macro__label"}>
+                  Your Current Weight
+                </label>
+                <input
+                  value={userProfile.weight}
+                  className={`edit-macro__input`}
+                  id="current-weight"
+                  name="current-weight"
                 />
               </div>
             </div>

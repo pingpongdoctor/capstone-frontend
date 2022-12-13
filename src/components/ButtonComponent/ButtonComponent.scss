@@ -13,10 +13,7 @@
   padding: 1rem;
 }
 
-.btn--macro-page-first-error,
-.btn--macro-page-second-error,
-.btn--macro-page-third-error,
-.btn--macro-page-fifth-error {
+.btn--macro-page--error {
   border: 1px solid red;
 }
 
@@ -43,5 +40,17 @@
   width: 100%;
   @include tablet {
     width: 100px;
+  }
+}
+
+.btn--detail-macro {
+  height: 45px;
+  width: 100%;
+  padding: 0.5rem, 1rem;
+  margin-bottom: 1rem;
+  @include tablet {
+    width: 100px;
+    margin-top: 8px;
+    margin-bottom: 0;
   }
 }

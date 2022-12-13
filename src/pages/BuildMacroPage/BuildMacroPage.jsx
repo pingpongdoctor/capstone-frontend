@@ -41,7 +41,7 @@ const fitnessCalculatorFunctions = require("fitness-calculator");
 export default function BuildMacroPage({ userProfile, loginState }) {
   //GET JWT TOKEN FROM LOCAL STRING
   const jwtToken = localStorage.getItem("jwt_token");
-  //STATES FOR THE ACTIVITY INTENSE LEVEL
+  //STATES
   const [activity, setActivity] = useState("");
   const [tdee, setTdee] = useState("");
   const [goal, setGoal] = useState("");
@@ -90,7 +90,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     }
 
     if (!bodyType) {
-      setMacroThirdBtnState("btn--macro-page-third-error");
+      setMacroThirdBtnState("btn--macro-page--error");
     }
   };
 
@@ -189,7 +189,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const countEstimatedWeekArr = function (weeks) {
     let weekArr = [];
     for (let i = 1; i <= weeks; i++) {
-      weekArr.push("week" + " " + i);
+      weekArr.push(`"week" ${i}`);
     }
     return weekArr;
   };
@@ -225,7 +225,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
         setShowSaveMacro(true);
       }
     } else {
-      setMacroFifthBtnState("btn--macro-page-fifth-error");
+      setMacroFifthBtnState("btn--macro-page--error");
       setShowSaveMacro(false);
     }
   };
@@ -253,7 +253,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   }, [estimatedWeekArr]);
 
   //FUNCTION TO CALCULATE TDEE (REQUIRED INPUT VALUES: GENDER, AGE, HEIGHT, WEIGHT, ACTIVITY)
-  console.log(activity);
   const handleBalancedTdee = function () {
     if (activity) {
       const balancedTdee = Math.round(
@@ -268,7 +267,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setTdee(balancedTdee);
       setMacroFirstBtnState("");
     } else {
-      setMacroFirstBtnState("btn--macro-page-first-error");
+      setMacroFirstBtnState("btn--macro-page--error");
     }
   };
 
@@ -295,7 +294,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setMacroSecondBtnState("");
     }
     if (!goal) {
-      setMacroSecondBtnState("btn--macro-page-second-error");
+      setMacroSecondBtnState("btn--macro-page--error");
     }
   };
 
@@ -366,7 +365,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     ],
   };
 
-  //DATA FOR THE PIE CHART THAT IS BUILT BASED ON THE TRAINING TYPE
+  //DATA FOR THE PIE CHART
   const data = {
     labels: ["Protein Ratio", "Carb Ratio", "Fat Ratio"],
     datasets: [

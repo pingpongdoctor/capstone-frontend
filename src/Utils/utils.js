@@ -30,3 +30,16 @@ export const timeConvDetail = function (timestamp) {
     return timeDisplayDetail;
   }
 };
+
+//FUNCTION TO CAPITALIZE ALL FIRST LETTER OF THE MACRO NAME
+export const handleCapitalize = (value) => {
+  let wordArr = value.split(" ");
+  let newWordArr = [];
+  for (let i = 0; i < wordArr.length; i++) {
+    newWordArr.push(
+      wordArr[i].split("")[0].toUpperCase() + wordArr[i].substring(1)
+    );
+  }
+  const newWord = newWordArr.join(" ");
+  return newWord;
+};

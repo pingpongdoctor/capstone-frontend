@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useParams } from "react-router-dom";
+import { handleCapitalize } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function EditMacroPage({ userProfile, loginState }) {
@@ -39,19 +40,6 @@ export default function EditMacroPage({ userProfile, loginState }) {
       });
     }
   }, [loginState, jwtToken]);
-
-  //FUNCTION TO CAPITALIZE ALL FIRST LETTER OF THE MACRO NAME
-  const handleCapitalize = (value) => {
-    let wordArr = value.split(" ");
-    let newWordArr = [];
-    for (let i = 0; i < wordArr.length; i++) {
-      newWordArr.push(
-        wordArr[i].split("")[0].toUpperCase() + wordArr[i].substring(1)
-      );
-    }
-    const newWord = newWordArr.join(" ");
-    return newWord;
-  };
 
   //USE EFFECT TO SET THE CAPITALIZED NAME PLACEHOLDER
   useEffect(() => {
@@ -305,6 +293,18 @@ export default function EditMacroPage({ userProfile, loginState }) {
                   type="number"
                   name="needed-intake"
                   placeholder={macroObj.tdee_need}
+                />
+              </div>
+
+              <div className="edit-macro__wrapper">
+                <label className={"edit-macro__label"}>
+                  Your Current Weight
+                </label>
+                <input
+                  value={userProfile.weight}
+                  className={`edit-macro__input`}
+                  id="current-weight"
+                  name="current-weight"
                 />
               </div>
             </div>
