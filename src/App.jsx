@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import MacroListPage from "./pages/MacroListPage/MacroListPage";
 import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
 import EditMacroPage from "./pages/EditMacroPage/EditMacroPage";
+import DetailedMacroPage from "./pages/DetailedMacroPage/DetailedMacroPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -168,6 +169,17 @@ function App() {
               path="/macro-list"
               element={
                 <MacroListPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* DETAILED MACRO PAGE */}
+            <Route
+              path="/macro-list/:macroId"
+              element={
+                <DetailedMacroPage
                   userProfile={userProfile}
                   loginState={loginState}
                 />

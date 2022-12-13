@@ -12,7 +12,9 @@ export default function SiteMenu({ sideMenuState }) {
           <li>Build Macronutrients</li>
         </Link>
         <li className="side-menu__item">Track Body Indexes</li>
-        <li className="side-menu__item">Macro List</li>
+        <Link to={"/macro-list"} className="side-menu__item">
+          <li>Macro List</li>
+        </Link>
         <li className="side-menu__item">Recipe List</li>
         <li className="side-menu__item">Recipe Library</li>
         <li className="side-menu__item">Nutritional Facts</li>

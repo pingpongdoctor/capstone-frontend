@@ -1,6 +1,7 @@
 import "./ItemComponent.scss";
 import { timeConvDetail } from "../../Utils/utils";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete.png";
 import editIcon from "../../assets/icons/edit.png";
 
@@ -54,7 +55,9 @@ export default function ItemComponent({
         {timeConvDetail(macroTime)}
       </p>
       <div className="item__icons">
-        <img className="item__icon" src={editIcon} alt="edit-icon" />
+        <Link to={`/edit-macro/${macroId}`}>
+          <img className="item__icon" src={editIcon} alt="edit-icon" />
+        </Link>
         <img
           onClick={() => {
             handleDeleteMacro(macroId);
