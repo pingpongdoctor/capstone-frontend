@@ -309,8 +309,8 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
       {
         label: "Your estimated weight",
         data: estimatedWeightArr,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.5)",
       },
     ],
   };

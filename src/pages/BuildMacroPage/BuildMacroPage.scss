@@ -35,23 +35,17 @@
   padding: 1rem;
 }
 
-.btn--macro-page-first-error,
-.btn--macro-page-second-error,
-.btn--macro-page-third-error,
-.btn--macro-page-fifth-error {
-  border: 1px solid red;
-}
-
 .maro-page__input {
   outline: none;
   border-radius: 20px;
-  background-color: hsla(211, 48%, 44%, 0.227);
+  background-color: ivory;
   padding: 0.5rem;
   margin-bottom: 1.5rem;
   margin-top: 0.3rem;
   display: block;
   min-width: 155px;
   font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
 }
 
 .macro-page {

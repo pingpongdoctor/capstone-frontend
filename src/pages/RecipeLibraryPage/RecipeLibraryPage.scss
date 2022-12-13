@@ -1,0 +1,19 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.recipe-library {
+  margin: 0 1rem;
+  @include tablet {
+    margin: 0 2rem;
+  }
+}
+
+.recipe-library__items {
+  display: flex;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

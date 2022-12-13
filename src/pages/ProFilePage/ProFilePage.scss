@@ -18,7 +18,7 @@
   height: 133px;
   flex-direction: column;
   &:hover {
-    background-color: rgba(0, 79, 152, 0.163);
+    background-color: $Row-Hover;
     border-radius: 10px;
   }
   &:first-child {
@@ -105,16 +105,14 @@
   width: 100%;
   margin-bottom: 2rem;
   font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
   &:focus {
-    box-shadow: 1px 2px 6px 1px rgba(0, 0, 255, 0.2);
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
   }
 }
 
 .profile-page__input--error {
-  box-shadow: 1px 2px 6px 1px rgb(255, 0, 0, 0.2);
-  &:focus {
-    box-shadow: 1px 2px 6px 1px rgb(255, 0, 0, 0.2);
-  }
+  border: 1px red solid;
 }
 
 .profile-page__close-pic {

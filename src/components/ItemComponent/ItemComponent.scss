@@ -1,14 +1,22 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.item {
+.item:link,
+.item:hover,
+.item:active,
+.item:visited {
+  color: $Text-Color;
+  text-decoration: none;
+}
+
+.item__container {
   display: flex;
   justify-content: space-between;
   padding: 1.5rem 2rem;
   border-top: 1px solid rgba(128, 128, 128, 0.162);
   align-items: center;
   &:hover {
-    background-color: rgba(0, 79, 152, 0.163);
+    background-color: $Row-Hover;
     border-radius: 10px;
   }
   &:first-child {
