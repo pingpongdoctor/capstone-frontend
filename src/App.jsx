@@ -220,6 +220,17 @@ function App() {
                 />
               }
             />
+
+            {/* DETAIL RECIPE ROUTE */}
+            <Route
+              path="/recipe-library/:recipeId"
+              element={
+                <RecipeLibraryPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

@@ -3,6 +3,7 @@ import RecipeItem from "../../components/RecipeItem/RecipeItem";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import DetailRecipeComponent from "../../components/DetailRecipeComponent/DetailRecipeComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeLibraryPage({ loginState, userProfile }) {
@@ -35,6 +36,7 @@ export default function RecipeLibraryPage({ loginState, userProfile }) {
             />
           ))}
       </div>
+      {recipes && <DetailRecipeComponent recipes={recipes} />}
     </div>
   );
 }
