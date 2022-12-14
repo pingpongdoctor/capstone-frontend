@@ -2,13 +2,14 @@
 @use "../../styles/partials/mixins" as *;
 
 .side-menu {
-  background-color: #ed1c5b;
+  background-color: #1c3157ac;
   position: absolute;
   width: 200px;
   height: 100vh;
   overflow: hidden;
   z-index: 100;
   border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
   @include tablet {
     width: 300px;
   }
@@ -44,7 +45,6 @@
   display: flex;
   align-items: center;
   &:hover {
-    background-color: black;
-    color: #ed1c5b;
+    background-color: #1c3157;
   }
 }

@@ -110,7 +110,8 @@ function App() {
       {/* SIDE MENU */}
       <SideMenu sideMenuState={sideMenuState} />
       <div onMouseEnter={closeMenu} className="App">
-        <div className={appPageState}>
+        {/* className={appPageState} */}
+        <div>
           <Routes>
             {/* HOME PAGE ROUTE */}
             <Route

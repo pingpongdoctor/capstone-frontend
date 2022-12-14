@@ -2,7 +2,6 @@
 @use "../../styles/partials/mixins" as *;
 
 .profile-page {
-  background-color: #ffffff;
   margin: 1rem;
   overflow: hidden;
   @include tablet {
