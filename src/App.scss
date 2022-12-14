@@ -1,4 +1,6 @@
 @use "./styles/partials/mixins" as *;
+@use "./styles/partials/variables" as *;
+
 * {
   box-sizing: border-box;
 }
@@ -8,6 +10,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   margin: 0;
+  color: $Text-Color;
 }
 
 h1 {

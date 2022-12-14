@@ -12,6 +12,7 @@ import MacroListPage from "./pages/MacroListPage/MacroListPage";
 import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
 import EditMacroPage from "./pages/EditMacroPage/EditMacroPage";
 import DetailedMacroPage from "./pages/DetailedMacroPage/DetailedMacroPage";
+import RecipeLibraryPage from "./pages/RecipeLibraryPage/RecipeLibraryPage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -109,7 +110,8 @@ function App() {
       {/* SIDE MENU */}
       <SideMenu sideMenuState={sideMenuState} />
       <div onMouseEnter={closeMenu} className="App">
-        <div className={appPageState}>
+        {/* className={appPageState} */}
+        <div>
           <Routes>
             {/* HOME PAGE ROUTE */}
             <Route
@@ -202,6 +204,28 @@ function App() {
               path="/edit-macro/:macroId"
               element={
                 <EditMacroPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* RECIPE LIBRARY ROUTE */}
+            <Route
+              path="/recipe-library"
+              element={
+                <RecipeLibraryPage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* DETAIL RECIPE ROUTE */}
+            <Route
+              path="/recipe-library/:recipeId"
+              element={
+                <RecipeLibraryPage
                   userProfile={userProfile}
                   loginState={loginState}
                 />

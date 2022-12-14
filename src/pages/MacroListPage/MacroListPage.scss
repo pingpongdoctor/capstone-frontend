@@ -81,11 +81,10 @@
   background-size: 1.5rem;
   background-repeat: no-repeat;
   padding-left: 3rem;
-  &::placeholder {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
   &:focus {
-    box-shadow: 1px 2px 6px 1px rgba(0, 0, 255, 0.2);
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
   }
 }
 
