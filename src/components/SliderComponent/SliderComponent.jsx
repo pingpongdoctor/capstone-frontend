@@ -105,17 +105,21 @@ export default function SliderComponent() {
             </p>
           </div>
         </div>
+
         <div className="slider__card">
-          <img
-            className="slider__image"
-            src={recipePic}
-            alt="build-macro-pic"
-          />
-          <div className="slider__text">
-            <h3>Enjoy our recipe library</h3>
-            <p>We provide you with many recipies to diversify your dishes</p>
-          </div>
+          <Link className="slider__link" to={"/recipe-library"}>
+            <img
+              className="slider__image"
+              src={recipePic}
+              alt="build-macro-pic"
+            />
+            <div className="slider__text">
+              <h3>Enjoy our recipe library</h3>
+              <p>We provide you with many recipies to diversify your dishes</p>
+            </div>
+          </Link>
         </div>
+
         <div className="slider__card">
           <img
             className="slider__image"

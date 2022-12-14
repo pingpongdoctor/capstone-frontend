@@ -2,6 +2,7 @@ import "./RecipeItem.scss";
 import Avatar from "../Avatar/Avatar";
 import heartPic from "../../assets/images/heart.png";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 const URL = process.env.REACT_APP_API_URL || "";
 
@@ -9,8 +10,9 @@ export default function RecipeItem({
   recipeImage,
   recipeName,
   recipePosterId,
+  id,
 }) {
-  //STATE TO STORE THE PROFILE OF THE RECIPE POSTER
+  //STATE TO STORE THE NAME OF THE POSTER
   const [posterName, setPosterName] = useState("");
   //STATE FOR THE HIDDEN CLASSNAME
   const [hiddenState, setHiddenSate] = useState("");
@@ -35,19 +37,34 @@ export default function RecipeItem({
         });
     }
   }, []);
-  return (
-    <div className="recipe-item">
-      <img
-        className="recipe-item__img"
-        src={recipeImage}
-        alt="recipe-item__picture"
-      />
-      <img className="recipe-item__heart-img" src={heartPic} alt="heart-pic" />
-      <h3 className="recipe__name">{recipeName}</h3>
-      <div className={`recipe-item__wrapper ${hiddenState}`}>
-        <Avatar avatarClassName="avatar--recipe-library" />
-        <p className="recipe-item__user">Simon</p>
-      </div>
-    </div>
-  );
+  if (id) {
+    return (
+      <Link to={`/recipe-library/${id}`} className="recipe-item">
+        <li className="recipe-item__container">
+          <img
+            className="recipe-item__img"
+            src={recipeImage}
+            alt="recipe-item__picture"
+          />
+          <img
+            className="recipe-item__heart-img"
+            src={heartPic}
+            alt="heart-pic"
+          />
+          <h3 className="recipe__name">{recipeName}</h3>
+          <div className={`recipe-item__wrapper ${hiddenState}`}>
+            <Avatar avatarClassName="avatar--recipe-library" />
+            {posterName && (
+              <p className="recipe-item__user">
+                {posterName.replace(
+                  posterName.split("")[0],
+                  posterName.split("")[0].toUpperCase()
+                )}
+              </p>
+            )}
+          </div>
+        </li>
+      </Link>
+    );
+  }
 }

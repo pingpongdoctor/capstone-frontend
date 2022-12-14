@@ -16,7 +16,9 @@ export default function SiteMenu({ sideMenuState }) {
           <li>Macro List</li>
         </Link>
         <li className="side-menu__item">Recipe List</li>
-        <li className="side-menu__item">Recipe Library</li>
+        <Link to={"/recipe-library"}>
+          <li className="side-menu__item">Recipe Library</li>
+        </Link>
         <li className="side-menu__item">Nutritional Facts</li>
         <li className="side-menu__item">Barcode Scanning</li>
       </ul>

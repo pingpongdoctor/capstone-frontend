@@ -1,4 +1,4 @@
-import "./ItemComponent.scss";
+import "./MacroItemComponent.scss";
 import { timeConvDetail } from "../../Utils/utils";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
