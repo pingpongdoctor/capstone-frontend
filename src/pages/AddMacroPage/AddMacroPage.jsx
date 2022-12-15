@@ -16,7 +16,11 @@ export default function AddMacroPage({ loginState, userProfile }) {
   const [tdee, setTdee] = useState("");
   const [neededIntake, setNeededIntake] = useState("");
   const [bodyType, setBodyType] = useState("");
-
+  //STATE FOR CURRENT BODY INDEXES
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [age, setAge] = useState("");
+  const [height, setHeight] = useState("");
+  const [gender, setGender] = useState("");
   //ERROR STATE FOR ALL INPUT BOXES
   const [macroNameError, setMacroNameError] = useState("");
   const [goalError, setGoalError] = useState("");
@@ -30,6 +34,20 @@ export default function AddMacroPage({ loginState, userProfile }) {
   const [targetedWeightAppear, setTargetedWeightAppear] = useState(true);
 
   //FUNCTION TO HANDLE ALL INPUT STATES
+
+  const handleCurrentWeight = function (event) {
+    setCurrentWeight(Number(event.target.value));
+  };
+  const handleHeight = function (event) {
+    setHeight(Number(event.target.value));
+  };
+  const handleAge = function (event) {
+    setAge(Number(event.target.value));
+  };
+  const handleGender = function (event) {
+    setGender(event.target.value);
+  };
+
   const handleMacroName = function (event) {
     setMacroName(event.target.value);
   };
@@ -58,6 +76,34 @@ export default function AddMacroPage({ loginState, userProfile }) {
     setBodyType(event.target.value);
   };
   //FUNCTIONS TO VALIDATE ALL STATES
+  const isCurrentWeightValid = function () {
+    if (currentWeight) {
+      return true;
+    }
+    return false;
+  };
+
+  const isHeightValid = function () {
+    if (height) {
+      return true;
+    }
+    return false;
+  };
+
+  const isAgeValid = function () {
+    if (age) {
+      return true;
+    }
+    return false;
+  };
+
+  const isGenderValid = function () {
+    if (gender) {
+      return true;
+    }
+    return false;
+  };
+
   const isMacroNameValid = function () {
     if (macroName) {
       return true;
@@ -76,14 +122,14 @@ export default function AddMacroPage({ loginState, userProfile }) {
     if (
       targetedWeight &&
       goal.includes("gain") &&
-      targetedWeight > userProfile.weight
+      targetedWeight > currentWeight
     ) {
       return true;
     }
     if (
       targetedWeight &&
       goal.includes("lose") &&
-      targetedWeight < userProfile.weight
+      targetedWeight < currentWeight
     ) {
       return true;
     }
@@ -129,7 +175,11 @@ export default function AddMacroPage({ loginState, userProfile }) {
       isGoalValid() &&
       isTdeeValid() &&
       isNeededIntakeValid() &&
-      isTargetedWeightValid()
+      isTargetedWeightValid() &&
+      isHeightValid() &&
+      isCurrentWeightValid() &&
+      isAgeValid() &&
+      isGenderValid()
     ) {
       return true;
     }
@@ -140,7 +190,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
   useEffect(() => {
     if (goal === "maintain") {
       setTargetedWeightAppear(false);
-      setTargetedWeight(userProfile.weight);
+      setTargetedWeight(currentWeight);
     } else {
       setTargetedWeightAppear(true);
       setTargetedWeight("");
@@ -202,6 +252,10 @@ export default function AddMacroPage({ loginState, userProfile }) {
             tdee_need: neededIntake,
             goal: goal,
             body_type: bodyType,
+            gender: gender,
+            height,
+            weight: currentWeight,
+            age,
           },
           {
             headers: {
@@ -246,6 +300,8 @@ export default function AddMacroPage({ loginState, userProfile }) {
     }
   };
 
+  console.log(height, currentWeight, age, gender);
+
   if (loginState) {
     return (
       <div className="add-macro">
@@ -268,6 +324,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   placeholder="Macro Name"
                 />
               </div>
+
               <div className="add-macro__wrapper">
                 <label className="add-macro__label" htmlFor="body-type">
                   Body Type
@@ -334,30 +391,6 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   </option>
                 </select>
               </div>
-            </div>
-
-            {/* FLEX ITEM */}
-            <div className="add-macro__flex-item">
-              {targetedWeightAppear && (
-                <div className="add-macro__wrapper">
-                  <label
-                    className={"add-macro__label"}
-                    htmlFor="targeted-weight"
-                  >
-                    Targeted Weight
-                  </label>
-                  <input
-                    value={targetedWeight}
-                    onChange={handleTargetedWeight}
-                    className={`add-macro__input ${targetedWeightError}`}
-                    id="targeted-weight"
-                    type="number"
-                    name="targeted-weight"
-                    placeholder="Targeted Weight"
-                  />
-                </div>
-              )}
-
               <div className="add-macro__wrapper">
                 <label className="add-macro__label" htmlFor="tdee">
                   Your Balanced TDEE
@@ -387,16 +420,90 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   placeholder="Daily Energy Needed"
                 />
               </div>
+            </div>
 
-              <div className="edit-macro__wrapper">
-                <label className={"edit-macro__label"}>
-                  Your Current Weight
+            {/* FLEX ITEM */}
+            <div className="add-macro__flex-item">
+              <div className="add-macro__wrapper">
+                <label className="add-macro__label" htmlFor="current-weight">
+                  Weight
                 </label>
                 <input
-                  value={userProfile.weight}
-                  className={`edit-macro__input`}
+                  className={`add-macro__input`}
+                  value={currentWeight}
+                  onChange={handleCurrentWeight}
                   id="current-weight"
+                  type="number"
                   name="current-weight"
+                  placeholder="Weight"
+                />
+              </div>
+
+              {targetedWeightAppear && (
+                <div className="add-macro__wrapper">
+                  <label
+                    className={"add-macro__label"}
+                    htmlFor="targeted-weight"
+                  >
+                    Targeted Weight
+                  </label>
+                  <input
+                    value={targetedWeight}
+                    onChange={handleTargetedWeight}
+                    className={`add-macro__input ${targetedWeightError}`}
+                    id="targeted-weight"
+                    type="number"
+                    name="targeted-weight"
+                    placeholder="Targeted Weight"
+                  />
+                </div>
+              )}
+
+              <div className="add-macro__wrapper">
+                <label className="macro-page__text" htmlFor="gender">
+                  Gender
+                </label>
+                <select
+                  value={gender}
+                  onChange={handleGender}
+                  className="add-macro__input"
+                  name="gender"
+                  id="gender"
+                >
+                  <option value="">Choose here</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="male">Others</option>
+                </select>
+              </div>
+
+              <div className="add-macro__wrapper">
+                <label className="add-macro__label" htmlFor="age">
+                  Age
+                </label>
+                <input
+                  className={`add-macro__input`}
+                  value={age}
+                  onChange={handleAge}
+                  id="age"
+                  type="number"
+                  name="age"
+                  placeholder="Age"
+                />
+              </div>
+
+              <div className="add-macro__wrapper">
+                <label className="add-macro__label" htmlFor="height">
+                  Height
+                </label>
+                <input
+                  className={`add-macro__input`}
+                  value={height}
+                  onChange={handleHeight}
+                  id="height"
+                  type="number"
+                  name="height"
+                  placeholder="Height"
                 />
               </div>
             </div>

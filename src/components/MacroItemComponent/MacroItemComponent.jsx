@@ -20,13 +20,13 @@ export default function ItemComponent({
   //USE EFFECT TO HANDLE THE GOAL TEXT
   useEffect(() => {
     if (macroGoal === "fast-lose") {
-      setGoalText("Fastly Lose Weight");
+      setGoalText("Fast Lose Weight");
     }
     if (macroGoal === "slow-lose") {
       setGoalText("Slowly Lose Weight");
     }
     if (macroGoal === "fast-gain") {
-      setGoalText("Fastly Gain Weight");
+      setGoalText("Fast Gain Weight");
     }
     if (macroGoal === "slow-gain") {
       setGoalText("Slowly Gain Weight");
@@ -60,14 +60,16 @@ export default function ItemComponent({
           <Link to={`/edit-macro/${macroId}`}>
             <img className="item__icon" src={editIcon} alt="edit-icon" />
           </Link>
-          <img
-            onClick={() => {
-              handleDeleteMacro(macroId);
-            }}
-            className="item__icon"
-            src={deleteIcon}
-            alt="delete-icon"
-          />
+          <Link to={`/macro-list`}>
+            <img
+              onClick={() => {
+                handleDeleteMacro(macroId);
+              }}
+              className="item__icon"
+              src={deleteIcon}
+              alt="delete-icon"
+            />
+          </Link>
         </div>
       </li>
     </Link>

@@ -1,6 +1,7 @@
 import "./DetailedMacroPage.scss";
 import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { handleCapitalizeAWord } from "../../Utils/utils";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
@@ -115,13 +116,13 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   useEffect(() => {
     if (loginState && macroObj) {
       if (macroObj.goal === "fast-lose") {
-        setGoalText("Fastly Lose Weight");
+        setGoalText("Fast Lose Weight");
       }
       if (macroObj.goal === "slow-lose") {
         setGoalText("Slowly Lose Weight");
       }
       if (macroObj.goal === "fast-gain") {
-        setGoalText("Fastly Gain Weight");
+        setGoalText("Fast Gain Weight");
       }
       if (macroObj.goal === "slow-gain") {
         setGoalText("Slowly Gain Weight");
@@ -222,7 +223,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   useEffect(() => {
     if (loginState && macroObj && userProfile) {
       const weightDescrepancy = Math.abs(
-        macroObj.targeted_weight - userProfile.weight
+        macroObj.targeted_weight - macroObj.weight
       );
       if (macroObj.goal === "slow-gain" || macroObj.goal === "slow-lose") {
         const estimatedWeeks = Math.round((weightDescrepancy * 7000) / 300 / 7);
@@ -242,20 +243,20 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   //USE EFFECT TO SET THE PREDICTED WEIGHTS ARRAY
   useEffect(() => {
     if (loginState && userProfile && macroObj && estimatedWeekArr) {
-      let weightArr = [userProfile.weight];
-      let newWeight = userProfile.weight;
+      let weightArr = [macroObj.weight];
+      let newWeight = macroObj.weight;
       const weekNumber = estimatedWeekArr.length;
       const weightDescrepancy = Math.abs(
-        macroObj.targeted_weight - userProfile.weight
+        macroObj.targeted_weight - macroObj.weight
       );
       const weightWeeklyChange = weightDescrepancy / weekNumber;
-      if (userProfile.weight > macroObj.targeted_weight) {
+      if (macroObj.weight > macroObj.targeted_weight) {
         for (let i = 1; i <= weekNumber; i++) {
           newWeight = newWeight - weightWeeklyChange;
           weightArr.push(newWeight);
         }
       }
-      if (userProfile.weight < macroObj.targeted_weight) {
+      if (macroObj.weight < macroObj.targeted_weight) {
         for (let i = 1; i <= weekNumber; i++) {
           newWeight = newWeight + weightWeeklyChange;
           weightArr.push(newWeight);
@@ -342,10 +343,12 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
             onClick={handleOnclickActivateFirstBox}
             className={`detail-page__box detail-page__first-box ${activateFirstBox}`}
           >
-            <div className="detail-page__value">
-              <p className="detail-page__field">Current Weight: </p>
-              <p>{userProfile.weight} kg</p>
-            </div>
+            {macroObj && (
+              <div className="detail-page__value">
+                <p className="detail-page__field">Current Weight: </p>
+                <p>{macroObj.weight} kg</p>
+              </div>
+            )}
 
             {macroObj && (
               <div className="detail-page__value">
@@ -363,6 +366,13 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
               <p className="detail-page__field">Activity: </p>
               <p>{activityText}</p>
             </div>
+
+            {macroObj && (
+              <div className="detail-page__value">
+                <p className="detail-page__field">Balanced TDEE: </p>
+                <p>{macroObj.tdee} calories</p>
+              </div>
+            )}
 
             {macroObj && (
               <div className="detail-page__value">
@@ -388,12 +398,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
             {macroObj && (
               <div className="detail-page__value">
                 <p className="detail-page__field">Body Type: </p>
-                <p>
-                  {macroObj.body_type.replace(
-                    macroObj.body_type.split("")[0],
-                    macroObj.body_type.split("")[0].toUpperCase()
-                  )}
-                </p>
+                <p>{handleCapitalizeAWord(macroObj.body_type)}</p>
               </div>
             )}
 

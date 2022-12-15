@@ -6,17 +6,23 @@ import { useParams } from "react-router-dom";
 import likeIcon from "../../assets/icons/like.png";
 import ingredientPic from "../../assets/images/ingredients.png";
 import stepPic from "../../assets/images/steps.png";
+import RecipeCommentItem from "../../components/RecipeCommentItem/RecipeCommentItem";
+import InputBox from "../../components/InputBox/InputBox";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { handleCapitalizeAWord } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
   // //STATE TO STORE THE SINGLE RECIPE DATA
   const [recipeData, setRecipeData] = useState("");
   //STATE TO STORE THE NAME OF THE POSTER
-  const [posterName, setPosterName] = useState("");
+  const [recipePosterName, setRecipePosterName] = useState("");
   //STATE TO STORE NEW CUSTOMIZED INGREDIENTS ARRAY
   const [ingredientArr, setIngredientArr] = useState("");
   //STATE TO STORE NEW CUSTOMIZED STEP ARRAY
   const [directionsArr, setDirectionsArr] = useState("");
+  //STATE TO STORE THE COMMENTS DATA
+  const [commentData, setCommentData] = useState([]);
   //USE USEPARAMS TO GET THE RECIPE ID
   const { detailRecipeId } = useParams();
 
@@ -39,31 +45,40 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     }
   }, [recipeData]);
 
-  // //USE EFFECT TO GET A SINGLE RECIPE DATA
+  //USE EFFECT TO GET A SINGLE RECIPE DATA
   useEffect(() => {
-    if (detailRecipeId) {
-      axios
-        .get(`${URL}/recipe-library/${detailRecipeId}`)
-        .then((response) => {
-          setRecipeData(response.data);
-        })
-        .catch((error) => console.log(error));
-    }
+    axios
+      .get(`${URL}/recipe-library/${detailRecipeId}`)
+      .then((response) => {
+        setRecipeData(response.data);
+      })
+      .catch((error) => console.log(error));
   }, [detailRecipeId]);
 
   //USE EFFECT TO GET PROFILE OF THE RECIPE POSTER
   useEffect(() => {
     if (recipeData && recipeData.poster_id) {
       axios
-        .get(`${URL}/poster-profile/${recipeData.poster_id}`)
+        .get(`${URL}/user-profile/${recipeData.poster_id}`)
         .then((response) => {
-          setPosterName(response.data.username);
-        })
-        .catch((error) => {
-          console.log(error);
+          setRecipePosterName(response.data.username);
         });
     }
   }, [recipeData]);
+
+  //USE EFFECT TO GET THE COMMENTS DATA
+  useEffect(() => {
+    axios
+      .get(`${URL}/recipe-library/${detailRecipeId}/comments`)
+      .then((response) => {
+        setCommentData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(commentData);
 
   if (recipeData) {
     return (
@@ -75,19 +90,14 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
             src={recipeData.image}
             alt="recipe-img"
           />
-          {posterName && (
+          {recipePosterName && (
             <div className="detail-recipe__avatar-wrapper">
               <Avatar avatarClassName="avatar" />
-              <p>
-                Recipe by{" "}
-                {posterName.replace(
-                  posterName.split("")[0],
-                  posterName.split("")[0].toUpperCase()
-                )}
-              </p>
+              <p>Recipe by {handleCapitalizeAWord(recipePosterName)}</p>
             </div>
           )}
         </div>
+
         {/* SECOND BIG WRAP */}
         <div className="detail-recipe__second-wrapper">
           {/* RECIPE NAME */}
@@ -157,6 +167,32 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
               </ul>
             </div>
           </div>
+        </div>
+
+        {/* COMMENT SECTION */}
+        <div className="detail-recipe__comment-wrapper">
+          <h3>Comments</h3>
+          <InputBox
+            inputType="text"
+            inputName="comment-box"
+            inputClassName="input-box input-box--recipe-comment"
+            inputWrap="hard"
+          />
+          <ul className="detail-recipe__comment-list">
+            {commentData.length > 0 &&
+              commentData.map((comment) => (
+                <RecipeCommentItem
+                  key={comment.id}
+                  commentText={comment.comment}
+                  commentLike={comment.likes}
+                  commentUserId={comment.user_id}
+                />
+              ))}
+          </ul>
+          <ButtonComponent
+            btnClassName="btn btn--recipe-comment"
+            btnContent="Comment"
+          />
         </div>
       </div>
     );

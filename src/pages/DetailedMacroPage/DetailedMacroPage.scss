@@ -72,7 +72,7 @@
   }
   @include desktop {
     margin-bottom: 1rem;
-    height: 311px;
+    height: 360px;
     width: 49%;
   }
 }
@@ -87,9 +87,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   @include desktop {
-    height: 392px;
+    height: auto;
   }
 }
 
@@ -141,7 +141,7 @@
   }
   @include desktop {
     width: 49%;
-    height: 392px;
+    height: 352px;
     margin-bottom: 1rem;
   }
 }
@@ -156,7 +156,7 @@
     margin-bottom: 1.5rem;
   }
   @include desktop {
-    height: 311px;
+    height: 360px;
     width: 49%;
     margin-bottom: 1rem;
   }
@@ -166,14 +166,20 @@
   animation: boxAnimation 0.5s;
   backdrop-filter: blur(20px);
   position: fixed;
-  bottom: 0;
   left: 0;
+  top: 0;
   width: 100vw;
   height: 100vh;
   @include desktop {
-    bottom: 14rem;
-    left: 14rem;
-    width: 70vw;
-    height: 55vh;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 10rem;
+    width: 80vw;
+    height: 65vh;
   }
+}
+
+.detail-recipe__comment-wrapper {
+  margin: 0 1rem;
 }

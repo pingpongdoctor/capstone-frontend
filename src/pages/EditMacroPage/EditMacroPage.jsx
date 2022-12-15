@@ -11,6 +11,11 @@ export default function EditMacroPage({ userProfile, loginState }) {
   const jwtToken = localStorage.getItem("jwt_token");
   //GET MACRO ID
   const { macroId } = useParams();
+  //STATE FOR CURRENT BODY INDEXES
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [age, setAge] = useState("");
+  const [height, setHeight] = useState("");
+  const [gender, setGender] = useState("");
   //STATE FOR THE MACRO OBJECT
   const [macroObj, setMacroObj] = useState(null);
   //STATES FOR ALL INPUT BOXES
@@ -57,13 +62,30 @@ export default function EditMacroPage({ userProfile, loginState }) {
       activity ||
       tdee ||
       neededIntake ||
-      bodyType
+      bodyType ||
+      currentWeight ||
+      height ||
+      gender ||
+      age
     ) {
       setMacroError("");
     }
   }, [macroName, goal, targetedWeight, activity, tdee, neededIntake, bodyType]);
 
   //FUNCTION TO HANDLE ALL INPUT STATES
+  const handleCurrentWeight = function (event) {
+    setCurrentWeight(Number(event.target.value));
+  };
+  const handleHeight = function (event) {
+    setHeight(Number(event.target.value));
+  };
+  const handleAge = function (event) {
+    setAge(Number(event.target.value));
+  };
+  const handleGender = function (event) {
+    setGender(event.target.value);
+  };
+
   const handleMacroName = function (event) {
     setMacroName(event.target.value);
   };
@@ -101,7 +123,11 @@ export default function EditMacroPage({ userProfile, loginState }) {
       activity ||
       tdee ||
       neededIntake ||
-      bodyType
+      bodyType ||
+      gender ||
+      currentWeight ||
+      height ||
+      age
     ) {
       const valueObject = {
         macro_name: macroName,
@@ -111,6 +137,10 @@ export default function EditMacroPage({ userProfile, loginState }) {
         tdee_need: neededIntake,
         goal: goal,
         body_type: bodyType,
+        gender: gender,
+        height,
+        weight: currentWeight,
+        age,
       };
       let newValueObject = {};
 
@@ -142,6 +172,22 @@ export default function EditMacroPage({ userProfile, loginState }) {
         newValueObject = { ...newValueObject, body_type: bodyType };
       }
 
+      if (valueObject.weight !== "") {
+        newValueObject = { ...newValueObject, body_type: bodyType };
+      }
+
+      if (valueObject.height !== "") {
+        newValueObject = { ...newValueObject, body_type: bodyType };
+      }
+
+      if (valueObject.age !== "") {
+        newValueObject = { ...newValueObject, body_type: bodyType };
+      }
+
+      if (valueObject.gender !== "") {
+        newValueObject = { ...newValueObject, body_type: bodyType };
+      }
+
       console.log(newValueObject);
 
       axios
@@ -157,6 +203,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
       setMacroError("edit-macro__input--error");
     }
   };
+  console.log(currentWeight, height, age, gender);
   if (loginState && macroObj) {
     return (
       <div className="edit-macro">
@@ -244,27 +291,6 @@ export default function EditMacroPage({ userProfile, loginState }) {
                   </option>
                 </select>
               </div>
-            </div>
-
-            {/* FLEX ITEM */}
-            <div className="edit-macro__flex-item">
-              <div className="edit-macro__wrapper">
-                <label
-                  className={"edit-macro__label"}
-                  htmlFor="targeted-weight"
-                >
-                  Targeted Weight
-                </label>
-                <input
-                  value={targetedWeight}
-                  onChange={handleTargetedWeight}
-                  className={`edit-macro__input ${macroError}`}
-                  id="targeted-weight"
-                  type="number"
-                  name="targeted-weight"
-                  placeholder={macroObj.targeted_weight}
-                />
-              </div>
 
               <div className="edit-macro__wrapper">
                 <label className="edit-macro__label" htmlFor="tdee">
@@ -295,17 +321,94 @@ export default function EditMacroPage({ userProfile, loginState }) {
                   placeholder={macroObj.tdee_need}
                 />
               </div>
+            </div>
+
+            {/* FLEX ITEM */}
+            <div className="edit-macro__flex-item">
+              <div className="edit-macro__wrapper">
+                <label className="edit-macro__label" htmlFor="current-weight">
+                  Weight
+                </label>
+                {macroObj && (
+                  <input
+                    className={`edit-macro__input ${macroError}`}
+                    value={currentWeight}
+                    onChange={handleCurrentWeight}
+                    id="current-weight"
+                    type="number"
+                    name="current-weight"
+                    placeholder={macroObj.weight}
+                  />
+                )}
+              </div>
 
               <div className="edit-macro__wrapper">
-                <label className={"edit-macro__label"}>
-                  Your Current Weight
+                <label className="edit-macro__label" htmlFor="targeted-weight">
+                  Targeted Weight
                 </label>
                 <input
-                  value={userProfile.weight}
-                  className={`edit-macro__input`}
-                  id="current-weight"
-                  name="current-weight"
+                  value={targetedWeight}
+                  onChange={handleTargetedWeight}
+                  className={`edit-macro__input ${macroError}`}
+                  id="targeted-weight"
+                  type="number"
+                  name="targeted-weight"
+                  placeholder={macroObj.targeted_weight}
                 />
+              </div>
+
+              <div className="add-macro__wrapper">
+                <label className="macro-page__text" htmlFor="gender">
+                  Gender
+                </label>
+                {macroObj && (
+                  <select
+                    value={gender || macroObj.gender}
+                    onChange={handleGender}
+                    className={`add-macro__input ${macroError}`}
+                    name="gender"
+                    id="gender"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="male">Others</option>
+                  </select>
+                )}
+              </div>
+
+              <div className="add-macro__wrapper">
+                <label className="add-macro__label" htmlFor="age">
+                  Age
+                </label>
+                {macroObj && (
+                  <input
+                    className={`add-macro__input ${macroError}`}
+                    value={age}
+                    onChange={handleAge}
+                    id="age"
+                    type="number"
+                    name="age"
+                    placeholder={macroObj.age}
+                  />
+                )}
+              </div>
+
+              <div className="add-macro__wrapper">
+                <label className="add-macro__label" htmlFor="height">
+                  Height
+                </label>
+                {macroObj && (
+                  <input
+                    className={`add-macro__input ${macroError}`}
+                    value={height}
+                    onChange={handleHeight}
+                    id="height"
+                    type="number"
+                    name="height"
+                    placeholder={macroObj.height}
+                  />
+                )}
               </div>
             </div>
           </div>

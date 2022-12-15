@@ -9,6 +9,10 @@
   text-decoration: none;
 }
 
+.item:first-child {
+  border: none;
+}
+
 .item__container {
   display: flex;
   justify-content: space-between;
@@ -18,9 +22,6 @@
   &:hover {
     background-color: $Row-Hover;
     border-radius: 10px;
-  }
-  &:first-child {
-    border: none;
   }
 }
 

@@ -58,9 +58,10 @@
 }
 
 .detail-recipe__second-wrapper {
-  margin: 0 1rem;
+  margin: 0 1rem 2rem 1rem;
   @include tablet {
     margin: 0 2rem;
+    margin: 0 2rem 2rem 2rem;
   }
 }
 
@@ -166,4 +167,9 @@
   width: 400px;
   margin-top: 0 auto;
   align-self: center;
+}
+
+.detail-recipe__comment-list {
+  list-style: none;
+  padding-left: 0;
 }
