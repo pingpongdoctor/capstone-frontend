@@ -29,6 +29,8 @@ h2 {
   font-size: 1.625rem;
   line-height: 2.25rem;
   font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   @include tablet {
     margin-top: 2rem;
     margin-bottom: 1.5rem;
@@ -39,6 +41,8 @@ h3 {
   font-size: 1.5rem;
   line-height: 2.25rem;
   font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   @include tablet {
     margin-top: 2rem;
     margin-bottom: 1.5rem;

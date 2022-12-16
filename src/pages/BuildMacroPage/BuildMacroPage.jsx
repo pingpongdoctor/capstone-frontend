@@ -39,6 +39,11 @@ const URL = process.env.REACT_APP_API_URL || "";
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
 export default function BuildMacroPage({ userProfile, loginState }) {
+  //THE STATES FOR WEIGHT, HEIGHT, AGE, GENDER
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [age, setAge] = useState("");
+  const [height, setHeight] = useState("");
+  const [gender, setGender] = useState("");
   //GET JWT TOKEN FROM LOCAL STRING
   const jwtToken = localStorage.getItem("jwt_token");
   //STATES
@@ -61,10 +66,46 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const [targetedWeight, setTargetedWeight] = useState("");
   const [estimatedWeekArr, setEstimatedWeekArr] = useState([]);
   const [estimatedWeightArr, setEstimatedWeightArr] = useState([]);
-  const [currentWeight, setCurrentWeight] = useState("");
   const [showSaveMacro, setShowSaveMacro] = useState(false);
+  //STATES FOR BODY TYPE EXPLAINATION
+  const [typeExplain, setTypeExplain] = useState("");
+  //STATE TO SHOW THE "BUILD MACRO FOR SOMEONE ELSE"
+  const [buildForFriend, setBuildForFriend] = useState(false);
+  //STATE TO SET WHO YOU BUILD MACRO FOR
+  const [buildFor, setBuildFor] = useState("user");
   //USE USENAVIGATE
   const navigate = useNavigate();
+  //FUNCTION TO SET THE STATES FOR CURRENT WEIGHT, HEIGHT, AGE, GENDER
+  const handleCurrentWeight = function (event) {
+    setCurrentWeight(Number(event.target.value));
+  };
+  const handleHeight = function (event) {
+    setHeight(Number(event.target.value));
+  };
+  const handleAge = function (event) {
+    setAge(Number(event.target.value));
+  };
+  const handleGender = function (event) {
+    setGender(event.target.value);
+  };
+  //FUNCTION TO SET THE STATE FOR "WHO DO YOU BUILD MACRO FOR"
+  const handleBuildFor = function (event) {
+    setBuildFor(event.target.value);
+  };
+  //USE EFFECT TO HANDLE THE STATE "BUILD FOR FRIEND" BASED ON THE STATE "BUILD FOR"
+  useEffect(() => {
+    if (loginState) {
+      if (buildFor === "user") {
+        setBuildForFriend(false);
+        setCurrentWeight(userProfile.weight);
+        setHeight(userProfile.height);
+        setAge(userProfile.age);
+        setGender(userProfile.gender);
+      } else if (buildFor === "friend") {
+        setBuildForFriend(true);
+      }
+    }
+  }, [buildFor, loginState]);
   //FUNCTION TO SET PROTEIN, CARB AND FAT RATIOS
   const handleRatios = function () {
     //Ectomorph body type
@@ -112,6 +153,28 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setTargetedWeight("");
     }
   };
+
+  //USE EFFECT TO SET BODY TYPE EXPLATINATION STATE
+  useEffect(() => {
+    if (loginState && bodyType) {
+      if (bodyType === "ectomorph") {
+        setTypeExplain(
+          " An ectomorph is characterized by a small frame size and little body fat. People who have this body type may be long and lean with little muscle mass. They may have difficulty gaining weight and muscle no matter what they eat or do in the gym."
+        );
+      }
+      if (bodyType === "mesomorph") {
+        setTypeExplain(
+          "People with a mesomorph body type tend to have a medium frame. They may develop muscles easily and have more muscle than fat on their bodies. Mesomorphs are typically strong and solid, not overweight or underweight. Their bodies may be described as rectangular in shape with an upright posture."
+        );
+      }
+      if (bodyType === "endomorph") {
+        setTypeExplain(
+          "Characterized by higher body fat and less muscle, endomorphs may appear round and soft. They may also put on pounds more easily. This does not necessarily mean that individuals with this body type are overweight. Rather, they’re more likely to gain weight than those who have other body types."
+        );
+      }
+    }
+  }, [bodyType, loginState]);
+
   //USE EFFECT TO RESET TDEE
   useEffect(() => {
     setTdee("");
@@ -152,11 +215,14 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     activity,
     targetedWeight,
   ]);
-  console.log(estimatedWeekArr);
-  //USE EFFECT TO GET CURRENT WEIGHT
+
+  //USE EFFECT TO GET CURRENT WEIGHT,HEIGHT,AGE
   useEffect(() => {
     if (loginState) {
       setCurrentWeight(userProfile.weight);
+      setAge(userProfile.age);
+      setHeight(userProfile.height);
+      setGender(userProfile.gender);
     }
   }, [loginState]);
 
@@ -257,9 +323,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     if (activity) {
       const balancedTdee = Math.round(
         fitnessCalculatorFunctions.TDEE(
-          userProfile.gender,
-          userProfile.age,
-          userProfile.height,
+          gender,
+          age,
+          height,
           currentWeight,
           activity
         )
@@ -308,7 +374,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       tdee &&
       neededIntake &&
       goal &&
-      bodyType
+      bodyType &&
+      gender &&
+      height &&
+      currentWeight &&
+      height
     ) {
       axios
         .post(
@@ -322,6 +392,10 @@ export default function BuildMacroPage({ userProfile, loginState }) {
             tdee_need: neededIntake,
             goal: goal,
             body_type: bodyType,
+            gender,
+            height,
+            weight: currentWeight,
+            age,
           },
           {
             headers: {
@@ -396,17 +470,100 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               Hey {userProfile.username}! Follow these below steps to build your
               ideal macro ratios
             </h2>
-            <p>
-              Here are some data retrieved from your profile that are needed to
-              calculate your TDEE. If this is not correct, please update your
-              profile.
-            </p>
-            <ul className="macro-page_list">
-              <li>Gender: {userProfile.gender}</li>
-              <li>Age: {userProfile.age}</li>
-              <li>Height: {userProfile.height} cm</li>
-              <li>Weight: {currentWeight} kg</li>
-            </ul>
+
+            <div>
+              <label htmlFor="build-for">Who do you build for?</label>
+              <select
+                onChange={handleBuildFor}
+                className="maro-page__input"
+                name="build-for"
+                id="build-for"
+              >
+                <option value="user">User</option>
+                <option value="friend">Your Friends</option>
+              </select>
+            </div>
+
+            {!buildForFriend && (
+              <p>
+                Here are some data retrieved from your profile that are needed
+                to calculate your TDEE. If this is not correct, please update
+                your profile.
+              </p>
+            )}
+
+            {!buildForFriend && (
+              <ul className="macro-page__list">
+                <li>Gender: {gender}</li>
+                <li>Age: {age}</li>
+                <li>Height: {height} cm</li>
+                <li>Weight: {currentWeight} kg</li>
+              </ul>
+            )}
+
+            {buildForFriend && (
+              <div className="macro-page__flex-container">
+                {/* WEIGHT */}
+                <div className="macro-page__flex-item">
+                  <label className="macro-page__text" htmlFor="current-weight">
+                    Type Weight (kg)
+                  </label>
+                  <input
+                    onChange={handleCurrentWeight}
+                    className="maro-page__input-box"
+                    id="current-weight"
+                    name="weight"
+                    type="number"
+                  />
+                </div>
+                {/* HEIGHT */}
+                <div className="macro-page__flex-item">
+                  <label
+                    className="macro-page__text"
+                    id="height"
+                    htmlFor="height"
+                  >
+                    Type Height (cm)
+                  </label>
+                  <input
+                    onChange={handleHeight}
+                    className="maro-page__input-box"
+                    name="height"
+                    type="number"
+                  />
+                </div>
+                {/* AGE */}
+                <div className="macro-page__flex-item">
+                  <label className="macro-page__text" htmlFor="age">
+                    Type Age
+                  </label>
+                  <input
+                    onChange={handleAge}
+                    className="maro-page__input-box"
+                    id="age"
+                    name="age"
+                    type="number"
+                  />
+                </div>
+                {/* GENDER */}
+                <div className="macro-page__flex-item">
+                  <label className="macro-page__text" htmlFor="gender">
+                    Gender
+                  </label>
+                  <select
+                    onChange={handleGender}
+                    className="maro-page__input macro-page__gender-input"
+                    name="gender"
+                    id="gender"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="male">Others</option>
+                  </select>
+                </div>
+              </div>
+            )}
           </div>
           {/* STEP 1 */}
           <div className="macro-page__steps">
@@ -541,6 +698,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     <option value="mesomorph">Mesomorph</option>
                     <option value="endomorph">Endomorph</option>
                   </select>
+                  {bodyType && typeExplain && <p>{typeExplain}</p>}
                   <ButtonComponent
                     btnClassName={`btn ${macroThirdBtnState}`}
                     onClickHandler={handleRatios}

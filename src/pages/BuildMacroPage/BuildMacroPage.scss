@@ -35,6 +35,24 @@
   padding: 1rem;
 }
 
+.macro-page__flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.macro-page__flex-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  height: 60px;
+  input {
+    width: 153px;
+  }
+}
+
 .maro-page__input {
   outline: none;
   border-radius: 20px;
@@ -46,6 +64,14 @@
   min-width: 155px;
   font-family: Arial, Helvetica, sans-serif;
   color: $Text-Color;
+}
+
+.macro-page__gender-input {
+  margin-top: 1.4rem;
+}
+
+.macro-page__text {
+  width: 130px;
 }
 
 .macro-page {
@@ -67,7 +93,7 @@
   }
 }
 
-.macro-page_list {
+.macro-page__list {
   list-style: none;
   padding-left: 0;
 }

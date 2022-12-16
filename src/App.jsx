@@ -13,6 +13,7 @@ import AddMacroPage from "./pages/AddMacroPage/AddMacroPage";
 import EditMacroPage from "./pages/EditMacroPage/EditMacroPage";
 import DetailedMacroPage from "./pages/DetailedMacroPage/DetailedMacroPage";
 import RecipeLibraryPage from "./pages/RecipeLibraryPage/RecipeLibraryPage";
+import DetailRecipePage from "./pages/DetailedRecipePage/DetailedRecipePage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -223,9 +224,9 @@ function App() {
 
             {/* DETAIL RECIPE ROUTE */}
             <Route
-              path="/recipe-library/:recipeId"
+              path="/recipe-library/:detailRecipeId"
               element={
-                <RecipeLibraryPage
+                <DetailRecipePage
                   userProfile={userProfile}
                   loginState={loginState}
                 />

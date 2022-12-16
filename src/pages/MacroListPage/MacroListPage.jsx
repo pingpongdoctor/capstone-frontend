@@ -1,5 +1,5 @@
 import "./MacroListPage.scss";
-import ItemComponent from "../../components/ItemComponent/ItemComponent";
+import MacroItemComponent from "../../components/MacroItemComponent/MacroItemComponent";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -164,7 +164,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
                 );
               })
               .map((macroItem) => (
-                <ItemComponent
+                <MacroItemComponent
                   key={macroItem.id}
                   macroId={macroItem.id}
                   macroName={macroItem.macro_name}

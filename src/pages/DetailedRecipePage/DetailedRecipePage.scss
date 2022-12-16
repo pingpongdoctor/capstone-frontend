@@ -1,0 +1,242 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.detail-recipe__img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.detail-recipe__first-wrapper {
+  position: relative;
+  height: 300px;
+  display: flex;
+  background-color: black;
+  @include tablet {
+    height: 400px;
+  }
+  @include desktop {
+    height: 500px;
+  }
+}
+
+.detail-recipe__avatar-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  position: absolute;
+  align-items: center;
+  bottom: 0.2rem;
+  color: #ffffff;
+  margin-left: 0 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  max-width: 300px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 0 1rem;
+  p {
+    margin: 0;
+  }
+  @include tablet {
+    max-width: 450px;
+    padding: 0.5rem 1rem;
+  }
+  @include desktop {
+    padding: 1rem;
+    max-width: 550px;
+  }
+}
+
+.detail-recipe__recipe-infor {
+  margin-bottom: 2rem;
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.detail-recipe__second-wrapper {
+  margin: 0 1rem 2rem 1rem;
+  @include tablet {
+    margin: 0 2rem;
+    margin: 0 2rem 2rem 2rem;
+  }
+}
+
+.detail-recipe__like-infor {
+  display: flex;
+  gap: 1rem;
+  width: 130px;
+  justify-content: space-between;
+  align-items: flex-end;
+  p {
+    margin: 0;
+    height: 20px;
+  }
+}
+
+.detail-recipe__ready-time {
+  @include tablet {
+    margin-bottom: 0;
+  }
+}
+
+.detail-recipe__like-icon {
+  width: 30%;
+}
+
+.detail-recipe__heading {
+  margin-bottom: 0;
+}
+
+.detail-recipe__small-text {
+  font-weight: 600;
+}
+
+.detail-recipe__ingredients-infor-wrapper,
+.detail-recipe__directions-infor-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  p {
+    font-weight: 600;
+  }
+  @include tablet {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+}
+
+.detail-recipe__ingredients,
+.detail-recipe__steps {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+
+.detail-recipe__step {
+  background-image: url("../../assets//icons/check.gif");
+  background-size: 2rem;
+  background-repeat: no-repeat;
+  padding-left: 2rem;
+}
+
+.detail-recipe__ingredient {
+  background-image: url("../../assets//icons/ingredient-icon.gif");
+  background-size: 2rem;
+  background-repeat: no-repeat;
+  padding-left: 2rem;
+}
+
+.detail-recipe__ingre-step-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  @include tablet {
+    gap: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.detail-recipe__ingre-step-box {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 10px;
+  @include tablet {
+    padding: 2rem;
+    gap: 2rem;
+    &:first-child {
+      width: 39%;
+    }
+    &:last-child {
+      width: 59%;
+    }
+  }
+}
+
+.detail-recipe__ingredient-pic,
+.detail-recipe__step-pic {
+  width: 400px;
+  align-self: center;
+  @include tablet {
+    width: 310px;
+  }
+  @include desktop {
+    width: 400px;
+  }
+}
+
+.detail-recipe__comment-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.5rem 0 0 0;
+  @include tablet {
+    margin: 2rem 0 0 0;
+  }
+}
+
+.detail-recipe__comment-textarea {
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
+  height: 150px;
+  margin-bottom: 1rem;
+  resize: none;
+  &:focus {
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  }
+  @include tablet {
+    height: 180px;
+  }
+}
+
+.detail-recipe__comment-form {
+  margin: 0 1rem;
+  @include tablet {
+    margin: 0 2rem;
+  }
+}
+
+.detail-recipe__comment-flex-container {
+  @include tablet {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+}
+
+.detail-recipe__comment-wrapper {
+  display: flex;
+  gap: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  align-items: center;
+  @include tablet {
+    margin-bottom: 0;
+  }
+}
+
+.detail-recipe__comment-flex-item {
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.detail-recipe__comment-poster {
+  margin: 0;
+}

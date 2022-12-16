@@ -20,9 +20,6 @@
     background-color: $Row-Hover;
     border-radius: 10px;
   }
-  &:first-child {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.162);
-  }
   @include tablet {
     height: 93px;
     justify-content: flex-start;
