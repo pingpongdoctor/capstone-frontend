@@ -12,7 +12,7 @@ export default function InputBox({
 }) {
   return (
     <input
-      wrap={inputWrap}
+      autoComplete
       className={inputClassName}
       value={inputValue}
       onChange={inputOnChange}

@@ -149,12 +149,13 @@
   display: flex;
   flex-direction: column;
   box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.5);
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   border-radius: 10px;
   @include tablet {
+    padding: 2rem;
     gap: 2rem;
     &:first-child {
-      width: 40%;
+      width: 39%;
     }
     &:last-child {
       width: 59%;
@@ -165,11 +166,77 @@
 .detail-recipe__ingredient-pic,
 .detail-recipe__step-pic {
   width: 400px;
-  margin-top: 0 auto;
   align-self: center;
+  @include tablet {
+    width: 310px;
+  }
+  @include desktop {
+    width: 400px;
+  }
 }
 
 .detail-recipe__comment-list {
   list-style: none;
   padding-left: 0;
+  margin: 1.5rem 0 0 0;
+  @include tablet {
+    margin: 2rem 0 0 0;
+  }
+}
+
+.detail-recipe__comment-textarea {
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
+  height: 150px;
+  margin-bottom: 1rem;
+  resize: none;
+  &:focus {
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  }
+  @include tablet {
+    height: 180px;
+  }
+}
+
+.detail-recipe__comment-form {
+  margin: 0 1rem;
+  @include tablet {
+    margin: 0 2rem;
+  }
+}
+
+.detail-recipe__comment-flex-container {
+  @include tablet {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+}
+
+.detail-recipe__comment-wrapper {
+  display: flex;
+  gap: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  align-items: center;
+  @include tablet {
+    margin-bottom: 0;
+  }
+}
+
+.detail-recipe__comment-flex-item {
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.detail-recipe__comment-poster {
+  margin: 0;
 }

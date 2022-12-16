@@ -10,6 +10,9 @@
   &:hover {
     background-color: $Button-Hover-Color;
   }
+  &:active {
+    transform: scale(0.99);
+  }
   padding: 1rem;
 }
 

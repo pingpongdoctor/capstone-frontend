@@ -2,7 +2,7 @@ import "./DetailedRecipePage.scss";
 import Avatar from "../../components/Avatar/Avatar";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import likeIcon from "../../assets/icons/like.png";
 import ingredientPic from "../../assets/images/ingredients.png";
 import stepPic from "../../assets/images/steps.png";
@@ -10,6 +10,7 @@ import RecipeCommentItem from "../../components/RecipeCommentItem/RecipeCommentI
 import InputBox from "../../components/InputBox/InputBox";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { handleCapitalizeAWord } from "../../Utils/utils";
+import id from "faker/lib/locales/id_ID";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
@@ -18,14 +19,23 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //STATE TO STORE THE NAME OF THE POSTER
   const [recipePosterName, setRecipePosterName] = useState("");
   //STATE TO STORE NEW CUSTOMIZED INGREDIENTS ARRAY
-  const [ingredientArr, setIngredientArr] = useState("");
+  const [ingredientArr, setIngredientArr] = useState([]);
   //STATE TO STORE NEW CUSTOMIZED STEP ARRAY
-  const [directionsArr, setDirectionsArr] = useState("");
+  const [directionsArr, setDirectionsArr] = useState([]);
   //STATE TO STORE THE COMMENTS DATA
   const [commentData, setCommentData] = useState([]);
+  //STATES TO STORE THE COMMENT INPUT
+  const [commentInput, setCommentInput] = useState("");
+  //GET JWT
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DELCARE A HEADER
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //USE USEPARAMS TO GET THE RECIPE ID
   const { detailRecipeId } = useParams();
-
   //USE EFFECT TO CUSTOMIZE THE INGREDIENTS ARRAY
   useEffect(() => {
     if (recipeData) {
@@ -45,14 +55,19 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     }
   }, [recipeData]);
 
-  //USE EFFECT TO GET A SINGLE RECIPE DATA
-  useEffect(() => {
+  //FUNCTION TO GET A SINGLE RECIPE DATA
+  const handleGetSingleRecipe = function () {
     axios
       .get(`${URL}/recipe-library/${detailRecipeId}`)
       .then((response) => {
         setRecipeData(response.data);
       })
       .catch((error) => console.log(error));
+  };
+
+  //USE EFFECT TO GET A SINGLE RECIPE DATA
+  useEffect(() => {
+    handleGetSingleRecipe();
   }, [detailRecipeId]);
 
   //USE EFFECT TO GET PROFILE OF THE RECIPE POSTER
@@ -66,8 +81,8 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     }
   }, [recipeData]);
 
-  //USE EFFECT TO GET THE COMMENTS DATA
-  useEffect(() => {
+  //FUNCTION TO GET THE COMMENTS DATA
+  const getCommentData = function () {
     axios
       .get(`${URL}/recipe-library/${detailRecipeId}/comments`)
       .then((response) => {
@@ -76,7 +91,51 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  //USE EFFECT TO GET THE COMMENTS DATA
+  useEffect(() => {
+    getCommentData();
   }, []);
+
+  //FUNCTION TO SET THE COMMENT INPUT
+  const handleCommentInput = function (event) {
+    setCommentInput(event.target.value);
+  };
+
+  //FUNCTION TO LIKE A REIPE
+  const handleOnclickLikeRecipe = function () {
+    axios
+      .put(`${URL}/recipe-library/${recipeData.id}`)
+      .then((response) => {
+        handleGetSingleRecipe();
+      })
+      .catch((error) => console.log(error));
+  };
+
+  //FUNCTION TO POST A RECIPE COMMENT
+  const handleOnSubmitComment = function (event) {
+    event.preventDefault();
+    if (loginState && userProfile && recipeData && commentInput) {
+      const newComment = {
+        comment: commentInput,
+        user_id: userProfile.id,
+        recipe_id: recipeData.id,
+      };
+      axios
+        .post(
+          `${URL}/recipe-library/${recipeData.id}/comments`,
+          newComment,
+          headers
+        )
+        .then((response) => {
+          getCommentData();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   console.log(commentData);
 
@@ -115,6 +174,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                 {recipeData.likes}
               </p>
               <img
+                onClick={handleOnclickLikeRecipe}
                 className="detail-recipe__like-icon"
                 src={likeIcon}
                 alt="like-icon"
@@ -132,11 +192,13 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
               {/* INGREDIENT NUMBER */}
               <div className="detail-recipe__ingredients-infor-wrapper">
                 <h3>Ingredients:</h3>
-                <p>{ingredientArr.length} ingredients</p>
+                {ingredientArr.length > 0 && (
+                  <p>{ingredientArr.length} ingredients</p>
+                )}
               </div>
               {/* INGREDIENTS */}
               <ul className="detail-recipe__ingredients">
-                {ingredientArr &&
+                {ingredientArr.length > 0 &&
                   ingredientArr.map((ingredient) => (
                     <li key={ingredient} className="detail-recipe__ingredient">
                       {ingredient}
@@ -154,11 +216,13 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
               {/* DIRECTION NUMBER */}
               <div className="detail-recipe__directions-infor-wrapper">
                 <h3>Steps to do:</h3>
-                <p>{directionsArr.length} steps</p>
+                {directionsArr.length > 0 && (
+                  <p>{directionsArr.length} steps</p>
+                )}
               </div>
               {/* DIRECTIONS */}
               <ul className="detail-recipe__steps">
-                {directionsArr &&
+                {directionsArr.length > 0 &&
                   directionsArr.map((step) => (
                     <li key={step} className="detail-recipe__step">
                       {step}
@@ -170,30 +234,64 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
         </div>
 
         {/* COMMENT SECTION */}
-        <div className="detail-recipe__comment-wrapper">
+        <form
+          onSubmit={handleOnSubmitComment}
+          className="detail-recipe__comment-form"
+        >
           <h3>Comments</h3>
-          <InputBox
-            inputType="text"
-            inputName="comment-box"
-            inputClassName="input-box input-box--recipe-comment"
-            inputWrap="hard"
-          />
+          <div className="detail-recipe__comment-flex-container">
+            <div className="detail-recipe__comment-wrapper">
+              <Avatar avatarClassName="avatar" />
+              {recipePosterName && (
+                <p className="detail-recipe__comment-poster">
+                  {handleCapitalizeAWord(recipePosterName)}
+                </p>
+              )}
+            </div>
+            <div className="detail-recipe__comment-flex-item">
+              {loginState && (
+                <textarea
+                  name="comment-box"
+                  className="detail-recipe__comment-textarea"
+                  wrap="hard"
+                  onChange={handleCommentInput}
+                  value={commentInput}
+                ></textarea>
+              )}
+              {loginState && (
+                <ButtonComponent
+                  btnClassName="btn btn--recipe-comment"
+                  btnContent="Comment"
+                  btnType="submit"
+                />
+              )}
+            </div>
+          </div>
+
           <ul className="detail-recipe__comment-list">
             {commentData.length > 0 &&
-              commentData.map((comment) => (
-                <RecipeCommentItem
-                  key={comment.id}
-                  commentText={comment.comment}
-                  commentLike={comment.likes}
-                  commentUserId={comment.user_id}
-                />
-              ))}
+              commentData
+                .sort(
+                  (a, b) =>
+                    new Date(b.updated_at).getTime() -
+                    new Date(a.updated_at).getTime()
+                )
+                .map((comment) => (
+                  <RecipeCommentItem
+                    key={comment.id}
+                    commentId={comment.id}
+                    commentText={comment.comment}
+                    commentLike={comment.likes}
+                    userId={comment.user_id}
+                    headers={headers}
+                    recipeId={recipeData.id}
+                    getCommentData={getCommentData}
+                    userProfile={userProfile}
+                    loginState={loginState}
+                  />
+                ))}
           </ul>
-          <ButtonComponent
-            btnClassName="btn btn--recipe-comment"
-            btnContent="Comment"
-          />
-        </div>
+        </form>
       </div>
     );
   }
