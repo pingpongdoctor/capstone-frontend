@@ -178,14 +178,11 @@
 .detail-recipe__comment-list {
   list-style: none;
   padding-left: 0;
-  margin: 1.5rem 0 0 0;
-  @include tablet {
-    margin: 2rem 0 0 0;
-  }
+  margin: 0;
 }
 
 .detail-recipe__comment-textarea {
-  border: 1px solid rgba(128, 128, 128, 0.3);
+  border: 1px solid rgba(128, 128, 128, 0.6);
   padding: 0.5rem;
   border-radius: 10px;
   outline: none;
@@ -211,10 +208,12 @@
 }
 
 .detail-recipe__comment-flex-container {
+  margin-bottom: 1.5rem;
   @include tablet {
     display: flex;
     gap: 3rem;
     align-items: flex-start;
+    margin-bottom: 2rem;
   }
 }
 

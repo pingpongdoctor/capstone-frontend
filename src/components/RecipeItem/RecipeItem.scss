@@ -9,6 +9,7 @@
     text-decoration: none;
     color: $Text-Color;
   }
+  display: inline-block;
   @include tablet {
     width: 48.5%;
   }
@@ -40,6 +41,16 @@
 
 .recipe-item__img {
   border-radius: 40px;
+  object-fit: cover;
+  object-position: center;
+  height: 50vh;
+  width: 100%;
+  @include desktop {
+    height: 60vh;
+  }
+  @include desktop {
+    height: 70vh;
+  }
 }
 
 .recipe-item__heart-img {

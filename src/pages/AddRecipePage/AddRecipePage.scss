@@ -1,0 +1,79 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.add-recipe {
+  margin: 0 1rem;
+  @include tablet {
+    margin: 0 2rem;
+  }
+}
+
+.add-recipe__input {
+  border: 1px solid rgba(128, 128, 128, 0.6);
+  padding: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
+  &:focus {
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  }
+}
+
+.add-recipe__input-textarea {
+  height: 150px;
+  resize: none;
+}
+
+.add-recipe__field {
+  margin-bottom: 1rem;
+}
+
+.add-recipe__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.add-recipe__previewed-image {
+  width: 30%;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  @include tablet {
+    width: 40%;
+  }
+}
+
+.add-recipe__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.add-recipe__btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+  label {
+    margin: 0;
+    margin-top: 0.7rem;
+  }
+}
+
+.add-recipe__flex-container {
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.add-recipe__flex-item {
+  @include tablet {
+    width: 49%;
+    &:first-child {
+      margin-top: 0.7rem;
+    }
+  }
+}

@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .input-box {
-  border: 1px solid rgba(128, 128, 128, 0.3);
+  border: 1px solid rgba(128, 128, 128, 0.6);
   padding: 0.5rem;
   border-radius: 10px;
   outline: none;
@@ -12,4 +12,13 @@
   &:focus {
     box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
   }
+}
+
+.input-box--add-recipe {
+  margin-bottom: 1rem;
+  animation: animate 1s;
+}
+
+.input-box--add-recipe-error {
+  border: 1px solid red;
 }

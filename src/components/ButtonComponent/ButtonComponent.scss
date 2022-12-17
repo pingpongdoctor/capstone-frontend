@@ -61,3 +61,15 @@
 .btn--recipe-comment {
   width: 100%;
 }
+
+.btn--add-recipe {
+  padding: 0.5rem 1rem;
+  width: 118px;
+}
+
+.btn--add-recipe-submit {
+  width: 100%;
+  @include tablet {
+    width: auto;
+  }
+}

@@ -29,10 +29,11 @@
 
 .edit-macro__label {
   margin-bottom: 0.3rem;
+  display: block;
 }
 
 .edit-macro__input {
-  border: 1px solid rgba(128, 128, 128, 0.3);
+  border: 1px solid rgba(128, 128, 128, 0.6);
   padding: 0.5rem;
   border-radius: 10px;
   outline: none;

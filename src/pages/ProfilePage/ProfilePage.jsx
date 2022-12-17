@@ -67,9 +67,11 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
     if (inputType === "height") {
       body = { height: newHeight };
     }
+
     if (inputType === "age") {
       body = { age: newAge };
     }
+
     if (newUserName || newWeight || newWeight || newAge) {
       axios
         .put(`${URL}/user-profile`, body, {

@@ -73,7 +73,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
         setMacroObj(response.data);
       });
     }
-  }, [loginState, jwtToken]);
+  }, [loginState, jwtToken, macroId, headers]);
 
   //FUNCTION TO SET THE STATES FOR ACTIVATING BOXES
   const handleOnclickActivateFirstBox = function () {
