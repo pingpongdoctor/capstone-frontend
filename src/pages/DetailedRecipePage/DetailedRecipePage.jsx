@@ -2,12 +2,11 @@ import "./DetailedRecipePage.scss";
 import Avatar from "../../components/Avatar/Avatar";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import likeIcon from "../../assets/icons/like.png";
 import ingredientPic from "../../assets/images/ingredients.png";
 import stepPic from "../../assets/images/steps.png";
 import RecipeCommentItem from "../../components/RecipeCommentItem/RecipeCommentItem";
-import InputBox from "../../components/InputBox/InputBox";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import id from "faker/lib/locales/id_ID";
@@ -68,6 +67,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //USE EFFECT TO GET A SINGLE RECIPE DATA
   useEffect(() => {
     handleGetSingleRecipe();
+    // eslint-disable-next-line
   }, [detailRecipeId]);
 
   //USE EFFECT TO GET PROFILE OF THE RECIPE POSTER
@@ -96,6 +96,8 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //USE EFFECT TO GET THE COMMENTS DATA
   useEffect(() => {
     getCommentData();
+
+    // eslint-disable-next-line
   }, []);
 
   //FUNCTION TO SET THE COMMENT INPUT
@@ -161,6 +163,8 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
         <div className="detail-recipe__second-wrapper">
           {/* RECIPE NAME */}
           <h2 className="detail-recipe__heading">{recipeData.recipe_name}</h2>
+          {/* DESCRIPTION */}
+          <p>{recipeData.description}</p>
           <div className="detail-recipe__recipe-infor">
             {/* READY TIME INFOR */}
             <p className="detail-recipe__ready-time">
@@ -240,14 +244,15 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
         >
           <h3>Comments</h3>
           <div className="detail-recipe__comment-flex-container">
-            <div className="detail-recipe__comment-wrapper">
-              <Avatar avatarClassName="avatar" />
-              {recipePosterName && (
+            {loginState && userProfile && (
+              <div className="detail-recipe__comment-wrapper">
+                <Avatar avatarClassName="avatar" />
+
                 <p className="detail-recipe__comment-poster">
-                  {handleCapitalizeAWord(recipePosterName)}
+                  {handleCapitalizeAWord(userProfile.username)}
                 </p>
-              )}
-            </div>
+              </div>
+            )}
             <div className="detail-recipe__comment-flex-item">
               {loginState && (
                 <textarea

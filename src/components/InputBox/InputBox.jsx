@@ -8,11 +8,9 @@ export default function InputBox({
   inputType,
   inputName,
   inputPlaceholder,
-  inputWrap,
 }) {
   return (
     <input
-      autoComplete
       className={inputClassName}
       value={inputValue}
       onChange={inputOnChange}

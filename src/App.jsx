@@ -14,21 +14,12 @@ import EditMacroPage from "./pages/EditMacroPage/EditMacroPage";
 import DetailedMacroPage from "./pages/DetailedMacroPage/DetailedMacroPage";
 import RecipeLibraryPage from "./pages/RecipeLibraryPage/RecipeLibraryPage";
 import DetailRecipePage from "./pages/DetailedRecipePage/DetailedRecipePage";
+import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
-  //STATE FOR APP
-  const [appPageState, setAppPageState] = useState("");
   //STATE FOR THE SIDE MENU
   const [sideMenuState, setSideMenuState] = useState("side-menu--hidden");
-  //USE EFFECT TO SET THE STATE FOR THE APP CLASS NAME
-  useEffect(() => {
-    if (sideMenuState === "side-menu--appear") {
-      setAppPageState("app--blur");
-    } else {
-      setAppPageState("");
-    }
-  }, [sideMenuState]);
   //STATE TO STORE USER PROFILE
   const [userProfile, setUserProfile] = useState(null);
   //STATE FOR LOGGING IN
@@ -63,6 +54,7 @@ function App() {
       })
       .catch((error) => console.log(error));
   };
+
   //FUNCTION TO SET THE STATE FOR USER PROFILE
   const loadProfile = function (jwtToken) {
     axios
@@ -227,6 +219,17 @@ function App() {
               path="/recipe-library/:detailRecipeId"
               element={
                 <DetailRecipePage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* ADD RECIPE ROUTE */}
+            <Route
+              path="/add-recipe"
+              element={
+                <AddRecipePage
                   userProfile={userProfile}
                   loginState={loginState}
                 />

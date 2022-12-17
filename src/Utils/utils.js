@@ -52,3 +52,5 @@ export const handleCapitalizeAWord = (word) => {
   );
   return caplitalizedWord;
 };
+
+export const jwtToken = localStorage.getItem("jwt_tokenw");
