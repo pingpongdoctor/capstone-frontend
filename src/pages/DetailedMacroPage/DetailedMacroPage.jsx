@@ -73,7 +73,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
         setMacroObj(response.data);
       });
     }
-  }, [loginState, jwtToken, macroId, headers]);
+  }, [loginState, jwtToken]);
 
   //FUNCTION TO SET THE STATES FOR ACTIVATING BOXES
   const handleOnclickActivateFirstBox = function () {
@@ -239,6 +239,8 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
       }
     }
   }, [loginState, macroObj, userProfile]);
+
+  console.log(macroObj);
 
   //USE EFFECT TO SET THE PREDICTED WEIGHTS ARRAY
   useEffect(() => {

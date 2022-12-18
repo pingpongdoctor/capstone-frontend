@@ -2,18 +2,21 @@ import "./DetailedRecipePage.scss";
 import Avatar from "../../components/Avatar/Avatar";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import likeIcon from "../../assets/icons/like.png";
 import ingredientPic from "../../assets/images/ingredients.png";
 import stepPic from "../../assets/images/steps.png";
 import RecipeCommentItem from "../../components/RecipeCommentItem/RecipeCommentItem";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { handleCapitalizeAWord } from "../../Utils/utils";
-import id from "faker/lib/locales/id_ID";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
+import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
-  // //STATE TO STORE THE SINGLE RECIPE DATA
+  //USE NAVIGATE
+  const navigate = useNavigate();
+  //STATE TO STORE THE SINGLE RECIPE DATA
   const [recipeData, setRecipeData] = useState("");
   //STATE TO STORE THE NAME OF THE POSTER
   const [recipePosterName, setRecipePosterName] = useState("");
@@ -139,8 +142,6 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     }
   };
 
-  console.log(commentData);
-
   if (recipeData) {
     return (
       <div className="detail-recipe">
@@ -162,7 +163,26 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
         {/* SECOND BIG WRAP */}
         <div className="detail-recipe__second-wrapper">
           {/* RECIPE NAME */}
-          <h2 className="detail-recipe__heading">{recipeData.recipe_name}</h2>
+          <div className="detail-recipe__heading-wrapper">
+            <BackIconComponent
+              onClickHandler={() => {
+                navigate("/recipe-library");
+              }}
+              backClassName="back-icon back-icon--detail-recipe"
+            />
+            <h2 className="detail-recipe__heading">{recipeData.recipe_name}</h2>
+            {loginState &&
+              userProfile &&
+              recipeData &&
+              userProfile.id === recipeData.poster_id && (
+                <EditIconComponent
+                  onClickHandler={() => {
+                    navigate(`/edit-recipe/${recipeData.id}`);
+                  }}
+                  editClassName="edit-icon"
+                />
+              )}
+          </div>
           {/* DESCRIPTION */}
           <p>{recipeData.description}</p>
           <div className="detail-recipe__recipe-infor">
@@ -197,7 +217,9 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
               <div className="detail-recipe__ingredients-infor-wrapper">
                 <h3>Ingredients:</h3>
                 {ingredientArr.length > 0 && (
-                  <p>{ingredientArr.length} ingredients</p>
+                  <p className="detail-recipe__num">
+                    {ingredientArr.length} ingredients
+                  </p>
                 )}
               </div>
               {/* INGREDIENTS */}
@@ -221,7 +243,9 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
               <div className="detail-recipe__directions-infor-wrapper">
                 <h3>Steps to do:</h3>
                 {directionsArr.length > 0 && (
-                  <p>{directionsArr.length} steps</p>
+                  <p className="detail-recipe__num">
+                    {directionsArr.length} steps
+                  </p>
                 )}
               </div>
               {/* DIRECTIONS */}
@@ -261,6 +285,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                   wrap="hard"
                   onChange={handleCommentInput}
                   value={commentInput}
+                  placeholder="Comment here..."
                 ></textarea>
               )}
               {loginState && (

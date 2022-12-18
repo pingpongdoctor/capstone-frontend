@@ -1,18 +1,6 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.btn--macro-page {
-  border: none;
-  border-radius: 20px;
-  background-color: $Button-Color;
-  color: #ffffff;
-  &:hover {
-    background-color: $Button-Hover-Color;
-    color: #ffffff;
-  }
-  padding: 1rem;
-}
-
 .macro-page__flex-container {
   display: flex;
   flex-direction: column;

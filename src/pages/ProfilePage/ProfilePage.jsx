@@ -246,6 +246,16 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                   placeholder="New age"
                 />
               )}
+              {/* {inputType === "age" && (
+                <input
+                  value={newAge}
+                  onChange={handleNewAge}
+                  className={`profile-page__input ${profileInputError}`}
+                  type="number"
+                  name="age"
+                  placeholder="New age"
+                />
+              )} */}
               <ButtonComponent
                 btnType="submit"
                 btnContent="Save"

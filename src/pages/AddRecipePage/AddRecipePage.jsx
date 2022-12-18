@@ -2,12 +2,16 @@ import "./AddRecipePage.scss";
 import InputBox from "../../components/InputBox/InputBox";
 import { useState, useEffect } from "react";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddRecipePage({ loginState, userProfile }) {
+  //USE USENAVIGATE
+  const navigate = useNavigate();
   //GET JWT TOKEN FROM LOCAL STRING
   const jwtToken = localStorage.getItem("jwt_token");
   //DECLARE A HEADERS
@@ -168,14 +172,26 @@ export default function AddRecipePage({ loginState, userProfile }) {
     setRecipeName(event.target.value);
   };
   //FUNCTION TO UPDATE THE INGREDIENT BOX COUNT
-  const handleUpdateIngreBoxCount = function () {
-    const newCount = ingredientBoxCount + 1;
-    setIngredientBoxCount(newCount);
+  const handleIncreaseIngreBoxCount = function () {
+    if (ingredientBoxCount <= 12) {
+      setIngredientBoxCount(ingredientBoxCount + 1);
+    }
+  };
+  const handleDecreaseIngreBoxCount = function () {
+    if (ingredientBoxCount > 1) {
+      setIngredientBoxCount(ingredientBoxCount - 1);
+    }
   };
   //FUNCTION TO UPDATE THE STEP BOX COUNT
-  const handleUpdateStepBoxCount = function () {
-    const newCount = stepBoxCount + 1;
-    setStepBoxCount(newCount);
+  const handleIncreaseStepBoxCount = function () {
+    if (stepBoxCount <= 12) {
+      setStepBoxCount(stepBoxCount + 1);
+    }
+  };
+  const handleDecreaseStepBoxCount = function () {
+    if (stepBoxCount > 1) {
+      setStepBoxCount(stepBoxCount - 1);
+    }
   };
   // FUNCTION TO CREATE THE INGREDIENT BOXES' KEY ARRAY
   const handleBoxKeyArr = function (value) {
@@ -369,10 +385,20 @@ export default function AddRecipePage({ loginState, userProfile }) {
     isIngreValid,
   ]);
 
+  console.log(ingredientBoxCount);
+
   if (loginState) {
     return (
       <form onSubmit={handleOnSubmitImage} className="add-recipe">
-        <h1>Add New Recipe</h1>
+        <div className="add-recipe__heading-wrapper">
+          <BackIconComponent
+            onClickHandler={() => {
+              navigate("/recipe-library");
+            }}
+            backClassName="back-icon"
+          />
+          <h1>Add New Recipe</h1>
+        </div>
         {/* RECIPE IMAGE */}
         <div className="add-recipe__wrapper">
           <label className="add-recipe__label" htmlFor="uploaded-image">
@@ -421,7 +447,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
               <textarea
                 value={description}
                 onChange={handleDescription}
-                className={`add-recipe__input add-recipe__input-textarea ${descriptError}`}
+                className={`edit-recipe__textarea add-recipe__descript-textarea ${descriptError}`}
                 placeholder="Type description here"
                 name="description"
                 id="description"
@@ -436,7 +462,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
               <select
                 value={level}
                 onChange={handleLevel}
-                className={`add-recipe__input ${levelError}`}
+                className={`add-recipe__select ${levelError}`}
                 name="level"
                 id="level"
               >
@@ -460,55 +486,75 @@ export default function AddRecipePage({ loginState, userProfile }) {
                 inputType="number"
               />
             </div>
+            <ButtonComponent
+              btnClassName="btn btn--add-recipe-submit btn--tablet"
+              btnContent="Post to the recipe library"
+              btnType="submit"
+            />
           </div>
 
           {/* FLEX ITEM */}
           <div className="add-recipe__flex-item">
             {/* INGREDIENTS */}
-            <div className="add-recipe__btn-wrapper">
-              <label className="add-recipe__label" htmlFor="step">
+            <div className="add-recipe__change-num-wrapper">
+              <label className="add-recipe__label-ingre" htmlFor="ingre">
                 Ingredients
               </label>
-              <ButtonComponent
-                btnClassName="btn btn--add-recipe"
-                btnContent="Add ingredient"
-                onClickHandler={handleUpdateIngreBoxCount}
-              />
+              <p
+                className="add-recipe__change-num"
+                onClick={handleIncreaseIngreBoxCount}
+              >
+                +
+              </p>
+              <p
+                className="add-recipe__change-num"
+                onClick={handleDecreaseIngreBoxCount}
+              >
+                -
+              </p>
             </div>
             {handleBoxKeyArr(ingredientBoxCount).map((boxKey) => (
-              <InputBox
-                inputClassName={`input-box input-box--add-recipe add-recipe__input-${boxKey} ${ingreError}`}
-                inputOnChange={handleIngredientStates}
+              <textarea
+                className={`add-recipe__textarea add-recipe__ingre-textarea add-recipe__input-${boxKey} ${ingreError}`}
+                onChange={handleIngredientStates}
                 key={boxKey}
-                inputType="text"
-                inputPlaceholder={`Ingredient ${boxKey}`}
-              />
+                placeholder={`Ingredient ${boxKey}`}
+                id="ingre"
+                wrap="hard"
+              ></textarea>
             ))}
             {/* STEPS */}
-            <div className="add-recipe__btn-wrapper">
-              <label className="add-recipe__label" htmlFor="step">
+            <div className="add-recipe__change-num-wrapper add-recipe__change-num-step-wrapper">
+              <label className="add-recipe__label-step" htmlFor="step">
                 Steps
               </label>
-              <ButtonComponent
-                btnClassName="btn btn--add-recipe"
-                btnContent="Add step"
-                onClickHandler={handleUpdateStepBoxCount}
-              />
+              <p
+                className="add-recipe__change-num"
+                onClick={handleIncreaseStepBoxCount}
+              >
+                +
+              </p>
+              <p
+                className="add-recipe__change-num"
+                onClick={handleDecreaseStepBoxCount}
+              >
+                -
+              </p>
             </div>
             {handleBoxKeyArr(stepBoxCount).map((boxKey) => (
-              <InputBox
-                inputClassName={`input-box input-box--add-recipe add-recipe__input-${boxKey} ${stepError}`}
-                inputOnChange={handleStepStates}
+              <textarea
+                className={`add-recipe__textarea add-recipe__step-textarea add-recipe__input-${boxKey} ${stepError}`}
+                onChange={handleStepStates}
                 key={boxKey}
-                inputType="text"
-                inputPlaceholder={`Step ${boxKey}`}
-                inputId="step"
-              />
+                placeholder={`Step ${boxKey}`}
+                id="step"
+                wrap="hard"
+              ></textarea>
             ))}
           </div>
         </div>
         <ButtonComponent
-          btnClassName="btn btn--add-recipe-submit"
+          btnClassName="btn btn--add-recipe-submit btn--mobile"
           btnContent="Post to the recipe library"
           btnType="submit"
         />
