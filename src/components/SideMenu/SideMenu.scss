@@ -44,6 +44,12 @@
   height: 60px;
   display: flex;
   align-items: center;
+  &:link,
+  &:hover,
+  &:active,
+  &:visited {
+    text-decoration: none;
+  }
   &:hover {
     background-color: #1c3157;
   }

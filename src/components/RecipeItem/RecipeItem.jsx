@@ -8,6 +8,8 @@ import { handleCapitalizeAWord } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeItem({
+  loginState,
+  userProfile,
   recipeImage,
   recipeName,
   recipePosterId,
@@ -47,11 +49,13 @@ export default function RecipeItem({
             src={recipeImage}
             alt="recipe-item__picture"
           />
-          <img
-            className="recipe-item__heart-img"
-            src={heartPic}
-            alt="heart-pic"
-          />
+          {loginState && userProfile && userProfile.id === recipePosterId && (
+            <img
+              className="recipe-item__heart-img"
+              src={heartPic}
+              alt="heart-pic"
+            />
+          )}
           <h3 className="recipe__name">{recipeName}</h3>
           <div className={`recipe-item__wrapper ${hiddenState}`}>
             <Avatar avatarClassName="avatar--recipe-library" />

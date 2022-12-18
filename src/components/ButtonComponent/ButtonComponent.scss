@@ -34,6 +34,9 @@
 .btn--macro-list {
   height: 45px;
   padding: 0.5rem 1rem;
+  @include tablet {
+    margin-top: 0.5rem;
+  }
 }
 
 .btn--add-macro,
@@ -46,8 +49,19 @@
   }
 }
 
+.btn--recipe-library {
+  height: 50px;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  @include tablet {
+    width: 140px;
+    margin-bottom: 0;
+  }
+}
+
 .btn--detail-macro {
-  height: 45px;
+  height: 50px;
   width: 100%;
   padding: 0.5rem, 1rem;
   margin-bottom: 1rem;
@@ -60,16 +74,37 @@
 
 .btn--recipe-comment {
   width: 100%;
-}
-
-.btn--add-recipe {
-  padding: 0.5rem 1rem;
-  width: 118px;
+  @include tablet {
+    width: 120px;
+    margin-left: auto;
+  }
 }
 
 .btn--add-recipe-submit {
   width: 100%;
+  margin-top: 1.5rem;
+  @include tablet {
+    margin: 0;
+    width: auto;
+  }
+}
+
+.btn--edit-recipe-submit {
+  width: 100%;
   @include tablet {
     width: auto;
+  }
+}
+
+.btn--mobile {
+  @include tablet {
+    display: none;
+  }
+}
+
+.btn--tablet {
+  display: none;
+  @include tablet {
+    display: inline-block;
   }
 }

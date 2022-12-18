@@ -1,14 +1,14 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.add-recipe {
+.edit-recipe {
   margin: 0 1rem;
   @include tablet {
     margin: 0 2rem;
   }
 }
 
-.add-recipe__select {
+.edit-recipe__select {
   border: 1px solid rgba(128, 128, 128, 0.6);
   padding: 0.5rem;
   border-radius: 10px;
@@ -21,61 +21,70 @@
   }
 }
 
-.add-recipe__heading-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.add-recipe__textarea {
-  @extend .add-recipe__select;
+.edit-recipe__textarea {
+  @extend .edit-recipe__select;
   resize: none;
   height: auto;
 }
 
-.add-recipe__descript-textarea {
-  height: 150px;
+.edit-recipe__descript-textarea {
+  height: 100px;
 }
 
-.add-recipe__step-textarea {
+.edit-recipe__step-textarea {
   height: 60px;
+  margin-bottom: 1rem;
 }
 
-.add-recipe__ingre-textarea {
-  height: 33.5px;
+.edit-recipe__ingre-textarea {
+  height: 36px;
+  margin-bottom: 1rem;
 }
 
-.add-recipe__field {
-  margin-bottom: 1.5rem;
-  @include tablet {
-    &:first-child {
-      margin-top: 0.3rem;
-    }
-  }
+.edit-recipe__field {
+  margin-bottom: 1rem;
 }
 
-.add-recipe__label {
+.edit-recipe__label {
   display: block;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.3rem;
   font-weight: 600;
 }
 
-.add-recipe__previewed-image {
-  width: 30%;
+.edit-recipe__previewed-image {
+  width: 70%;
   margin-bottom: 1rem;
   border-radius: 20px;
   @include tablet {
-    width: 40%;
+    width: 100%;
   }
 }
 
-.add-recipe__wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
+.edit-recipe__big-container {
+  @include tablet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
 }
 
-.add-recipe__btn-wrapper {
+.edit-recipe__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  @include tablet {
+    width: 48%;
+  }
+}
+
+.edit-recipe__fields-wrapper {
+  @include tablet {
+    width: 48%;
+  }
+}
+
+.edit-recipe__btn-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,20 +95,20 @@
   }
 }
 
-.add-recipe__flex-container {
+.edit-recipe__flex-container {
   @include tablet {
     display: flex;
     justify-content: space-between;
   }
 }
 
-.add-recipe__flex-item {
+.edit-recipe__flex-item {
   @include tablet {
-    width: 49%;
+    width: 48%;
   }
 }
 
-.add-recipe__change-num {
+.edit-recipe__change-num {
   background-color: $Button-Color;
   color: white;
   width: 40px;
@@ -107,7 +116,6 @@
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
-  margin: 0;
   &:hover {
     background-color: $Button-Hover-Color;
   }
@@ -117,22 +125,8 @@
   }
 }
 
-.add-recipe__change-num-wrapper {
+.edit-recipe__change-num-wrapper {
   display: flex;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 0.3rem;
-}
-
-.add-recipe__change-num-step-wrapper {
-  margin-top: 1.5rem;
-  @include tablet {
-    margin-top: 0.8rem;
-  }
-}
-
-.add-recipe__label-step,
-.add-recipe__label-ingre {
-  margin: 0;
-  font-weight: 600;
 }

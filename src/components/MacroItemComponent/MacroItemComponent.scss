@@ -9,10 +9,6 @@
   text-decoration: none;
 }
 
-.item:first-child {
-  border: none;
-}
-
 .item__container {
   display: flex;
   justify-content: space-between;
@@ -22,6 +18,9 @@
   &:hover {
     background-color: $Row-Hover;
     border-radius: 10px;
+  }
+  &:first-child {
+    border: none;
   }
 }
 
@@ -60,15 +59,15 @@
 .item__icons {
   width: 85px;
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
   align-items: center;
 }
 
 .item__icon {
   cursor: pointer;
-  height: 29px;
-  &:first-child {
-    height: 34px;
-    margin-top: 0.4rem;
-  }
+  width: 30px;
+}
+
+.item__icon-edit {
+  width: 35px;
 }

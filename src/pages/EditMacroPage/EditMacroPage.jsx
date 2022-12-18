@@ -2,11 +2,14 @@ import "./EditMacroPage.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function EditMacroPage({ userProfile, loginState }) {
+  //USE USENAVIGATE
+  const navigate = useNavigate();
   //GET JWT
   const jwtToken = localStorage.getItem("jwt_token");
   //GET MACRO ID
@@ -117,83 +120,39 @@ export default function EditMacroPage({ userProfile, loginState }) {
   const handleUpdateMacro = function (event) {
     event.preventDefault();
     if (
-      macroName ||
-      goal ||
-      targetedWeight ||
-      activity ||
-      tdee ||
-      neededIntake ||
-      bodyType ||
-      gender ||
-      currentWeight ||
-      height ||
-      age
+      macroObj &&
+      (macroName ||
+        goal ||
+        targetedWeight ||
+        activity ||
+        tdee ||
+        neededIntake ||
+        bodyType ||
+        gender ||
+        currentWeight ||
+        height ||
+        age)
     ) {
       const valueObject = {
-        macro_name: macroName,
-        targeted_weight: targetedWeight,
-        activity: activity,
-        tdee: tdee,
-        tdee_need: neededIntake,
+        macro_name: macroName || macroObj.macro_name,
+        targeted_weight: targetedWeight || macroObj.targeted_weight,
+        activity: activity || macroObj.activity,
+        tdee: tdee || macroObj.tdee,
+        tdee_need: neededIntake || macroObj.tdee_need,
         goal: goal,
-        body_type: bodyType,
-        gender: gender,
-        height,
-        weight: currentWeight,
-        age,
+        body_type: bodyType || macroObj.body_type,
+        gender: gender || macroObj.gender,
+        height: height || macroObj.height,
+        weight: currentWeight || macroObj.weight,
+        age: age || macroObj.age,
       };
-      let newValueObject = {};
-
-      if (valueObject.macro_name !== "") {
-        newValueObject = { ...newValueObject, macro_name: macroName };
-      }
-
-      if (valueObject.targeted_weight !== "") {
-        newValueObject = { ...newValueObject, targeted_weight: targetedWeight };
-      }
-
-      if (valueObject.activity !== "") {
-        newValueObject = { ...newValueObject, activity: activity };
-      }
-
-      if (valueObject.tdee !== "") {
-        newValueObject = { ...newValueObject, tdee: tdee };
-      }
-
-      if (valueObject.tdee_need !== "") {
-        newValueObject = { ...newValueObject, tdee_need: neededIntake };
-      }
-
-      if (valueObject.goal !== "") {
-        newValueObject = { ...newValueObject, goal: goal };
-      }
-
-      if (valueObject.body_type !== "") {
-        newValueObject = { ...newValueObject, body_type: bodyType };
-      }
-
-      if (valueObject.weight !== "") {
-        newValueObject = { ...newValueObject, body_type: bodyType };
-      }
-
-      if (valueObject.height !== "") {
-        newValueObject = { ...newValueObject, body_type: bodyType };
-      }
-
-      if (valueObject.age !== "") {
-        newValueObject = { ...newValueObject, body_type: bodyType };
-      }
-
-      if (valueObject.gender !== "") {
-        newValueObject = { ...newValueObject, body_type: bodyType };
-      }
-
-      console.log(newValueObject);
 
       axios
-        .put(`${URL}/macros-list/${macroId}`, newValueObject, headers)
+        .put(`${URL}/macros-list/${macroId}`, valueObject, headers)
         .then((response) => {
           console.log(response.data);
+          alert("Macro is updated");
+          navigate("/macro-list");
         })
         .catch((error) => {
           console.log(error);
@@ -203,11 +162,19 @@ export default function EditMacroPage({ userProfile, loginState }) {
       setMacroError("edit-macro__input--error");
     }
   };
-  console.log(currentWeight, height, age, gender);
+
   if (loginState && macroObj) {
     return (
       <div className="edit-macro">
-        <h1>Edit Macro {handleCapitalize(macroObj.macro_name)}</h1>
+        <div className="edit-macro__heading-wrapper">
+          <BackIconComponent
+            onClickHandler={() => {
+              navigate("/macro-list");
+            }}
+            backClassName="back-icon"
+          />
+          <h1>Edit Macro {handleCapitalize(macroObj.macro_name)}</h1>
+        </div>
         <form onSubmit={handleUpdateMacro} className="edit-macro__form">
           <div className="edit-macro__flex-container">
             {/* FLEX ITEM */}
@@ -303,7 +270,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
                   id="tdee"
                   type="number"
                   name="tdee"
-                  placeholder={macroObj.tdee}
+                  placeholder={`${macroObj.tdee} calories`}
                 />
               </div>
 
@@ -318,7 +285,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
                   id="needed-intake"
                   type="number"
                   name="needed-intake"
-                  placeholder={macroObj.tdee_need}
+                  placeholder={`${macroObj.tdee_need} calories`}
                 />
               </div>
             </div>
@@ -337,7 +304,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
                     id="current-weight"
                     type="number"
                     name="current-weight"
-                    placeholder={macroObj.weight}
+                    placeholder={`${macroObj.weight} kg`}
                   />
                 )}
               </div>
@@ -353,7 +320,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
                   id="targeted-weight"
                   type="number"
                   name="targeted-weight"
-                  placeholder={macroObj.targeted_weight}
+                  placeholder={`${macroObj.targeted_weight} kg`}
                 />
               </div>
 

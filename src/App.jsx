@@ -15,6 +15,7 @@ import DetailedMacroPage from "./pages/DetailedMacroPage/DetailedMacroPage";
 import RecipeLibraryPage from "./pages/RecipeLibraryPage/RecipeLibraryPage";
 import DetailRecipePage from "./pages/DetailedRecipePage/DetailedRecipePage";
 import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
+import EditRecipePage from "./pages/EditRecipePage/EditRecipePage";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -230,6 +231,17 @@ function App() {
               path="/add-recipe"
               element={
                 <AddRecipePage
+                  userProfile={userProfile}
+                  loginState={loginState}
+                />
+              }
+            />
+
+            {/* EDIT RECIPE ROUTE */}
+            <Route
+              path="/edit-recipe/:recipeId"
+              element={
+                <EditRecipePage
                   userProfile={userProfile}
                   loginState={loginState}
                 />

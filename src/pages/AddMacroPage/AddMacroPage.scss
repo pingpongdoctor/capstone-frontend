@@ -30,6 +30,7 @@
 .add-macro__label {
   margin-bottom: 0.3rem;
   display: block;
+  font-weight: 600;
 }
 
 .add-macro__input {
@@ -47,4 +48,10 @@
 
 .add-macro__input--error {
   border: 1px solid red;
+}
+
+.add-macro__heading-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }

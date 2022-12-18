@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./AddMacroPage.scss";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile }) {
+  //USE USENAVIGATE
+  const navigate = useNavigate();
   //GET JWT
   const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR ALL INPUT BOXES
@@ -266,6 +269,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
         .then((response) => {
           console.log(response.data);
           alert("New macro is added");
+          navigate("/macro-list");
         })
         .catch((error) => console.log(error));
     } else {
@@ -300,12 +304,19 @@ export default function AddMacroPage({ loginState, userProfile }) {
     }
   };
 
-  console.log(height, currentWeight, age, gender);
-
   if (loginState) {
     return (
       <div className="add-macro">
-        <h1>Add New Macro</h1>
+        <div className="add-macro__heading-wrapper">
+          <BackIconComponent
+            onClickHandler={() => {
+              navigate("/macro-list");
+            }}
+            backClassName="back-icon"
+          />
+
+          <h1 className="add-macro__heading">Add New Macro</h1>
+        </div>
         <form onSubmit={handleSubmitMacro} className="add-macro__form">
           <div className="add-macro__flex-container">
             {/* FLEX ITEM */}
@@ -402,7 +413,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   id="tdee"
                   type="number"
                   name="tdee"
-                  placeholder="Your TDEE"
+                  placeholder="Your TDEE (calories)"
                 />
               </div>
 
@@ -417,7 +428,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   id="needed-intake"
                   type="number"
                   name="needed-intake"
-                  placeholder="Daily Energy Needed"
+                  placeholder="Daily Energy Needed (calories)"
                 />
               </div>
             </div>
@@ -435,7 +446,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   id="current-weight"
                   type="number"
                   name="current-weight"
-                  placeholder="Weight"
+                  placeholder="Weight (kg)"
                 />
               </div>
 
@@ -454,7 +465,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     id="targeted-weight"
                     type="number"
                     name="targeted-weight"
-                    placeholder="Targeted Weight"
+                    placeholder="Targeted Weight (kg)"
                   />
                 </div>
               )}
@@ -503,7 +514,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   id="height"
                   type="number"
                   name="height"
-                  placeholder="Height"
+                  placeholder="Height (cm)"
                 />
               </div>
             </div>
@@ -516,5 +527,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
         </form>
       </div>
     );
+  } else {
+    return <h1>Please log in to use this function</h1>;
   }
 }

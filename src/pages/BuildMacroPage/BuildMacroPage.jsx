@@ -836,12 +836,11 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                       your new macro. Click the button below to save your new
                       macro to your macro list
                     </p>
-                    <button
-                      onClick={handlePostNewMacro}
-                      className="btn--macro-page"
-                    >
-                      Save
-                    </button>
+                    <ButtonComponent
+                      btnClassName="btn"
+                      onClickHandler={handlePostNewMacro}
+                      btnContent="Save your macro"
+                    />
                   </div>
                 )}
               </div>

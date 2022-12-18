@@ -178,5 +178,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
         )}
       </div>
     );
+  } else {
+    return <h1>Please log in to use this function</h1>;
   }
 }

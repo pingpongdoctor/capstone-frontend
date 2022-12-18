@@ -1,7 +1,7 @@
 import "./MacroItemComponent.scss";
 import { timeConvDetail } from "../../Utils/utils";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete.png";
 import editIcon from "../../assets/icons/edit.png";
 
@@ -13,6 +13,8 @@ export default function ItemComponent({
   macroTime,
   handleDeleteMacro,
 }) {
+  //USE USENAVIGATE
+  const navigate = useNavigate();
   //STATE FOR THE GOAL TEXT
   const [goalText, setGoalText] = useState("");
   //STATE FOR THE MACRO NAME TEXT
@@ -46,7 +48,6 @@ export default function ItemComponent({
   }, [macroName]);
   return (
     <Link to={`/macro-list/${macroId}`} className="item">
-      {" "}
       <li className="item__container">
         <p className="item__text">{macroText}</p>
         <p className="item__text item__text--hidden">{goalText}</p>
@@ -58,7 +59,11 @@ export default function ItemComponent({
         </p>
         <div className="item__icons">
           <Link to={`/edit-macro/${macroId}`}>
-            <img className="item__icon" src={editIcon} alt="edit-icon" />
+            <img
+              className="item__icon item__icon-edit"
+              src={editIcon}
+              alt="edit-icon"
+            />
           </Link>
           <Link to={`/macro-list`}>
             <img

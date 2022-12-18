@@ -2,12 +2,15 @@ import "./RecipeLibraryPage.scss";
 import RecipeItem from "../../components/RecipeItem/RecipeItem";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeLibraryPage({ loginState, userProfile }) {
+  //USE USENAVIGATE
+  const navigate = useNavigate();
   //STATE TO GET DATA OF ALL RECIPES AND THE CORRESPONDING INGREDIENTS
   const [recipes, setRecipes] = useState("");
-
   //USE EFFECT TO GET THE RECIPE DATA
   useEffect(() => {
     axios
@@ -21,7 +24,18 @@ export default function RecipeLibraryPage({ loginState, userProfile }) {
   }, []);
   return (
     <div className="recipe-library">
-      <h1 className="recipe-library__heading">Recipe Library</h1>
+      <div className="recipe-library__wrapper">
+        <h1 className="recipe-library__heading">Recipe Library</h1>
+        {loginState && (
+          <ButtonComponent
+            onClickHandler={() => {
+              navigate("/add-recipe");
+            }}
+            btnClassName="btn btn--recipe-library"
+            btnContent="Add new recipe"
+          />
+        )}
+      </div>
       <ul className="recipe-library__items">
         {recipes &&
           recipes.map((recipe) => (

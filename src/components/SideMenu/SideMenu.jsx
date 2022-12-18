@@ -11,16 +11,22 @@ export default function SiteMenu({ sideMenuState }) {
         <Link to={"/build-macro"} className="side-menu__item">
           <li>Build Macronutrients</li>
         </Link>
-        <li className="side-menu__item">Track Body Indexes</li>
         <Link to={"/macro-list"} className="side-menu__item">
           <li>Macro List</li>
         </Link>
-        <li className="side-menu__item">Recipe List</li>
-        <Link to={"/recipe-library"}>
-          <li className="side-menu__item">Recipe Library</li>
+        <Link to={"/add-macro"} className="side-menu__item">
+          <li>Add New Macro</li>
         </Link>
-        <li className="side-menu__item">Nutritional Facts</li>
-        <li className="side-menu__item">Barcode Scanning</li>
+        <Link to={"/recipe-library"} className="side-menu__item">
+          <li>Recipe Library</li>
+        </Link>
+        <Link to={"/add-recipe"} className="side-menu__item">
+          <li>Add New Recipe</li>
+        </Link>
+        {/* <li className="side-menu__item">Track Body Indexes</li> */}
+        {/* <li className="side-menu__item">Recipe List</li> */}
+        {/* <li className="side-menu__item">Nutritional Facts</li>
+        <li className="side-menu__item">Barcode Scanning</li> */}
       </ul>
     </div>
   );
