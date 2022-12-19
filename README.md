@@ -9,3 +9,4 @@ KEY FEATURES
    Install the css styling files by using this command: npm install slick-carousel --save
 4. Use the fitness calculator library to calculate
    Install the library by using this command: npm i fitness-calculator
+5. Use Cloudnary to store images
