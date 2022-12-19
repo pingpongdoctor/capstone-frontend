@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import SliderComponent from "../../components/SliderComponent/SliderComponent";
 import dumbbellPic from "../../assets/images/dumbbell.png";
 import officePic from "../../assets/images/office.png";
