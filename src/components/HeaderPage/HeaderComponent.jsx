@@ -20,7 +20,7 @@ export default function HeaderComponent({
         <div className="header-page__container">
           <img
             onMouseEnter={popOutSideMenu}
-            className="menu menu--header-page"
+            className="header-page__menu"
             alt="menu"
             src={menu}
           />
