@@ -475,7 +475,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               <label htmlFor="build-for">Who do you build for?</label>
               <select
                 onChange={handleBuildFor}
-                className="maro-page__input"
+                className="macro-page__input"
                 name="build-for"
                 id="build-for"
               >
@@ -510,7 +510,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   </label>
                   <input
                     onChange={handleCurrentWeight}
-                    className="maro-page__input-box"
+                    className="macro-page__input-box"
                     id="current-weight"
                     name="weight"
                     type="number"
@@ -527,7 +527,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   </label>
                   <input
                     onChange={handleHeight}
-                    className="maro-page__input-box"
+                    className="macro-page__input-box"
                     name="height"
                     type="number"
                   />
@@ -539,7 +539,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   </label>
                   <input
                     onChange={handleAge}
-                    className="maro-page__input-box"
+                    className="macro-page__input-box"
                     id="age"
                     name="age"
                     type="number"
@@ -552,7 +552,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   </label>
                   <select
                     onChange={handleGender}
-                    className="maro-page__input macro-page__gender-input"
+                    className="macro-page__input macro-page__gender-input"
                     name="gender"
                     id="gender"
                   >
@@ -586,7 +586,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   How intense do you do exercise in a week?
                 </label>
                 <select
-                  className="maro-page__input"
+                  className="macro-page__input"
                   value={activity}
                   onChange={handleActivity}
                   name="activity"
@@ -640,7 +640,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 <div>
                   <label htmlFor="goal">What is your general goal?</label>
                   <select
-                    className="maro-page__input"
+                    className="macro-page__input"
                     value={goal}
                     onChange={handleGoal}
                     name="goal"
@@ -687,7 +687,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 <div>
                   <label htmlFor="body-type">What is your body type?</label>
                   <select
-                    className="maro-page__input"
+                    className="macro-page__input"
                     value={bodyType}
                     onChange={handleBodyType}
                     name="body-type"
@@ -775,7 +775,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 </label>
                 <div className="macro-page__wrapper">
                   <input
-                    className="maro-page__input-box"
+                    className="macro-page__input-box"
                     type="number"
                     name="targeted-weight"
                     placeholder="Type weight in kg"

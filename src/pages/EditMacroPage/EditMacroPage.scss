@@ -6,59 +6,59 @@
   @include tablet {
     margin: 2rem;
   }
-}
 
-.edit-macro__container {
-  @include desktop {
-    max-width: 1216px;
-    margin: 0 auto;
+  &__container {
+    @include desktop {
+      max-width: 1216px;
+      margin: 0 auto;
+    }
   }
-}
 
-.edit-macro__flex-container {
-  @include tablet {
+  &__flex-container {
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__flex-item {
+    @include tablet {
+      width: 45%;
+    }
+  }
+
+  &__wrapper {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
   }
-}
 
-.edit-macro__flex-item {
-  @include tablet {
-    width: 45%;
+  &__label {
+    margin-bottom: 0.3rem;
+    display: block;
+    font-weight: 600;
   }
-}
 
-.edit-macro__wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
-}
-
-.edit-macro__label {
-  margin-bottom: 0.3rem;
-  display: block;
-  font-weight: 600;
-}
-
-.edit-macro__input {
-  border: 1px solid rgba(128, 128, 128, 0.6);
-  padding: 0.5rem;
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  color: $Text-Color;
-  &:focus {
-    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  &__input {
+    border: 1px solid rgba(128, 128, 128, 0.6);
+    padding: 0.5rem;
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $Text-Color;
+    &:focus {
+      box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+    }
   }
-}
 
-.edit-macro__input--error {
-  border: 1px red solid;
-}
+  &__input--error {
+    border: 1px red solid;
+  }
 
-.edit-macro__heading-wrapper {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+  &__heading-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
 }

@@ -15,8 +15,8 @@ export default function LoginPage({
   if (!loginState) {
     return (
       <div className="login-page">
-        <form onSubmit={handleLogin} className="login-page_form">
-          <h1 className="login-page_heading">Glad To See You Here</h1>
+        <form onSubmit={handleLogin} className="login-page__form">
+          <h1 className="login-page__heading">Glad To See You Here</h1>
           <input
             id="email"
             className="login-page__input-box login-page__input-box-email"

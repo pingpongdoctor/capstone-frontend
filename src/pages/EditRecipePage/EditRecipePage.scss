@@ -6,134 +6,134 @@
   @include tablet {
     margin: 2rem;
   }
-}
 
-.edit-recipe__container {
-  @include desktop {
-    max-width: 1216px;
-    margin: 0 auto;
+  &__container {
+    @include desktop {
+      max-width: 1216px;
+      margin: 0 auto;
+    }
   }
-}
 
-.edit-recipe__select {
-  border: 1px solid rgba(128, 128, 128, 0.6);
-  padding: 0.5rem;
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  color: $Text-Color;
-  &:focus {
-    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
-  }
-}
-
-.edit-recipe__textarea {
-  @extend .edit-recipe__select;
-  resize: none;
-  height: auto;
-}
-
-.edit-recipe__descript-textarea {
-  height: 100px;
-}
-
-.edit-recipe__step-textarea {
-  height: 60px;
-  margin-bottom: 1rem;
-}
-
-.edit-recipe__ingre-textarea {
-  height: 36px;
-  margin-bottom: 1rem;
-}
-
-.edit-recipe__field {
-  margin-bottom: 1rem;
-}
-
-.edit-recipe__label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: 600;
-}
-
-.edit-recipe__previewed-image {
-  width: 70%;
-  margin-bottom: 1rem;
-  border-radius: 20px;
-  @include tablet {
+  &__select {
+    border: 1px solid rgba(128, 128, 128, 0.6);
+    padding: 0.5rem;
+    border-radius: 10px;
+    outline: none;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $Text-Color;
+    &:focus {
+      box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+    }
   }
-}
 
-.edit-recipe__big-container {
-  @include tablet {
+  &__textarea {
+    @extend .edit-recipe__select;
+    resize: none;
+    height: auto;
+  }
+
+  &__descript-textarea {
+    height: 100px;
+  }
+
+  &__step-textarea {
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+
+  &__ingre-textarea {
+    height: 36px;
+    margin-bottom: 1rem;
+  }
+
+  &__field {
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+
+  &__previewed-image {
+    width: 70%;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__big-container {
+    @include tablet {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__wrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    @include tablet {
+      width: 48%;
+    }
   }
-}
 
-.edit-recipe__wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-  @include tablet {
-    width: 48%;
+  &__fields-wrapper {
+    @include tablet {
+      width: 48%;
+    }
   }
-}
 
-.edit-recipe__fields-wrapper {
-  @include tablet {
-    width: 48%;
-  }
-}
-
-.edit-recipe__btn-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.3rem;
-  label {
-    margin: 0;
-    margin-top: 0.7rem;
-  }
-}
-
-.edit-recipe__flex-container {
-  @include tablet {
+  &__btn-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    label {
+      margin: 0;
+      margin-top: 0.7rem;
+    }
   }
-}
 
-.edit-recipe__flex-item {
-  @include tablet {
-    width: 48%;
+  &__flex-container {
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+    }
   }
-}
 
-.edit-recipe__change-num {
-  background-color: $Button-Color;
-  color: white;
-  width: 40px;
-  height: 26px;
-  text-align: center;
-  border-radius: 10px;
-  cursor: pointer;
-  &:hover {
-    background-color: $Button-Hover-Color;
+  &__flex-item {
+    @include tablet {
+      width: 48%;
+    }
   }
-  &:active {
-    width: 38px;
-    height: 24px;
-  }
-}
 
-.edit-recipe__change-num-wrapper {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+  &__change-num {
+    background-color: $Button-Color;
+    color: white;
+    width: 40px;
+    height: 26px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: $Button-Hover-Color;
+    }
+    &:active {
+      width: 38px;
+      height: 24px;
+    }
+  }
+
+  &__change-num-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
 }

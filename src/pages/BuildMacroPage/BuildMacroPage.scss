@@ -1,190 +1,192 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.macro-page__flex-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.macro-page__flex-item {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  height: 60px;
-  input {
-    width: 153px;
-  }
-}
-
-.maro-page__input {
-  outline: none;
-  border-radius: 20px;
-  background-color: ivory;
-  padding: 0.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 0.3rem;
-  display: block;
-  min-width: 155px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: $Text-Color;
-}
-
-.macro-page__gender-input {
-  margin-top: 1.4rem;
-}
-
-.macro-page__text {
-  width: 130px;
-}
-
 .macro-page {
   margin: 0 1rem;
+
+  &__container {
+    @include desktop {
+      max-width: 1212px;
+      margin: 0 auto;
+    }
+  }
+
   h3 {
     @include tablet {
       margin-top: 0;
     }
   }
+
+  &__flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  &__flex-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    height: 60px;
+    input {
+      width: 153px;
+    }
+  }
+
+  &__input {
+    outline: none;
+    border-radius: 20px;
+    background-color: ivory;
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.3rem;
+    display: block;
+    min-width: 155px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $Text-Color;
+  }
+
+  &__gender-input {
+    margin-top: 1.4rem;
+  }
+
+  &__text {
+    width: 130px;
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #e26e5c41;
+    align-items: center;
+    animation: animate 1.5s;
+    justify-content: space-between;
+    @include tablet {
+      flex-direction: row;
+      margin-bottom: 2rem;
+      gap: 3rem;
+      padding: 2rem;
+    }
+    @include desktop {
+      gap: 7rem;
+    }
+  }
+
+  &__image {
+    width: 300px;
+    height: auto;
+    @include desktop {
+      width: 350px;
+    }
+  }
+
+  &__welcome {
+    box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #e26e5c41;
+    margin-top: 1rem;
+    ul {
+      font-weight: bold;
+    }
+    @include tablet {
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+  }
+
+  &__chart {
+    padding: 1rem;
+    display: flex;
+    box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #e26e5c41;
+    animation: animate 1.5s;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    @include tablet {
+      flex-direction: row;
+      padding: 2rem;
+    }
+  }
+
+  &__wrapper-chart {
+    height: 280px;
+    @include tablet {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    @include desktop {
+      height: 350px;
+    }
+  }
+
+  &__wrapper-line-chart {
+    height: 150px;
+    @include small-mobile {
+      height: 230px;
+    }
+    @include tablet {
+      width: 100%;
+      height: 350px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__image-chart {
+    width: 280px;
+    height: auto;
+    @include desktop {
+      width: 350px;
+    }
+  }
+
+  &__image-bar-chart {
+    display: none;
+    @include desktop {
+      display: block;
+    }
+  }
+
+  &__input-box {
+    padding: 0.5rem 1rem;
+    width: 12rem;
+    border-radius: 5px;
+    outline: none;
+    background-color: ivory;
+    text-align: center;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+    @include tablet {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
   @include tablet {
     margin: 0 2rem;
-  }
-}
-
-.macro-page__container {
-  @include desktop {
-    max-width: 1212px;
-    margin: 0 auto;
-  }
-}
-
-.macro-page__list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.macro-page__steps {
-  display: flex;
-  flex-direction: column;
-  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #e26e5c41;
-  align-items: center;
-  animation: animate 1.5s;
-  justify-content: space-between;
-  @include tablet {
-    flex-direction: row;
-    margin-bottom: 2rem;
-    gap: 3rem;
-    padding: 2rem;
-  }
-  @include desktop {
-    gap: 7rem;
-  }
-}
-
-.macro-page__image {
-  width: 300px;
-  height: auto;
-  @include desktop {
-    width: 350px;
-  }
-}
-
-.macro-page__welcome {
-  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #e26e5c41;
-  margin-top: 1rem;
-  ul {
-    font-weight: bold;
-  }
-  @include tablet {
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-  }
-}
-
-.macro-page__chart {
-  padding: 1rem;
-  display: flex;
-  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.75);
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #e26e5c41;
-  animation: animate 1.5s;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  @include tablet {
-    flex-direction: row;
-    padding: 2rem;
-  }
-}
-
-.macro-page__wrapper-chart {
-  height: 280px;
-  @include tablet {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  @include desktop {
-    height: 350px;
-  }
-}
-
-.macro-page__wrapper-line-chart {
-  height: 150px;
-  @include small-mobile {
-    height: 230px;
-  }
-  @include tablet {
-    width: 100%;
-    height: 350px;
-    display: flex;
-    justify-content: center;
-  }
-}
-
-.macro-page__image-chart {
-  width: 280px;
-  height: auto;
-  @include desktop {
-    width: 350px;
-  }
-}
-
-.macro-page__image-bar-chart {
-  display: none;
-  @include desktop {
-    display: block;
-  }
-}
-
-.maro-page__input-box {
-  padding: 0.5rem 1rem;
-  width: 12rem;
-  border-radius: 5px;
-  outline: none;
-  background-color: ivory;
-  text-align: center;
-}
-
-.macro-page__wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-top: 1rem;
-  @include tablet {
-    flex-direction: row;
-    align-items: center;
   }
 }

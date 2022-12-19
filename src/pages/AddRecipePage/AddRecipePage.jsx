@@ -446,7 +446,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
                 <textarea
                   value={description}
                   onChange={handleDescription}
-                  className={`edit-recipe__textarea add-recipe__descript-textarea ${descriptError}`}
+                  className={`add-recipe__textarea add-recipe__descript-textarea ${descriptError}`}
                   placeholder="Type description here"
                   name="description"
                   id="description"
