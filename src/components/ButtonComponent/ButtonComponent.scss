@@ -1,0 +1,121 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.btn {
+  border: none;
+  border-radius: 20px;
+  background-color: $Button-Color;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background-color: $Button-Hover-Color;
+  }
+  &:active {
+    transform: scale(0.99);
+  }
+  padding: 1rem;
+}
+
+.btn--macro-page--error {
+  border: 1.5px solid red;
+}
+
+.btn--profile {
+  padding: 0.5rem;
+  height: 35px;
+  width: 80px;
+  border-radius: 10px;
+}
+
+.btn--profile-modal-box {
+  width: 100%;
+}
+
+.btn--macro-list {
+  height: 45px;
+  padding: 0.5rem 1rem;
+  @include tablet {
+    margin-top: 0.5rem;
+  }
+}
+
+.btn--add-macro,
+.btn--edit-macro {
+  padding: 0.5rem;
+  height: 36px;
+  width: 100%;
+  @include tablet {
+    width: 100px;
+  }
+}
+
+.btn--recipe-library {
+  height: 50px;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  @include tablet {
+    width: 140px;
+    margin-bottom: 0;
+  }
+}
+
+.btn--detail-macro {
+  height: 50px;
+  width: 100%;
+  padding: 0.5rem, 1rem;
+  margin-bottom: 1rem;
+  @include tablet {
+    width: 100px;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+}
+
+.btn--recipe-comment {
+  width: 100%;
+  @include tablet {
+    width: 120px;
+    margin-left: auto;
+  }
+}
+
+.btn--add-recipe-submit {
+  width: 100%;
+  margin-top: 1.5rem;
+  @include tablet {
+    margin: 0;
+    width: auto;
+  }
+}
+
+.btn--edit-recipe-submit {
+  width: 100%;
+  @include tablet {
+    width: auto;
+  }
+}
+
+.btn--mobile {
+  @include tablet {
+    display: none;
+  }
+}
+
+.btn--tablet {
+  display: none;
+  @include tablet {
+    display: inline-block;
+  }
+}
+
+.btn--home-page {
+  margin-bottom: 1rem;
+  @include tablet {
+    margin-bottom: 0;
+    margin-top: 1rem;
+    height: 55px;
+    width: 250px;
+    margin-left: auto;
+  }
+}

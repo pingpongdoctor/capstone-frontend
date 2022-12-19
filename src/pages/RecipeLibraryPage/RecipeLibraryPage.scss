@@ -1,0 +1,48 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.recipe-library {
+  margin: 1rem;
+  @include tablet {
+    margin: 2rem;
+  }
+}
+
+.recipe-library__container {
+  @include desktop {
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+}
+
+.recipe-library__items {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.recipe-library__wrapper {
+  display: flex;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.recipe-library__heart-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.recipe-library__heart-pic {
+  width: 50px;
+  height: 50px;
+}

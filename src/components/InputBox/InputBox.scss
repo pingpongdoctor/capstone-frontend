@@ -1,0 +1,32 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.input-box {
+  border: 1px solid rgba(128, 128, 128, 0.6);
+  padding: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
+  &:focus {
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  }
+}
+
+.input-box--add-recipe {
+  margin-bottom: 1rem;
+  animation: animate 1s;
+}
+
+.input-box--add-recipe-error {
+  border: 1px solid red;
+}
+
+.input--profile-page {
+  margin-bottom: 1rem;
+}
+
+.input--profile-page-error {
+  border: 1px red solid;
+}

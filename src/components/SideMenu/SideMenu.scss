@@ -1,0 +1,56 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.side-menu {
+  background-color: #1c3157ac;
+  position: absolute;
+  width: 200px;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 100;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  @include tablet {
+    width: 300px;
+  }
+}
+
+.side-menu--appear {
+  transition: transform 1s;
+  transform: translate(0);
+}
+
+.side-menu--hidden {
+  transition: transform 1s;
+  transform: translate(-100%);
+}
+
+.side-menu__list {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 0;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.side-menu__item {
+  padding: 1rem;
+  padding-left: 2rem;
+  text-decoration: none;
+  color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  &:link,
+  &:hover,
+  &:active,
+  &:visited {
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: #1c3157;
+  }
+}

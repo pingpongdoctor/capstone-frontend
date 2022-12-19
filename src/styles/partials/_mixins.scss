@@ -1,0 +1,42 @@
+@use "./variables" as *;
+
+@mixin small-mobile {
+  @media (min-width: 465px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop-width) {
+    @content;
+  }
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+    border-radius: 100%;
+    filter: grayscale(100%);
+  }
+  30% {
+    opacity: 0.3;
+    border-radius: 50%;
+    filter: grayscale(50%);
+  }
+  60% {
+    opacity: 0.6;
+    border-radius: 25%;
+    filter: grayscale(25%);
+  }
+  100% {
+    opacity: 1;
+    border-radius: 0;
+    filter: grayscale(0);
+  }
+}

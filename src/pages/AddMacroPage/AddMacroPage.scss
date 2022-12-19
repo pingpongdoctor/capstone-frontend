@@ -1,0 +1,64 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.add-macro {
+  margin: 1rem;
+  @include tablet {
+    margin: 2rem;
+  }
+}
+
+.add-macro__container {
+  @include desktop {
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+}
+
+.add-macro__flex-container {
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.add-macro__flex-item {
+  @include tablet {
+    width: 45%;
+  }
+}
+
+.add-macro__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.add-macro__label {
+  margin-bottom: 0.3rem;
+  display: block;
+  font-weight: 600;
+}
+
+.add-macro__input {
+  border: 1px solid rgba(128, 128, 128, 0.6);
+  padding: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: $Text-Color;
+  &:focus {
+    box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  }
+}
+
+.add-macro__input--error {
+  border: 1px solid red;
+}
+
+.add-macro__heading-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}

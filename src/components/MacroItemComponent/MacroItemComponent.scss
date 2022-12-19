@@ -1,0 +1,73 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.item:link,
+.item:hover,
+.item:active,
+.item:visited {
+  color: $Text-Color;
+  text-decoration: none;
+}
+
+.item__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.162);
+  align-items: center;
+  &:hover {
+    background-color: $Row-Hover;
+    border-radius: 10px;
+  }
+  &:first-child {
+    border: none;
+  }
+}
+
+.item__text {
+  margin: 0;
+
+  text-align: left;
+  &:first-child {
+    width: 125px;
+  }
+  &:nth-child(2) {
+    width: 140px;
+  }
+  &:nth-child(3) {
+    width: 135px;
+  }
+  &:nth-child(4) {
+    width: 130px;
+  }
+}
+
+.item__text--hidden {
+  display: none;
+  @include tablet {
+    display: block;
+  }
+}
+
+.item__text--energy-hidden {
+  display: none;
+  @include small-mobile {
+    display: block;
+  }
+}
+
+.item__icons {
+  width: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item__icon {
+  cursor: pointer;
+  width: 30px;
+}
+
+.item__icon-edit {
+  width: 35px;
+}
