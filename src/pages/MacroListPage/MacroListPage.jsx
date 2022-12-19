@@ -36,7 +36,6 @@ export default function MacroLisPage({ userProfile, loginState }) {
         .get(`${URL}/macros-list`, headers)
         .then((response) => {
           setMacroArr(response.data);
-          console.log("running");
         })
         .catch((error) => console.log(error));
     }

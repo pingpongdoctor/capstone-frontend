@@ -317,7 +317,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
   };
   //FUNCTION TO IMPLEMENT A PUT REQUEST
   const handlePutData = function (obj) {
-    console.log("running");
     if (recipeData) {
       axios
         .put(`${URL}/recipe-library/${recipeData.id}/update`, obj, headers)
@@ -331,7 +330,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
 
   //FUNCTION TO UPDATE THE RECIPE
   const handleOnSubmitUpdateRecipe = function (event) {
-    console.log("running");
     event.preventDefault();
     if (
       userProfile &&
@@ -346,7 +344,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
         isIngreValid() ||
         isStepValid())
     ) {
-      console.log("running");
       const inputIngredientArr = [
         ingredient1 || ingreArr[0],
         ingredient2 || ingreArr[1],
@@ -361,7 +358,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
         ingredient11 || ingreArr[10],
         ingredient12 || ingreArr[11],
       ].filter((ingredient) => ingredient !== "" && ingredient !== undefined);
-      console.log(inputIngredientArr);
+
       const inputStepArr = [
         step1 || stepArr[0],
         step2 || stepArr[1],
@@ -393,7 +390,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
         formData.append("upload_preset", UPLOAD_PRESET);
         axios.post(CLOUD_URL, formData).then((response) => {
           const imageURL = response.data.secure_url;
-          console.log(imageURL);
           const newUploadObj = { ...uploadObj, image: imageURL };
           handlePutData(newUploadObj);
           alert("The recipe is updated");
@@ -401,7 +397,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
         });
       }
       if (uploadImage === null) {
-        console.log("running");
         handlePutData(uploadObj);
         alert("The recipe is updated");
         navigate("/recipe-library");

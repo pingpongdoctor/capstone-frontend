@@ -39,17 +39,14 @@ export default function SliderComponent() {
       carousel.current.slickGoTo(0);
     } else {
       carousel.current.slickGoTo(currentSlide - 1);
-      console.log(currentSlide - 1);
     }
   };
   //FUNCTION TO MOVE TO THE PREVIOUS SLIDE
   const moveToPreviousSlide = function () {
     const currentSlide = findCurrentSlide();
-    console.log(currentSlide);
 
     if (currentSlide < 3) {
       carousel.current.slickGoTo(3);
-      console.log(cardArr.length);
     } else {
       carousel.current.slickGoTo(currentSlide - 3);
     }

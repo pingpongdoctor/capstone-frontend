@@ -243,8 +243,6 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
     }
   }, [loginState, macroObj, userProfile]);
 
-  console.log(macroObj);
-
   //USE EFFECT TO SET THE PREDICTED WEIGHTS ARRAY
   useEffect(() => {
     if (loginState && userProfile && macroObj && estimatedWeekArr) {
@@ -271,7 +269,6 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
     }
   }, [estimatedWeekArr]);
 
-  console.log(estimatedWeekArr, estimatedWeightArr);
   //DATA FOR THE PIE CHART
   const data = {
     labels: ["Protein Ratio", "Carb Ratio", "Fat Ratio"],

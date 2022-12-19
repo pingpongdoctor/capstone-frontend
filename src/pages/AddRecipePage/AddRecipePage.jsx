@@ -317,7 +317,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
           ingredients: ingredientString,
           directions: stepString,
         };
-        console.log(postedRecipe);
+
         axios
           .post(`${URL}/recipe-library`, postedRecipe, headers)
           .then((response) => {
@@ -384,8 +384,6 @@ export default function AddRecipePage({ loginState, userProfile }) {
     isStepValid,
     isIngreValid,
   ]);
-
-  console.log(ingredientBoxCount);
 
   if (loginState) {
     return (

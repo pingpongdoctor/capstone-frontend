@@ -139,8 +139,6 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
     setProfileTextareaError("");
   }, [modalBoxAppear]);
 
-  console.log(newUserName, newWeight, newHeight, newAge, newGender);
-
   if (loginState) {
     return (
       <div className="profile-page">

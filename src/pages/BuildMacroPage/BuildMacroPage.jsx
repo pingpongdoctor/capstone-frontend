@@ -460,7 +460,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       },
     ],
   };
-  console.log("loginState", loginState);
+
   if (loginState) {
     return (
       <div className="macro-page">

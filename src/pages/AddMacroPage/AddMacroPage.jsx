@@ -241,7 +241,6 @@ export default function AddMacroPage({ loginState, userProfile }) {
   //FUNCTION TO SUBMIT A NEW MACRO
   const handleSubmitMacro = function (event) {
     event.preventDefault();
-    console.log("running");
     if (userProfile.id && isFormValid()) {
       axios
         .post(
@@ -267,7 +266,6 @@ export default function AddMacroPage({ loginState, userProfile }) {
           }
         )
         .then((response) => {
-          console.log(response.data);
           alert("New macro is added");
           navigate("/macro-list");
         })
