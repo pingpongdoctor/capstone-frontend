@@ -307,224 +307,225 @@ export default function AddMacroPage({ loginState, userProfile }) {
   if (loginState) {
     return (
       <div className="add-macro">
-        <div className="add-macro__heading-wrapper">
-          <BackIconComponent
-            onClickHandler={() => {
-              navigate("/macro-list");
-            }}
-            backClassName="back-icon"
-          />
-
-          <h1 className="add-macro__heading">Add New Macro</h1>
-        </div>
-        <form onSubmit={handleSubmitMacro} className="add-macro__form">
-          <div className="add-macro__flex-container">
-            {/* FLEX ITEM */}
-            <div className="add-macro__flex-item">
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="name">
-                  Macro Name
-                </label>
-                <input
-                  className={`add-macro__input ${macroNameError}`}
-                  value={macroName}
-                  onChange={handleMacroName}
-                  id="name"
-                  type="text"
-                  name="macro-name"
-                  placeholder="Macro Name"
-                />
-              </div>
-
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="body-type">
-                  Body Type
-                </label>
-                <select
-                  className={`add-macro__input ${macroBodyError}`}
-                  value={bodyType}
-                  onChange={handleBodyType}
-                  name="body-type"
-                  id="body-type"
-                >
-                  <option value="">Choose here</option>
-                  <option value="ectomorph">Ectomorph</option>
-                  <option value="mesomorph">Mesomorph</option>
-                  <option value="endomorph">Endomorph</option>
-                </select>
-              </div>
-
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="goal">
-                  Goal of Macro
-                </label>
-                <select
-                  value={goal}
-                  onChange={handleGoal}
-                  className={`add-macro__input ${goalError}`}
-                  name="goal"
-                  id="goal"
-                >
-                  <option value="">Choose here</option>
-                  <option value="slow-lose">Gradually Lose Weight</option>
-                  <option value="slow-gain">Gradually Gain Weight</option>
-                  <option value="fast-lose">Fast Lose Weight</option>
-                  <option value="fast-gain">Fast Gain Weight</option>
-                  <option value="maintain">Maintain Weight</option>
-                </select>
-              </div>
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="activity">
-                  Intensity Level of Activity
-                </label>
-                <select
-                  value={activity}
-                  onChange={handleActivity}
-                  className={`add-macro__input ${activityError}`}
-                  name="activity"
-                  id="activity"
-                >
-                  <option value="">Choose here</option>
-                  <option value="sedentary">
-                    Sedentary - about 2 days doing exercise a week
-                  </option>
-                  <option value="light">
-                    Light - about 3 days doing exercise a week
-                  </option>
-                  <option value="moderate">
-                    Moderate - about 4 days doing exercise a week
-                  </option>
-                  <option value="active">
-                    Active - about 5 days doing exercise a week
-                  </option>
-                  <option value="extreme">
-                    Extreme - about 6 days doing exercise a week
-                  </option>
-                </select>
-              </div>
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="tdee">
-                  Your Balanced TDEE
-                </label>
-                <input
-                  value={tdee}
-                  onChange={handleTdee}
-                  className={`add-macro__input ${tdeeError}`}
-                  id="tdee"
-                  type="number"
-                  name="tdee"
-                  placeholder="Your TDEE (calories)"
-                />
-              </div>
-
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="needed-intake">
-                  Daily Needed Energy Intake
-                </label>
-                <input
-                  value={neededIntake}
-                  onChange={handleNeededIntake}
-                  className={`add-macro__input ${neededIntakeError}`}
-                  id="needed-intake"
-                  type="number"
-                  name="needed-intake"
-                  placeholder="Daily Energy Needed (calories)"
-                />
-              </div>
-            </div>
-
-            {/* FLEX ITEM */}
-            <div className="add-macro__flex-item">
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="current-weight">
-                  Weight
-                </label>
-                <input
-                  className={`add-macro__input`}
-                  value={currentWeight}
-                  onChange={handleCurrentWeight}
-                  id="current-weight"
-                  type="number"
-                  name="current-weight"
-                  placeholder="Weight (kg)"
-                />
-              </div>
-
-              {targetedWeightAppear && (
+        <div className="add-macro__container">
+          <div className="add-macro__heading-wrapper">
+            <BackIconComponent
+              onClickHandler={() => {
+                navigate("/macro-list");
+              }}
+              backClassName="back-icon"
+            />
+            <h1 className="add-macro__heading">Add New Macro</h1>
+          </div>
+          <form onSubmit={handleSubmitMacro} className="add-macro__form">
+            <div className="add-macro__flex-container">
+              {/* FLEX ITEM */}
+              <div className="add-macro__flex-item">
                 <div className="add-macro__wrapper">
-                  <label
-                    className={"add-macro__label"}
-                    htmlFor="targeted-weight"
-                  >
-                    Targeted Weight
+                  <label className="add-macro__label" htmlFor="name">
+                    Macro Name
                   </label>
                   <input
-                    value={targetedWeight}
-                    onChange={handleTargetedWeight}
-                    className={`add-macro__input ${targetedWeightError}`}
-                    id="targeted-weight"
-                    type="number"
-                    name="targeted-weight"
-                    placeholder="Targeted Weight (kg)"
+                    className={`add-macro__input ${macroNameError}`}
+                    value={macroName}
+                    onChange={handleMacroName}
+                    id="name"
+                    type="text"
+                    name="macro-name"
+                    placeholder="Macro Name"
                   />
                 </div>
-              )}
 
-              <div className="add-macro__wrapper">
-                <label className="macro-page__text" htmlFor="gender">
-                  Gender
-                </label>
-                <select
-                  value={gender}
-                  onChange={handleGender}
-                  className="add-macro__input"
-                  name="gender"
-                  id="gender"
-                >
-                  <option value="">Choose here</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="male">Others</option>
-                </select>
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="body-type">
+                    Body Type
+                  </label>
+                  <select
+                    className={`add-macro__input ${macroBodyError}`}
+                    value={bodyType}
+                    onChange={handleBodyType}
+                    name="body-type"
+                    id="body-type"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="ectomorph">Ectomorph</option>
+                    <option value="mesomorph">Mesomorph</option>
+                    <option value="endomorph">Endomorph</option>
+                  </select>
+                </div>
+
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="goal">
+                    Goal of Macro
+                  </label>
+                  <select
+                    value={goal}
+                    onChange={handleGoal}
+                    className={`add-macro__input ${goalError}`}
+                    name="goal"
+                    id="goal"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="slow-lose">Gradually Lose Weight</option>
+                    <option value="slow-gain">Gradually Gain Weight</option>
+                    <option value="fast-lose">Fast Lose Weight</option>
+                    <option value="fast-gain">Fast Gain Weight</option>
+                    <option value="maintain">Maintain Weight</option>
+                  </select>
+                </div>
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="activity">
+                    Intensity Level of Activity
+                  </label>
+                  <select
+                    value={activity}
+                    onChange={handleActivity}
+                    className={`add-macro__input ${activityError}`}
+                    name="activity"
+                    id="activity"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="sedentary">
+                      Sedentary - about 2 days doing exercise a week
+                    </option>
+                    <option value="light">
+                      Light - about 3 days doing exercise a week
+                    </option>
+                    <option value="moderate">
+                      Moderate - about 4 days doing exercise a week
+                    </option>
+                    <option value="active">
+                      Active - about 5 days doing exercise a week
+                    </option>
+                    <option value="extreme">
+                      Extreme - about 6 days doing exercise a week
+                    </option>
+                  </select>
+                </div>
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="tdee">
+                    Your Balanced TDEE
+                  </label>
+                  <input
+                    value={tdee}
+                    onChange={handleTdee}
+                    className={`add-macro__input ${tdeeError}`}
+                    id="tdee"
+                    type="number"
+                    name="tdee"
+                    placeholder="Your TDEE (calories)"
+                  />
+                </div>
+
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="needed-intake">
+                    Daily Needed Energy Intake
+                  </label>
+                  <input
+                    value={neededIntake}
+                    onChange={handleNeededIntake}
+                    className={`add-macro__input ${neededIntakeError}`}
+                    id="needed-intake"
+                    type="number"
+                    name="needed-intake"
+                    placeholder="Daily Energy Needed (calories)"
+                  />
+                </div>
               </div>
 
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="age">
-                  Age
-                </label>
-                <input
-                  className={`add-macro__input`}
-                  value={age}
-                  onChange={handleAge}
-                  id="age"
-                  type="number"
-                  name="age"
-                  placeholder="Age"
-                />
-              </div>
+              {/* FLEX ITEM */}
+              <div className="add-macro__flex-item">
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="current-weight">
+                    Weight
+                  </label>
+                  <input
+                    className={`add-macro__input`}
+                    value={currentWeight}
+                    onChange={handleCurrentWeight}
+                    id="current-weight"
+                    type="number"
+                    name="current-weight"
+                    placeholder="Weight (kg)"
+                  />
+                </div>
 
-              <div className="add-macro__wrapper">
-                <label className="add-macro__label" htmlFor="height">
-                  Height
-                </label>
-                <input
-                  className={`add-macro__input`}
-                  value={height}
-                  onChange={handleHeight}
-                  id="height"
-                  type="number"
-                  name="height"
-                  placeholder="Height (cm)"
-                />
+                {targetedWeightAppear && (
+                  <div className="add-macro__wrapper">
+                    <label
+                      className={"add-macro__label"}
+                      htmlFor="targeted-weight"
+                    >
+                      Targeted Weight
+                    </label>
+                    <input
+                      value={targetedWeight}
+                      onChange={handleTargetedWeight}
+                      className={`add-macro__input ${targetedWeightError}`}
+                      id="targeted-weight"
+                      type="number"
+                      name="targeted-weight"
+                      placeholder="Targeted Weight (kg)"
+                    />
+                  </div>
+                )}
+
+                <div className="add-macro__wrapper">
+                  <label className="macro-page__text" htmlFor="gender">
+                    Gender
+                  </label>
+                  <select
+                    value={gender}
+                    onChange={handleGender}
+                    className="add-macro__input"
+                    name="gender"
+                    id="gender"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="male">Others</option>
+                  </select>
+                </div>
+
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="age">
+                    Age
+                  </label>
+                  <input
+                    className={`add-macro__input`}
+                    value={age}
+                    onChange={handleAge}
+                    id="age"
+                    type="number"
+                    name="age"
+                    placeholder="Age"
+                  />
+                </div>
+
+                <div className="add-macro__wrapper">
+                  <label className="add-macro__label" htmlFor="height">
+                    Height
+                  </label>
+                  <input
+                    className={`add-macro__input`}
+                    value={height}
+                    onChange={handleHeight}
+                    id="height"
+                    type="number"
+                    name="height"
+                    placeholder="Height (cm)"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <ButtonComponent
-            btnType="submit"
-            btnClassName="btn btn--add-macro"
-            btnContent="Add"
-          />
-        </form>
+            <ButtonComponent
+              btnType="submit"
+              btnClassName="btn btn--add-macro"
+              btnContent="Add"
+            />
+          </form>
+        </div>
       </div>
     );
   } else {

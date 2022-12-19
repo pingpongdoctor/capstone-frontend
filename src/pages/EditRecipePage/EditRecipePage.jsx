@@ -444,176 +444,178 @@ export default function EditRecipePage({ loginState, userProfile }) {
   ) {
     return (
       <form onSubmit={handleOnSubmitUpdateRecipe} className="edit-recipe">
-        <h1>Edit Recipe {handleCapitalizeAWord(recipeData.recipe_name)}</h1>
-        <h3>Author: {posterName}</h3>
-        <div className="edit-recipe__big-container">
-          {/* RECIPE IMAGE */}
-          <div className="edit-recipe__wrapper">
-            <label className="edit-recipe__label" htmlFor="uploaded-image">
-              Edit recipe image
-            </label>
-
-            <img
-              className="edit-recipe__previewed-image"
-              src={previewFile || recipeData.image}
-              alt="uploaded-image"
-            />
-            <input
-              className="edit-recipe__file-input"
-              onChange={handleImage}
-              id="uploaded-image"
-              name="uploaded-image"
-              type="file"
-            />
-          </div>
-
-          <div className="edit-recipe__fields-wrapper">
-            {/* RECIPE NAME */}
-            <div className="edit-recipe__field">
-              <label className="edit-recipe__label" htmlFor="name">
-                Recipe name
+        <div className="edit-recipe__container">
+          <h1>Edit Recipe {handleCapitalizeAWord(recipeData.recipe_name)}</h1>
+          <h3>Author: {posterName}</h3>
+          <div className="edit-recipe__big-container">
+            {/* RECIPE IMAGE */}
+            <div className="edit-recipe__wrapper">
+              <label className="edit-recipe__label" htmlFor="uploaded-image">
+                Edit recipe image
               </label>
-              <InputBox
-                inputValue={recipeName}
-                inputOnChange={handleRecipeName}
-                inputClassName={`input-box ${error}`}
-                inputName="name"
-                inputPlaceholder={recipeData.recipe_name}
-                inputType="text"
+
+              <img
+                className="edit-recipe__previewed-image"
+                src={previewFile || recipeData.image}
+                alt="uploaded-image"
+              />
+              <input
+                className="edit-recipe__file-input"
+                onChange={handleImage}
+                id="uploaded-image"
+                name="uploaded-image"
+                type="file"
               />
             </div>
-            {/* DESCRIPTION */}
-            <div className="edit-recipe__field">
-              <label className="edit-recipe__label" htmlFor="descrittion">
-                Description
-              </label>
-              <textarea
-                value={description}
-                onChange={handleDescription}
-                className={`edit-recipe__descript-textarea edit-recipe__textarea ${error}`}
-                placeholder={recipeData.description}
-                name="description"
-                id="description"
-                wrap="hard"
-              ></textarea>
-            </div>
-            {/* DIFFICULTY LEVEL */}
-            <div className="edit-recipe__field">
-              <label className="edit-recipe__label" htmlFor="level">
-                Difficulty level
-              </label>
-              <select
-                value={level || recipeData.level}
-                onChange={handleLevel}
-                className={`edit-recipe__select ${error}`}
-                name="level"
-                id="level"
-              >
-                <option value="">Choose here</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-            </div>
-            {/* READY TIME */}
-            <div className="edit-recipe__field">
-              <label className="edit-recipe__label" htmlFor="time">
-                Ready time
-              </label>
-              <InputBox
-                inputValue={readyTime}
-                inputOnChange={handleReadyTime}
-                inputClassName={`input-box ${error}`}
-                inputName="time"
-                inputPlaceholder={`${recipeData.ready_time} minutes`}
-                inputType="number"
-              />
+
+            <div className="edit-recipe__fields-wrapper">
+              {/* RECIPE NAME */}
+              <div className="edit-recipe__field">
+                <label className="edit-recipe__label" htmlFor="name">
+                  Recipe name
+                </label>
+                <InputBox
+                  inputValue={recipeName}
+                  inputOnChange={handleRecipeName}
+                  inputClassName={`input-box ${error}`}
+                  inputName="name"
+                  inputPlaceholder={recipeData.recipe_name}
+                  inputType="text"
+                />
+              </div>
+              {/* DESCRIPTION */}
+              <div className="edit-recipe__field">
+                <label className="edit-recipe__label" htmlFor="descrittion">
+                  Description
+                </label>
+                <textarea
+                  value={description}
+                  onChange={handleDescription}
+                  className={`edit-recipe__descript-textarea edit-recipe__textarea ${error}`}
+                  placeholder={recipeData.description}
+                  name="description"
+                  id="description"
+                  wrap="hard"
+                ></textarea>
+              </div>
+              {/* DIFFICULTY LEVEL */}
+              <div className="edit-recipe__field">
+                <label className="edit-recipe__label" htmlFor="level">
+                  Difficulty level
+                </label>
+                <select
+                  value={level || recipeData.level}
+                  onChange={handleLevel}
+                  className={`edit-recipe__select ${error}`}
+                  name="level"
+                  id="level"
+                >
+                  <option value="">Choose here</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
+              {/* READY TIME */}
+              <div className="edit-recipe__field">
+                <label className="edit-recipe__label" htmlFor="time">
+                  Ready time
+                </label>
+                <InputBox
+                  inputValue={readyTime}
+                  inputOnChange={handleReadyTime}
+                  inputClassName={`input-box ${error}`}
+                  inputName="time"
+                  inputPlaceholder={`${recipeData.ready_time} minutes`}
+                  inputType="number"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* FLEX CONTAINER */}
-        <div className="edit-recipe__flex-container">
-          {/* FLEX ITEM */}
-          <div className="edit-recipe__flex-item">
-            {/* STEPS */}
-            <div>
+          {/* FLEX CONTAINER */}
+          <div className="edit-recipe__flex-container">
+            {/* FLEX ITEM */}
+            <div className="edit-recipe__flex-item">
+              {/* STEPS */}
+              <div>
+                <div className="edit-recipe__change-num-wrapper">
+                  <label className="edit-recipe__label" htmlFor="step">
+                    Steps
+                  </label>
+                  <p
+                    className="edit-recipe__change-num"
+                    onClick={handleIncreaseStepBoxCount}
+                  >
+                    +
+                  </p>
+                  <p
+                    className="edit-recipe__change-num"
+                    onClick={handleDecreaseStepBoxCount}
+                  >
+                    -
+                  </p>
+                </div>
+                {stepArr &&
+                  stepBoxNum &&
+                  handleCreateNumArr(stepBoxNum).map((step, index) => (
+                    <textarea
+                      className={`edit-recipe__textarea edit-recipe__step-textarea edit-recipe__input-${
+                        index + 1
+                      } ${error}`}
+                      onChange={handleStepStates}
+                      key={step}
+                      placeholder={stepArr[index] || `Step ${index + 1}`}
+                    ></textarea>
+                  ))}
+                <ButtonComponent
+                  btnClassName="btn btn--edit-recipe-submit btn--tablet"
+                  btnContent="Post to the recipe library"
+                  btnType="submit"
+                />
+              </div>
+            </div>
+
+            {/* FLEX ITEM */}
+            <div className="edit-recipe__flex-item">
+              {/* INGREDIENTS */}
               <div className="edit-recipe__change-num-wrapper">
                 <label className="edit-recipe__label" htmlFor="step">
-                  Steps
+                  Ingredients
                 </label>
                 <p
                   className="edit-recipe__change-num"
-                  onClick={handleIncreaseStepBoxCount}
+                  onClick={handleIncreaseIngreBoxCount}
                 >
                   +
                 </p>
                 <p
                   className="edit-recipe__change-num"
-                  onClick={handleDecreaseStepBoxCount}
+                  onClick={handleDecreaseIngreBoxCount}
                 >
                   -
                 </p>
               </div>
-              {stepArr &&
-                stepBoxNum &&
-                handleCreateNumArr(stepBoxNum).map((step, index) => (
+              {ingreArr &&
+                ingreBoxNum &&
+                handleCreateNumArr(ingreBoxNum).map((ingre, index) => (
                   <textarea
-                    className={`edit-recipe__textarea edit-recipe__step-textarea edit-recipe__input-${
+                    className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
                       index + 1
                     } ${error}`}
-                    onChange={handleStepStates}
-                    key={step}
-                    placeholder={stepArr[index] || `Step ${index + 1}`}
+                    onChange={handleIngredientStates}
+                    key={ingre}
+                    placeholder={ingreArr[index] || `Ingredient ${index + 1}`}
                   ></textarea>
                 ))}
-              <ButtonComponent
-                btnClassName="btn btn--edit-recipe-submit btn--tablet"
-                btnContent="Post to the recipe library"
-                btnType="submit"
-              />
             </div>
           </div>
-
-          {/* FLEX ITEM */}
-          <div className="edit-recipe__flex-item">
-            {/* INGREDIENTS */}
-            <div className="edit-recipe__change-num-wrapper">
-              <label className="edit-recipe__label" htmlFor="step">
-                Ingredients
-              </label>
-              <p
-                className="edit-recipe__change-num"
-                onClick={handleIncreaseIngreBoxCount}
-              >
-                +
-              </p>
-              <p
-                className="edit-recipe__change-num"
-                onClick={handleDecreaseIngreBoxCount}
-              >
-                -
-              </p>
-            </div>
-            {ingreArr &&
-              ingreBoxNum &&
-              handleCreateNumArr(ingreBoxNum).map((ingre, index) => (
-                <textarea
-                  className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
-                    index + 1
-                  } ${error}`}
-                  onChange={handleIngredientStates}
-                  key={ingre}
-                  placeholder={ingreArr[index] || `Ingredient ${index + 1}`}
-                ></textarea>
-              ))}
-          </div>
+          <ButtonComponent
+            btnClassName="btn btn--edit-recipe-submit btn--mobile"
+            btnContent="Post to the recipe library"
+            btnType="submit"
+          />
         </div>
-        <ButtonComponent
-          btnClassName="btn btn--edit-recipe-submit btn--mobile"
-          btnContent="Post to the recipe library"
-          btnType="submit"
-        />
       </form>
     );
   }

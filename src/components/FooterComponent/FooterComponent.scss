@@ -24,6 +24,11 @@
   font-weight: 600;
   font-size: 1.25rem;
   color: ivory;
+  margin: 1.5rem 0;
+  @include tablet {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .site-footer__icon {

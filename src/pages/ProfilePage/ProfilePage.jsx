@@ -162,19 +162,6 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 />
               </div>
             </div>
-            {/* 
-            <div className="profile-page__text">
-              <p className="profile-page__field">Your Photo</p>
-              <div className="profile-page__small-wrapper">
-                <Avatar avatarClassName="avatar avatar--profile-value" />
-                <ButtonComponent
-                  btnClassName="btn btn--profile"
-                  btnContent="Update"
-                  btnName="photo"
-                />
-              </div>
-            </div> */}
-
             <div className="profile-page__text">
               <p className="profile-page__field">Weight</p>
               <div className="profile-page__small-wrapper">

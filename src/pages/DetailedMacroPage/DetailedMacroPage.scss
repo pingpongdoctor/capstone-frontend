@@ -32,9 +32,16 @@
 }
 
 .detail-page {
-  margin: 0 1rem;
+  margin: 1rem;
   @include tablet {
-    margin: 0 2rem;
+    margin: 2rem;
+  }
+}
+
+.detail-page__huge-container {
+  @include desktop {
+    max-width: 1216px;
+    margin: 0 auto;
   }
 }
 

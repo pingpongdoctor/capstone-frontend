@@ -127,6 +127,9 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
       if (macroObj.goal === "slow-gain") {
         setGoalText("Slowly Gain Weight");
       }
+      if (macroObj.goal === "maintain") {
+        setGoalText("Maintain Weight");
+      }
     }
   }, [macroObj]);
 
@@ -321,123 +324,125 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   if (loginState) {
     return (
       <div className="detail-page">
-        <div className="detail-page__heading-wrap">
-          {macroObj && (
-            <div className="detail-page__heading">
-              <p>Macro Name: </p>
-              <p>{handleCapitalize(macroObj.macro_name)}</p>
-            </div>
-          )}
-          {macroObj && (
-            <ButtonComponent
-              onClickHandler={() => {
-                navigate(`/edit-macro/${macroObj.id}`);
-              }}
-              btnContent="Edit"
-              btnClassName="btn btn--detail-macro"
-            />
-          )}
-        </div>
-
-        <div className="detail-page__container">
-          {/* FIRST BOX */}
-          <div
-            onClick={handleOnclickActivateFirstBox}
-            className={`detail-page__box detail-page__first-box ${activateFirstBox}`}
-          >
+        <div className="detail-page__huge-container">
+          <div className="detail-page__heading-wrap">
             {macroObj && (
-              <div className="detail-page__value">
-                <p className="detail-page__field">Current Weight: </p>
-                <p>{macroObj.weight} kg</p>
+              <div className="detail-page__heading">
+                <p>Macro Name: </p>
+                <p>{handleCapitalize(macroObj.macro_name)}</p>
               </div>
             )}
-
             {macroObj && (
-              <div className="detail-page__value">
-                <p className="detail-page__field">Targeted Weight: </p>
-                <p>{macroObj.targeted_weight} kg</p>
-              </div>
-            )}
-
-            <div className="detail-page__value">
-              <p className="detail-page__field">Goal: </p>
-              <p>{goalText}</p>
-            </div>
-
-            <div className="detail-page__value">
-              <p className="detail-page__field">Activity: </p>
-              <p>{activityText}</p>
-            </div>
-
-            {macroObj && (
-              <div className="detail-page__value">
-                <p className="detail-page__field">Balanced TDEE: </p>
-                <p>{macroObj.tdee} calories</p>
-              </div>
-            )}
-
-            {macroObj && (
-              <div className="detail-page__value">
-                <p className="detail-page__field">Daily Energy Intake: </p>
-                <p>{macroObj.tdee_need} calories</p>
-              </div>
+              <ButtonComponent
+                onClickHandler={() => {
+                  navigate(`/edit-macro/${macroObj.id}`);
+                }}
+                btnContent="Edit"
+                btnClassName="btn btn--detail-macro"
+              />
             )}
           </div>
 
-          {/* SECOND BOX */}
-          <div
-            onClick={handleOnclickActivateSecondBox}
-            className={`detail-page__wrapper-line-chart ${activateSecondBox}`}
-          >
-            <Line options={options} data={lineData} />
-          </div>
+          <div className="detail-page__container">
+            {/* FIRST BOX */}
+            <div
+              onClick={handleOnclickActivateFirstBox}
+              className={`detail-page__box detail-page__first-box ${activateFirstBox}`}
+            >
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Current Weight: </p>
+                  <p>{macroObj.weight} kg</p>
+                </div>
+              )}
 
-          {/* THIRD BOX */}
-          <div
-            onClick={handleOnclickActivateThirdBox}
-            className={`detail-page__box detail-page__third-box ${activateThirdBox}`}
-          >
-            {macroObj && (
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Targeted Weight: </p>
+                  <p>{macroObj.targeted_weight} kg</p>
+                </div>
+              )}
+
               <div className="detail-page__value">
-                <p className="detail-page__field">Body Type: </p>
-                <p>{handleCapitalizeAWord(macroObj.body_type)}</p>
+                <p className="detail-page__field">Goal: </p>
+                <p>{goalText}</p>
               </div>
-            )}
 
-            {macroObj && typeExplain && (
-              <div className="detail-page__explain">
-                <p>{typeExplain}</p>
-              </div>
-            )}
-
-            {macroObj && (
               <div className="detail-page__value">
-                <p className="detail-page__field">Protein: </p>
-                <p>{protein} gram</p>
+                <p className="detail-page__field">Activity: </p>
+                <p>{activityText}</p>
               </div>
-            )}
 
-            {macroObj && (
-              <div className="detail-page__value">
-                <p className="detail-page__field">Carb: </p>
-                <p>{carb} gram</p>
-              </div>
-            )}
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Balanced TDEE: </p>
+                  <p>{macroObj.tdee} calories</p>
+                </div>
+              )}
 
-            {macroObj && (
-              <div className="detail-page__value">
-                <p className="detail-page__field">Fat: </p>
-                <p>{fat} gram</p>
-              </div>
-            )}
-          </div>
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Daily Energy Intake: </p>
+                  <p>{macroObj.tdee_need} calories</p>
+                </div>
+              )}
+            </div>
 
-          {/* LAST BOX */}
-          <div
-            onClick={handleOnclickActivateLastBox}
-            className={`detail-page__wrapper-chart ${activateLastBox}`}
-          >
-            <Pie data={data} />
+            {/* SECOND BOX */}
+            <div
+              onClick={handleOnclickActivateSecondBox}
+              className={`detail-page__wrapper-line-chart ${activateSecondBox}`}
+            >
+              <Line options={options} data={lineData} />
+            </div>
+
+            {/* THIRD BOX */}
+            <div
+              onClick={handleOnclickActivateThirdBox}
+              className={`detail-page__box detail-page__third-box ${activateThirdBox}`}
+            >
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Body Type: </p>
+                  <p>{handleCapitalizeAWord(macroObj.body_type)}</p>
+                </div>
+              )}
+
+              {macroObj && typeExplain && (
+                <div className="detail-page__explain">
+                  <p>{typeExplain}</p>
+                </div>
+              )}
+
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Protein: </p>
+                  <p>{protein} gram</p>
+                </div>
+              )}
+
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Carb: </p>
+                  <p>{carb} gram</p>
+                </div>
+              )}
+
+              {macroObj && (
+                <div className="detail-page__value">
+                  <p className="detail-page__field">Fat: </p>
+                  <p>{fat} gram</p>
+                </div>
+              )}
+            </div>
+
+            {/* LAST BOX */}
+            <div
+              onClick={handleOnclickActivateLastBox}
+              className={`detail-page__wrapper-chart ${activateLastBox}`}
+            >
+              <Pie data={data} />
+            </div>
           </div>
         </div>
       </div>

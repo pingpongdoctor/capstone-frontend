@@ -108,3 +108,14 @@
     display: inline-block;
   }
 }
+
+.btn--home-page {
+  margin-bottom: 1rem;
+  @include tablet {
+    margin-bottom: 0;
+    margin-top: 1rem;
+    height: 55px;
+    width: 250px;
+    margin-left: auto;
+  }
+}

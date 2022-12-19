@@ -3,7 +3,6 @@ import logo from "../../assets/logos/logo.png";
 import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function HeaderComponent({
   loginState,
