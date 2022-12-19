@@ -1,4 +1,4 @@
-KEY FEATURE
+KEY FEATURES
 
 1. Use axios to make requests between frontend and backend
    Install by using the command: npm install axios
