@@ -16,6 +16,7 @@ import RecipeLibraryPage from "./pages/RecipeLibraryPage/RecipeLibraryPage";
 import DetailRecipePage from "./pages/DetailedRecipePage/DetailedRecipePage";
 import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
 import EditRecipePage from "./pages/EditRecipePage/EditRecipePage";
+import FooterComponent from "./components/FooterComponent/FooterComponent";
 const URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -28,8 +29,6 @@ function App() {
   //STATE FOR EMAIL AND PASSWORD
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //STATE FOR THE CURRENT PATH
-  // const [currentPath, setCurrentPath] = useState("");
   //FUNCTION TO HANDLE EMAIL AND PASSWORD STATES
   const handleEmail = function (event) {
     setEmail(event.target.value);
@@ -104,152 +103,147 @@ function App() {
       {/* SIDE MENU */}
       <SideMenu sideMenuState={sideMenuState} />
       <div onMouseEnter={closeMenu} className="App">
-        {/* className={appPageState} */}
-        <div>
-          <Routes>
-            {/* HOME PAGE ROUTE */}
-            <Route
-              path="/"
-              element={
-                <HomePage
-                  userProfile={userProfile}
-                  handleLogout={handleLogout}
-                  loginState={loginState}
-                />
-              }
-            />
+        <Routes>
+          {/* HOME PAGE ROUTE */}
+          <Route
+            path="/"
+            element={
+              <HomePage
+                userProfile={userProfile}
+                handleLogout={handleLogout}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* PROFILE ROUTE*/}
-            <Route
-              path="/profile"
-              element={
-                <ProfilePage
-                  loadProfile={loadProfile}
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* PROFILE ROUTE*/}
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage
+                loadProfile={loadProfile}
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* LOGIN PAGE ROUTE */}
-            <Route
-              path="/login"
-              element={
-                <LoginPage
-                  handleLogin={handleLogin}
-                  handleEmail={handleEmail}
-                  handlePassword={handlePassword}
-                  email={email}
-                  password={password}
-                  loadProfile={loadProfile}
-                  loginState={loginState}
-                  userProfile={userProfile}
-                />
-              }
-            />
+          {/* LOGIN PAGE ROUTE */}
+          <Route
+            path="/login"
+            element={
+              <LoginPage
+                handleLogin={handleLogin}
+                handleEmail={handleEmail}
+                handlePassword={handlePassword}
+                email={email}
+                password={password}
+                loadProfile={loadProfile}
+                loginState={loginState}
+                userProfile={userProfile}
+              />
+            }
+          />
 
-            {/* BUILD MACRO PAGE ROUTE */}
+          {/* BUILD MACRO PAGE ROUTE */}
 
-            <Route
-              path="/build-macro"
-              element={
-                <BuildMacroPage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          <Route
+            path="/build-macro"
+            element={
+              <BuildMacroPage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* MACRO LIST ROUTE */}
-            <Route
-              path="/macro-list"
-              element={
-                <MacroListPage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* MACRO LIST ROUTE */}
+          <Route
+            path="/macro-list"
+            element={
+              <MacroListPage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* DETAILED MACRO PAGE */}
-            <Route
-              path="/macro-list/:macroId"
-              element={
-                <DetailedMacroPage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* DETAILED MACRO PAGE */}
+          <Route
+            path="/macro-list/:macroId"
+            element={
+              <DetailedMacroPage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* ADD MACRO ROUTE */}
-            <Route
-              path="/add-macro"
-              element={
-                <AddMacroPage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* ADD MACRO ROUTE */}
+          <Route
+            path="/add-macro"
+            element={
+              <AddMacroPage userProfile={userProfile} loginState={loginState} />
+            }
+          />
 
-            {/* EDIT MACRO ROUTE */}
-            <Route
-              path="/edit-macro/:macroId"
-              element={
-                <EditMacroPage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* EDIT MACRO ROUTE */}
+          <Route
+            path="/edit-macro/:macroId"
+            element={
+              <EditMacroPage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* RECIPE LIBRARY ROUTE */}
-            <Route
-              path="/recipe-library"
-              element={
-                <RecipeLibraryPage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* RECIPE LIBRARY ROUTE */}
+          <Route
+            path="/recipe-library"
+            element={
+              <RecipeLibraryPage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* DETAIL RECIPE ROUTE */}
-            <Route
-              path="/recipe-library/:detailRecipeId"
-              element={
-                <DetailRecipePage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* DETAIL RECIPE ROUTE */}
+          <Route
+            path="/recipe-library/:detailRecipeId"
+            element={
+              <DetailRecipePage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* ADD RECIPE ROUTE */}
-            <Route
-              path="/add-recipe"
-              element={
-                <AddRecipePage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
+          {/* ADD RECIPE ROUTE */}
+          <Route
+            path="/add-recipe"
+            element={
+              <AddRecipePage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
 
-            {/* EDIT RECIPE ROUTE */}
-            <Route
-              path="/edit-recipe/:recipeId"
-              element={
-                <EditRecipePage
-                  userProfile={userProfile}
-                  loginState={loginState}
-                />
-              }
-            />
-          </Routes>
-        </div>
+          {/* EDIT RECIPE ROUTE */}
+          <Route
+            path="/edit-recipe/:recipeId"
+            element={
+              <EditRecipePage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
+        </Routes>
       </div>
+      <FooterComponent />
     </BrowserRouter>
   );
 }

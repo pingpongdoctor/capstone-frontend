@@ -3,7 +3,6 @@ import logo from "../../assets/logos/logo.png";
 import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function HeaderComponent({
   loginState,
@@ -20,7 +19,7 @@ export default function HeaderComponent({
         <div className="header-page__container">
           <img
             onMouseEnter={popOutSideMenu}
-            className="menu menu--header-page"
+            className="header-page__menu"
             alt="menu"
             src={menu}
           />

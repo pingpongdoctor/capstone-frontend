@@ -2,7 +2,17 @@
 @use "../../styles/partials/mixins" as *;
 
 .macro-list {
-  margin: 0 2rem;
+  margin: 1rem 2rem;
+  @include tablet {
+    margin: 2rem;
+  }
+}
+
+.macro-list__container {
+  @include desktop {
+    max-width: 1216px;
+    margin: 0 auto;
+  }
 }
 
 .macro-list__main-text {
@@ -45,6 +55,7 @@
   &:last-child {
     width: 85px;
     cursor: auto;
+    background-image: none;
   }
 }
 

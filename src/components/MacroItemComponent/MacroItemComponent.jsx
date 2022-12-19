@@ -33,6 +33,9 @@ export default function ItemComponent({
     if (macroGoal === "slow-gain") {
       setGoalText("Slowly Gain Weight");
     }
+    if (macroGoal === "maintain") {
+      setGoalText("Maintain Weight");
+    }
   }, [macroGoal]);
   //USE EFFECT TO CAPITALIZE ALL FIRST LETTER OF THE MACRO NAME
   useEffect(() => {

@@ -390,174 +390,176 @@ export default function AddRecipePage({ loginState, userProfile }) {
   if (loginState) {
     return (
       <form onSubmit={handleOnSubmitImage} className="add-recipe">
-        <div className="add-recipe__heading-wrapper">
-          <BackIconComponent
-            onClickHandler={() => {
-              navigate("/recipe-library");
-            }}
-            backClassName="back-icon"
-          />
-          <h1>Add New Recipe</h1>
-        </div>
-        {/* RECIPE IMAGE */}
-        <div className="add-recipe__wrapper">
-          <label className="add-recipe__label" htmlFor="uploaded-image">
-            Upload new recipe image
-          </label>
-
-          {uploadImage && previewFile && (
-            <img
-              className="add-recipe__previewed-image"
-              src={previewFile}
-              alt="uploaded-image"
+        <div className="add-recipe__container">
+          <div className="add-recipe__heading-wrapper">
+            <BackIconComponent
+              onClickHandler={() => {
+                navigate("/recipe-library");
+              }}
+              backClassName="back-icon"
             />
-          )}
-          <input
-            className="add-recipe__file-input"
-            onChange={handleImage}
-            id="uploaded-image"
-            name="uploaded-image"
-            type="file"
-          />
-        </div>
+            <h1>Add New Recipe</h1>
+          </div>
+          {/* RECIPE IMAGE */}
+          <div className="add-recipe__wrapper">
+            <label className="add-recipe__label" htmlFor="uploaded-image">
+              Upload new recipe image
+            </label>
 
-        {/* FLEX CONTAINER */}
-        <div className="add-recipe__flex-container">
-          {/* FLEX ITEM */}
-          <div className="add-recipe__flex-item">
-            {/* RECIPE NAME */}
-            <div className="add-recipe__field">
-              <label className="add-recipe__label" htmlFor="name">
-                Recipe name
-              </label>
-              <InputBox
-                inputValue={recipeName}
-                inputOnChange={handleRecipeName}
-                inputClassName={`input-box ${nameError}`}
-                inputName="name"
-                inputPlaceholder="Name of new recipe"
-                inputType="text"
+            {uploadImage && previewFile && (
+              <img
+                className="add-recipe__previewed-image"
+                src={previewFile}
+                alt="uploaded-image"
               />
-            </div>
-            {/* DESCRIPTION */}
-            <div className="add-recipe__field">
-              <label className="add-recipe__label" htmlFor="descrittion">
-                Description
-              </label>
-              <textarea
-                value={description}
-                onChange={handleDescription}
-                className={`edit-recipe__textarea add-recipe__descript-textarea ${descriptError}`}
-                placeholder="Type description here"
-                name="description"
-                id="description"
-                wrap="hard"
-              ></textarea>
-            </div>
-            {/* DIFFICULTY LEVEL */}
-            <div className="add-recipe__field">
-              <label className="add-recipe__label" htmlFor="level">
-                Difficulty level
-              </label>
-              <select
-                value={level}
-                onChange={handleLevel}
-                className={`add-recipe__select ${levelError}`}
-                name="level"
-                id="level"
-              >
-                <option value="">Choose here</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-            </div>
-            {/* READY TIME */}
-            <div className="add-recipe__field">
-              <label className="add-recipe__label" htmlFor="time">
-                Ready time
-              </label>
-              <InputBox
-                inputValue={readyTime}
-                inputOnChange={handleReadyTime}
-                inputClassName={`input-box ${readyTimeError}`}
-                inputName="time"
-                inputPlaceholder="Ready time in minute"
-                inputType="number"
-              />
-            </div>
-            <ButtonComponent
-              btnClassName="btn btn--add-recipe-submit btn--tablet"
-              btnContent="Post to the recipe library"
-              btnType="submit"
+            )}
+            <input
+              className="add-recipe__file-input"
+              onChange={handleImage}
+              id="uploaded-image"
+              name="uploaded-image"
+              type="file"
             />
           </div>
 
-          {/* FLEX ITEM */}
-          <div className="add-recipe__flex-item">
-            {/* INGREDIENTS */}
-            <div className="add-recipe__change-num-wrapper">
-              <label className="add-recipe__label-ingre" htmlFor="ingre">
-                Ingredients
-              </label>
-              <p
-                className="add-recipe__change-num"
-                onClick={handleIncreaseIngreBoxCount}
-              >
-                +
-              </p>
-              <p
-                className="add-recipe__change-num"
-                onClick={handleDecreaseIngreBoxCount}
-              >
-                -
-              </p>
+          {/* FLEX CONTAINER */}
+          <div className="add-recipe__flex-container">
+            {/* FLEX ITEM */}
+            <div className="add-recipe__flex-item">
+              {/* RECIPE NAME */}
+              <div className="add-recipe__field">
+                <label className="add-recipe__label" htmlFor="name">
+                  Recipe name
+                </label>
+                <InputBox
+                  inputValue={recipeName}
+                  inputOnChange={handleRecipeName}
+                  inputClassName={`input-box ${nameError}`}
+                  inputName="name"
+                  inputPlaceholder="Name of new recipe"
+                  inputType="text"
+                />
+              </div>
+              {/* DESCRIPTION */}
+              <div className="add-recipe__field">
+                <label className="add-recipe__label" htmlFor="descrittion">
+                  Description
+                </label>
+                <textarea
+                  value={description}
+                  onChange={handleDescription}
+                  className={`edit-recipe__textarea add-recipe__descript-textarea ${descriptError}`}
+                  placeholder="Type description here"
+                  name="description"
+                  id="description"
+                  wrap="hard"
+                ></textarea>
+              </div>
+              {/* DIFFICULTY LEVEL */}
+              <div className="add-recipe__field">
+                <label className="add-recipe__label" htmlFor="level">
+                  Difficulty level
+                </label>
+                <select
+                  value={level}
+                  onChange={handleLevel}
+                  className={`add-recipe__select ${levelError}`}
+                  name="level"
+                  id="level"
+                >
+                  <option value="">Choose here</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
+              {/* READY TIME */}
+              <div className="add-recipe__field">
+                <label className="add-recipe__label" htmlFor="time">
+                  Ready time
+                </label>
+                <InputBox
+                  inputValue={readyTime}
+                  inputOnChange={handleReadyTime}
+                  inputClassName={`input-box ${readyTimeError}`}
+                  inputName="time"
+                  inputPlaceholder="Ready time in minute"
+                  inputType="number"
+                />
+              </div>
+              <ButtonComponent
+                btnClassName="btn btn--add-recipe-submit btn--tablet"
+                btnContent="Post to the recipe library"
+                btnType="submit"
+              />
             </div>
-            {handleBoxKeyArr(ingredientBoxCount).map((boxKey) => (
-              <textarea
-                className={`add-recipe__textarea add-recipe__ingre-textarea add-recipe__input-${boxKey} ${ingreError}`}
-                onChange={handleIngredientStates}
-                key={boxKey}
-                placeholder={`Ingredient ${boxKey}`}
-                id="ingre"
-                wrap="hard"
-              ></textarea>
-            ))}
-            {/* STEPS */}
-            <div className="add-recipe__change-num-wrapper add-recipe__change-num-step-wrapper">
-              <label className="add-recipe__label-step" htmlFor="step">
-                Steps
-              </label>
-              <p
-                className="add-recipe__change-num"
-                onClick={handleIncreaseStepBoxCount}
-              >
-                +
-              </p>
-              <p
-                className="add-recipe__change-num"
-                onClick={handleDecreaseStepBoxCount}
-              >
-                -
-              </p>
+
+            {/* FLEX ITEM */}
+            <div className="add-recipe__flex-item">
+              {/* INGREDIENTS */}
+              <div className="add-recipe__change-num-wrapper">
+                <label className="add-recipe__label-ingre" htmlFor="ingre">
+                  Ingredients
+                </label>
+                <p
+                  className="add-recipe__change-num"
+                  onClick={handleIncreaseIngreBoxCount}
+                >
+                  +
+                </p>
+                <p
+                  className="add-recipe__change-num"
+                  onClick={handleDecreaseIngreBoxCount}
+                >
+                  -
+                </p>
+              </div>
+              {handleBoxKeyArr(ingredientBoxCount).map((boxKey) => (
+                <textarea
+                  className={`add-recipe__textarea add-recipe__ingre-textarea add-recipe__input-${boxKey} ${ingreError}`}
+                  onChange={handleIngredientStates}
+                  key={boxKey}
+                  placeholder={`Ingredient ${boxKey}`}
+                  id="ingre"
+                  wrap="hard"
+                ></textarea>
+              ))}
+              {/* STEPS */}
+              <div className="add-recipe__change-num-wrapper add-recipe__change-num-step-wrapper">
+                <label className="add-recipe__label-step" htmlFor="step">
+                  Steps
+                </label>
+                <p
+                  className="add-recipe__change-num"
+                  onClick={handleIncreaseStepBoxCount}
+                >
+                  +
+                </p>
+                <p
+                  className="add-recipe__change-num"
+                  onClick={handleDecreaseStepBoxCount}
+                >
+                  -
+                </p>
+              </div>
+              {handleBoxKeyArr(stepBoxCount).map((boxKey) => (
+                <textarea
+                  className={`add-recipe__textarea add-recipe__step-textarea add-recipe__input-${boxKey} ${stepError}`}
+                  onChange={handleStepStates}
+                  key={boxKey}
+                  placeholder={`Step ${boxKey}`}
+                  id="step"
+                  wrap="hard"
+                ></textarea>
+              ))}
             </div>
-            {handleBoxKeyArr(stepBoxCount).map((boxKey) => (
-              <textarea
-                className={`add-recipe__textarea add-recipe__step-textarea add-recipe__input-${boxKey} ${stepError}`}
-                onChange={handleStepStates}
-                key={boxKey}
-                placeholder={`Step ${boxKey}`}
-                id="step"
-                wrap="hard"
-              ></textarea>
-            ))}
           </div>
+          <ButtonComponent
+            btnClassName="btn btn--add-recipe-submit btn--mobile"
+            btnContent="Post to the recipe library"
+            btnType="submit"
+          />
         </div>
-        <ButtonComponent
-          btnClassName="btn btn--add-recipe-submit btn--mobile"
-          btnContent="Post to the recipe library"
-          btnType="submit"
-        />
       </form>
     );
   } else {

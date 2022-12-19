@@ -2,9 +2,16 @@
 @use "../../styles/partials/mixins" as *;
 
 .edit-recipe {
-  margin: 0 1rem;
+  margin: 1rem;
   @include tablet {
-    margin: 0 2rem;
+    margin: 2rem;
+  }
+}
+
+.edit-recipe__container {
+  @include desktop {
+    max-width: 1216px;
+    margin: 0 auto;
   }
 }
 

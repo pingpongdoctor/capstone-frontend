@@ -5,6 +5,7 @@ import buildMacrosPic from "../../assets/images/build-macro-pic.jpg";
 import trackBodyIndexPic from "../../assets/images/track-body-index.jpg";
 import recipePic from "../../assets/images/recipe.jpg";
 import nutritionFactPic from "../../assets/images/nutrition-fact.jpg";
+import addRecipePic from "../../assets/images/add-recipe.jpg";
 import "./SliderComponent.scss";
 import nextBtn from "../../assets/icons/next.png";
 import backBtn from "../../assets/icons/back.png";
@@ -86,24 +87,38 @@ export default function SliderComponent() {
               alt="build-macro-pic"
             />
             <div className="slider__text">
-              <h3>Build your macro ratios fast</h3>
+              <h3>Build your macro ratios right now</h3>
               <p>Let's design your Macronutrient ratios here</p>
             </div>
           </Link>
         </div>
 
         <div className="slider__card">
-          <img
-            className="slider__image"
-            src={trackBodyIndexPic}
-            alt="build-macro-pic"
-          />
-          <div className="slider__text">
-            <h3>Track your body indexes</h3>
-            <p>
-              We help you track your body indexes to let you know how far you go
-            </p>
-          </div>
+          <Link className="slider__link" to={"/macro-list"}>
+            <img
+              className="slider__image"
+              src={nutritionFactPic}
+              alt="build-macro-pic"
+            />
+            <div className="slider__text">
+              <h3>Enjoy your own macro list</h3>
+              <p>You can easily save the macros you built into a list</p>
+            </div>
+          </Link>
+        </div>
+
+        <div className="slider__card">
+          <Link className="slider__link" to={"/add-macro"}>
+            <img
+              className="slider__image"
+              src={trackBodyIndexPic}
+              alt="build-macro-pic"
+            />
+            <div className="slider__text">
+              <h3>Construct a new macro based on your preference</h3>
+              <p>We allow users to build macros based on their calculators</p>
+            </div>
+          </Link>
         </div>
 
         <div className="slider__card">
@@ -121,15 +136,17 @@ export default function SliderComponent() {
         </div>
 
         <div className="slider__card">
-          <img
-            className="slider__image"
-            src={nutritionFactPic}
-            alt="build-macro-pic"
-          />
-          <div className="slider__text">
-            <h3>Learn about nutrition with fun facts</h3>
-            <p>There are a lot of fun facts to take a look here</p>
-          </div>
+          <Link className="slider__link" to={"/add-recipe"}>
+            <img
+              className="slider__image"
+              src={addRecipePic}
+              alt="build-macro-pic"
+            />
+            <div className="slider__text">
+              <h3>Become a recipe creator</h3>
+              <p>Join our community to share your recipes</p>
+            </div>
+          </Link>
         </div>
       </Slider>
     </div>

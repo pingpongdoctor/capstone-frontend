@@ -80,16 +80,13 @@
   }
 }
 
-.menu {
+.header-page__menu {
   width: 6%;
+  margin-right: 82px;
   @include tablet {
     width: 4%;
   }
   @include desktop {
     width: 3%;
   }
-}
-
-.menu--header-page {
-  margin-right: 82px;
 }

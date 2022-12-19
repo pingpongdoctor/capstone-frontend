@@ -18,7 +18,7 @@
 }
 
 .detail-recipe__heading {
-  margin-bottom: 0;
+  margin-bottom: 1.8rem;
   @include tablet {
     margin: 0;
     margin-right: auto;
@@ -84,6 +84,13 @@
   }
 }
 
+.detail-recipe__second-wrapper-container {
+  @include desktop {
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+}
+
 .detail-recipe__like-infor {
   display: flex;
   gap: 1rem;
@@ -97,6 +104,7 @@
 }
 
 .detail-recipe__ready-time {
+  margin-bottom: 1.5rem;
   @include tablet {
     margin-bottom: 0;
   }
@@ -104,6 +112,13 @@
 
 .detail-recipe__like-icon {
   width: 30%;
+}
+
+.detail-recipe__text {
+  margin-bottom: 1.5rem;
+  @include tablet {
+    margin-top: 1.5rem;
+  }
 }
 
 .detail-recipe__small-text {
@@ -236,6 +251,11 @@
   }
 }
 
+.detail-recipe__comment-form-container {
+  max-width: 1216px;
+  margin: 0 auto;
+}
+
 .detail-recipe__comment-flex-container {
   @include tablet {
     display: flex;
@@ -250,6 +270,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   align-items: center;
+  width: 200px;
   @include tablet {
     margin-bottom: 0;
   }
@@ -265,4 +286,23 @@
 
 .detail-recipe__comment-poster {
   margin: 0;
+}
+
+.detail-recipe__edit-icon-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.detail-recipe__edit-text {
+  font-weight: 600;
+}
+
+.detail-recipe__back-icon-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  @include tablet {
+    margin-right: auto;
+  }
 }

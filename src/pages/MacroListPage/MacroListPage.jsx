@@ -103,79 +103,81 @@ export default function MacroLisPage({ userProfile, loginState }) {
   if (loginState) {
     return (
       <div className="macro-list">
-        <div className="macro-list__wrapper">
-          <h1 className="macro-list__heading">Macro List</h1>
-          <ButtonComponent
-            onClickHandler={handleNavigateAddMacroPage}
-            btnClassName="btn btn--macro-list"
-            btnContent="Add New Macro"
+        <div className="macro-list__container">
+          <div className="macro-list__wrapper">
+            <h1 className="macro-list__heading">Macro List</h1>
+            <ButtonComponent
+              onClickHandler={handleNavigateAddMacroPage}
+              btnClassName="btn btn--macro-list"
+              btnContent="Add New Macro"
+            />
+          </div>
+          {macroArr.length > 0 && (
+            <p className="macro-list__main-text">{macroArr.length} Macros</p>
+          )}
+          <input
+            placeholder="Search for macro name, goal, energy intake and created time"
+            className="macro-list__search-box"
+            type="text"
+            value={searchData}
+            onChange={handleSearchData}
           />
-        </div>
-        {macroArr.length > 0 && (
-          <p className="macro-list__main-text">{macroArr.length} Macros</p>
-        )}
-        <input
-          placeholder="Search for macro name, goal, energy intake and created time"
-          className="macro-list__search-box"
-          type="text"
-          value={searchData}
-          onChange={handleSearchData}
-        />
-        <div className="macro-list__texts">
-          <p onClick={handleShortMacroName} className="macro-list__text">
-            Macro Name
-          </p>
-          <p
-            onClick={handleShortMacroGoal}
-            className="macro-list__text  macro-list__text--hidden"
-          >
-            Goal
-          </p>
+          <div className="macro-list__texts">
+            <p onClick={handleShortMacroName} className="macro-list__text">
+              Macro Name
+            </p>
+            <p
+              onClick={handleShortMacroGoal}
+              className="macro-list__text  macro-list__text--hidden"
+            >
+              Goal
+            </p>
 
-          <p
-            onClick={handleShortMacroEnergy}
-            className="macro-list__text macro-list__text--energy-hidden"
-          >
-            Energy Intake
-          </p>
+            <p
+              onClick={handleShortMacroEnergy}
+              className="macro-list__text macro-list__text--energy-hidden"
+            >
+              Energy Intake
+            </p>
 
-          <p
-            onClick={handleShortMacroTime}
-            className="macro-list__text macro-list__text--hidden"
-          >
-            Created Time
-          </p>
-          <p className="macro-list__text">Actions</p>
+            <p
+              onClick={handleShortMacroTime}
+              className="macro-list__text macro-list__text--hidden"
+            >
+              Created Time
+            </p>
+            <p className="macro-list__text">Actions</p>
+          </div>
+          {macroArr.length > 0 && (
+            <ul className="macro-list__list">
+              {macroArr
+                .filter((macroItem) => {
+                  return (
+                    macroItem.macro_name
+                      .toLowerCase()
+                      .includes(searchData.toLowerCase()) ||
+                    macroItem.goal
+                      .toLowerCase()
+                      .includes(searchData.toLowerCase()) ||
+                    macroItem.tdee_need
+                      .toString()
+                      .includes(searchData.toLowerCase())
+                  );
+                })
+                .map((macroItem) => (
+                  <MacroItemComponent
+                    key={macroItem.id}
+                    macroId={macroItem.id}
+                    macroName={macroItem.macro_name}
+                    macroGoal={macroItem.goal}
+                    macroEnergy={macroItem.tdee_need}
+                    macroTime={macroItem.updated_at}
+                    handleDeleteMacro={handleDeleteMacro}
+                  />
+                ))}
+            </ul>
+          )}
         </div>
-        {macroArr.length > 0 && (
-          <ul className="macro-list__list">
-            {macroArr
-              .filter((macroItem) => {
-                return (
-                  macroItem.macro_name
-                    .toLowerCase()
-                    .includes(searchData.toLowerCase()) ||
-                  macroItem.goal
-                    .toLowerCase()
-                    .includes(searchData.toLowerCase()) ||
-                  macroItem.tdee_need
-                    .toString()
-                    .includes(searchData.toLowerCase())
-                );
-              })
-              .map((macroItem) => (
-                <MacroItemComponent
-                  key={macroItem.id}
-                  macroId={macroItem.id}
-                  macroName={macroItem.macro_name}
-                  macroGoal={macroItem.goal}
-                  macroEnergy={macroItem.tdee_need}
-                  macroTime={macroItem.updated_at}
-                  handleDeleteMacro={handleDeleteMacro}
-                />
-              ))}
-          </ul>
-        )}
       </div>
     );
   } else {
