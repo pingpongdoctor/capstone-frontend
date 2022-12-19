@@ -408,11 +408,11 @@ export default function AddRecipePage({ loginState, userProfile }) {
               <img
                 className="add-recipe__previewed-image"
                 src={previewFile}
-                alt="uploaded-image"
+                alt="uploaded-pic"
               />
             )}
             <input
-              className="add-recipe__file-input"
+              className={`add-recipe__file-input ${imageError}`}
               onChange={handleImage}
               id="uploaded-image"
               name="uploaded-image"

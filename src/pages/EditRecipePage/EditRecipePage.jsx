@@ -40,6 +40,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
   const [stepArr, setStepArr] = useState("");
   //ERROR STATES
   const [error, setError] = useState("");
+  const [inputError, setInputError] = useState("");
   //STATE FOR THE NUMBER OF INGREDIENT BOXES
   const [ingreBoxNum, setIngreBoxNum] = useState("");
   //STATE FOR THE NUMBER OF STEP BOXES
@@ -328,6 +329,30 @@ export default function EditRecipePage({ loginState, userProfile }) {
     }
   };
 
+  //USE EFFECT TO CLEAR THE ERROR STATE
+  useEffect(() => {
+    if (
+      uploadImage ||
+      recipeName ||
+      level ||
+      readyTime ||
+      description ||
+      isIngreValid() ||
+      isStepValid()
+    ) {
+      setError("");
+      setInputError("");
+    }
+  }, [
+    uploadImage,
+    recipeName,
+    level,
+    readyTime,
+    description,
+    isIngreValid,
+    isStepValid,
+  ]);
+
   //FUNCTION TO UPDATE THE RECIPE
   const handleOnSubmitUpdateRecipe = function (event) {
     event.preventDefault();
@@ -358,7 +383,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
         ingredient11 || ingreArr[10],
         ingredient12 || ingreArr[11],
       ].filter((ingredient) => ingredient !== "" && ingredient !== undefined);
-
       const inputStepArr = [
         step1 || stepArr[0],
         step2 || stepArr[1],
@@ -373,7 +397,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
         step11 || stepArr[10],
         step12 || stepArr[11],
       ].filter((step) => step !== "" && step !== undefined);
-
       const uploadObj = {
         recipe_name: recipeName || recipeData.name,
         level: level || recipeData.level,
@@ -383,7 +406,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
           handleReturnString(inputIngredientArr) || recipeData.ingredients,
         directions: handleReturnString(inputStepArr) || recipeData.directions,
       };
-      //IMAGE IS EDITED
+      //IF IMAGE IS EDITED
       if (uploadImage !== null) {
         const formData = new FormData();
         formData.append("file", uploadImage);
@@ -396,13 +419,22 @@ export default function EditRecipePage({ loginState, userProfile }) {
           navigate("/recipe-library");
         });
       }
+      //IF IMAGE IS NOT EDITED
       if (uploadImage === null) {
         handlePutData(uploadObj);
         alert("The recipe is updated");
         navigate("/recipe-library");
       }
+
+      setError("");
+      setInputError("");
+    } else {
+      alert("Please edit at least 1 field");
+      setError("input-box--edit-recipe-error");
+      setInputError("edit-recipe__input-error");
     }
   };
+
   //USE EFFECT TO GET THE DATA OF A SINGLE RECIPE
   useEffect(() => {
     if (loginState) {
@@ -417,6 +449,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
       setIngreArr(recipeData.ingredients.split(";"));
     }
   }, [loginState, recipeData]);
+
   //USE EFFECT TO GET POSTER NAME
   useEffect(() => {
     if (recipeData) {
@@ -455,7 +488,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
                 alt="uploaded-image"
               />
               <input
-                className="edit-recipe__file-input"
+                className={`edit-recipe__file-input ${inputError}`}
                 onChange={handleImage}
                 id="uploaded-image"
                 name="uploaded-image"
@@ -486,7 +519,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
                 <textarea
                   value={description}
                   onChange={handleDescription}
-                  className={`edit-recipe__descript-textarea edit-recipe__textarea ${error}`}
+                  className={`edit-recipe__descript-textarea edit-recipe__textarea ${inputError}`}
                   placeholder={recipeData.description}
                   name="description"
                   id="description"
@@ -501,7 +534,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
                 <select
                   value={level || recipeData.level}
                   onChange={handleLevel}
-                  className={`edit-recipe__select ${error}`}
+                  className={`edit-recipe__select ${inputError}`}
                   name="level"
                   id="level"
                 >
@@ -557,7 +590,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
                     <textarea
                       className={`edit-recipe__textarea edit-recipe__step-textarea edit-recipe__input-${
                         index + 1
-                      } ${error}`}
+                      } ${inputError}`}
                       onChange={handleStepStates}
                       key={step}
                       placeholder={stepArr[index] || `Step ${index + 1}`}
@@ -597,7 +630,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
                   <textarea
                     className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
                       index + 1
-                    } ${error}`}
+                    } ${inputError}`}
                     onChange={handleIngredientStates}
                     key={ingre}
                     placeholder={ingreArr[index] || `Ingredient ${index + 1}`}
