@@ -6,11 +6,10 @@ import axios from "axios";
 import closePic from "../../assets/icons/close.png";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import InputBox from "../../components/InputBox/InputBox";
+import { headers } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function ProfilePage({ loginState, userProfile, loadProfile }) {
-  //GET JWT TOKEN FROM LOCAL STORAGE
-  const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR INPUT BOXES
   const [newUserName, setNewUserName] = useState("");
   const [newHeight, setNewHeight] = useState("");
@@ -65,6 +64,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
       setInputType("gender");
     }
   };
+
   //FUNCTION TO UPDATE USER PROFILE
   const handleUpdateProfile = function (event) {
     event.preventDefault();
@@ -87,11 +87,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
 
     if (newUserName || newWeight || newHeight || newAge || newGender) {
       axios
-        .put(`${URL}/user-profile`, body, {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        })
+        .put(`${URL}/user-profile`, body, headers)
         .then((response) => {
           alert(`Your ${inputType} has been updated`);
           setModalBoxAppear(false);

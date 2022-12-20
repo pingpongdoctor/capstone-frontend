@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import { handleCapitalizeAWord } from "../../Utils/utils";
+import { headers } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
@@ -14,14 +15,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
   const navigate = useNavigate();
   //GET RECIPE ID FROM THE USE PARAMS
   const { recipeId } = useParams();
-  //GET JWT TOKEN FROM LOCAL STRING
-  const jwtToken = localStorage.getItem("jwt_token");
-  //DECLARE A HEADERS
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
   //STATE TO STORE THE POSTER NAME
   const [posterName, setPosterName] = useState("");
   //STATE TO STORE THE RECIPE DATA
@@ -222,37 +215,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
       })
       .catch((error) => console.log(error));
   };
-  //FUNCTION TO CLEAR THE VALUE STATES
-  const handleClearStates = function () {
-    setRecipeName("");
-    setDescription("");
-    setLevel("");
-    setReadyTime("");
-    setStep1("");
-    setStep2("");
-    setStep3("");
-    setStep4("");
-    setStep5("");
-    setStep6("");
-    setStep7("");
-    setStep8("");
-    setStep9("");
-    setStep10("");
-    setStep11("");
-    setStep12("");
-    setIngredient1("");
-    setIngredient2("");
-    setIngredient3("");
-    setIngredient4("");
-    setIngredient5("");
-    setIngredient6("");
-    setIngredient7("");
-    setIngredient8("");
-    setIngredient9("");
-    setIngredient10("");
-    setIngredient11("");
-    setIngredient12("");
-  };
   //FUNCTION TO VALIDATE THE INGREDIENT AND STEP
   const isIngreValid = function () {
     if (
@@ -440,6 +402,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
     if (loginState) {
       handleGetSingleRecipe();
     }
+    // eslint-disable-next-line
   }, [loginState]);
 
   //USE EFFECT TO SET TO SET STATES FOR INGREDIENT BOXES AND INGREDIENTS, FOR STEP BOXES AND STEPS
@@ -485,7 +448,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
               <img
                 className="edit-recipe__previewed-image"
                 src={previewFile || recipeData.image}
-                alt="uploaded-image"
+                alt="uploaded-pic"
               />
               <input
                 className={`edit-recipe__file-input ${inputError}`}

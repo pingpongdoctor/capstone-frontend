@@ -12,6 +12,7 @@ import barChartPic from "../../assets/images/bar-chart.png";
 import lineChartPic from "../../assets/images/line-chart.png";
 import meditationPic from "../../assets/images/meditation.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { headers } from "../../Utils/utils";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -44,8 +45,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const [age, setAge] = useState("");
   const [height, setHeight] = useState("");
   const [gender, setGender] = useState("");
-  //GET JWT TOKEN FROM LOCAL STRING
-  const jwtToken = localStorage.getItem("jwt_token");
   //STATES
   const [activity, setActivity] = useState("");
   const [tdee, setTdee] = useState("");
@@ -103,8 +102,13 @@ export default function BuildMacroPage({ userProfile, loginState }) {
         setGender(userProfile.gender);
       } else if (buildFor === "friend") {
         setBuildForFriend(true);
+        setCurrentWeight("");
+        setHeight("");
+        setAge("");
+        setGender("");
       }
     }
+    // eslint-disable-next-line
   }, [buildFor, loginState]);
   //FUNCTION TO SET PROTEIN, CARB AND FAT RATIOS
   const handleRatios = function () {
@@ -224,6 +228,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setHeight(userProfile.height);
       setGender(userProfile.gender);
     }
+    // eslint-disable-next-line
   }, [loginState]);
 
   //FUNCTION TO HANDLE THE TARGETED WEIGHT STATE
@@ -316,6 +321,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       }
     }
     setEstimatedWeightArr(weightArr);
+    // eslint-disable-next-line
   }, [estimatedWeekArr]);
 
   //FUNCTION TO CALCULATE TDEE (REQUIRED INPUT VALUES: GENDER, AGE, HEIGHT, WEIGHT, ACTIVITY)
@@ -397,11 +403,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
             weight: currentWeight,
             age,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          }
+          headers
         )
         .then((reponse) => {
           alert(
@@ -566,62 +568,64 @@ export default function BuildMacroPage({ userProfile, loginState }) {
             )}
           </div>
           {/* STEP 1 */}
-          <div className="macro-page__steps">
-            <img
-              className="macro-page__image"
-              src={workoutPic1}
-              alt="workout-pic-1"
-            />
-            <div className="macro-page__big-wrapper">
-              <h3>Step 1: Calculate your Balanced TDEE</h3>
-              <p>
-                Balanced TDEE: Total daily energy expenditure (TDEE) estimates
-                how many calories your body burns daily. Based on this, you can
-                know how much you need to eat everyday to make your weight
-                remain unchanged.
-              </p>
-              {/* OPTION BOX */}
-              <div>
-                <label htmlFor="activity">
-                  How intense do you do exercise in a week?
-                </label>
-                <select
-                  className="macro-page__input"
-                  value={activity}
-                  onChange={handleActivity}
-                  name="activity"
-                  id="activity"
-                >
-                  <option value="">Choose here</option>
-                  <option value="sedentary">
-                    Sedentary - about 2 days doing exercise a week
-                  </option>
-                  <option value="light">
-                    Light - about 3 days doing exercise a week
-                  </option>
-                  <option value="moderate">
-                    Moderate - about 4 days doing exercise a week
-                  </option>
-                  <option value="active">
-                    Active - about 5 days doing exercise a week
-                  </option>
-                  <option value="extreme">
-                    Extreme - about 6 days doing exercise a week
-                  </option>
-                </select>
-                <ButtonComponent
-                  btnClassName={`btn ${macroFirstBtnState}`}
-                  onClickHandler={handleBalancedTdee}
-                  btnContent="Calculate your TDEE now"
-                />
-                {/* RESULT */}
-                {activity && tdee && (
-                  <p>Your Balanced TDEE is: {tdee} calories</p>
-                )}
+          {currentWeight && height && gender && age && (
+            <div className="macro-page__steps">
+              <img
+                className="macro-page__image"
+                src={workoutPic1}
+                alt="workout-pic-1"
+              />
+
+              <div className="macro-page__big-wrapper">
+                <h3>Step 1: Calculate your Balanced TDEE</h3>
+                <p>
+                  Balanced TDEE: Total daily energy expenditure (TDEE) estimates
+                  how many calories your body burns daily. Based on this, you
+                  can know how much you need to eat everyday to make your weight
+                  remain unchanged.
+                </p>
+                {/* OPTION BOX */}
+                <div>
+                  <label htmlFor="activity">
+                    How intense do you do exercise in a week?
+                  </label>
+                  <select
+                    className="macro-page__input"
+                    value={activity}
+                    onChange={handleActivity}
+                    name="activity"
+                    id="activity"
+                  >
+                    <option value="">Choose here</option>
+                    <option value="sedentary">
+                      Sedentary - about 2 days doing exercise a week
+                    </option>
+                    <option value="light">
+                      Light - about 3 days doing exercise a week
+                    </option>
+                    <option value="moderate">
+                      Moderate - about 4 days doing exercise a week
+                    </option>
+                    <option value="active">
+                      Active - about 5 days doing exercise a week
+                    </option>
+                    <option value="extreme">
+                      Extreme - about 6 days doing exercise a week
+                    </option>
+                  </select>
+                  <ButtonComponent
+                    btnClassName={`btn ${macroFirstBtnState}`}
+                    onClickHandler={handleBalancedTdee}
+                    btnContent="Calculate your TDEE now"
+                  />
+                  {/* RESULT */}
+                  {activity && tdee && (
+                    <p>Your Balanced TDEE is: {tdee} calories</p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-
+          )}
           {/* STEP 2 */}
           {tdee && (
             <div className="macro-page__steps">
@@ -668,7 +672,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </div>
             </div>
           )}
-
           {/* STEP 3 */}
           {tdee && neededIntake && (
             <div className="macro-page__steps">
@@ -708,7 +711,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </div>
             </div>
           )}
-
           {/* RESULT */}
           {tdee && neededIntake && proteinRatio && carbRatio && fatRatio && (
             <div className="macro-page__chart">
@@ -722,7 +724,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </div>
             </div>
           )}
-
           {/* STEP 4 */}
           {tdee && neededIntake && proteinRatio && carbRatio && fatRatio && (
             <div className="macro-page__steps">
@@ -754,9 +755,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </div>
             </div>
           )}
-
           {/* STEP 5 */}
-
           {goal !== "maintain" && protein && carb && fat && (
             <div className="macro-page__steps">
               <img
@@ -792,7 +791,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </div>
             </div>
           )}
-
           {targetedWeight &&
             estimatedWeekArr.length > 0 &&
             estimatedWeightArr.length > 0 &&
@@ -808,7 +806,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 </div>
               </div>
             )}
-
           {/* STEP 6 */}
           {showSaveMacro && (
             <div className="macro-page__steps">

@@ -5,13 +5,12 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useNavigate, useParams } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
+import { headers, jwtToken } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
-export default function EditMacroPage({ userProfile, loginState }) {
+export default function EditMacroPage({ loginState }) {
   //USE USENAVIGATE
   const navigate = useNavigate();
-  //GET JWT
-  const jwtToken = localStorage.getItem("jwt_token");
   //GET MACRO ID
   const { macroId } = useParams();
   //STATE FOR CURRENT BODY INDEXES
@@ -34,12 +33,6 @@ export default function EditMacroPage({ userProfile, loginState }) {
 
   //ERROR STATE FOR ALL INPUT BOXES
   const [macroError, setMacroError] = useState("");
-  //DECLARE HEADERS
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
   //USE EFFECT TO GET THE MACRO INFOR
   useEffect(() => {
     if (loginState) {
@@ -47,6 +40,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
         setMacroObj(response.data);
       });
     }
+    // eslint-disable-next-line
   }, [loginState, jwtToken]);
 
   //USE EFFECT TO SET THE CAPITALIZED NAME PLACEHOLDER
@@ -73,6 +67,7 @@ export default function EditMacroPage({ userProfile, loginState }) {
     ) {
       setMacroError("");
     }
+    // eslint-disable-next-line
   }, [macroName, goal, targetedWeight, activity, tdee, neededIntake, bodyType]);
 
   //FUNCTION TO HANDLE ALL INPUT STATES

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { headers } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function MacroLisPage({ userProfile, loginState }) {
@@ -21,14 +22,6 @@ export default function MacroLisPage({ userProfile, loginState }) {
   };
   //STATE FOR THE MACROS ARRAY
   const [macroArr, setMacroArr] = useState([]);
-  //GET JWT TOKEN
-  const jwtToken = localStorage.getItem("jwt_token");
-  //DECLARE HEADERS
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
   //FUNCTION TO GET ALL MACROS
   const handleGetAllMacros = function () {
     if (loginState) {
@@ -43,6 +36,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
   //USE EFFECT TO GET ALL MACROS
   useEffect(() => {
     handleGetAllMacros();
+    // eslint-disable-next-line
   }, [loginState]);
 
   //FUNCTION TO DELETE A MACRO

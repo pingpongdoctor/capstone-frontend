@@ -53,4 +53,12 @@ export const handleCapitalizeAWord = (word) => {
   return caplitalizedWord;
 };
 
-export const jwtToken = localStorage.getItem("jwt_tokenw");
+//GET JWT TOKEN FROM LOCAL STORAGE
+export const jwtToken = localStorage.getItem("jwt_token");
+
+//DEFINE HEADERS
+export const headers = {
+  headers: {
+    Authorization: `Bearer ${jwtToken}`,
+  },
+};

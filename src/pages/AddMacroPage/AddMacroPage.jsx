@@ -4,13 +4,12 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
+import { headers } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile }) {
   //USE USENAVIGATE
   const navigate = useNavigate();
-  //GET JWT
-  const jwtToken = localStorage.getItem("jwt_token");
   //STATES FOR ALL INPUT BOXES
   const [macroName, setMacroName] = useState("");
   const [goal, setGoal] = useState("");
@@ -198,6 +197,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
       setTargetedWeightAppear(true);
       setTargetedWeight("");
     }
+    // eslint-disable-next-line
   }, [goal]);
 
   //USE EFFECT TO HANDLE THE VALUE OF ENERGY INTAKE
@@ -236,6 +236,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
     if (isNeededIntakeValid()) {
       setNeededIntakeError("");
     }
+    // eslint-disable-next-line
   }, [macroName, goal, tdee, bodyType, neededIntake, activity, targetedWeight]);
 
   //FUNCTION TO SUBMIT A NEW MACRO
@@ -259,11 +260,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
             weight: currentWeight,
             age,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          }
+          headers
         )
         .then((response) => {
           alert("New macro is added");

@@ -11,6 +11,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
+import { headers } from "../../Utils/utils";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
@@ -28,14 +29,6 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   const [commentData, setCommentData] = useState([]);
   //STATES TO STORE THE COMMENT INPUT
   const [commentInput, setCommentInput] = useState("");
-  //GET JWT
-  const jwtToken = localStorage.getItem("jwt_token");
-  //DELCARE A HEADER
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
   //USE USEPARAMS TO GET THE RECIPE ID
   const { detailRecipeId } = useParams();
   //USE EFFECT TO CUSTOMIZE THE INGREDIENTS ARRAY

@@ -1,6 +1,7 @@
 import "./DetailedMacroPage.scss";
 import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { headers } from "../../Utils/utils";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -30,8 +31,6 @@ ChartJS.register(
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedMacroPage({ loginState, userProfile }) {
-  //GET JWT TOKEN
-  const jwtToken = localStorage.getItem("jwt_token");
   //GET MACRO ID
   const { macroId } = useParams();
   //USE USENAVIGATE
@@ -60,12 +59,6 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   const [activateSecondBox, setActivateSecondBox] = useState("");
   const [activateThirdBox, setActivateThirdBox] = useState("");
   const [activateLastBox, setActivateLastBox] = useState("");
-  //DECLARE HEADERS
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
   //GET DATA OF A DETAILED MACRO
   useEffect(() => {
     if (loginState) {
@@ -73,6 +66,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
         setMacroObj(response.data);
       });
     }
+    // eslint-disable-next-line
   }, [loginState, jwtToken]);
 
   //FUNCTION TO SET THE STATES FOR ACTIVATING BOXES
@@ -131,7 +125,10 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
         setGoalText("Maintain Weight");
       }
     }
+    // eslint-disable-next-line
   }, [macroObj]);
+
+  console.log(macroObj);
 
   //USE EFFECT TO HANDLE THE ACTIVITY TEXT
   useEffect(() => {
@@ -267,6 +264,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
       }
       setEstimatedWeightArr(weightArr);
     }
+    // eslint-disable-next-line
   }, [estimatedWeekArr]);
 
   //DATA FOR THE PIE CHART

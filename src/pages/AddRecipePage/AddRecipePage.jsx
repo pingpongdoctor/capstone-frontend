@@ -5,6 +5,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { headers } from "../../Utils/utils";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const URL = process.env.REACT_APP_API_URL || "";
@@ -12,14 +13,6 @@ const URL = process.env.REACT_APP_API_URL || "";
 export default function AddRecipePage({ loginState, userProfile }) {
   //USE USENAVIGATE
   const navigate = useNavigate();
-  //GET JWT TOKEN FROM LOCAL STRING
-  const jwtToken = localStorage.getItem("jwt_token");
-  //DECLARE A HEADERS
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
   //STATE TO STORE THE FILE
   const [uploadImage, setUploadImage] = useState(null);
   //SET STATE TO SHOW PREVIEWED IMAGE AFTER CHOOSING AN UPLOADED FILE
