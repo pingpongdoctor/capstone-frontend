@@ -1,8 +1,7 @@
 import "./BuildMacroPage.scss";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pie, Line } from "react-chartjs-2";
-import { useEffect } from "react";
 import workoutPic1 from "../../assets/images/workout-1.png";
 import workoutPic2 from "../../assets/images/workout-2.png";
 import workoutPic3 from "../../assets/images/workout-3.png";
@@ -91,6 +90,60 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const handleBuildFor = function (event) {
     setBuildFor(event.target.value);
   };
+  //USE USEREF
+  const neededTdeeRef = useRef();
+  const bodyTypeRef = useRef();
+  const macroRatioRef = useRef();
+  const targetedWeightRef = useRef();
+  const saveMacroRef = useRef();
+  const lineRef = useRef();
+  //SCROLLING FUNCTION
+  const handleScroll = (value) => {
+    value.current.scrollIntoView({ behavior: "smooth" });
+  };
+  //USE EFFECT TO SROLL TO ELEMENTS
+  useEffect(() => {
+    if (tdee) {
+      handleScroll(neededTdeeRef);
+    }
+    if (neededIntake) {
+      handleScroll(bodyTypeRef);
+    }
+    if (proteinRatio && carbRatio && fatRatio) {
+      handleScroll(macroRatioRef);
+    }
+    if (goal !== "maintain" && protein && carb && fat) {
+      handleScroll(targetedWeightRef);
+    }
+    if (
+      targetedWeight &&
+      currentWeight &&
+      estimatedWeekArr.length > 0 &&
+      estimatedWeightArr.length > 0 &&
+      currentWeight !== targetedWeight &&
+      showSaveMacro
+    ) {
+      handleScroll(lineRef);
+    }
+    if (goal === "maintain" && protein && carb && fat && showSaveMacro) {
+      handleScroll(saveMacroRef);
+    }
+  }, [
+    tdee,
+    neededIntake,
+    proteinRatio,
+    carbRatio,
+    fatRatio,
+    goal,
+    protein,
+    carb,
+    fat,
+    showSaveMacro,
+    targetedWeight,
+    estimatedWeekArr,
+    estimatedWeightArr,
+    currentWeight,
+  ]);
   //USE EFFECT TO HANDLE THE STATE "BUILD FOR FRIEND" BASED ON THE STATE "BUILD FOR"
   useEffect(() => {
     if (loginState) {
@@ -148,16 +201,17 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setProtein(proteinQuantity);
       setCarb(carbQuantity);
       setFat(fatQuantity);
-    }
-    if (goal === "maintain") {
-      setShowSaveMacro(true);
-      setTargetedWeight(currentWeight);
-    } else {
-      setShowSaveMacro(false);
-      setTargetedWeight("");
+
+      if (goal === "maintain") {
+        setShowSaveMacro(true);
+        setTargetedWeight(currentWeight);
+      } else {
+        setShowSaveMacro(false);
+        setTargetedWeight("");
+      }
     }
   };
-
+  console.log(goal, showSaveMacro, protein, carb, fat);
   //USE EFFECT TO SET BODY TYPE EXPLATINATION STATE
   useEffect(() => {
     if (loginState && bodyType) {
@@ -203,13 +257,12 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     setFat("");
   }, [proteinRatio, carbRatio, fatRatio, bodyType, goal, activity]);
 
-  //USE EFFECT TO RESET LINE CHART DATA, SHOWS STATE OF THE LAST STEP AND MACRO NAME
+  //USE EFFECT TO RESET LINE CHART DATA AND THE SHOWS STATE OF THE LAST STEP AND MACRO NAME
   useEffect(() => {
     setEstimatedWeekArr([]);
     setEstimatedWeightArr([]);
     setMacroFifthBtnState("");
     setMacroName("");
-    setShowSaveMacro(false);
   }, [
     proteinRatio,
     carbRatio,
@@ -219,6 +272,10 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     activity,
     targetedWeight,
   ]);
+
+  useEffect(() => {
+    setShowSaveMacro(false);
+  }, [bodyType, goal, activity]);
 
   //USE EFFECT TO GET CURRENT WEIGHT,HEIGHT,AGE
   useEffect(() => {
@@ -277,7 +334,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       return true;
     }
   };
-
   //FUNCTION TO HANDLE ESTIMATED WEEK ARRAY STATE
   const handleEstimatedWeekArr = function () {
     if (isTargetedWeightValid()) {
@@ -630,6 +686,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {tdee && (
             <div className="macro-page__steps">
               <img
+                ref={neededTdeeRef}
                 className="macro-page__image"
                 src={workoutPic2}
                 alt="workout-pic-2"
@@ -676,6 +733,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {tdee && neededIntake && (
             <div className="macro-page__steps">
               <img
+                ref={bodyTypeRef}
                 className="macro-page__image"
                 src={workoutPic3}
                 alt="workout-pic-3"
@@ -715,6 +773,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {tdee && neededIntake && proteinRatio && carbRatio && fatRatio && (
             <div className="macro-page__chart">
               <img
+                ref={macroRatioRef}
                 className="macro-page__image-chart "
                 src={pieChartPic}
                 alt="pie-chart-pic"
@@ -759,6 +818,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {goal !== "maintain" && protein && carb && fat && (
             <div className="macro-page__steps">
               <img
+                ref={targetedWeightRef}
                 className="macro-page__image"
                 src={barChartPic}
                 alt="bar-chart-pic"
@@ -795,7 +855,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
             estimatedWeekArr.length > 0 &&
             estimatedWeightArr.length > 0 &&
             currentWeight !== targetedWeight && (
-              <div className="macro-page__chart">
+              <div ref={lineRef} className="macro-page__chart">
                 <img
                   className="macro-page__image-chart macro-page__image-bar-chart "
                   src={lineChartPic}
@@ -810,6 +870,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {showSaveMacro && (
             <div className="macro-page__steps">
               <img
+                ref={saveMacroRef}
                 className="macro-page__image"
                 src={meditationPic}
                 alt="meditation-pic"
