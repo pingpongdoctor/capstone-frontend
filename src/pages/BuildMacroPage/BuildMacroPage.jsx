@@ -466,6 +466,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
             "Congratulations! You have successfully created and saved a new macro"
           );
           navigate("/");
+          window.scrollTo(0, 0);
         });
     }
   };
