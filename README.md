@@ -4,7 +4,9 @@
 
 This project is about building a website to help users designing their own diets quickly and effortlessly. Users can calculate their suitable macronutrient ratios and diversify their dishes by refering to the recipe library. All pages are responsive in different breakpoints such as mobile, tablet and desktop breakpoints.
 
-## Features
+![](https://github.com/pingpongdoctor/capstone-frontend/blob/recipes-list-page/demo.gif)
+
+## Key Features
 
 - Allow users to have their own accounts
 - Calculate macronutrients
@@ -29,7 +31,7 @@ This project is about building a website to help users designing their own diets
 
 - JWT token - JWT token helps authenticating users.
 - Node.js
-- Express - Express framework is used to build endpoints for macros and recipes.
+- Express - Express framework is used to build endpoints for fetching data from tables.
 - Knex library - Knex is a SQL query builder that helps form SQL table by using javascript codes and query data from SQL tables such as user data, macro data, recipe data and comment data.
 
 ## Installation
