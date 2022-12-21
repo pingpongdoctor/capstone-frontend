@@ -31,6 +31,8 @@ ChartJS.register(
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedMacroPage({ loginState, userProfile }) {
+  //GET JWT TOKEN FROM THE LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
   //GET MACRO ID
   const { macroId } = useParams();
   //USE USENAVIGATE
