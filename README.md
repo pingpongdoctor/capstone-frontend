@@ -1,7 +1,5 @@
 ![Logo](https://res.cloudinary.com/dtdzvyf4s/image/upload/v1671582202/build-your-diets-low-resolution-logo-white-on-black-background_ouha7g.png)
 
-<img src"https://res.cloudinary.com/dtdzvyf4s/image/upload/v1671582202/build-your-diets-low-resolution-logo-white-on-black-background_ouha7g.png" width="300px" height="auto" />
-
 # Build Your Diet
 
 This project is about building a website to help users designing their own diets quickly and effortlessly. Users can calculate their suitable macronutrient ratios and diversify their dishes by refering to the recipe library. All pages are responsive in different breakpoints such as mobile, tablet and desktop breakpoints.
