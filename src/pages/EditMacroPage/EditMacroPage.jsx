@@ -134,7 +134,7 @@ export default function EditMacroPage({ loginState }) {
         activity: activity || macroObj.activity,
         tdee: tdee || macroObj.tdee,
         tdee_need: neededIntake || macroObj.tdee_need,
-        goal: goal,
+        goal: goal || macroObj.goal,
         body_type: bodyType || macroObj.body_type,
         gender: gender || macroObj.gender,
         height: height || macroObj.height,
@@ -169,7 +169,7 @@ export default function EditMacroPage({ loginState }) {
               }}
               backClassName="back-icon"
             />
-            <h1>Edit Macro {handleCapitalize(macroObj.macro_name)}</h1>
+            <h1>Edit Macro</h1>
           </div>
           <form onSubmit={handleUpdateMacro} className="edit-macro__form">
             <div className="edit-macro__flex-container">

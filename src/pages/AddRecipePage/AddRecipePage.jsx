@@ -252,7 +252,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
   };
 
   //FUNCTION TO SUBMIT AN IMAGE TO CLOUDNARY
-  const handleOnSubmitImage = function (event) {
+  const handleOnSubmitRecipe = function (event) {
     event.preventDefault();
     if (
       userProfile &&
@@ -315,6 +315,8 @@ export default function AddRecipePage({ loginState, userProfile }) {
           .post(`${URL}/recipe-library`, postedRecipe, headers)
           .then((response) => {
             console.log(response.data);
+            alert("Thank you for posting a new recipe");
+            navigate("/recipe-library");
           })
           .catch((error) => {
             console.log(error);
@@ -380,7 +382,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
 
   if (loginState) {
     return (
-      <form onSubmit={handleOnSubmitImage} className="add-recipe">
+      <form onSubmit={handleOnSubmitRecipe} className="add-recipe">
         <div className="add-recipe__container">
           <div className="add-recipe__heading-wrapper">
             <BackIconComponent

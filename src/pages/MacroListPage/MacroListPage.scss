@@ -26,6 +26,18 @@
     }
   }
 
+  .macro-list__text-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 66%;
+    @include small-mobile {
+      width: 75%;
+    }
+    @include tablet {
+      width: 80%;
+    }
+  }
+
   &__text {
     background-image: url("../../assets/icons/reorder.png");
     background-size: 2rem;
@@ -45,13 +57,24 @@
     &:nth-child(3) {
       width: 135px;
     }
-    &:nth-child(4) {
+    &:last-child {
       width: 130px;
     }
-    &:last-child {
-      width: 85px;
-      cursor: auto;
-      background-image: none;
+  }
+
+  .macro-list__text-action {
+    cursor: auto;
+    background-image: none;
+    text-align: center;
+    margin: 0;
+    margin-right: 1rem;
+    text-align: end;
+    width: 33%;
+    @include small-mobile {
+      width: 25%;
+    }
+    @include tablet {
+      width: 20%;
     }
   }
 
