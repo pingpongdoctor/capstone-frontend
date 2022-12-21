@@ -6,7 +6,7 @@ This project is about building a website to help users designing their own diets
 
 ![](https://github.com/pingpongdoctor/capstone-frontend/blob/recipes-list-page/demo.gif)
 
-## FeaturesCancel changes
+## Key Features
 
 - Allow users to have their own accounts
 - Calculate macronutrients
