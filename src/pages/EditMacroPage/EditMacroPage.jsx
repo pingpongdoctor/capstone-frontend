@@ -134,7 +134,7 @@ export default function EditMacroPage({ loginState }) {
         activity: activity || macroObj.activity,
         tdee: tdee || macroObj.tdee,
         tdee_need: neededIntake || macroObj.tdee_need,
-        goal: goal,
+        goal: goal || macroObj.goal,
         body_type: bodyType || macroObj.body_type,
         gender: gender || macroObj.gender,
         height: height || macroObj.height,

@@ -137,30 +137,32 @@ export default function MacroLisPage({ userProfile, loginState }) {
             onChange={handleSearchData}
           />
           <div className="macro-list__texts">
-            <p onClick={handleShortMacroName} className="macro-list__text">
-              Macro Name
-            </p>
-            <p
-              onClick={handleShortMacroGoal}
-              className="macro-list__text  macro-list__text--hidden"
-            >
-              Goal
-            </p>
+            <div className="macro-list__text-wrapper">
+              <p onClick={handleShortMacroName} className="macro-list__text">
+                Macro Name
+              </p>
+              <p
+                onClick={handleShortMacroGoal}
+                className="macro-list__text  macro-list__text--hidden"
+              >
+                Goal
+              </p>
 
-            <p
-              onClick={handleShortMacroEnergy}
-              className="macro-list__text macro-list__text--energy-hidden"
-            >
-              Energy Intake
-            </p>
+              <p
+                onClick={handleShortMacroEnergy}
+                className="macro-list__text macro-list__text--energy-hidden"
+              >
+                Energy Intake
+              </p>
 
-            <p
-              onClick={handleShortMacroTime}
-              className="macro-list__text macro-list__text--hidden"
-            >
-              Created Time
-            </p>
-            <p className="macro-list__text">Actions</p>
+              <p
+                onClick={handleShortMacroTime}
+                className="macro-list__text macro-list__text--hidden"
+              >
+                Created Time
+              </p>
+            </div>
+            <p className="macro-list__text-action">Actions</p>
           </div>
           {macroArr.length > 0 && (
             <ul className="macro-list__list">
