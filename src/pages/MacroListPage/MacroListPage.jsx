@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { headers } from "../../Utils/utils";
+import ModalBox from "../../components/ModalBox/ModalBox";
 const URL = process.env.REACT_APP_API_URL || "";
 
 export default function MacroLisPage({ userProfile, loginState }) {
@@ -14,6 +15,10 @@ export default function MacroLisPage({ userProfile, loginState }) {
   const handleNavigateAddMacroPage = function () {
     navigate("/add-macro");
   };
+  //STATE TO MAKE THE DELETE BOX APPEAR
+  const [boxAppear, setBoxAppear] = useState(false);
+  //STATE TO STORE THE DELETE MACRO ID
+  const [deleteMacroId, setDeleteMacroId] = useState("");
   //STATE FOR THE INPUT DATA OF THE SEARCH BOX
   const [searchData, setSearchData] = useState("");
   //FUNCTION TO HANDLE THE SEARCH DATA
@@ -39,14 +44,28 @@ export default function MacroLisPage({ userProfile, loginState }) {
     // eslint-disable-next-line
   }, [loginState]);
 
+  //FUNCTION TO UPDATE THE DELETE MACRO ID STATE
+  const handleDeleteMacroId = function (macroId) {
+    setDeleteMacroId(macroId);
+    setBoxAppear(true);
+  };
+
+  //FUNCTION TO DISAPPEAR THE MODAL BOX
+  const handleDisappearBox = function () {
+    setBoxAppear(false);
+    setDeleteMacroId("");
+  };
+
   //FUNCTION TO DELETE A MACRO
-  const handleDeleteMacro = function (macroId) {
-    if (loginState) {
+  const handleDeleteMacro = function () {
+    if (deleteMacroId) {
       axios
-        .delete(`${URL}/macros-list/${macroId}`, headers)
+        .delete(`${URL}/macros-list/${deleteMacroId}`, headers)
         .then((response) => {
-          handleGetAllMacros();
           console.log(response.data);
+          setDeleteMacroId("");
+          setBoxAppear(false);
+          handleGetAllMacros();
         })
         .catch((error) => console.log(error));
     }
@@ -92,6 +111,8 @@ export default function MacroLisPage({ userProfile, loginState }) {
       setMacroArr(newMacroArr);
     }
   };
+
+  console.log(deleteMacroId);
 
   if (loginState) {
     return (
@@ -165,12 +186,20 @@ export default function MacroLisPage({ userProfile, loginState }) {
                     macroGoal={macroItem.goal}
                     macroEnergy={macroItem.tdee_need}
                     macroTime={macroItem.updated_at}
-                    handleDeleteMacro={handleDeleteMacro}
+                    handleDeleteMacroId={handleDeleteMacroId}
                   />
                 ))}
             </ul>
           )}
         </div>
+        {boxAppear && (
+          <ModalBox
+            modalOnClickHandler={handleDeleteMacro}
+            modalCloseOnClickHandler={handleDisappearBox}
+            modalBtnContent="Delete now"
+            modalBoxContent="Do you want to delete this macro?"
+          />
+        )}
       </div>
     );
   } else {

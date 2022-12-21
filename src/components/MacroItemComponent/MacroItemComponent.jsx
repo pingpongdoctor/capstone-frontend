@@ -11,7 +11,7 @@ export default function ItemComponent({
   macroGoal,
   macroEnergy,
   macroTime,
-  handleDeleteMacro,
+  handleDeleteMacroId,
 }) {
   //USE USENAVIGATE
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ export default function ItemComponent({
           <Link to={`/macro-list`}>
             <img
               onClick={() => {
-                handleDeleteMacro(macroId);
+                handleDeleteMacroId(macroId);
               }}
               className="item__icon"
               src={deleteIcon}

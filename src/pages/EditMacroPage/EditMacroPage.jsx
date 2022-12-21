@@ -169,7 +169,7 @@ export default function EditMacroPage({ loginState }) {
               }}
               backClassName="back-icon"
             />
-            <h1>Edit Macro {handleCapitalize(macroObj.macro_name)}</h1>
+            <h1>Edit Macro</h1>
           </div>
           <form onSubmit={handleUpdateMacro} className="edit-macro__form">
             <div className="edit-macro__flex-container">

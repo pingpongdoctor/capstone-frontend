@@ -1,6 +1,7 @@
 import "./DetailedMacroPage.scss";
 import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { headers } from "../../Utils/utils";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import { useState, useEffect } from "react";
@@ -323,22 +324,45 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
       <div className="detail-page">
         <div className="detail-page__huge-container">
           <div className="detail-page__heading-wrap">
-            {macroObj && (
-              <div className="detail-page__heading">
-                <p>Macro Name: </p>
-                <p>{handleCapitalize(macroObj.macro_name)}</p>
-              </div>
-            )}
+            <div className="detail-page__back-icon-wrapper">
+              <BackIconComponent
+                onClickHandler={() => {
+                  navigate("/macro-list");
+                }}
+                backClassName="back-icon"
+              />
+              <h1 className="detail-page__main-heading">Macro Details</h1>
+            </div>
+
             {macroObj && (
               <ButtonComponent
                 onClickHandler={() => {
                   navigate(`/edit-macro/${macroObj.id}`);
                 }}
                 btnContent="Edit"
-                btnClassName="btn btn--detail-macro"
+                btnClassName="btn btn--detail-macro btn--tablet"
               />
             )}
           </div>
+
+          {macroObj && (
+            <div className="detail-page__heading-small-wrap">
+              <h3 className="detail-page__heading">Macro Name: </h3>
+              <p className="detail-page__macro-name">
+                {handleCapitalize(macroObj.macro_name)}
+              </p>
+            </div>
+          )}
+
+          {macroObj && (
+            <ButtonComponent
+              onClickHandler={() => {
+                navigate(`/edit-macro/${macroObj.id}`);
+              }}
+              btnContent="Edit"
+              btnClassName="btn btn--detail-macro btn--mobile"
+            />
+          )}
 
           <div className="detail-page__container">
             {/* FIRST BOX */}
