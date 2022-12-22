@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import { headers } from "../../Utils/utils";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
+
 const API_URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
@@ -435,8 +437,16 @@ export default function EditRecipePage({ loginState, userProfile }) {
     return (
       <form onSubmit={handleOnSubmitUpdateRecipe} className="edit-recipe">
         <div className="edit-recipe__container">
-          <h1>Edit Recipe</h1>
-          <h3>Author: {posterName}</h3>
+          <div className="edit-recipe__back-icon-wrapper">
+            <BackIconComponent
+              onClickHandler={() => {
+                navigate(`/recipe-library/${recipeId}`);
+              }}
+              backClassName="back-icon"
+            />
+            <h1>Edit Recipe</h1>
+          </div>
+          <h3 className="edit-recipe__sub-heading">Author: {posterName}</h3>
           <div className="edit-recipe__big-container">
             {/* RECIPE IMAGE */}
             <div className="edit-recipe__wrapper">
