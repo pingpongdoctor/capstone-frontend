@@ -31,7 +31,7 @@ This project is about building a website to help users designing their own diets
 
 - JWT token - JWT token helps authenticating users.
 - Node.js
-- Express - Express framework is used to build endpoints for fetching data from tables.
+- Express - Express framework is used to build endpoints for fetching data from SQL tables.
 - Knex library - Knex is a SQL query builder that helps form SQL table by using javascript codes and query data from SQL tables such as user data, macro data, recipe data and comment data.
 
 ## Installation
