@@ -87,7 +87,7 @@ npm start
 Since the website authenticating users by using JWT token, you have to log in to use the full website's functions. There are two accounts below
 
 - Email: simon@gmail.com | Password: 12345
-- Email:greg@gmail.com | Password: 123456
+- Email: greg@gmail.com | Password: 123456
 
 ## Links
 
