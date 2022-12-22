@@ -64,7 +64,7 @@ Create an env file that includes all information as same as the env.sample file.
 
 Change the values of user and password variables so that they matches with your SQL app's username and password.
 
-Run the below commands to use migration file and seed file to form the SQL table
+Run the below commands to use migration file and seed file to form the SQL tables.
 
 ```bash
   npx knex migration:latest
