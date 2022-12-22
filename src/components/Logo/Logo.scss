@@ -9,36 +9,36 @@
   @include desktop {
     width: 190px;
   }
-}
 
-.logo--header-page {
-  margin: 0 auto;
-  @include desktop {
-    margin: inherit;
+  &--header-page {
+    margin: 0 auto;
+    @include desktop {
+      margin: inherit;
+    }
   }
-}
 
-.logo--site-footer-mobile {
-  @include tablet {
+  &--site-footer-mobile {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &--site-footer-tablet {
     display: none;
+    @include tablet {
+      display: block;
+      padding-left: 1rem;
+    }
   }
-}
 
-.logo--site-footer-tablet {
-  display: none;
-  @include tablet {
-    display: block;
-    padding-left: 1rem;
-  }
-}
-
-.logo--header-page {
-  margin: 0 auto;
-  width: 130px;
-  @include tablet {
-    width: 170px;
-  }
-  @include desktop {
-    width: 190px;
+  &--header-page {
+    margin: 0 auto;
+    width: 130px;
+    @include tablet {
+      width: 170px;
+    }
+    @include desktop {
+      width: 190px;
+    }
   }
 }

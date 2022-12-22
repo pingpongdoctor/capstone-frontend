@@ -2,6 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .recipe-item {
+  display: inline-block;
   &:link,
   &:hover,
   &:active,
@@ -9,57 +10,57 @@
     text-decoration: none;
     color: $Text-Color;
   }
-  display: inline-block;
+
+  &__container {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.4);
+    @include tablet {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__user {
+    color: rgba(128, 128, 128, 0.658);
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__img {
+    border-radius: 40px;
+    object-fit: cover;
+    object-position: center;
+    height: 50vh;
+    width: 100%;
+    @include desktop {
+      height: 60vh;
+    }
+    @include desktop {
+      height: 70vh;
+    }
+  }
+
+  &__heart-img {
+    width: 60px;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  &__wrapper--visibility-hidden {
+    visibility: hidden;
+  }
+
   @include tablet {
     width: 48.5%;
   }
-}
-
-.recipe-item__container {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  border-radius: 40px;
-  position: relative;
-  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.4);
-  @include tablet {
-    margin-bottom: 2rem;
-  }
-}
-
-.recipe-item__user {
-  color: rgba(128, 128, 128, 0.658);
-}
-
-.recipe-item__wrapper {
-  display: flex;
-  gap: 1rem;
-}
-
-.recipe-item__img {
-  border-radius: 40px;
-  object-fit: cover;
-  object-position: center;
-  height: 50vh;
-  width: 100%;
-  @include desktop {
-    height: 60vh;
-  }
-  @include desktop {
-    height: 70vh;
-  }
-}
-
-.recipe-item__heart-img {
-  width: 60px;
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-}
-
-.recipe-item__wrapper--visibility-hidden {
-  visibility: hidden;
 }

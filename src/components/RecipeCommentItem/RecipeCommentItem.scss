@@ -4,54 +4,54 @@
 .recipe-comment {
   border-top: 1px solid rgba(128, 128, 128, 0.162);
   padding: 1rem;
-}
 
-.recipe-comment__wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.recipe-comment__delete-icon {
-  width: 20px;
-  margin-left: auto;
-  height: 20px;
-  &:active {
-    width: 18px;
-    height: 18px;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
-}
 
-.recipe-comment__like-icon {
-  width: 27px;
-  height: 27px;
-  &:active {
-    width: 25px;
-    height: 25px;
+  &__delete-icon {
+    width: 20px;
+    margin-left: auto;
+    height: 20px;
+    &:active {
+      width: 18px;
+      height: 18px;
+    }
   }
-}
 
-.recipe-comment__username {
-  margin: 0;
-  font-weight: 700;
-}
-
-.recipe-comment__like-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.recipe-comment__like-number {
-  margin: 0;
-  margin-top: 0.6rem;
-  margin-right: 1rem;
-  @include tablet {
-    margin-right: 1.5rem;
+  &__like-icon {
+    width: 27px;
+    height: 27px;
+    &:active {
+      width: 25px;
+      height: 25px;
+    }
   }
-}
 
-.recipe-comment__like-text {
-  @extend .recipe-comment__like-number;
-  font-weight: 700;
-  margin-right: 0.5rem;
+  &__username {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  &__like-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__like-number {
+    margin: 0;
+    margin-top: 0.6rem;
+    margin-right: 1rem;
+    @include tablet {
+      margin-right: 1.5rem;
+    }
+  }
+
+  &__like-text {
+    @extend .recipe-comment__like-number;
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
 }
