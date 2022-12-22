@@ -2,6 +2,7 @@ import "./HeaderComponent.scss";
 import logo from "../../assets/logos/logo.png";
 import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
+import Logo from "../Logo/Logo";
 import { Link, useLocation } from "react-router-dom";
 
 export default function HeaderComponent({
@@ -23,7 +24,8 @@ export default function HeaderComponent({
             alt="menu"
             src={menu}
           />
-          <img className="logo logo--header-page" src={logo} alt="logo" />
+          {/* <img className="logo logo--header-page" src={logo} alt="logo" /> */}
+          <Logo logoClassName="logo logo--header-page" />
           <div className="header-page__wrapper">
             {!loginState && <Link className="header-page__link">Sign Up</Link>}
             {!loginState && (

@@ -26,7 +26,10 @@
 }
 
 .header-page__user-profile-pic {
-  width: 100%;
+  width: 30px;
+  @include tablet {
+    width: 36px;
+  }
 }
 
 .header-page__wrapper {
@@ -34,7 +37,10 @@
   justify-content: space-between;
   gap: 1rem;
   align-items: center;
-  width: 120px;
+  width: 100px;
+  @include tablet {
+    width: 120px;
+  }
 }
 
 .header-page__profile-link {
@@ -81,12 +87,10 @@
 }
 
 .header-page__menu {
-  width: 6%;
-  margin-right: 82px;
+  width: 35px;
+  margin-right: 65px;
   @include tablet {
-    width: 4%;
-  }
-  @include desktop {
-    width: 3%;
+    margin-right: 80px;
+    width: 40px;
   }
 }
