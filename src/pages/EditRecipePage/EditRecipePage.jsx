@@ -6,7 +6,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import { headers } from "../../Utils/utils";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 
@@ -209,7 +209,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
   //FUNCTION TO GET A SINGLE RECIPE DATA
   const handleGetSingleRecipe = function () {
     axios
-      .get(`${URL}/recipe-library/${recipeId}`)
+      .get(`${API_URL}/recipe-library/${recipeId}`)
       .then((response) => {
         setRecipeData(response.data);
       })
@@ -282,7 +282,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
   const handlePutData = function (obj) {
     if (recipeData) {
       axios
-        .put(`${URL}/recipe-library/${recipeData.id}/update`, obj, headers)
+        .put(`${API_URL}/recipe-library/${recipeData.id}/update`, obj, headers)
         .then((response) => {
           console.log(response.data);
           handleGetSingleRecipe();
@@ -417,7 +417,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
   useEffect(() => {
     if (recipeData) {
       axios
-        .get(`${URL}/user-profile/${recipeData.poster_id}`)
+        .get(`${API_URL}/user-profile/${recipeData.poster_id}`)
         .then((response) => {
           setPosterName(response.data.username);
         })

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { handleCapitalizeAWord } from "../../Utils/utils";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeItem({
   loginState,
@@ -31,7 +31,7 @@ export default function RecipeItem({
   useEffect(() => {
     if (recipePosterId !== null) {
       axios
-        .get(`${URL}/user-profile/${recipePosterId}`)
+        .get(`${API_URL}/user-profile/${recipePosterId}`)
         .then((response) => {
           setRecipePosterName(response.data.username);
         })

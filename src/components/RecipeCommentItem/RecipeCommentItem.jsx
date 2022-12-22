@@ -6,7 +6,7 @@ import { handleCapitalizeAWord } from "../../Utils/utils";
 import deleteIcon from "../../assets/icons/close.png";
 import likeIcon from "../../assets/icons/thumb-up.png";
 
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeCommentItem({
   commentText,
@@ -24,7 +24,7 @@ export default function RecipeCommentItem({
   //USE EFFECT THE GET THE BASIC INFORMATION OF THE COMMENT POSTER
   useEffect(() => {
     if (userId) {
-      axios.get(`${URL}/user-profile/${userId}`).then((response) => {
+      axios.get(`${API_URL}/user-profile/${userId}`).then((response) => {
         setPosterName(response.data.username);
       });
     }
@@ -33,7 +33,7 @@ export default function RecipeCommentItem({
   const handleOnclickDelete = function () {
     axios
       .delete(
-        `${URL}/recipe-library/${recipeId}/comments/${commentId}`,
+        `${API_URL}/recipe-library/${recipeId}/comments/${commentId}`,
         headers
       )
       .then((response) => {
@@ -47,7 +47,7 @@ export default function RecipeCommentItem({
   const handleOnclickLike = function () {
     if (loginState && userProfile.id !== userId) {
       axios
-        .put(`${URL}/recipe-library/${recipeId}/comments/${commentId}`)
+        .put(`${API_URL}/recipe-library/${recipeId}/comments/${commentId}`)
         .then((response) => {
           getCommentData();
         })

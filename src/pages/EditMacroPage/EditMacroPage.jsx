@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { headers, jwtToken } from "../../Utils/utils";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function EditMacroPage({ loginState }) {
   //USE USENAVIGATE
@@ -36,9 +36,11 @@ export default function EditMacroPage({ loginState }) {
   //USE EFFECT TO GET THE MACRO INFOR
   useEffect(() => {
     if (loginState) {
-      axios.get(`${URL}/macros-list/${macroId}`, headers).then((response) => {
-        setMacroObj(response.data);
-      });
+      axios
+        .get(`${API_URL}/macros-list/${macroId}`, headers)
+        .then((response) => {
+          setMacroObj(response.data);
+        });
     }
     // eslint-disable-next-line
   }, [loginState, jwtToken]);
@@ -143,7 +145,7 @@ export default function EditMacroPage({ loginState }) {
       };
 
       axios
-        .put(`${URL}/macros-list/${macroId}`, valueObject, headers)
+        .put(`${API_URL}/macros-list/${macroId}`, valueObject, headers)
         .then((response) => {
           console.log(response.data);
           alert("Macro is updated");
@@ -169,7 +171,7 @@ export default function EditMacroPage({ loginState }) {
               }}
               backClassName="back-icon"
             />
-            <h1>Edit Macro</h1>
+            <h1>Edit Macro {handleCapitalize(macroObj.macro_name)}</h1>
           </div>
           <form onSubmit={handleUpdateMacro} className="edit-macro__form">
             <div className="edit-macro__flex-container">

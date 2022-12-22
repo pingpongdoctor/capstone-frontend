@@ -12,7 +12,7 @@ import { handleCapitalizeAWord } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
 import { headers } from "../../Utils/utils";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
   //USE NAVIGATE
@@ -53,7 +53,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //FUNCTION TO GET A SINGLE RECIPE DATA
   const handleGetSingleRecipe = function () {
     axios
-      .get(`${URL}/recipe-library/${detailRecipeId}`)
+      .get(`${API_URL}/recipe-library/${detailRecipeId}`)
       .then((response) => {
         setRecipeData(response.data);
       })
@@ -70,7 +70,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   useEffect(() => {
     if (recipeData && recipeData.poster_id) {
       axios
-        .get(`${URL}/user-profile/${recipeData.poster_id}`)
+        .get(`${API_URL}/user-profile/${recipeData.poster_id}`)
         .then((response) => {
           setRecipePosterName(response.data.username);
         });
@@ -80,7 +80,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //FUNCTION TO GET THE COMMENTS DATA
   const getCommentData = function () {
     axios
-      .get(`${URL}/recipe-library/${detailRecipeId}/comments`)
+      .get(`${API_URL}/recipe-library/${detailRecipeId}/comments`)
       .then((response) => {
         setCommentData(response.data);
       })
@@ -104,7 +104,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //FUNCTION TO LIKE A REIPE
   const handleOnclickLikeRecipe = function () {
     axios
-      .put(`${URL}/recipe-library/${recipeData.id}`)
+      .put(`${API_URL}/recipe-library/${recipeData.id}`)
       .then((response) => {
         handleGetSingleRecipe();
       })
@@ -122,7 +122,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
       };
       axios
         .post(
-          `${URL}/recipe-library/${recipeData.id}/comments`,
+          `${API_URL}/recipe-library/${recipeData.id}/comments`,
           newComment,
           headers
         )

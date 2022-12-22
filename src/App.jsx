@@ -17,7 +17,7 @@ import DetailRecipePage from "./pages/DetailedRecipePage/DetailedRecipePage";
 import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
 import EditRecipePage from "./pages/EditRecipePage/EditRecipePage";
 import FooterComponent from "./components/FooterComponent/FooterComponent";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
   //STATE FOR THE SIDE MENU
@@ -40,7 +40,7 @@ function App() {
   const handleLogin = function (event) {
     event.preventDefault();
     axios
-      .post(`${URL}/login`, {
+      .post(`${API_URL}/login`, {
         email,
         password,
       })
@@ -58,7 +58,7 @@ function App() {
   //FUNCTION TO SET THE STATE FOR USER PROFILE
   const loadProfile = function (jwtToken) {
     axios
-      .get(`${URL}/user-profile`, {
+      .get(`${API_URL}/user-profile`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },

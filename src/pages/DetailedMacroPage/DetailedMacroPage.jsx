@@ -29,7 +29,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedMacroPage({ loginState, userProfile }) {
   //GET JWT TOKEN FROM THE LOCAL STORAGE
@@ -65,7 +65,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   //GET DATA OF A DETAILED MACRO
   useEffect(() => {
     if (loginState) {
-      axios.get(`${URL}/macros-list/${macroId}`, headers).then((response) => {
+      axios.get(`${API_URL}/macros-list/${macroId}`, headers).then((response) => {
         setMacroObj(response.data);
       });
     }
