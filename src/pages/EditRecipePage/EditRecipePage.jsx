@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
-import { handleCapitalizeAWord } from "../../Utils/utils";
 import { headers } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
@@ -436,7 +435,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
     return (
       <form onSubmit={handleOnSubmitUpdateRecipe} className="edit-recipe">
         <div className="edit-recipe__container">
-          <h1>Edit Recipe {handleCapitalizeAWord(recipeData.recipe_name)}</h1>
+          <h1>Edit Recipe</h1>
           <h3>Author: {posterName}</h3>
           <div className="edit-recipe__big-container">
             {/* RECIPE IMAGE */}
