@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { headers } from "../../Utils/utils";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile }) {
   //USE USENAVIGATE
@@ -245,7 +245,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
     if (userProfile.id && isFormValid()) {
       axios
         .post(
-          `${URL}/macros-list`,
+          `${API_URL}/macros-list`,
           {
             user_id: userProfile.id,
             macro_name: macroName,

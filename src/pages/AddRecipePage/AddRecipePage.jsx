@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { headers } from "../../Utils/utils";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddRecipePage({ loginState, userProfile }) {
   //USE USENAVIGATE
@@ -312,7 +312,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
         };
 
         axios
-          .post(`${URL}/recipe-library`, postedRecipe, headers)
+          .post(`${API_URL}/recipe-library`, postedRecipe, headers)
           .then((response) => {
             console.log(response.data);
             alert("Thank you for posting a new recipe");

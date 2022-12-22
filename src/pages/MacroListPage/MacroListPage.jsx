@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { headers } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function MacroLisPage({ userProfile, loginState }) {
   //APPLY THE USE NAVIGATE
@@ -31,13 +31,14 @@ export default function MacroLisPage({ userProfile, loginState }) {
   const handleGetAllMacros = function () {
     if (loginState) {
       axios
-        .get(`${URL}/macros-list`, headers)
+        .get(`${API_URL}/macros-list`, headers)
         .then((response) => {
           setMacroArr(response.data);
         })
         .catch((error) => console.log(error));
     }
   };
+  console.log(API_URL);
   //USE EFFECT TO GET ALL MACROS
   useEffect(() => {
     handleGetAllMacros();
@@ -60,7 +61,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
   const handleDeleteMacro = function () {
     if (deleteMacroId) {
       axios
-        .delete(`${URL}/macros-list/${deleteMacroId}`, headers)
+        .delete(`${API_URL}/macros-list/${deleteMacroId}`, headers)
         .then((response) => {
           console.log(response.data);
           setDeleteMacroId("");

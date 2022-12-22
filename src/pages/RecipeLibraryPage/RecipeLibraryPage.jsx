@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import heartPic from "../../assets/images/heart.png";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeLibraryPage({ loginState, userProfile }) {
   //USE USENAVIGATE
@@ -15,7 +15,7 @@ export default function RecipeLibraryPage({ loginState, userProfile }) {
   //USE EFFECT TO GET THE RECIPE DATA
   useEffect(() => {
     axios
-      .get(`${URL}/recipe-library`)
+      .get(`${API_URL}/recipe-library`)
       .then((response) => {
         setRecipes(response.data);
       })
