@@ -2,6 +2,8 @@
 
 # Build Your Diet
 
+https://buildyourdiet.netlify.app/
+
 This project is about building a website to help users designing their own diets quickly and effortlessly. Users can calculate their suitable macronutrient ratios and diversify their dishes by refering to the recipe library. All pages are responsive in different breakpoints such as mobile, tablet and desktop breakpoints.
 
 ![](https://github.com/pingpongdoctor/capstone-frontend/blob/recipes-list-page/demo.gif)
@@ -79,6 +81,13 @@ Now you can run the server
 ```bash
 npm start
 ```
+
+## Log in accounts
+
+Since the website authenticating users by using JWT token, you have to log in to use the full website's functions. There are two accounts below
+
+- Email: simon@gmail.com | Password: 12345
+- Email: greg@gmail.com | Password: 123456
 
 ## Links
 
