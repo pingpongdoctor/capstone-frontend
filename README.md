@@ -20,7 +20,7 @@ This project is about building a website to help users designing their own diets
 
 ## Tech Stack Frontend
 
-- React JS
+- React JS.
 - React Component - React Components are applied to create reuseable components and create multi-view single pages.
 - Slick Library - React slick is a carousel component built with React. The homepage has an image carousel that is built by using this library.
 - Chart.js Library - React components for Chart.js is one of the most popular charting libraries. The website uses the Pie chart and the Line chart from this library.
@@ -30,7 +30,7 @@ This project is about building a website to help users designing their own diets
 ## Tech Stack Backend
 
 - JWT token - JWT token helps authenticating users.
-- Node.js
+- Node.js.
 - Express - Express framework is used to build endpoints for fetching data from tables.
 - Knex library - Knex is a SQL query builder that helps form SQL table by using javascript codes and query data from SQL tables such as user data, macro data, recipe data and comment data.
 
