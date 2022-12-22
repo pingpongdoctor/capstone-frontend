@@ -35,7 +35,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
 export default function BuildMacroPage({ userProfile, loginState }) {
@@ -444,7 +444,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     ) {
       axios
         .post(
-          `${URL}/macros-list`,
+          `${API_URL}/macros-list`,
           {
             user_id: userProfile.id,
             macro_name: macroName,

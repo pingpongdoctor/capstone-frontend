@@ -7,7 +7,7 @@ import closePic from "../../assets/icons/close.png";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import InputBox from "../../components/InputBox/InputBox";
 import { headers } from "../../Utils/utils";
-const URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function ProfilePage({ loginState, userProfile, loadProfile }) {
   //STATES FOR INPUT BOXES
@@ -87,7 +87,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
 
     if (newUserName || newWeight || newHeight || newAge || newGender) {
       axios
-        .put(`${URL}/user-profile`, body, headers)
+        .put(`${API_URL}/user-profile`, body, headers)
         .then((response) => {
           alert(`Your ${inputType} has been updated`);
           setModalBoxAppear(false);
