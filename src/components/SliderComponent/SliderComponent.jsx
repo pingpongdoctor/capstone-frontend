@@ -6,6 +6,7 @@ import trackBodyIndexPic from "../../assets/images/track-body-index.jpg";
 import recipePic from "../../assets/images/recipe.jpg";
 import nutritionFactPic from "../../assets/images/nutrition-fact.jpg";
 import addRecipePic from "../../assets/images/add-recipe.jpg";
+import buildRecipe from "../../assets/images/build-recipe.jpg";
 import "./SliderComponent.scss";
 import nextBtn from "../../assets/icons/next.png";
 import backBtn from "../../assets/icons/back.png";
@@ -35,7 +36,7 @@ export default function SliderComponent() {
   const moveToNextSlide = function () {
     const currentSlide = findCurrentSlide();
 
-    if (currentSlide > 4) {
+    if (currentSlide > 5) {
       carousel.current.slickGoTo(0);
     } else {
       carousel.current.slickGoTo(currentSlide - 1);
@@ -46,7 +47,7 @@ export default function SliderComponent() {
     const currentSlide = findCurrentSlide();
 
     if (currentSlide < 3) {
-      carousel.current.slickGoTo(3);
+      carousel.current.slickGoTo(4);
     } else {
       carousel.current.slickGoTo(currentSlide - 3);
     }
@@ -133,6 +134,22 @@ export default function SliderComponent() {
         </div>
 
         <div className="slider__card">
+          <Link className="slider__link" to={"/recipe-list"}>
+            <img
+              className="slider__image"
+              src={buildRecipe}
+              alt="build-macro-pic"
+            />
+            <div className="slider__text">
+              <h3>Let's build your own favourite recipe list</h3>
+              <p>
+                The website platform allows you to construct your recipe list
+              </p>
+            </div>
+          </Link>
+        </div>
+
+        <div className="slider__card">
           <Link className="slider__link" to={"/add-recipe"}>
             <img
               className="slider__image"
@@ -141,7 +158,7 @@ export default function SliderComponent() {
             />
             <div className="slider__text">
               <h3>Become a recipe creator</h3>
-              <p>Join our community to share your recipes</p>
+              <p>Post your recipe and share it with the other users</p>
             </div>
           </Link>
         </div>

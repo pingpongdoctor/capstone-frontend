@@ -20,11 +20,13 @@ export default function SiteMenu({ sideMenuState }) {
         <Link to={"/recipe-library"} className="side-menu__item">
           <li>Recipe Library</li>
         </Link>
+        <Link to={"/recipe-list"} className="side-menu__item">
+          <li>Recipe List</li>
+        </Link>
         <Link to={"/add-recipe"} className="side-menu__item">
           <li>Add New Recipe</li>
         </Link>
         {/* <li className="side-menu__item">Track Body Indexes</li> */}
-        {/* <li className="side-menu__item">Recipe List</li> */}
         {/* <li className="side-menu__item">Nutritional Facts</li>
         <li className="side-menu__item">Barcode Scanning</li> */}
       </ul>

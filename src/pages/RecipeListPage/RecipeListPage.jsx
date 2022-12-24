@@ -182,5 +182,7 @@ export default function RecipeListPage({ loginState, userProfile }) {
         )}
       </div>
     );
+  } else {
+    return <h1>Please log in to use this function</h1>;
   }
 }
