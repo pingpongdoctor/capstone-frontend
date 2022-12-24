@@ -13,6 +13,7 @@ import backBtn from "../../assets/icons/back.png";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useWindowSize } from "../../Utils/utils";
 
 export default function SliderComponent() {
   //FUNCTION TO FIND THE CURRENT SLIDE
@@ -53,10 +54,11 @@ export default function SliderComponent() {
     }
   };
 
+  const size = useWindowSize();
   const settings = {
     infinite: true,
     dots: true,
-    slidesToShow: 2,
+    slidesToShow: size.width > 768 ? 2 : 1,
     slidesToScroll: 1,
     lazyLoad: true,
     autoplay: true,
