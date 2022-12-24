@@ -17,49 +17,47 @@ import { useWindowSize } from "../../Utils/utils";
 
 export default function SliderComponent() {
   //FUNCTION TO FIND THE CURRENT SLIDE
-  const [cardArr, setCardArr] = useState([]);
-
   const carousel = useRef();
 
-  useEffect(() => {
-    const slideCardArr = document.querySelectorAll(".slick-slide");
-    setCardArr(slideCardArr);
-  }, []);
-
+  //FUNCTION TO FIND THE CURRENT SLIDE
   const findCurrentSlide = function () {
+    const cardArr = document.querySelectorAll(".slick-slide");
     for (let i = 0; i < cardArr.length; i++) {
       if (cardArr[i].classList.contains("slick-current")) {
         return i;
       }
     }
   };
+
   //FUNCTION TO MOVE TO THE NEXT SLIDE
   const moveToNextSlide = function () {
     const currentSlide = findCurrentSlide();
-
     if (currentSlide > 5) {
       carousel.current.slickGoTo(0);
     } else {
       carousel.current.slickGoTo(currentSlide - 1);
     }
   };
+
   //FUNCTION TO MOVE TO THE PREVIOUS SLIDE
   const moveToPreviousSlide = function () {
     const currentSlide = findCurrentSlide();
-
     if (currentSlide < 3) {
       carousel.current.slickGoTo(4);
     } else {
       carousel.current.slickGoTo(currentSlide - 3);
     }
   };
+
   //USE USEWINDOWSIZE HOOK TO GET THE CURRENT SIZES OF THE SCREEN
   const size = useWindowSize();
+
   //SETTING FOR THE CAROUSEL DATA
   const settings = {
     infinite: true,
     dots: true,
-    slidesToShow: size.width > 768 ? 2 : 1,
+    // slidesToShow: size.width > 768 ? 2 : 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     lazyLoad: true,
     autoplay: true,
@@ -73,12 +71,14 @@ export default function SliderComponent() {
         src={nextBtn}
         alt="next-btn"
       />
+
       <img
         onClick={moveToPreviousSlide}
         className="back-btn"
         src={backBtn}
         alt="back-btn"
       />
+
       <Slider {...settings} ref={carousel}>
         <div className="slider__card">
           <Link className="slider__link" to={"/build-macro"}>
