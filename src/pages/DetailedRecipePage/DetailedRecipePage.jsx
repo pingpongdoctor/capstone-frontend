@@ -12,13 +12,19 @@ import { handleCapitalizeAWord } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
 import { headers } from "../../Utils/utils";
+import DeleteIconComponent from "../../components/DeleteIconComponent/DeleteIconComponent";
+import ModalBox from "../../components/ModalBox/ModalBox";
+import savedIcon from "../../assets/icons/save.png";
+import unSavedIcon from "../../assets/icons/unsave.png";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
   //USE NAVIGATE
   const navigate = useNavigate();
   //STATE TO STORE THE SINGLE RECIPE DATA
-  const [recipeData, setRecipeData] = useState("");
+  const [recipeData, setRecipeData] = useState(null);
+  //STATE TO STORE RECIPE-USER DATA
+  const [recipeUserData, setRecipeUserData] = useState([]);
   //STATE TO STORE THE NAME OF THE POSTER
   const [recipePosterName, setRecipePosterName] = useState("");
   //STATE TO STORE NEW CUSTOMIZED INGREDIENTS ARRAY
@@ -29,6 +35,10 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   const [commentData, setCommentData] = useState([]);
   //STATES TO STORE THE COMMENT INPUT
   const [commentInput, setCommentInput] = useState("");
+  //STATE TO STORE THE BOX APPEARANCE STATE
+  const [boxAppear, setBoxAppear] = useState(false);
+  //STATE FOR THE SAVED RECIPE
+  const [savedRecipe, setSavedRecipe] = useState(null);
   //USE USEPARAMS TO GET THE RECIPE ID
   const { detailRecipeId } = useParams();
   //USE EFFECT TO CUSTOMIZE THE INGREDIENTS ARRAY
@@ -66,7 +76,30 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     // eslint-disable-next-line
   }, [detailRecipeId]);
 
-  //USE EFFECT TO GET PROFILE OF THE RECIPE POSTER
+  //USE EFFECT TO GET THE RECIPE-USER DATA
+  useEffect(() => {
+    axios.get(`${API_URL}/recipe-library/recipes-users`).then((response) => {
+      console.log(response.data);
+      setRecipeUserData(response.data);
+    });
+  }, []);
+
+  //USE EFFECT TO SET THE SAVED RECIPE STATE
+  useEffect(() => {
+    if (recipeData && userProfile && recipeUserData) {
+      const foundObj = recipeUserData.find(
+        (obj) =>
+          obj.user_id === userProfile.id && obj.recipe_id === recipeData.id
+      );
+      if (foundObj) {
+        setSavedRecipe(true);
+      } else {
+        setSavedRecipe(false);
+      }
+    }
+  }, [recipeUserData]);
+
+  //USE EFFECT TO GET THE NAME OF THE RECIPE POSTER
   useEffect(() => {
     if (recipeData && recipeData.poster_id) {
       axios
@@ -92,7 +125,6 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   //USE EFFECT TO GET THE COMMENTS DATA
   useEffect(() => {
     getCommentData();
-
     // eslint-disable-next-line
   }, []);
 
@@ -135,6 +167,73 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     }
   };
 
+  //FUNCTION TO DELETE A RECIPE
+  const handleDeleteRecipe = function () {
+    if (
+      loginState &&
+      userProfile &&
+      recipeData &&
+      userProfile.id === recipeData.poster_id
+    ) {
+      axios
+        .delete(`${API_URL}/recipe-library/${recipeData.id}`, headers)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/recipe-library");
+          setBoxAppear(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  //FUNCTION TO MAKE THE BOX APPEAR
+  const handleAppearBox = function () {
+    setBoxAppear(true);
+  };
+
+  //FUNCTION TO CLOSE THE BOX
+  const handleCloseBox = function () {
+    setBoxAppear(false);
+  };
+
+  //FUNCTION TO SAVE THE RECIPE TO THE RECIPE LIST
+  const handleOnClickSaveRecipe = function () {
+    if (loginState && recipeData && savedRecipe === false) {
+      const postedObj = {
+        recipe_id: recipeData.id,
+      };
+      axios
+        .post(`${API_URL}/recipe-library/saved-recipes`, postedObj, headers)
+        .then((response) => {
+          console.log(response.data);
+          setSavedRecipe(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  //FUNCTION TO SAVE THE RECIPE TO THE RECIPE LIST
+  const handleOnClickUnSaveRecipe = function () {
+    if (loginState && recipeData && savedRecipe === true) {
+      axios
+        .delete(
+          `${API_URL}/recipe-library/saved-recipes/${recipeData.id}`,
+          headers
+        )
+        .then((response) => {
+          console.log(response.data);
+          setSavedRecipe(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   if (recipeData) {
     return (
       <div className="detail-recipe">
@@ -169,23 +268,46 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                   {recipeData.recipe_name}
                 </h2>
               </div>
-              {loginState &&
-                userProfile &&
-                recipeData &&
-                userProfile.id === recipeData.poster_id && (
-                  <div className="detail-recipe__edit-icon-wrapper">
-                    <p className="detail-recipe__edit-text">Edit recipe</p>
+              <div className="detail-recipe__edit-icon-wrapper">
+                {!savedRecipe && (
+                  <img
+                    onClick={handleOnClickSaveRecipe}
+                    className="detail-recipe__save"
+                    src={unSavedIcon}
+                    alt="unsave-icon"
+                  />
+                )}
+                {savedRecipe && (
+                  <img
+                    onClick={handleOnClickUnSaveRecipe}
+                    className="detail-recipe__save"
+                    src={savedIcon}
+                    alt="save-icon"
+                  />
+                )}
+                {loginState &&
+                  userProfile &&
+                  recipeData &&
+                  userProfile.id === recipeData.poster_id && (
                     <EditIconComponent
                       onClickHandler={() => {
                         navigate(`/edit-recipe/${recipeData.id}`);
                       }}
                       editClassName="edit-icon"
                     />
-                  </div>
-                )}
+                  )}
+                {loginState &&
+                  userProfile &&
+                  recipeData &&
+                  userProfile.id === recipeData.poster_id && (
+                    <DeleteIconComponent
+                      onClickHandler={handleAppearBox}
+                      delClassName="del-icon"
+                    />
+                  )}
+              </div>
             </div>
             {/* DESCRIPTION */}
-
             <p className="detail-recipe__text">
               <span className="detail-recipe__small-text">
                 Recipe Description:
@@ -336,6 +458,15 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
             </ul>
           </div>
         </form>
+
+        {boxAppear && (
+          <ModalBox
+            modalBoxContent="Delete this recipe?"
+            modalBtnContent="Delete"
+            modalOnClickHandler={handleDeleteRecipe}
+            modalCloseOnClickHandler={handleCloseBox}
+          />
+        )}
       </div>
     );
   }

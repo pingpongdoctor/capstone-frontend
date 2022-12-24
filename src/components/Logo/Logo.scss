@@ -2,39 +2,43 @@
 @use "../../styles/partials/mixins" as *;
 
 .logo {
-  width: 20%;
-  @include tablet {
-    width: 15%;
-  }
-}
-
-.logo--header-page {
-  margin: 0 auto;
-  @include desktop {
-    margin: inherit;
-  }
-}
-
-.logo--site-footer {
   width: 150px;
   @include tablet {
     width: 170px;
   }
-  @include tablet {
+  @include desktop {
     width: 190px;
   }
-}
 
-.logo--site-footer-mobile {
-  @include tablet {
-    display: none;
+  &--header-page {
+    margin: 0 auto;
+    @include desktop {
+      margin: inherit;
+    }
   }
-}
 
-.logo--site-footer-tablet {
-  display: none;
-  @include tablet {
-    display: block;
-    padding-left: 1rem;
+  &--site-footer-mobile {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &--site-footer-tablet {
+    display: none;
+    @include tablet {
+      display: block;
+      padding-left: 1rem;
+    }
+  }
+
+  &--header-page {
+    margin: 0 auto;
+    width: 130px;
+    @include tablet {
+      width: 170px;
+    }
+    @include desktop {
+      width: 190px;
+    }
   }
 }

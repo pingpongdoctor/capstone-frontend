@@ -12,7 +12,7 @@ export default function FooterComponent() {
     return (
       <div className="site-footer">
         <div className="site-footer__container">
-          <Logo logoClassName="logo logo--site-footer logo--site-footer-tablet" />
+          <Logo logoClassName="logo logo--site-footer-tablet" />
           <div className="site-footer__flex-container">
             <div className="site-footer__wrapper">
               <p className="site-footer__main-text">Service</p>
@@ -48,7 +48,7 @@ export default function FooterComponent() {
               </div>
             </div>
           </div>
-          <Logo logoClassName="logo logo--site-footer logo--site-footer-mobile" />
+          <Logo logoClassName="logo logo--site-footer-mobile" />
         </div>
       </div>
     );

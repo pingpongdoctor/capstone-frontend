@@ -1,0 +1,103 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.recipe-list {
+  margin: 1rem;
+
+  &__container {
+    @include desktop {
+      max-width: 1216px;
+      margin: 0 auto;
+    }
+  }
+
+  &__main-text {
+    font-weight: 600;
+  }
+
+  &__texts {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    background-color: rgba(128, 128, 128, 0.141);
+    border-radius: 10px;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.392);
+    }
+  }
+
+  &__text-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 66%;
+    @include small-mobile {
+      width: 68%;
+    }
+    @include tablet {
+      width: 83.3%;
+    }
+  }
+
+  &__text-action {
+    cursor: auto;
+    background-image: none;
+    text-align: center;
+    margin: 0;
+    padding-right: 1rem;
+    text-align: end;
+    width: 33%;
+    @include small-mobile {
+      width: 32%;
+    }
+    @include tablet {
+      width: 16.7%;
+    }
+  }
+
+  &__text {
+    background-image: url("../../assets/icons/reorder.png");
+    background-size: 2rem;
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 2rem;
+    text-align: center;
+    margin: 0;
+    cursor: pointer;
+    &:first-child {
+      width: 130px;
+    }
+    &:nth-child(2) {
+      width: 120px;
+    }
+    &:nth-child(3) {
+      width: 73px;
+    }
+    &:last-child {
+      width: 130px;
+    }
+  }
+
+  &__text--hidden {
+    display: none;
+    @include tablet {
+      display: block;
+    }
+  }
+
+  &__text--ready-time-hidden {
+    display: none;
+    @include small-mobile {
+      display: block;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  @include tablet {
+    margin: 2rem;
+  }
+}

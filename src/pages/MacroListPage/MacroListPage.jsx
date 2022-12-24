@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { headers } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
+import InputBox from "../../components/InputBox/InputBox";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function MacroLisPage({ userProfile, loginState }) {
@@ -113,8 +114,6 @@ export default function MacroLisPage({ userProfile, loginState }) {
     }
   };
 
-  console.log(deleteMacroId);
-
   if (loginState) {
     return (
       <div className="macro-list">
@@ -130,12 +129,12 @@ export default function MacroLisPage({ userProfile, loginState }) {
           {macroArr.length > 0 && (
             <p className="macro-list__main-text">{macroArr.length} Macros</p>
           )}
-          <input
-            placeholder="Search for macro name, goal, energy intake and created time"
-            className="macro-list__search-box"
-            type="text"
-            value={searchData}
-            onChange={handleSearchData}
+          <InputBox
+            inputOnChange={handleSearchData}
+            inputValue={searchData}
+            inputType="text"
+            inputPlaceholder="Search for macro name, goal and energy intake"
+            inputClassName="input-box input-box--macro-list-search"
           />
           <div className="macro-list__texts">
             <div className="macro-list__text-wrapper">

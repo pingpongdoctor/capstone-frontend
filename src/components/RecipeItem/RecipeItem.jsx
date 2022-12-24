@@ -56,7 +56,7 @@ export default function RecipeItem({
               alt="heart-pic"
             />
           )}
-          <h3 className="recipe__name">{recipeName}</h3>
+          <h3 className="recipe-item__name">{recipeName}</h3>
           <div className={`recipe-item__wrapper ${hiddenState}`}>
             <Avatar avatarClassName="avatar--recipe-library" />
             {recipePosterName && (

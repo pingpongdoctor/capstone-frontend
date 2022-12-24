@@ -3,16 +3,16 @@
 
 .avatar {
   width: 56px;
-}
 
-.avatar--main {
-  width: 100px;
-}
+  &--main {
+    width: 100px;
+  }
 
-.avatar--profile-value {
-  width: 60px;
-}
+  &--profile-value {
+    width: 60px;
+  }
 
-.avatar--recipe-library {
-  width: 56px;
+  &--recipe-library {
+    width: 56px;
+  }
 }

@@ -26,6 +26,10 @@
     }
   }
 
+  &__save {
+    width: 40px;
+  }
+
   &__first-wrapper {
     position: relative;
     height: 300px;
@@ -292,10 +296,6 @@
     display: flex;
     gap: 1rem;
     align-items: center;
-  }
-
-  &__edit-text {
-    font-weight: 600;
   }
 
   &__back-icon-wrapper {
