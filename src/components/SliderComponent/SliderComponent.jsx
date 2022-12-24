@@ -53,8 +53,9 @@ export default function SliderComponent() {
       carousel.current.slickGoTo(currentSlide - 3);
     }
   };
-
+  //USE USEWINDOWSIZE HOOK TO GET THE CURRENT SIZES OF THE SCREEN
   const size = useWindowSize();
+  //SETTING FOR THE CAROUSEL DATA
   const settings = {
     infinite: true,
     dots: true,
