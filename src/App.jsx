@@ -17,6 +17,7 @@ import DetailRecipePage from "./pages/DetailedRecipePage/DetailedRecipePage";
 import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
 import EditRecipePage from "./pages/EditRecipePage/EditRecipePage";
 import FooterComponent from "./components/FooterComponent/FooterComponent";
+import RecipeListPage from "./pages/RecipeListPage/RecipeListPage";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -236,6 +237,17 @@ function App() {
             path="/edit-recipe/:recipeId"
             element={
               <EditRecipePage
+                userProfile={userProfile}
+                loginState={loginState}
+              />
+            }
+          />
+
+          {/* EDIT RECIPE ROUTE */}
+          <Route
+            path="/recipe-list"
+            element={
+              <RecipeListPage
                 userProfile={userProfile}
                 loginState={loginState}
               />

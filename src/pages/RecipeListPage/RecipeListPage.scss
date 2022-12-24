@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.macro-list {
+.recipe-list {
   margin: 1rem;
 
   &__container {
@@ -26,15 +26,31 @@
     }
   }
 
-  .macro-list__text-wrapper {
+  &__text-wrapper {
     display: flex;
     justify-content: space-between;
     width: 66%;
     @include small-mobile {
-      width: 67%;
+      width: 68%;
     }
     @include tablet {
-      width: 85%;
+      width: 83.3%;
+    }
+  }
+
+  &__text-action {
+    cursor: auto;
+    background-image: none;
+    text-align: center;
+    margin: 0;
+    padding-right: 1rem;
+    text-align: end;
+    width: 33%;
+    @include small-mobile {
+      width: 32%;
+    }
+    @include tablet {
+      width: 16.7%;
     }
   }
 
@@ -48,33 +64,16 @@
     margin: 0;
     cursor: pointer;
     &:first-child {
-      width: 125px;
+      width: 130px;
     }
     &:nth-child(2) {
-      width: 73px;
-      margin: 0 33.5px;
+      width: 120px;
     }
     &:nth-child(3) {
-      width: 135px;
+      width: 73px;
     }
     &:last-child {
       width: 130px;
-    }
-  }
-
-  .macro-list__text-action {
-    cursor: auto;
-    background-image: none;
-    text-align: center;
-    margin: 0;
-    padding-right: 1rem;
-    text-align: end;
-    width: 33%;
-    @include small-mobile {
-      width: 33%;
-    }
-    @include tablet {
-      width: 15%;
     }
   }
 
@@ -85,7 +84,7 @@
     }
   }
 
-  &__text--energy-hidden {
+  &__text--ready-time-hidden {
     display: none;
     @include small-mobile {
       display: block;
@@ -96,17 +95,6 @@
     list-style: none;
     padding-left: 0;
     margin: 0;
-  }
-
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-
-    @include tablet {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
   }
 
   @include tablet {

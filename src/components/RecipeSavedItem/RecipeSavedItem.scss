@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.macro-item {
+.recipe-save-item {
   &__wrapper:link,
   &__wrapper:hover,
   &__wrapper:active,
@@ -12,10 +12,10 @@
 
   &__container {
     display: flex;
-    padding: 0 1rem;
     justify-content: space-between;
     border-top: 1px solid rgba(128, 128, 128, 0.162);
     align-items: center;
+    padding: 0 1rem;
     &:hover {
       background-color: $Row-Hover;
       border-radius: 10px;
@@ -35,11 +35,11 @@
     width: 66%;
     padding: 1.5rem 0;
     @include small-mobile {
-      width: 67%;
+      width: 68%;
     }
     @include tablet {
+      width: 83.3%;
       padding: 2rem 0;
-      width: 85%;
     }
   }
 
@@ -51,15 +51,14 @@
     white-space: nowrap;
     overflow: hidden;
     &:first-child {
-      width: 125px;
+      width: 130px;
       padding-left: 0;
     }
     &:nth-child(2) {
-      width: 140px;
-      padding-left: 0;
+      width: 120px;
     }
     &:nth-child(3) {
-      width: 135px;
+      width: 73px;
     }
     &:nth-child(4) {
       width: 130px;
@@ -73,7 +72,7 @@
     }
   }
 
-  &__text--energy-hidden {
+  &__text--ready-time-hidden {
     display: none;
     @include small-mobile {
       display: block;
@@ -87,10 +86,10 @@
     gap: 1rem;
     width: 33%;
     @include small-mobile {
-      width: 33%;
+      width: 32%;
     }
     @include tablet {
-      width: 15%;
+      width: 16.7%;
     }
   }
 

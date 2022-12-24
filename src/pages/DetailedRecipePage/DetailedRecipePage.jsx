@@ -12,6 +12,8 @@ import { handleCapitalizeAWord } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
 import { headers } from "../../Utils/utils";
+import DeleteIconComponent from "../../components/DeleteIconComponent/DeleteIconComponent";
+import ModalBox from "../../components/ModalBox/ModalBox";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
@@ -29,6 +31,8 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
   const [commentData, setCommentData] = useState([]);
   //STATES TO STORE THE COMMENT INPUT
   const [commentInput, setCommentInput] = useState("");
+  //STATE TO STORE THE BOX APPEARANCE STATE
+  const [boxAppear, setBoxAppear] = useState(false);
   //USE USEPARAMS TO GET THE RECIPE ID
   const { detailRecipeId } = useParams();
   //USE EFFECT TO CUSTOMIZE THE INGREDIENTS ARRAY
@@ -135,6 +139,37 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
     }
   };
 
+  //FUNCTION TO DELETE A RECIPE
+  const handleDeleteRecipe = function () {
+    if (
+      loginState &&
+      userProfile &&
+      recipeData &&
+      userProfile.id === recipeData.poster_id
+    ) {
+      axios
+        .delete(`${API_URL}/recipe-library/${recipeData.id}`, headers)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/recipe-library");
+          setBoxAppear(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  //FUNCTION TO MAKE THE BOX APPEAR
+  const handleAppearBox = function () {
+    setBoxAppear(true);
+  };
+
+  //FUNCTION TO CLOSE THE BOX
+  const handleCloseBox = function () {
+    setBoxAppear(false);
+  };
+
   if (recipeData) {
     return (
       <div className="detail-recipe">
@@ -174,12 +209,15 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                 recipeData &&
                 userProfile.id === recipeData.poster_id && (
                   <div className="detail-recipe__edit-icon-wrapper">
-                    <p className="detail-recipe__edit-text">Edit recipe</p>
                     <EditIconComponent
                       onClickHandler={() => {
                         navigate(`/edit-recipe/${recipeData.id}`);
                       }}
                       editClassName="edit-icon"
+                    />
+                    <DeleteIconComponent
+                      onClickHandler={handleAppearBox}
+                      delClassName="del-icon"
                     />
                   </div>
                 )}
@@ -336,6 +374,15 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
             </ul>
           </div>
         </form>
+
+        {boxAppear && (
+          <ModalBox
+            modalBoxContent="Delete this recipe?"
+            modalBtnContent="Delete"
+            modalOnClickHandler={handleDeleteRecipe}
+            modalCloseOnClickHandler={handleCloseBox}
+          />
+        )}
       </div>
     );
   }

@@ -66,19 +66,12 @@
     }
   }
 
-  &__heading-small-wrap {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  .detail-page__heading {
     margin-bottom: 1rem;
+    margin-top: 0.5rem;
     @include tablet {
       margin-bottom: 1.5rem;
     }
-  }
-
-  .detail-page__heading,
-  .detail-page__macro-name {
-    margin: 0;
   }
 
   .detail-page__back-icon-wrapper {

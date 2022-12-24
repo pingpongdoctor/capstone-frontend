@@ -65,9 +65,11 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
   //GET DATA OF A DETAILED MACRO
   useEffect(() => {
     if (loginState) {
-      axios.get(`${API_URL}/macros-list/${macroId}`, headers).then((response) => {
-        setMacroObj(response.data);
-      });
+      axios
+        .get(`${API_URL}/macros-list/${macroId}`, headers)
+        .then((response) => {
+          setMacroObj(response.data);
+        });
     }
     // eslint-disable-next-line
   }, [loginState, jwtToken]);
@@ -348,12 +350,9 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
           </div>
 
           {macroObj && (
-            <div className="detail-page__heading-small-wrap">
-              <h3 className="detail-page__heading">Macro Name: </h3>
-              <p className="detail-page__macro-name">
-                {handleCapitalize(macroObj.macro_name)}
-              </p>
-            </div>
+            <h3 className="detail-page__heading">
+              Macro Name: {handleCapitalize(macroObj.macro_name)}
+            </h3>
           )}
 
           {macroObj && (
