@@ -12,7 +12,6 @@ import nextBtn from "../../assets/icons/next.png";
 import backBtn from "../../assets/icons/back.png";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useWindowSize } from "../../Utils/utils";
 
 export default function SliderComponent() {
@@ -56,13 +55,13 @@ export default function SliderComponent() {
   const settings = {
     infinite: true,
     dots: true,
-    // slidesToShow: size.width > 768 ? 2 : 1,
-    slidesToShow: 2,
+    slidesToShow: size.width > 768 ? 2 : 1,
     slidesToScroll: 1,
     lazyLoad: true,
     autoplay: true,
     autoplaySpeed: 2000,
   };
+
   return (
     <div className="slider">
       <img
