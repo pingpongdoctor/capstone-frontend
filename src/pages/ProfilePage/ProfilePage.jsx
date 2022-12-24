@@ -108,7 +108,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
           setInputType("");
         });
     } else {
-      setProfileInputError("input--profile-page-error");
+      setProfileInputError("input-box--profile-page-error");
       setProfileTextareaError("profile-page__textarea--error");
     }
   };
@@ -232,7 +232,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newUserName}
                   inputOnChange={handleNewUserName}
-                  inputClassName={`input-box input--profile-page ${profileInputError}`}
+                  inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="text"
                   inputPlaceholder="New username"
                   inputName="usename"
@@ -242,7 +242,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newHeight}
                   inputOnChange={handleNewHeight}
-                  inputClassName={`input-box input--profile-page ${profileInputError}`}
+                  inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="number"
                   inputPlaceholder="Type new height in cm"
                   inputName="height"
@@ -252,7 +252,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newWeight}
                   inputOnChange={handleNewWeight}
-                  inputClassName={`input-box input--profile-page ${profileInputError}`}
+                  inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="number"
                   inputPlaceholder="Type new weight in kg"
                   inputName="weight"
@@ -262,7 +262,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newAge}
                   inputOnChange={handleNewAge}
-                  inputClassName={`input-box input--profile-page ${profileInputError}`}
+                  inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="number"
                   inputPlaceholder="New age"
                   inputName="age"

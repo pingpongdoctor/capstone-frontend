@@ -50,24 +50,24 @@ export default function ItemComponent({
     setMacroText(newWord);
   }, [macroName]);
   return (
-    <li className="item__container">
-      <Link className="item__wrapper" to={`/macro-list/${macroId}`}>
-        <p className="item__text">{macroText}</p>
-        <p className="item__text item__text--hidden">{goalText}</p>
-        <p className="item__text item__text--energy-hidden">
+    <li className="macro-item__container">
+      <Link className="macro-item__wrapper" to={`/macro-list/${macroId}`}>
+        <p className="macro-item__text">{macroText}</p>
+        <p className="macro-item__text macro-item__text--hidden">{goalText}</p>
+        <p className="macro-item__text macro-item__text--energy-hidden">
           {macroEnergy} calories
         </p>
-        <p className="item__text item__text--hidden">
+        <p className="macro-item__text macro-item__text--hidden">
           {timeConvDetail(macroTime)}
         </p>
       </Link>
 
-      <div className="item__icons">
+      <div className="macro-item__icons">
         <img
           onClick={() => {
             navigate(`/edit-macro/${macroId}`);
           }}
-          className="item__icon item__icon-edit"
+          className="macro-item__icon macro-item__icon-edit"
           src={editIcon}
           alt="edit-icon"
         />
@@ -76,7 +76,7 @@ export default function ItemComponent({
           onClick={() => {
             handleDeleteMacroId(macroId);
           }}
-          className="item__icon"
+          className="macro-item__icon"
           src={deleteIcon}
           alt="delete-icon"
         />

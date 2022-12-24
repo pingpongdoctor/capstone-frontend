@@ -1,92 +1,105 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.item__wrapper:link,
-.item__wrapper:hover,
-.item__wrapper:active,
-.item__wrapper:visited {
-  color: $Text-Color;
-  text-decoration: none;
-}
+.macro-item {
+  &__wrapper:link,
+  &__wrapper:hover,
+  &__wrapper:active,
+  &__wrapper:visited {
+    color: $Text-Color;
+    text-decoration: none;
+  }
 
-.item__container {
-  display: flex;
-  padding: 1.5rem 2rem;
-  justify-content: space-between;
-  border-top: 1px solid rgba(128, 128, 128, 0.162);
-  align-items: center;
-  &:hover {
-    background-color: $Row-Hover;
-    border-radius: 10px;
+  &__container {
+    display: flex;
+    padding: 0 1rem;
+    justify-content: space-between;
+    border-top: 1px solid rgba(128, 128, 128, 0.162);
+    align-items: center;
+    &:hover {
+      background-color: $Row-Hover;
+      border-radius: 10px;
+    }
+    &:first-child {
+      border: none;
+    }
+    @include tablet {
+      padding: 0 2rem;
+    }
   }
-  &:first-child {
-    border: none;
-  }
-}
 
-.item__wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 66%;
-  @include small-mobile {
-    width: 75%;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 66%;
+    padding: 1.5rem 0;
+    @include small-mobile {
+      width: 67%;
+    }
+    @include tablet {
+      padding: 2rem 0;
+      width: 85%;
+    }
   }
-  @include tablet {
-    width: 80%;
-  }
-}
 
-.item__text {
-  margin: 0;
-  text-align: left;
-  &:first-child {
-    width: 125px;
+  &__text {
+    margin: 0;
+    text-align: left;
+    padding-left: 0.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    &:first-child {
+      width: 125px;
+      padding-left: 0;
+    }
+    &:nth-child(2) {
+      width: 140px;
+      padding-left: 0;
+    }
+    &:nth-child(3) {
+      width: 135px;
+    }
+    &:nth-child(4) {
+      width: 130px;
+    }
   }
-  &:nth-child(2) {
-    width: 140px;
-  }
-  &:nth-child(3) {
-    width: 135px;
-  }
-  &:nth-child(4) {
-    width: 130px;
-  }
-}
 
-.item__text--hidden {
-  display: none;
-  @include tablet {
-    display: block;
+  &__text--hidden {
+    display: none;
+    @include tablet {
+      display: block;
+    }
   }
-}
 
-.item__text--energy-hidden {
-  display: none;
-  @include small-mobile {
-    display: block;
+  &__text--energy-hidden {
+    display: none;
+    @include small-mobile {
+      display: block;
+    }
   }
-}
 
-.item__icons {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  width: 33%;
-  @include small-mobile {
-    width: 25%;
+  &__icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    width: 33%;
+    @include small-mobile {
+      width: 33%;
+    }
+    @include tablet {
+      width: 15%;
+    }
   }
-  @include tablet {
-    width: 20%;
+
+  &__icon {
+    cursor: pointer;
+    width: 30px;
   }
-}
 
-.item__icon {
-  cursor: pointer;
-  width: 30px;
-}
-
-.item__icon-edit {
-  width: 35px;
+  &__icon-edit {
+    width: 35px;
+  }
 }

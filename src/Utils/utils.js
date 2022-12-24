@@ -62,3 +62,6 @@ export const headers = {
     Authorization: `Bearer ${jwtToken}`,
   },
 };
+
+//DECLARE URL
+export const API_URL = process.env.REACT_APP_API_URL;
