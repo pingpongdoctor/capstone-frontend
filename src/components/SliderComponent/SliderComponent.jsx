@@ -13,11 +13,58 @@ import backBtn from "../../assets/icons/back.png";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "../../Utils/utils";
+import { useState } from "react";
 
 export default function SliderComponent() {
+  //STATE FOR THE BRIGHTER STATES
+  const [macroBuildBrighter, setMacroBuildBrighter] = useState("");
+  const [macroListBrighter, setMacroListBrighter] = useState("");
+  const [recipeLibraryBrighter, setRecipeLibraryBrighter] = useState("");
+  const [recipeListBrighter, setRecipeListBrighter] = useState("");
+  const [macroCreateBrighter, setMacroCreateBrighter] = useState("");
+  const [recipeCreateBrighter, setRecipeCreateBrighter] = useState("");
+  //FUNCTION TO SET THE BRIGHTER STATES WHEN USING THE MOUSEENTER EVENT HANDLER
+  const handleMouseEnterBrighter = function (event) {
+    if (event.target.classList.contains("slider__build-macro")) {
+      setMacroBuildBrighter("slider__image--brighter");
+    }
+
+    if (event.target.classList.contains("slider__macro-list")) {
+      setMacroListBrighter("slider__image--brighter");
+    }
+
+    if (event.target.classList.contains("slider__add-macro")) {
+      setMacroCreateBrighter("slider__image--brighter");
+    }
+
+    if (event.target.classList.contains("slider__recipe-library")) {
+      setRecipeLibraryBrighter("slider__image--brighter");
+    }
+
+    if (event.target.classList.contains("slider__recipe-list")) {
+      setRecipeListBrighter("slider__image--brighter");
+    }
+
+    if (event.target.classList.contains("slider__add-recipe")) {
+      setRecipeCreateBrighter("slider__image--brighter");
+    }
+  };
+  //FUNCTION TO SET THE BRIGHTER STATES WHEN USING THE MOUSELEAVE EVENT HANDLER
+  const handleMouseLeaveDarker = function (event) {
+    setMacroBuildBrighter("");
+
+    setMacroListBrighter("");
+
+    setMacroCreateBrighter("");
+
+    setRecipeLibraryBrighter("");
+
+    setRecipeListBrighter("");
+
+    setRecipeCreateBrighter("");
+  };
   //FUNCTION TO FIND THE CURRENT SLIDE
   const carousel = useRef();
-
   //FUNCTION TO FIND THE CURRENT SLIDE
   const findCurrentSlide = function () {
     const cardArr = document.querySelectorAll(".slick-slide");
@@ -79,88 +126,139 @@ export default function SliderComponent() {
       />
 
       <Slider {...settings} ref={carousel}>
-        <div className="slider__card">
-          <Link className="slider__link" to={"/build-macro"}>
+        <div
+          onMouseEnter={handleMouseEnterBrighter}
+          onMouseLeave={handleMouseLeaveDarker}
+          className="slider__card slider__build-macro"
+        >
+          <Link
+            className="slider__link slider__build-macro"
+            to={"/build-macro"}
+          >
             <img
-              className="slider__image"
+              className={`slider__image slider__build-macro ${macroBuildBrighter}`}
               src={buildMacrosPic}
-              alt="build-macro-pic"
+              alt="build-macro"
             />
-            <div className="slider__text">
-              <h3>Build your macro ratios right now</h3>
-              <p>Let's design your Macronutrient ratios here</p>
+            <div className="slider__text slider__build-macro">
+              <h3 className="slider__build-macro">
+                Build your macro ratios right now
+              </h3>
+              <p className="slider__build-macro">
+                Let's design your Macronutrient ratios here
+              </p>
             </div>
           </Link>
         </div>
 
-        <div className="slider__card">
-          <Link className="slider__link" to={"/macro-list"}>
+        <div
+          onMouseEnter={handleMouseEnterBrighter}
+          onMouseLeave={handleMouseLeaveDarker}
+          className="slider__card slider__macro-list"
+        >
+          <Link className="slider__link slider__macro-list" to={"/macro-list"}>
             <img
-              className="slider__image"
+              className={`slider__image slider__macro-list ${macroListBrighter}`}
               src={nutritionFactPic}
-              alt="build-macro-pic"
+              alt="macro-list"
             />
-            <div className="slider__text">
-              <h3>Enjoy your own macro list</h3>
-              <p>You can easily save the macros you built into a list</p>
+            <div className="slider__text slider__macro-list">
+              <h3 className="slider__macro-list">Enjoy your own macro list</h3>
+              <p className="slider__macro-list">
+                You can easily save the macros you built into a list
+              </p>
             </div>
           </Link>
         </div>
 
-        <div className="slider__card">
-          <Link className="slider__link" to={"/add-macro"}>
+        <div
+          onMouseEnter={handleMouseEnterBrighter}
+          onMouseLeave={handleMouseLeaveDarker}
+          className="slider__card slider__add-macro"
+        >
+          <Link className="slider__link slider__add-macro" to={"/add-macro"}>
             <img
-              className="slider__image"
+              className={`slider__image slider__add-macro ${macroCreateBrighter}`}
               src={trackBodyIndexPic}
-              alt="build-macro-pic"
+              alt="add-macro"
             />
-            <div className="slider__text">
-              <h3>Construct a new macro based on your preference</h3>
-              <p>We allow users to build macros based on their calculators</p>
+            <div className="slider__text slider__add-macro">
+              <h3 className="slider__add-macro">
+                Construct a new macro based on your preference
+              </h3>
+              <p className="slider__add-macro">
+                We allow users to build macros based on their calculators
+              </p>
             </div>
           </Link>
         </div>
 
-        <div className="slider__card">
-          <Link className="slider__link" to={"/recipe-library"}>
+        <div
+          onMouseEnter={handleMouseEnterBrighter}
+          onMouseLeave={handleMouseLeaveDarker}
+          className="slider__card slider__recipe-library"
+        >
+          <Link
+            className="slider__link slider__recipe-library"
+            to={"/recipe-library"}
+          >
             <img
-              className="slider__image"
+              className={`slider__image slider__recipe-library ${recipeLibraryBrighter}`}
               src={recipePic}
-              alt="build-macro-pic"
+              alt="recipe-library"
             />
-            <div className="slider__text">
-              <h3>Enjoy our recipe library</h3>
-              <p>We provide you with many recipies to diversify your dishes</p>
+            <div className="slider__text slider__recipe-library">
+              <h3 className="slider__recipe-library">
+                Enjoy our recipe library
+              </h3>
+              <p className="slider__recipe-library">
+                We provide you with many recipies to diversify your dishes
+              </p>
             </div>
           </Link>
         </div>
 
-        <div className="slider__card">
-          <Link className="slider__link" to={"/recipe-list"}>
+        <div
+          onMouseEnter={handleMouseEnterBrighter}
+          onMouseLeave={handleMouseLeaveDarker}
+          className="slider__card slider__recipe-list"
+        >
+          <Link
+            className="slider__link slider__recipe-list"
+            to={"/recipe-list"}
+          >
             <img
-              className="slider__image"
+              className={`slider__image slider__recipe-list ${recipeListBrighter}`}
               src={buildRecipe}
-              alt="build-macro-pic"
+              alt="recipe-list"
             />
-            <div className="slider__text">
-              <h3>Let's build your own favourite recipe list</h3>
-              <p>
+            <div className="slider__text slider__recipe-list">
+              <h3 className="slider__recipe-list">
+                Let's build your own favourite recipe list
+              </h3>
+              <p className="slider__recipe-list">
                 The website platform allows you to construct your recipe list
               </p>
             </div>
           </Link>
         </div>
 
-        <div className="slider__card">
-          <Link className="slider__link" to={"/add-recipe"}>
+        <div
+          onMouseEnter={handleMouseEnterBrighter}
+          onMouseLeave={handleMouseLeaveDarker}
+          className="slider__card slider__add-recipe"
+        >
+          <Link className="slider__link slider__add-recipe" to={"/add-recipe"}>
             <img
-              className="slider__image"
+              className={`slider__image slider__add-recipe ${recipeCreateBrighter}`}
               src={addRecipePic}
-              alt="build-macro-pic"
+              alt="add-recipe"
             />
-            <div className="slider__text">
-              <h3>Become a recipe creator</h3>
-              <p>Post your recipe and share it with the other users</p>
+            <div className="slider__text slider__add-recipe">
+              <h3 className="slider__add-recipe">Become a recipe creator</h3>
+              <p className="slider__add-recipe">
+                Post your recipe and share it with the other users
+              </p>
             </div>
           </Link>
         </div>
