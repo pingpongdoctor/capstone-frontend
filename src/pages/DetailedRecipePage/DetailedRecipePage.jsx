@@ -269,7 +269,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                 </h2>
               </div>
               <div className="detail-recipe__edit-icon-wrapper">
-                {!savedRecipe && (
+                {loginState && !savedRecipe && (
                   <img
                     onClick={handleOnClickSaveRecipe}
                     className="detail-recipe__save"
@@ -277,7 +277,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                     alt="unsave-icon"
                   />
                 )}
-                {savedRecipe && (
+                {loginState && savedRecipe && (
                   <img
                     onClick={handleOnClickUnSaveRecipe}
                     className="detail-recipe__save"

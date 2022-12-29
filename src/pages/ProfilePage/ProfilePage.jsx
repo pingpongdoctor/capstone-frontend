@@ -2,14 +2,18 @@ import "./ProfilePage.scss";
 import Avatar from "../../components/Avatar/Avatar";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import closePic from "../../assets/icons/close.png";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import InputBox from "../../components/InputBox/InputBox";
+import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { headers } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function ProfilePage({ loginState, userProfile, loadProfile }) {
+  //USE USENAVIGATE
+  const navigate = useNavigate();
   //STATES FOR INPUT BOXES
   const [newUserName, setNewUserName] = useState("");
   const [newHeight, setNewHeight] = useState("");
@@ -18,8 +22,6 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
   const [newGender, setNewGender] = useState("");
   const [profileInputError, setProfileInputError] = useState("");
   const [profileTextareaError, setProfileTextareaError] = useState("");
-  //STATE FOR THE UPDATED FIELD
-  // const [updateField, setUpdateField] = useState("");
   //STATE FOR MODAL BOX APPEARANCE
   const [modalBoxAppear, setModalBoxAppear] = useState(false);
   //STATE FOR THE INPUT BOX APPEARANCE (name, weight, height, age)
@@ -82,7 +84,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
       body = { age: newAge };
     }
     if (inputType === "gender") {
-      body = { gender: newGender };
+      body = { gender: newGender === "others" ? "male" : newGender };
     }
 
     if (newUserName || newWeight || newHeight || newAge || newGender) {
@@ -140,6 +142,12 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
       <div className="profile-page">
         <div className="profile-page__container">
           <div className="profile-page__wrapper">
+            <BackIconComponent
+              onClickHandler={() => {
+                navigate("/");
+              }}
+              backClassName="back-icon back-icon--profile-page"
+            />
             <Avatar avatarClassName="avatar avatar--main" />
             <h3>Profile Details Of {userProfile.username}</h3>
           </div>
@@ -278,6 +286,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                   <option value="">Choose here</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
+                  <option value="others">Others</option>
                 </select>
               )}
               <ButtonComponent

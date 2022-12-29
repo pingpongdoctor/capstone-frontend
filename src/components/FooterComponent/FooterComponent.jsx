@@ -8,7 +8,7 @@ export default function FooterComponent() {
   const location = useLocation();
   const currentRoute = location.pathname;
 
-  if (currentRoute !== "/login") {
+  if (currentRoute !== "/login" && currentRoute !== "/sign-up") {
     return (
       <div className="site-footer">
         <div className="site-footer__container">

@@ -7,13 +7,18 @@
   background-color: $Button-Color;
   color: #ffffff;
   cursor: pointer;
-  &:hover {
-    background-color: $Button-Hover-Color;
-  }
-  &:active {
-    transform: scale(0.99);
-  }
   padding: 1rem;
+
+  &--signup {
+    width: 285px;
+    @include desktop {
+      width: 312px;
+    }
+  }
+
+  &--login {
+    width: 100%;
+  }
 
   &--macro-page--error {
     border: 1.5px solid red;
@@ -123,5 +128,12 @@
   &--modal-box {
     height: 50px;
     width: 100%;
+  }
+
+  &:hover {
+    background-color: $Button-Hover-Color;
+  }
+  &:active {
+    transform: scale(0.99);
   }
 }
