@@ -255,7 +255,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
             tdee_need: neededIntake,
             goal: goal,
             body_type: bodyType,
-            gender: gender,
+            gender: gender === "others" ? "male" : gender,
             height,
             weight: currentWeight,
             age,
@@ -448,7 +448,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                 {targetedWeightAppear && (
                   <div className="add-macro__wrapper">
                     <label
-                      className={"add-macro__label"}
+                      className="add-macro__label"
                       htmlFor="targeted-weight"
                     >
                       Targeted Weight
@@ -466,7 +466,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                 )}
 
                 <div className="add-macro__wrapper">
-                  <label className="macro-page__text" htmlFor="gender">
+                  <label className="add-macro__label" htmlFor="gender">
                     Gender
                   </label>
                   <select
@@ -479,7 +479,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     <option value="">Choose here</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="male">Others</option>
+                    <option value="others">Others</option>
                   </select>
                 </div>
 

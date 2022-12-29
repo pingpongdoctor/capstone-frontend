@@ -138,7 +138,7 @@ export default function EditMacroPage({ loginState }) {
         tdee_need: neededIntake || macroObj.tdee_need,
         goal: goal || macroObj.goal,
         body_type: bodyType || macroObj.body_type,
-        gender: gender || macroObj.gender,
+        gender: (gender === "others" ? "male" : gender) || macroObj.gender,
         height: height || macroObj.height,
         weight: currentWeight || macroObj.weight,
         age: age || macroObj.age,
@@ -340,7 +340,7 @@ export default function EditMacroPage({ loginState }) {
                       <option value="">Choose here</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
-                      <option value="male">Others</option>
+                      <option value="others">Others</option>
                     </select>
                   )}
                 </div>

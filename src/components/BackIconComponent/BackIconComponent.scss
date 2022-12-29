@@ -10,4 +10,11 @@
   &--detail-recipe {
     margin-top: 0;
   }
+
+  &--profile-page {
+    margin: 0 1rem 1rem 0;
+    @include tablet {
+      margin: 0.5rem 0 0 0;
+    }
+  }
 }
