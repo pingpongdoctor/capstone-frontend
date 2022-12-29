@@ -84,7 +84,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     setAge(Number(event.target.value));
   };
   const handleGender = function (event) {
-    setGender(event.target.value);
+    setGender(event.target.value === "others" ? "male" : event.target.value);
   };
   //FUNCTION TO SET THE STATE FOR "WHO DO YOU BUILD MACRO FOR"
   const handleBuildFor = function (event) {
@@ -317,7 +317,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const countEstimatedWeekArr = function (weeks) {
     let weekArr = [];
     for (let i = 1; i <= weeks; i++) {
-      weekArr.push(`"week" ${i}`);
+      weekArr.push(`week ${i}`);
     }
     return weekArr;
   };
@@ -618,7 +618,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     <option value="">Choose here</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="male">Others</option>
+                    <option value="others">Others</option>
                   </select>
                 </div>
               </div>

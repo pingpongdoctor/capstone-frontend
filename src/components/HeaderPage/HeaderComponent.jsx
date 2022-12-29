@@ -14,7 +14,7 @@ export default function HeaderComponent({
   const location = useLocation();
   const currentRoute = location.pathname;
 
-  if (currentRoute !== "/login") {
+  if (currentRoute !== "/login" && currentRoute !== "/sign-up") {
     return (
       <div className="header-page header-page--login">
         <div className="header-page__container">
@@ -27,7 +27,11 @@ export default function HeaderComponent({
           {/* <img className="logo logo--header-page" src={logo} alt="logo" /> */}
           <Logo logoClassName="logo logo--header-page" />
           <div className="header-page__wrapper">
-            {!loginState && <Link className="header-page__link">Sign Up</Link>}
+            {!loginState && (
+              <Link to={"/sign-up"} className="header-page__link">
+                Sign Up
+              </Link>
+            )}
             {!loginState && (
               <Link to={"/login"} className="header-page__link">
                 Log in

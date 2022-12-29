@@ -9,9 +9,57 @@
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   color: $Text-Color;
-
   &:focus {
     box-shadow: 1px 2px 6px 1px $Input-Box-Shadow;
+  }
+
+  &--login {
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+    border: none;
+    height: 3rem;
+    background-color: rgb(255, 255, 255, 0.3);
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: 1rem;
+    width: 100%;
+    &::placeholder {
+      color: #ffffff;
+    }
+    &:focus {
+      box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &--signup {
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+    border: none;
+    height: 3rem;
+    background-color: rgb(255, 255, 255, 0.3);
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: 1rem;
+    width: 285px;
+    &::placeholder {
+      color: #ffffff;
+    }
+    &:focus {
+      box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+    }
+    @include desktop {
+      width: 312px;
+    }
+  }
+
+  &--login-password {
+    background-image: url("../../assets/icons/lock.svg");
+  }
+
+  &--login-email {
+    background-image: url("../../assets/icons/envelope.svg");
   }
 
   &--macro-list-search,
@@ -44,5 +92,34 @@
 
   &--profile-page-error {
     border: 1px red solid;
+  }
+
+  &--signup-password,
+  &--signup-password-confirm {
+    background-image: url("../../assets/icons/lock.svg");
+  }
+
+  &--signup-email {
+    background-image: url("../../assets/icons/envelope.svg");
+  }
+
+  &--signup-username {
+    background-image: url("../../assets/icons/envelope.svg");
+  }
+
+  &--signup-gender {
+    background-image: url("../../assets/icons/envelope.svg");
+  }
+
+  &--signup-age {
+    background-image: url("../../assets/icons/envelope.svg");
+  }
+
+  &--signup-weight {
+    background-image: url("../../assets/icons/envelope.svg");
+  }
+
+  &--signup-height {
+    background-image: url("../../assets/icons/envelope.svg");
   }
 }

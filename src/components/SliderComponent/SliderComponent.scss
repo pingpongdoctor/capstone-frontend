@@ -18,7 +18,7 @@
     transition: transform 1s;
     height: 500px;
     &:hover {
-      transform: scale(1.03);
+      transform: scale(1.01);
     }
   }
 
@@ -39,10 +39,13 @@
     object-position: center;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    transition: filter 1s;
     filter: brightness(0.85);
-    &:hover {
-      filter: brightness(1);
-    }
+  }
+
+  &__image--brighter {
+    transition: filter 1s;
+    filter: brightness(1);
   }
 
   &__text {
