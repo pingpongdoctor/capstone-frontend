@@ -5,9 +5,11 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import questionIcon from "../../assets/icons/question.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { sha256 } from "js-sha256";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function SignUpPage() {
+  console.log(sha256("greg@gmail.com"));
   //USE USENAVIGATE
   const navigate = useNavigate();
   //STATES FOR ALL INPUT BOXES
@@ -154,8 +156,8 @@ export default function SignUpPage() {
     if (isFormValid()) {
       const postedObj = {
         username,
-        email,
-        password,
+        email: sha256(email),
+        password: sha256(password),
         gender: gender === "others" ? "male" : gender,
         age,
         weight,
