@@ -5,6 +5,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import questionIcon from "../../assets/icons/question.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { sha256 } from "js-sha256";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function SignUpPage() {
@@ -154,8 +155,8 @@ export default function SignUpPage() {
     if (isFormValid()) {
       const postedObj = {
         username,
-        email,
-        password,
+        email: sha256(email),
+        password: sha256(password),
         gender: gender === "others" ? "male" : gender,
         age,
         weight,
@@ -169,7 +170,9 @@ export default function SignUpPage() {
           navigate("/login");
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.data === "This email already exists") {
+            alert("This email already exists");
+          }
         });
     } else {
       if (!isEmailValid()) {

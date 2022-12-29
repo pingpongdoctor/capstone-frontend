@@ -19,6 +19,7 @@ import EditRecipePage from "./pages/EditRecipePage/EditRecipePage";
 import FooterComponent from "./components/FooterComponent/FooterComponent";
 import RecipeListPage from "./pages/RecipeListPage/RecipeListPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import { sha256 } from "js-sha256";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 function App() {
@@ -43,8 +44,8 @@ function App() {
     event.preventDefault();
     axios
       .post(`${API_URL}/login`, {
-        email,
-        password,
+        email: sha256(email),
+        password: sha256(password),
       })
       .then((response) => {
         if (response.data) {

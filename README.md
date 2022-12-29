@@ -28,6 +28,7 @@ This project is about building a website to help users designing their own diets
 - Chart.js Library - React components for Chart.js is one of the most popular charting libraries. The website uses the Pie chart and the Line chart from this library.
 - Fitness Calculator Library - This library helps perform calculations for your BMI, BMR, calorie needs, total daily energy expenditure, macros and much more.
 - Cloudinary - Cloudinary is used to store the recipe images posted from frontend.
+- Sha256 Library - This library is used to hash email and password on the front end to protect users from being hacked.
 
 ## Tech Stack Backend
 
@@ -35,6 +36,7 @@ This project is about building a website to help users designing their own diets
 - Node.js
 - Express - Express framework is used to build endpoints for the backend and to apply libraries.
 - Knex library - Knex is a SQL query builder that helps form SQL table by using javascript codes and query data from SQL tables such as user data, macro data, recipe data and comment data.
+- Bcrypt Library - The encrypted password on frontend is again encrypted on the backend by using the bcrypt library. This immensly enhance the security level for the website.
 
 ## Installation
 
@@ -86,8 +88,8 @@ npm start
 
 Since the website authenticating users by using JWT token, you have to log in to use the full website's functions. There are two accounts below
 
-- Email: simon@gmail.com | Password: 12345
-- Email: greg@gmail.com | Password: 123456
+- Email: simon@gmail.com | Password: 123456Aa@
+- Email: greg@gmail.com | Password: 123456Aa@
 
 ## Links
 
