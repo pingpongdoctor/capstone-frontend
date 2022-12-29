@@ -9,7 +9,6 @@ import { sha256 } from "js-sha256";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function SignUpPage() {
-  console.log(sha256("greg@gmail.com"));
   //USE USENAVIGATE
   const navigate = useNavigate();
   //STATES FOR ALL INPUT BOXES
@@ -171,7 +170,9 @@ export default function SignUpPage() {
           navigate("/login");
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.data === "This email already exists") {
+            alert("This email already exists");
+          }
         });
     } else {
       if (!isEmailValid()) {
