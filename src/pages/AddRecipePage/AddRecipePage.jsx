@@ -6,6 +6,7 @@ import BackIconComponent from "../../components/BackIconComponent/BackIconCompon
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { headers } from "../../Utils/utils";
+import { handleFilterMinusOperator } from "../../Utils/utils";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const API_URL = process.env.REACT_APP_API_URL || "";
@@ -150,7 +151,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
 
   //FUNCTION TO SET THE STATES OF READY TIME, DESCRIPTION, LEVEL AND RECIPE NAME
   const handleReadyTime = function (event) {
-    setReadyTime(Math.abs(event.target.value));
+    setReadyTime(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleDescription = function (event) {

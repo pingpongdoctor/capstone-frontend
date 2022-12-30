@@ -11,6 +11,11 @@ import barChartPic from "../../assets/images/bar-chart.png";
 import lineChartPic from "../../assets/images/line-chart.png";
 import meditationPic from "../../assets/images/meditation.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { API_URL } from "../../Utils/utils";
+import {
+  handleFilterMinusOperator,
+  handleCapitalizeAWord,
+} from "../../Utils/utils";
 import { headers } from "../../Utils/utils";
 import {
   Chart as ChartJS,
@@ -35,7 +40,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const API_URL = process.env.REACT_APP_API_URL || "";
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
 export default function BuildMacroPage({ userProfile, loginState }) {
@@ -75,13 +79,13 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const navigate = useNavigate();
   //FUNCTION TO SET THE STATES FOR CURRENT WEIGHT, HEIGHT, AGE, GENDER
   const handleCurrentWeight = function (event) {
-    setCurrentWeight(Number(event.target.value));
+    setCurrentWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleHeight = function (event) {
-    setHeight(Number(event.target.value));
+    setHeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleAge = function (event) {
-    setAge(Number(event.target.value));
+    setAge(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleGender = function (event) {
     setGender(event.target.value === "others" ? "male" : event.target.value);
@@ -103,7 +107,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   };
   //USE EFFECT TO SROLL TO ELEMENTS
   useEffect(() => {
-    if (tdee) {
+    if (currentWeight && height && gender && age && tdee) {
       handleScroll(neededTdeeRef);
     }
     if (neededIntake) {
@@ -152,13 +156,17 @@ export default function BuildMacroPage({ userProfile, loginState }) {
         setCurrentWeight(userProfile.weight);
         setHeight(userProfile.height);
         setAge(userProfile.age);
-        setGender(userProfile.gender);
+        setGender(
+          userProfile.gender === "others" ? "male" : userProfile.gender
+        );
       } else if (buildFor === "friend") {
         setBuildForFriend(true);
         setCurrentWeight("");
         setHeight("");
         setAge("");
         setGender("");
+        setActivity("");
+        setTdee("");
       }
     }
     // eslint-disable-next-line
@@ -211,7 +219,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       }
     }
   };
-  console.log(goal, showSaveMacro, protein, carb, fat);
+
   //USE EFFECT TO SET BODY TYPE EXPLATINATION STATE
   useEffect(() => {
     if (loginState && bodyType) {
@@ -236,7 +244,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   //USE EFFECT TO RESET TDEE
   useEffect(() => {
     setTdee("");
-  }, [activity]);
+  }, [activity, age, currentWeight, height, gender]);
 
   //USE EFFECT TO RESET GOAL
   useEffect(() => {
@@ -283,14 +291,14 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setCurrentWeight(userProfile.weight);
       setAge(userProfile.age);
       setHeight(userProfile.height);
-      setGender(userProfile.gender);
+      setGender(userProfile.gender === "others" ? "male" : userProfile.gender);
     }
     // eslint-disable-next-line
   }, [loginState]);
 
   //FUNCTION TO HANDLE THE TARGETED WEIGHT STATE
   const handleTargetedWeight = function (event) {
-    setTargetedWeight(Math.round(event.target.value));
+    setTargetedWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   //FUNCTION TO HADNLE THE MACRO NAME STATE
@@ -382,7 +390,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
 
   //FUNCTION TO CALCULATE TDEE (REQUIRED INPUT VALUES: GENDER, AGE, HEIGHT, WEIGHT, ACTIVITY)
   const handleBalancedTdee = function () {
-    if (activity) {
+    if (activity && age && currentWeight && height && gender) {
       const balancedTdee = Math.round(
         fitnessCalculatorFunctions.TDEE(
           gender,
@@ -551,9 +559,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               </p>
             )}
 
-            {!buildForFriend && (
+            {!buildForFriend && gender && (
               <ul className="macro-page__list">
-                <li>Gender: {gender}</li>
+                <li>Gender: {handleCapitalizeAWord(gender)}</li>
                 <li>Age: {age}</li>
                 <li>Height: {height} cm</li>
                 <li>Weight: {currentWeight} kg</li>
@@ -568,6 +576,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     Type Weight (kg)
                   </label>
                   <input
+                    value={currentWeight}
                     onChange={handleCurrentWeight}
                     className="macro-page__input-box"
                     id="current-weight"
@@ -585,6 +594,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     Type Height (cm)
                   </label>
                   <input
+                    value={height}
                     onChange={handleHeight}
                     className="macro-page__input-box"
                     name="height"
@@ -597,6 +607,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     Type Age
                   </label>
                   <input
+                    value={age}
                     onChange={handleAge}
                     className="macro-page__input-box"
                     id="age"
@@ -676,15 +687,13 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     btnContent="Calculate your TDEE now"
                   />
                   {/* RESULT */}
-                  {activity && tdee && (
-                    <p>Your Balanced TDEE is: {tdee} calories</p>
-                  )}
+                  {tdee && <p>Your Balanced TDEE is: {tdee} calories</p>}
                 </div>
               </div>
             </div>
           )}
           {/* STEP 2 */}
-          {tdee && (
+          {activity && tdee && (
             <div className="macro-page__steps">
               <img
                 ref={neededTdeeRef}

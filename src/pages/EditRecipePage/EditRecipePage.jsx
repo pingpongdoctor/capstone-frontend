@@ -6,6 +6,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import { headers } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
+import { handleFilterMinusOperator } from "../../Utils/utils";
 
 const API_URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
@@ -193,7 +194,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
 
   //FUNCTION TO SET THE STATES OF READY TIME, DESCRIPTION, LEVEL AND RECIPE NAME
   const handleReadyTime = function (event) {
-    setReadyTime(Math.abs(event.target.value));
+    setReadyTime(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleDescription = function (event) {
