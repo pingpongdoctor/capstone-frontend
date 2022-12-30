@@ -328,7 +328,7 @@ export default function SignUpPage() {
                   onMouseLeave={handleMouseLeaveUsernameText}
                   className="signup-page__text"
                 >
-                  Username requires at least 6 charactets.
+                  Username requires at least 6 characters.
                 </p>
               )}
             </div>
