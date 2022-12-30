@@ -86,7 +86,7 @@ npm start
 
 ## Log in accounts
 
-Since the website authenticates users by using JWT token, you have to log in to use the full website's functions. There are two accounts below
+Since the website authenticates users by using JWT token, you have to log in to use the full website's feature. There are two available accounts below for you or you can sign up for a new account.
 
 - Email: simon@gmail.com | Password: 123456Aa@
 - Email: greg@gmail.com | Password: 123456Aa@
