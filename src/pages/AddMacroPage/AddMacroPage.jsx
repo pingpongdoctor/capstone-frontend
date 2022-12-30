@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { headers } from "../../Utils/utils";
+import { handleFilterMinusOperator } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile }) {
@@ -38,13 +39,13 @@ export default function AddMacroPage({ loginState, userProfile }) {
   //FUNCTION TO HANDLE ALL INPUT STATES
 
   const handleCurrentWeight = function (event) {
-    setCurrentWeight(Number(event.target.value));
+    setCurrentWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleHeight = function (event) {
-    setHeight(Number(event.target.value));
+    setHeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleAge = function (event) {
-    setAge(Number(event.target.value));
+    setAge(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleGender = function (event) {
     setGender(event.target.value);
@@ -59,7 +60,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
   };
 
   const handleTargetedWeight = function (event) {
-    setTargetedWeight(Math.round(event.target.value));
+    setTargetedWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleActivity = function (event) {
@@ -67,11 +68,11 @@ export default function AddMacroPage({ loginState, userProfile }) {
   };
 
   const handleTdee = function (event) {
-    setTdee(Math.round(event.target.value));
+    setTdee(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleNeededIntake = function (event) {
-    setNeededIntake(Math.round(event.target.value));
+    setNeededIntake(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleBodyType = function (event) {

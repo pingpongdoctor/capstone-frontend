@@ -84,7 +84,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
       body = { age: newAge };
     }
     if (inputType === "gender") {
-      body = { gender: newGender === "others" ? "male" : newGender };
+      body = { gender: newGender };
     }
 
     if (newUserName || newWeight || newHeight || newAge || newGender) {

@@ -4,10 +4,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
-import { headers } from "../../Utils/utils";
+import { headers, jwtToken } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
-const API_URL = process.env.REACT_APP_API_URL || "";
+import { API_URL } from "../../Utils/utils";
 
 export default function MacroLisPage({ userProfile, loginState }) {
   //APPLY THE USE NAVIGATE
@@ -39,12 +39,12 @@ export default function MacroLisPage({ userProfile, loginState }) {
         .catch((error) => console.log(error));
     }
   };
-  console.log(API_URL);
+
   //USE EFFECT TO GET ALL MACROS
   useEffect(() => {
     handleGetAllMacros();
     // eslint-disable-next-line
-  }, [loginState]);
+  }, [loginState, jwtToken]);
 
   //FUNCTION TO UPDATE THE DELETE MACRO ID STATE
   const handleDeleteMacroId = function (macroId) {

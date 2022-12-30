@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { headers, jwtToken } from "../../Utils/utils";
+import { handleFilterMinusOperator } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function EditMacroPage({ loginState }) {
@@ -74,13 +75,13 @@ export default function EditMacroPage({ loginState }) {
 
   //FUNCTION TO HANDLE ALL INPUT STATES
   const handleCurrentWeight = function (event) {
-    setCurrentWeight(Number(event.target.value));
+    setCurrentWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleHeight = function (event) {
-    setHeight(Number(event.target.value));
+    setHeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleAge = function (event) {
-    setAge(Number(event.target.value));
+    setAge(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleGender = function (event) {
     setGender(event.target.value);
@@ -95,7 +96,7 @@ export default function EditMacroPage({ loginState }) {
   };
 
   const handleTargetedWeight = function (event) {
-    setTargetedWeight(Math.round(event.target.value));
+    setTargetedWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleActivity = function (event) {
@@ -103,11 +104,11 @@ export default function EditMacroPage({ loginState }) {
   };
 
   const handleTdee = function (event) {
-    setTdee(Math.round(event.target.value));
+    setTdee(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleNeededIntake = function (event) {
-    setNeededIntake(Math.round(event.target.value));
+    setNeededIntake(Number(handleFilterMinusOperator(event.target.value)));
   };
 
   const handleBodyType = function (event) {
@@ -138,7 +139,7 @@ export default function EditMacroPage({ loginState }) {
         tdee_need: neededIntake || macroObj.tdee_need,
         goal: goal || macroObj.goal,
         body_type: bodyType || macroObj.body_type,
-        gender: (gender === "others" ? "male" : gender) || macroObj.gender,
+        gender: gender || macroObj.gender,
         height: height || macroObj.height,
         weight: currentWeight || macroObj.weight,
         age: age || macroObj.age,

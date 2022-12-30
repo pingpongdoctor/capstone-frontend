@@ -67,9 +67,17 @@ export const headers = {
 //DECLARE URL
 export const API_URL = process.env.REACT_APP_API_URL;
 
-//DECLARE THE HOOK USE WINDOW SIZE
+//FUNCTION TO FILTER OUT ALL "-" OPERATOR FROM THE INPUT VALUES
+export const handleFilterMinusOperator = function (string) {
+  const newString = string
+    .split("")
+    .filter((letter) => letter !== "-" && letter !== ".")
+    .join("");
 
-// Hook
+  return newString;
+};
+
+//DECLARE THE HOOK USE WINDOW SIZE
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
     width: undefined,

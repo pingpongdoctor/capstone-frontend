@@ -321,8 +321,6 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
     ],
   };
 
-  console.log(macroObj);
-
   if (loginState) {
     return (
       <div className="detail-page">
