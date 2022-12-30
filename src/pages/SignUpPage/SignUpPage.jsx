@@ -6,7 +6,8 @@ import questionIcon from "../../assets/icons/question.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { sha256 } from "js-sha256";
-const API_URL = process.env.REACT_APP_API_URL || "";
+import { API_URL } from "../../Utils/utils";
+import { handleFilterMinusOperator } from "../../Utils/utils";
 
 export default function SignUpPage() {
   //USE USENAVIGATE
@@ -63,13 +64,13 @@ export default function SignUpPage() {
     setGender(event.target.value);
   };
   const handleAge = function (event) {
-    setAge(event.target.value);
+    setAge(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleWeight = function (event) {
-    setWeight(event.target.value);
+    setWeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleHeight = function (event) {
-    setHeight(event.target.value);
+    setHeight(Number(handleFilterMinusOperator(event.target.value)));
   };
   //FUNCTION TO VALIDATE THE STATES
   const isEmailValid = function () {
@@ -279,7 +280,7 @@ export default function SignUpPage() {
                   inputOnChange={handlePassword}
                 />
                 <img
-                  onClick={handleMouseEnterPasswordText}
+                  onMouseEnter={handleMouseEnterPasswordText}
                   className="signup-page__ques-img"
                   src={questionIcon}
                   alt="question-icon"
@@ -287,7 +288,7 @@ export default function SignUpPage() {
               </div>
               {passwordTextAppear && (
                 <p
-                  onClick={handleMouseLeavePasswordText}
+                  onMouseLeave={handleMouseLeavePasswordText}
                   className="signup-page__text"
                 >
                   At least 1 lower-case letter, 1 upper-case letter, 1 number, 1
@@ -316,7 +317,7 @@ export default function SignUpPage() {
                   inputOnChange={handleUsername}
                 />
                 <img
-                  onClick={handleMouseEnterUsernameText}
+                  onMouseEnter={handleMouseEnterUsernameText}
                   className="signup-page__ques-img"
                   src={questionIcon}
                   alt="question-icon"
@@ -324,7 +325,7 @@ export default function SignUpPage() {
               </div>
               {usernameTextAppear && (
                 <p
-                  onClick={handleMouseLeaveUsernameText}
+                  onMouseLeave={handleMouseLeaveUsernameText}
                   className="signup-page__text"
                 >
                   Username requires at least 6 charactets.
@@ -371,7 +372,7 @@ export default function SignUpPage() {
 
             {/* WEIGHT  */}
             <InputBox
-              inputPlaceholder="Weight"
+              inputPlaceholder="Weight in kg"
               inputName="weight"
               inputType="number"
               inputClassName={`input-box input-box--signup input-box--signup-weight ${weightEr}`}
@@ -381,7 +382,7 @@ export default function SignUpPage() {
 
             {/* HEIGHT  */}
             <InputBox
-              inputPlaceholder="Height"
+              inputPlaceholder="Height in cm"
               inputName="height"
               inputType="number"
               inputClassName={`input-box input-box--signup input-box--signup-height ${heightEr}`}
