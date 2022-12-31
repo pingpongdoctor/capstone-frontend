@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
-import { headers, jwtToken } from "../../Utils/utils";
+import { headers } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
 import { API_URL } from "../../Utils/utils";
@@ -44,7 +44,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
   useEffect(() => {
     handleGetAllMacros();
     // eslint-disable-next-line
-  }, [loginState, jwtToken]);
+  }, [loginState]);
 
   //FUNCTION TO UPDATE THE DELETE MACRO ID STATE
   const handleDeleteMacroId = function (macroId) {
