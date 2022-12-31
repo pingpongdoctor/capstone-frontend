@@ -23,7 +23,7 @@ This project is about building a website to help users designing their own diets
 ## Tech Stack Frontend
 
 - React JS.
-- React Component - React Components are applied to create reuseable components and create multi-view single pages.
+- React Component - React Components are applied to create reusable components and create multi-view single pages.
 - Slick Library - React slick is a carousel component built with React. The homepage has an image carousel that is built by using this library.
 - Chart.js Library - React components for Chart.js is one of the most popular charting libraries. The website uses the Pie chart and the Line chart from this library.
 - Fitness Calculator Library - This library helps perform calculations for your BMI, BMR, total daily energy expenditure, and so on.
