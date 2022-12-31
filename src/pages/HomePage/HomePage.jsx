@@ -29,8 +29,8 @@ export default function HomePage({ loginState }) {
           <img className="home-page__img" src={cookingPic} alt="cooking" />
           <p className="home-page__descript">
             Being on diets does not mean that you are not allowed to eat yummy
-            food. We provide users with a big bunch of recipes instructing you
-            cook healthy and yummy food.
+            food. We provide users with a big bunch of recipes instructing how
+            to cook healthy and yummy food.
           </p>
         </div>
         {!loginState && (
@@ -39,7 +39,7 @@ export default function HomePage({ loginState }) {
               navigate("/login");
             }}
             btnClassName="btn btn--home-page"
-            btnContent="Login now to use the full version"
+            btnContent="Sign up for a new account"
           />
         )}
       </div>

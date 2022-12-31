@@ -4,10 +4,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
-import { headers } from "../../Utils/utils";
+import { API_URL } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
-import { API_URL } from "../../Utils/utils";
 
 export default function MacroLisPage({ userProfile, loginState }) {
   //APPLY THE USE NAVIGATE
@@ -15,6 +14,14 @@ export default function MacroLisPage({ userProfile, loginState }) {
   //FUNCTION TO NAVIGATE TO THE ADD MACRO PAGE
   const handleNavigateAddMacroPage = function () {
     navigate("/add-macro");
+  };
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
   };
   //STATE TO MAKE THE DELETE BOX APPEAR
   const [boxAppear, setBoxAppear] = useState(false);
@@ -34,6 +41,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
       axios
         .get(`${API_URL}/macros-list`, headers)
         .then((response) => {
+          console.log(response.data);
           setMacroArr(response.data);
         })
         .catch((error) => console.log(error));
@@ -44,7 +52,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
   useEffect(() => {
     handleGetAllMacros();
     // eslint-disable-next-line
-  }, [loginState]);
+  }, [loginState, jwtToken]);
 
   //FUNCTION TO UPDATE THE DELETE MACRO ID STATE
   const handleDeleteMacroId = function (macroId) {

@@ -228,6 +228,7 @@ export default function SignUpPage() {
     if (isHeightValid()) {
       setHeightEr("");
     }
+    // eslint-disable-next-line
   }, [email, password, passwordConfirm, username, gender, age, weight, height]);
 
   return (

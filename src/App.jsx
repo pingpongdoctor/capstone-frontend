@@ -42,6 +42,10 @@ function App() {
   //FUNCTION TO LOGIN
   const handleLogin = function (event) {
     event.preventDefault();
+    console.log({
+      email: sha256(email),
+      password: sha256(password),
+    });
     axios
       .post(`${API_URL}/login`, {
         email: sha256(email),

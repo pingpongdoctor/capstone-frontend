@@ -17,6 +17,10 @@
     }
   }
 
+  &__big-wrapper {
+    width: 100%;
+  }
+
   &__flex-container {
     display: flex;
     flex-direction: column;
@@ -52,8 +56,12 @@
     margin-top: 1.4rem;
   }
 
-  &__text {
+  &__label {
     width: 130px;
+  }
+
+  &__step-label {
+    font-weight: 600;
   }
 
   &__list {
@@ -167,11 +175,14 @@
 
   &__input-box {
     padding: 0.5rem 1rem;
-    width: 12rem;
     border-radius: 5px;
     outline: none;
     background-color: ivory;
     text-align: center;
+    width: 15rem;
+    @include desktop {
+      width: 15rem;
+    }
   }
 
   &__wrapper {
@@ -179,8 +190,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    margin-top: 1rem;
-    @include tablet {
+    margin-top: 0.5rem;
+    @include desktop {
       flex-direction: row;
       align-items: center;
     }

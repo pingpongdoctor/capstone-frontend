@@ -16,6 +16,13 @@
     }
   }
 
+  &--macro-page {
+    margin-top: 0.5rem;
+    @include desktop {
+      margin-top: 0;
+    }
+  }
+
   &--login {
     width: 100%;
   }

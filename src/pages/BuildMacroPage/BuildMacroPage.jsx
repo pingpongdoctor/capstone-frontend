@@ -16,7 +16,6 @@ import {
   handleFilterMinusOperator,
   handleCapitalizeAWord,
 } from "../../Utils/utils";
-import { headers } from "../../Utils/utils";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -43,6 +42,14 @@ ChartJS.register(
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
 export default function BuildMacroPage({ userProfile, loginState }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //THE STATES FOR WEIGHT, HEIGHT, AGE, GENDER
   const [currentWeight, setCurrentWeight] = useState("");
   const [age, setAge] = useState("");
@@ -106,48 +113,52 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     value.current.scrollIntoView({ behavior: "smooth" });
   };
   //USE EFFECT TO SROLL TO ELEMENTS
-  useEffect(() => {
-    if (currentWeight && height && gender && age && tdee) {
-      handleScroll(neededTdeeRef);
-    }
-    if (neededIntake) {
-      handleScroll(bodyTypeRef);
-    }
-    if (proteinRatio && carbRatio && fatRatio) {
-      handleScroll(macroRatioRef);
-    }
-    if (goal !== "maintain" && protein && carb && fat) {
-      handleScroll(targetedWeightRef);
-    }
-    if (
-      targetedWeight &&
-      currentWeight &&
-      estimatedWeekArr.length > 0 &&
-      estimatedWeightArr.length > 0 &&
-      currentWeight !== targetedWeight &&
-      showSaveMacro
-    ) {
-      handleScroll(lineRef);
-    }
-    if (goal === "maintain" && protein && carb && fat && showSaveMacro) {
-      handleScroll(saveMacroRef);
-    }
-  }, [
-    tdee,
-    neededIntake,
-    proteinRatio,
-    carbRatio,
-    fatRatio,
-    goal,
-    protein,
-    carb,
-    fat,
-    showSaveMacro,
-    targetedWeight,
-    estimatedWeekArr,
-    estimatedWeightArr,
-    currentWeight,
-  ]);
+  useEffect(
+    () => {
+      if (currentWeight && height && gender && age && tdee) {
+        handleScroll(neededTdeeRef);
+      }
+      if (neededIntake) {
+        handleScroll(bodyTypeRef);
+      }
+      if (proteinRatio && carbRatio && fatRatio) {
+        handleScroll(macroRatioRef);
+      }
+      if (goal !== "maintain" && protein && carb && fat) {
+        handleScroll(targetedWeightRef);
+      }
+      if (
+        targetedWeight &&
+        currentWeight &&
+        estimatedWeekArr.length > 0 &&
+        estimatedWeightArr.length > 0 &&
+        currentWeight !== targetedWeight &&
+        showSaveMacro
+      ) {
+        handleScroll(lineRef);
+      }
+      if (goal === "maintain" && protein && carb && fat && showSaveMacro) {
+        handleScroll(saveMacroRef);
+      }
+    },
+    // eslint-disable-next-line
+    [
+      tdee,
+      neededIntake,
+      proteinRatio,
+      carbRatio,
+      fatRatio,
+      goal,
+      protein,
+      carb,
+      fat,
+      showSaveMacro,
+      targetedWeight,
+      estimatedWeekArr,
+      estimatedWeightArr,
+      currentWeight,
+    ]
+  );
   //USE EFFECT TO HANDLE THE STATE "BUILD FOR FRIEND" BASED ON THE STATE "BUILD FOR"
   useEffect(() => {
     if (loginState) {
@@ -473,7 +484,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           alert(
             "Congratulations! You have successfully created and saved a new macro"
           );
-          navigate("/");
+          navigate("/macro-list");
           window.scrollTo(0, 0);
         });
     }
@@ -488,7 +499,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       },
       title: {
         display: true,
-        text: "Chart.js Line Chart",
+        text: "Line Chart",
       },
     },
   };
@@ -572,7 +583,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               <div className="macro-page__flex-container">
                 {/* WEIGHT */}
                 <div className="macro-page__flex-item">
-                  <label className="macro-page__text" htmlFor="current-weight">
+                  <label className="macro-page__label" htmlFor="current-weight">
                     Type Weight (kg)
                   </label>
                   <input
@@ -587,7 +598,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 {/* HEIGHT */}
                 <div className="macro-page__flex-item">
                   <label
-                    className="macro-page__text"
+                    className="macro-page__label"
                     id="height"
                     htmlFor="height"
                   >
@@ -603,7 +614,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 </div>
                 {/* AGE */}
                 <div className="macro-page__flex-item">
-                  <label className="macro-page__text" htmlFor="age">
+                  <label className="macro-page__label" htmlFor="age">
                     Type Age
                   </label>
                   <input
@@ -617,7 +628,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                 </div>
                 {/* GENDER */}
                 <div className="macro-page__flex-item">
-                  <label className="macro-page__text" htmlFor="gender">
+                  <label className="macro-page__label" htmlFor="gender">
                     Gender
                   </label>
                   <select
@@ -645,16 +656,16 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               />
 
               <div className="macro-page__big-wrapper">
-                <h3>Step 1: Calculate your Balanced TDEE</h3>
+                <h3>Step 1: Calculate your TDEE</h3>
                 <p>
-                  Balanced TDEE: Total daily energy expenditure (TDEE) estimates
-                  how many calories your body burns daily. Based on this, you
-                  can know how much you need to eat everyday to make your weight
-                  remain unchanged.
+                  TDEE: Total daily energy expenditure (TDEE) estimates how many
+                  calories your body burns daily. Based on this, you can know
+                  how much you need to eat everyday to make your weight remain
+                  unchanged.
                 </p>
                 {/* OPTION BOX */}
                 <div>
-                  <label htmlFor="activity">
+                  <label className="macro-page__step-label" htmlFor="activity">
                     How intense do you do exercise in a week?
                   </label>
                   <select
@@ -687,7 +698,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     btnContent="Calculate your TDEE now"
                   />
                   {/* RESULT */}
-                  {tdee && <p>Your Balanced TDEE is: {tdee} calories</p>}
+                  {tdee && <p>Your TDEE is: {tdee} calories</p>}
                 </div>
               </div>
             </div>
@@ -704,12 +715,19 @@ export default function BuildMacroPage({ userProfile, loginState }) {
 
               <div className="macro-page__big-wrapper">
                 <h3>
-                  Step 2: Now we can calculate your needed daily energy intake
-                  based on your Balanced TDEE
+                  Step 2: Now we can calculate your ideal daily intake of
+                  calories.
                 </h3>
+                <p>
+                  Ideal daily intake of calories is the energy you should
+                  consume everyday to achieve your targeted weight based on your
+                  goal.
+                </p>
                 {/* OPTION BOX */}
                 <div>
-                  <label htmlFor="goal">What is your general goal?</label>
+                  <label className="macro-page__step-label" htmlFor="goal">
+                    What is your general goal?
+                  </label>
                   <select
                     className="macro-page__input"
                     value={goal}
@@ -727,7 +745,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   <ButtonComponent
                     btnClassName={`btn ${macroSecondBtnState}`}
                     onClickHandler={handleNeededEnergy}
-                    btnContent="Calculate your needed daily energy intake"
+                    btnContent="Calculate your ideal daily energy intake"
                   />
                   {/* RESULT */}
                   {neededIntake && tdee && (
@@ -750,13 +768,15 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               />
 
               <div className="macro-page__big-wrapper">
-                <h3>
-                  Step 3: Now we need to know what is your body type to design
-                  your macro ratios
-                </h3>
+                <h3>Step 3: Calculate your macro ratios.</h3>
+                <p>
+                  Choose your body type to measure your nutritional macro ratio.
+                </p>
                 {/* OPTION BOX */}
                 <div>
-                  <label htmlFor="body-type">What is your body type?</label>
+                  <label className="macro-page__step-label" htmlFor="body-type">
+                    What is your body type?
+                  </label>
                   <select
                     className="macro-page__input"
                     value={bodyType}
@@ -803,9 +823,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               />
               <div className="macro-page__big-wrapper">
                 <h3>
-                  Step 4: Next but not last, we will continue to calculate how
-                  much protein, carb and fat you should eat everyday to achieve
-                  your goal
+                  Step 4: We then continue to calculate how much protein, carb
+                  and fat in quantity you should eat everyday to achieve your
+                  goal
                 </h3>
                 <ButtonComponent
                   btnClassName="btn"
@@ -835,11 +855,14 @@ export default function BuildMacroPage({ userProfile, loginState }) {
               />
               <div className="macro-page__big-wrapper">
                 <h3>
-                  Step 5: We will see how much is the estimated time amount that
-                  you need to achieve your goal based on your targeted weight
+                  Step 5: Show the time amount that you need to spent to achieve
+                  your goal based on your targeted weight
                 </h3>
 
-                <label htmlFor="targeted-weight">
+                <label
+                  className="macro-page__step-label"
+                  htmlFor="targeted-weight"
+                >
                   Type your targeted weight here
                 </label>
                 <div className="macro-page__wrapper">
@@ -853,9 +876,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     onChange={handleTargetedWeight}
                   />
                   <ButtonComponent
-                    btnClassName={`btn ${macroFifthBtnState}`}
+                    btnClassName={`btn btn--macro-page ${macroFifthBtnState}`}
                     onClickHandler={handleEstimatedWeekArr}
-                    btnContent="Show the line chart now"
+                    btnContent="Show the time on a line chart"
                   />
                 </div>
               </div>
