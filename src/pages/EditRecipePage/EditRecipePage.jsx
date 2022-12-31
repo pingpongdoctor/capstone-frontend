@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
-import { headers } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 
@@ -13,6 +12,14 @@ const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 
 export default function EditRecipePage({ loginState, userProfile }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //USE USENAVIGATE
   const navigate = useNavigate();
   //GET RECIPE ID FROM THE USE PARAMS

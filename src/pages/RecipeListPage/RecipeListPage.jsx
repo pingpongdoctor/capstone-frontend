@@ -3,9 +3,17 @@ import "./RecipeListPage.scss";
 import InputBox from "../../components/InputBox/InputBox";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import axios from "axios";
-import { API_URL, headers } from "../../Utils/utils";
+import { API_URL } from "../../Utils/utils";
 import RecipeSavedItem from "../../components/RecipeSavedItem/RecipeSavedItem";
 export default function RecipeListPage({ loginState, userProfile }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //STATE FOR RECIPE ARRAY
   const [recipeArr, setRecipeArr] = useState([]);
   //STATE FOR SEARCH DATA

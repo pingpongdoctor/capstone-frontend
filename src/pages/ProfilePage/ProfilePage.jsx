@@ -8,10 +8,17 @@ import closePic from "../../assets/icons/close.png";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import InputBox from "../../components/InputBox/InputBox";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
-import { headers } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function ProfilePage({ loginState, userProfile, loadProfile }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //USE USENAVIGATE
   const navigate = useNavigate();
   //STATES FOR INPUT BOXES

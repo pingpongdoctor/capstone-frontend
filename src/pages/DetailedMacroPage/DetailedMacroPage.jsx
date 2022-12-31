@@ -2,7 +2,6 @@ import "./DetailedMacroPage.scss";
 import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
-import { headers } from "../../Utils/utils";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -32,8 +31,14 @@ ChartJS.register(
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedMacroPage({ loginState, userProfile }) {
-  //GET JWT TOKEN FROM THE LOCAL STORAGE
+  //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //GET MACRO ID
   const { macroId } = useParams();
   //USE USENAVIGATE

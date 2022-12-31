@@ -4,11 +4,18 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
-import { headers } from "../../Utils/utils";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //USE USENAVIGATE
   const navigate = useNavigate();
   //STATES FOR ALL INPUT BOXES

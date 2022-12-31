@@ -11,7 +11,6 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { handleCapitalizeAWord } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
-import { headers } from "../../Utils/utils";
 import DeleteIconComponent from "../../components/DeleteIconComponent/DeleteIconComponent";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import savedIcon from "../../assets/icons/save.png";
@@ -19,6 +18,14 @@ import unSavedIcon from "../../assets/icons/unsave.png";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({ loginState, userProfile }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //USE NAVIGATE
   const navigate = useNavigate();
   //STATE TO STORE THE SINGLE RECIPE DATA
@@ -97,6 +104,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
         setSavedRecipe(false);
       }
     }
+    // eslint-disable-next-line
   }, [recipeUserData]);
 
   //USE EFFECT TO GET THE NAME OF THE RECIPE POSTER

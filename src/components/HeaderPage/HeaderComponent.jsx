@@ -1,5 +1,4 @@
 import "./HeaderComponent.scss";
-import logo from "../../assets/logos/logo.png";
 import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
 import Logo from "../Logo/Logo";

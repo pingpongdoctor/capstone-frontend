@@ -5,11 +5,18 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useNavigate, useParams } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
-import { headers, jwtToken } from "../../Utils/utils";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function EditMacroPage({ loginState }) {
+  //GET JWT TOKEN FROM LOCAL STORAGE
+  const jwtToken = localStorage.getItem("jwt_token");
+  //DEFINE HEADERS
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  };
   //USE USENAVIGATE
   const navigate = useNavigate();
   //GET MACRO ID
