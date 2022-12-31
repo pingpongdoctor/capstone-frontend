@@ -44,7 +44,7 @@ export default function MacroLisPage({ userProfile, loginState }) {
   useEffect(() => {
     handleGetAllMacros();
     // eslint-disable-next-line
-  }, [loginState, jwtToken]);
+  }, [loginState]);
 
   //FUNCTION TO UPDATE THE DELETE MACRO ID STATE
   const handleDeleteMacroId = function (macroId) {
