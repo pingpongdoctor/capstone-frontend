@@ -309,12 +309,12 @@ export default function AddRecipePage({ loginState, userProfile }) {
         ingredientArr.filter(
           (ingredient) =>
             ingredient !== "" &&
-            ingredientArr.indexOf(ingredient) + 1 <= ingredientBoxCount
+            ingredientArr.indexOf(ingredient) + 1 <= ingredientBoxCount //The second operand is used to filter out the deleted ingredients
         )
       );
       const stepString = handleReturnString(
         stepArr.filter(
-          (step) => step !== "" && stepArr.indexOf(step) + 1 <= stepBoxCount
+          (step) => step !== "" && stepArr.indexOf(step) + 1 <= stepBoxCount //The second operand is used to filter out the deleted steps
         )
       );
 

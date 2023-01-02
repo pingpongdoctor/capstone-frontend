@@ -379,7 +379,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
           (ingredient) =>
             ingredient !== "" &&
             ingredient !== undefined &&
-            inputIngredientArr.indexOf(ingredient) + 1 <= ingreBoxNum
+            inputIngredientArr.indexOf(ingredient) + 1 <= ingreBoxNum //The second operand is used to filter out the deleted ingredients
         )
       );
       const inputStepStr = handleReturnString(
@@ -387,7 +387,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
           (step) =>
             step !== "" &&
             step !== undefined &&
-            inputStepArr.indexOf(step) + 1 <= stepBoxNum
+            inputStepArr.indexOf(step) + 1 <= stepBoxNum //The second operand is used to filter out the deleted steps
         )
       );
       const uploadObj = {
