@@ -8,7 +8,7 @@ import ingredientPic from "../../assets/images/ingredients.png";
 import stepPic from "../../assets/images/steps.png";
 import RecipeCommentItem from "../../components/RecipeCommentItem/RecipeCommentItem";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
-import { handleCapitalizeAWord } from "../../Utils/utils";
+import { handleCapitalizeAWord, handleCapitalize } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
 import DeleteIconComponent from "../../components/DeleteIconComponent/DeleteIconComponent";
@@ -273,7 +273,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                   backClassName="back-icon back-icon--detail-recipe"
                 />
                 <h2 className="detail-recipe__heading">
-                  {recipeData.recipe_name}
+                  {handleCapitalize(recipeData.recipe_name)}
                 </h2>
               </div>
               <div className="detail-recipe__edit-icon-wrapper">

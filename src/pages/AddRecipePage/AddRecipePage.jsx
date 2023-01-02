@@ -75,7 +75,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
     const newUrl = window.URL.createObjectURL(event.target.files[0]);
     setPreviewFile(newUrl);
   };
-
+  console.log(step2);
   //FUNCTION TO SET THE INGREDIENT STATES
   const handleIngredientStates = function (event) {
     if (event.target.classList.contains("add-recipe__input-1")) {
@@ -202,6 +202,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
     }
     return arr;
   };
+
   //FUNCTION TO VALIDATE THE INGREDIENT AND STEP
   const isIngreValid = function () {
     if (
@@ -259,16 +260,6 @@ export default function AddRecipePage({ loginState, userProfile }) {
     return newStr;
   };
 
-  console.log(
-    uploadImage,
-    recipeName,
-    level,
-    readyTime,
-    description,
-    isIngreValid(),
-    isStepValid()
-  );
-
   //FUNCTION TO SUBMIT AN IMAGE TO CLOUDNARY
   const handleOnSubmitRecipe = function (event) {
     event.preventDefault();
@@ -299,7 +290,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
         ingredient10,
         ingredient11,
         ingredient12,
-      ].filter((ingredient) => ingredient !== "");
+      ];
       const stepArr = [
         step1,
         step2,
@@ -313,9 +304,20 @@ export default function AddRecipePage({ loginState, userProfile }) {
         step10,
         step11,
         step12,
-      ].filter((step) => step !== "");
-      const ingredientString = handleReturnString(ingredientArr);
-      const stepString = handleReturnString(stepArr);
+      ];
+      const ingredientString = handleReturnString(
+        ingredientArr.filter(
+          (ingredient) =>
+            ingredient !== "" &&
+            ingredientArr.indexOf(ingredient) + 1 <= ingredientBoxCount
+        )
+      );
+      const stepString = handleReturnString(
+        stepArr.filter(
+          (step) => step !== "" && stepArr.indexOf(step) + 1 <= stepBoxCount
+        )
+      );
+
       axios.post(CLOUD_URL, formData).then((response) => {
         const imageURL = response.data.secure_url;
         const postedRecipe = {
