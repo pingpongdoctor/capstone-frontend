@@ -300,7 +300,7 @@ export default function EditMacroPage({ loginState }) {
               <div className="edit-macro__flex-item">
                 <div className="edit-macro__wrapper">
                   <label className="edit-macro__label" htmlFor="current-weight">
-                    Weight
+                    Current Weight
                   </label>
                   {macroObj && (
                     <input

@@ -88,13 +88,13 @@ export default function EditRecipePage({ loginState, userProfile }) {
   };
 
   const handleDecreaseIngreBoxCount = function () {
-    if (ingreBoxNum >= ingreArr.length + 1) {
+    if (ingreBoxNum > 1) {
       setIngreBoxNum(ingreBoxNum - 1);
     }
   };
 
   const handleDecreaseStepBoxCount = function () {
-    if (stepBoxNum >= stepArr.length + 1) {
+    if (stepBoxNum > 1) {
       setStepBoxNum(stepBoxNum - 1);
     }
   };
@@ -242,6 +242,9 @@ export default function EditRecipePage({ loginState, userProfile }) {
     ) {
       return true;
     }
+    if (ingreBoxNum < ingreArr.length) {
+      return true;
+    }
     return false;
   };
 
@@ -260,6 +263,9 @@ export default function EditRecipePage({ loginState, userProfile }) {
       step11 ||
       step12
     ) {
+      return true;
+    }
+    if (stepBoxNum < stepArr.length) {
       return true;
     }
     return false;
@@ -353,7 +359,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
         ingredient10 || ingreArr[9],
         ingredient11 || ingreArr[10],
         ingredient12 || ingreArr[11],
-      ].filter((ingredient) => ingredient !== "" && ingredient !== undefined);
+      ];
       const inputStepArr = [
         step1 || stepArr[0],
         step2 || stepArr[1],
@@ -367,15 +373,30 @@ export default function EditRecipePage({ loginState, userProfile }) {
         step10 || stepArr[9],
         step11 || stepArr[10],
         step12 || stepArr[11],
-      ].filter((step) => step !== "" && step !== undefined);
+      ];
+      const inputIngredientStr = handleReturnString(
+        inputIngredientArr.filter(
+          (ingredient) =>
+            ingredient !== "" &&
+            ingredient !== undefined &&
+            inputIngredientArr.indexOf(ingredient) + 1 <= ingreBoxNum //The second operand is used to filter out the deleted ingredients
+        )
+      );
+      const inputStepStr = handleReturnString(
+        inputStepArr.filter(
+          (step) =>
+            step !== "" &&
+            step !== undefined &&
+            inputStepArr.indexOf(step) + 1 <= stepBoxNum //The second operand is used to filter out the deleted steps
+        )
+      );
       const uploadObj = {
         recipe_name: recipeName || recipeData.name,
         level: level || recipeData.level,
         ready_time: readyTime || recipeData.ready_time,
         description: description || recipeData.description,
-        ingredients:
-          handleReturnString(inputIngredientArr) || recipeData.ingredients,
-        directions: handleReturnString(inputStepArr) || recipeData.directions,
+        ingredients: inputIngredientStr || recipeData.ingredients,
+        directions: inputStepStr || recipeData.directions,
       };
       //IF IMAGE IS EDITED
       if (uploadImage !== null) {

@@ -138,8 +138,6 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
     // eslint-disable-next-line
   }, [macroObj]);
 
-  console.log(macroObj);
-
   //USE EFFECT TO HANDLE THE ACTIVITY TEXT
   useEffect(() => {
     if (loginState && macroObj) {
@@ -400,7 +398,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
 
               {macroObj && (
                 <div className="detail-page__value">
-                  <p className="detail-page__field">Balanced TDEE: </p>
+                  <p className="detail-page__field">TDEE: </p>
                   <p>{macroObj.tdee} calories</p>
                 </div>
               )}
