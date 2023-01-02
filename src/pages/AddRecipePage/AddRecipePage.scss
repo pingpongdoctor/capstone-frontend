@@ -31,6 +31,10 @@
     height: 100px;
   }
 
+  &__textarea--error {
+    border: 1px solid red;
+  }
+
   &__heading-wrapper {
     display: flex;
     align-items: center;

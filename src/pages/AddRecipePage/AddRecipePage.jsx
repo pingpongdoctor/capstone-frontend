@@ -259,6 +259,16 @@ export default function AddRecipePage({ loginState, userProfile }) {
     return newStr;
   };
 
+  console.log(
+    uploadImage,
+    recipeName,
+    level,
+    readyTime,
+    description,
+    isIngreValid(),
+    isStepValid()
+  );
+
   //FUNCTION TO SUBMIT AN IMAGE TO CLOUDNARY
   const handleOnSubmitRecipe = function (event) {
     event.preventDefault();
@@ -331,6 +341,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
           });
       });
     } else {
+      alert("You need to fulfill the correct values for all fields");
       if (!recipeName) {
         setNameError("input-box--add-recipe-error");
       }
@@ -347,10 +358,10 @@ export default function AddRecipePage({ loginState, userProfile }) {
         setReadyTimeError("input-box--add-recipe-error");
       }
       if (!isIngreValid()) {
-        setIngreError("input-box--add-recipe-error");
+        setIngreError("add-recipe__textarea--error");
       }
       if (!isStepValid()) {
-        setStepError("input-box--add-recipe-error");
+        setStepError("add-recipe__textarea--error");
       }
     }
   };
