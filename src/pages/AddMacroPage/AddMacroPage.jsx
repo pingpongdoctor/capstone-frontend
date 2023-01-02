@@ -263,7 +263,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
             tdee_need: neededIntake,
             goal: goal,
             body_type: bodyType,
-            gender: gender === "others" ? "male" : gender,
+            gender,
             height,
             weight: currentWeight,
             age,
@@ -440,7 +440,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
               <div className="add-macro__flex-item">
                 <div className="add-macro__wrapper">
                   <label className="add-macro__label" htmlFor="current-weight">
-                    Weight
+                    Current Weight
                   </label>
                   <input
                     className={`add-macro__input`}
@@ -449,7 +449,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     id="current-weight"
                     type="number"
                     name="current-weight"
-                    placeholder="Weight (kg)"
+                    placeholder="Current Weight (kg)"
                   />
                 </div>
 

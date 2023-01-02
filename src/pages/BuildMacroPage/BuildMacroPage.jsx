@@ -95,7 +95,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     setAge(Number(handleFilterMinusOperator(event.target.value)));
   };
   const handleGender = function (event) {
-    setGender(event.target.value === "others" ? "male" : event.target.value);
+    setGender(event.target.value);
   };
   //FUNCTION TO SET THE STATE FOR "WHO DO YOU BUILD MACRO FOR"
   const handleBuildFor = function (event) {
@@ -167,9 +167,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
         setCurrentWeight(userProfile.weight);
         setHeight(userProfile.height);
         setAge(userProfile.age);
-        setGender(
-          userProfile.gender === "others" ? "male" : userProfile.gender
-        );
+        setGender(userProfile.gender);
       } else if (buildFor === "friend") {
         setBuildForFriend(true);
         setCurrentWeight("");
@@ -302,7 +300,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setCurrentWeight(userProfile.weight);
       setAge(userProfile.age);
       setHeight(userProfile.height);
-      setGender(userProfile.gender === "others" ? "male" : userProfile.gender);
+      setGender(userProfile.gender);
     }
     // eslint-disable-next-line
   }, [loginState]);
@@ -404,7 +402,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
     if (activity && age && currentWeight && height && gender) {
       const balancedTdee = Math.round(
         fitnessCalculatorFunctions.TDEE(
-          gender,
+          gender === "others" ? "male" : gender,
           age,
           height,
           currentWeight,
@@ -444,7 +442,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       setMacroSecondBtnState("btn--macro-page--error");
     }
   };
-
+  console.log(gender);
   //FUNCTION TO POST A NEW MACRO
   const handlePostNewMacro = function () {
     if (
