@@ -36,7 +36,7 @@ export default function HomePage({ loginState }) {
         {!loginState && (
           <ButtonComponent
             onClickHandler={() => {
-              navigate("/login");
+              navigate("/sign-up");
             }}
             btnClassName="btn btn--home-page"
             btnContent="Sign up for a new account"
