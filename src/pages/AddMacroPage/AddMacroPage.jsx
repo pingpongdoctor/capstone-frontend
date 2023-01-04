@@ -412,6 +412,9 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   <input
                     value={tdee}
                     onChange={handleTdee}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className={`add-macro__input ${tdeeError}`}
                     id="tdee"
                     type="number"
@@ -427,6 +430,9 @@ export default function AddMacroPage({ loginState, userProfile }) {
                   <input
                     value={neededIntake}
                     onChange={handleNeededIntake}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className={`add-macro__input ${neededIntakeError}`}
                     id="needed-intake"
                     type="number"
@@ -446,6 +452,9 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     className={`add-macro__input`}
                     value={currentWeight}
                     onChange={handleCurrentWeight}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     id="current-weight"
                     type="number"
                     name="current-weight"
@@ -464,6 +473,9 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     <input
                       value={targetedWeight}
                       onChange={handleTargetedWeight}
+                      onWheel={(e) => {
+                        e.target.blur();
+                      }}
                       className={`add-macro__input ${targetedWeightError}`}
                       id="targeted-weight"
                       type="number"
@@ -499,6 +511,9 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     className={`add-macro__input`}
                     value={age}
                     onChange={handleAge}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     id="age"
                     type="number"
                     name="age"
@@ -514,6 +529,9 @@ export default function AddMacroPage({ loginState, userProfile }) {
                     className={`add-macro__input`}
                     value={height}
                     onChange={handleHeight}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     id="height"
                     type="number"
                     name="height"

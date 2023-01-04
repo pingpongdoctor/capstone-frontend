@@ -52,7 +52,7 @@ export default function EditMacroPage({ loginState }) {
     }
     // eslint-disable-next-line
   }, [loginState, jwtToken]);
-
+  console.log(targetedWeight);
   //USE EFFECT TO SET THE CAPITALIZED NAME PLACEHOLDER
   useEffect(() => {
     if (macroObj) {
@@ -151,6 +151,8 @@ export default function EditMacroPage({ loginState }) {
         weight: currentWeight || macroObj.weight,
         age: age || macroObj.age,
       };
+
+      console.log(valueObject);
 
       axios
         .put(`${API_URL}/macros-list/${macroId}`, valueObject, headers)
@@ -272,6 +274,9 @@ export default function EditMacroPage({ loginState }) {
                   <input
                     value={tdee}
                     onChange={handleTdee}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className={`edit-macro__input ${macroError}`}
                     id="tdee"
                     type="number"
@@ -287,6 +292,9 @@ export default function EditMacroPage({ loginState }) {
                   <input
                     value={neededIntake}
                     onChange={handleNeededIntake}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className={`edit-macro__input ${macroError}`}
                     id="needed-intake"
                     type="number"
@@ -306,6 +314,9 @@ export default function EditMacroPage({ loginState }) {
                     <input
                       className={`edit-macro__input ${macroError}`}
                       value={currentWeight}
+                      onWheel={(e) => {
+                        e.target.blur();
+                      }}
                       onChange={handleCurrentWeight}
                       id="current-weight"
                       type="number"
@@ -324,6 +335,9 @@ export default function EditMacroPage({ loginState }) {
                   </label>
                   <input
                     value={targetedWeight}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     onChange={handleTargetedWeight}
                     className={`edit-macro__input ${macroError}`}
                     id="targeted-weight"
@@ -362,6 +376,9 @@ export default function EditMacroPage({ loginState }) {
                       className={`add-macro__input ${macroError}`}
                       value={age}
                       onChange={handleAge}
+                      onWheel={(e) => {
+                        e.target.blur();
+                      }}
                       id="age"
                       type="number"
                       name="age"
@@ -379,6 +396,9 @@ export default function EditMacroPage({ loginState }) {
                       className={`add-macro__input ${macroError}`}
                       value={height}
                       onChange={handleHeight}
+                      onWheel={(e) => {
+                        e.target.blur();
+                      }}
                       id="height"
                       type="number"
                       name="height"

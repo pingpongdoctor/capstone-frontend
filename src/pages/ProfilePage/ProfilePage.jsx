@@ -257,6 +257,9 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newHeight}
                   inputOnChange={handleNewHeight}
+                  inputOnWheel={(e) => {
+                    e.target.blur();
+                  }}
                   inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="number"
                   inputPlaceholder="Type new height in cm"
@@ -267,6 +270,9 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newWeight}
                   inputOnChange={handleNewWeight}
+                  inputOnWheel={(e) => {
+                    e.target.blur();
+                  }}
                   inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="number"
                   inputPlaceholder="Type new weight in kg"
@@ -277,6 +283,9 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
                 <InputBox
                   inputValue={newAge}
                   inputOnChange={handleNewAge}
+                  inputOnWheel={(e) => {
+                    e.target.blur();
+                  }}
                   inputClassName={`input-box input-box--profile-page ${profileInputError}`}
                   inputType="number"
                   inputPlaceholder="New age"

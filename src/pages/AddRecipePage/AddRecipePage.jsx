@@ -499,6 +499,9 @@ export default function AddRecipePage({ loginState, userProfile }) {
                   inputName="time"
                   inputPlaceholder="Ready time in minute"
                   inputType="number"
+                  inputOnWheel={(e) => {
+                    e.target.blur();
+                  }}
                 />
               </div>
               <ButtonComponent
