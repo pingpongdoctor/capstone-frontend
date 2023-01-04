@@ -105,8 +105,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   const neededTdeeRef = useRef();
   const bodyTypeRef = useRef();
   const macroRatioRef = useRef();
-  const targetedWeightRef = useRef();
-  const saveMacroRef = useRef();
+  const quatitiesRef = useRef();
   const lineRef = useRef();
   //SCROLLING FUNCTION
   const handleScroll = (value) => {
@@ -124,8 +123,8 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       if (proteinRatio && carbRatio && fatRatio) {
         handleScroll(macroRatioRef);
       }
-      if (goal !== "maintain" && protein && carb && fat) {
-        handleScroll(targetedWeightRef);
+      if (protein && carb && fat) {
+        handleScroll(quatitiesRef);
       }
       if (
         targetedWeight &&
@@ -136,9 +135,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
         showSaveMacro
       ) {
         handleScroll(lineRef);
-      }
-      if (goal === "maintain" && protein && carb && fat && showSaveMacro) {
-        handleScroll(saveMacroRef);
       }
     },
     // eslint-disable-next-line
@@ -815,6 +811,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {tdee && neededIntake && proteinRatio && carbRatio && fatRatio && (
             <div className="macro-page__steps">
               <img
+                ref={quatitiesRef}
                 className="macro-page__image"
                 src={cookingPic}
                 alt="cooking-pic"
@@ -846,7 +843,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {goal !== "maintain" && protein && carb && fat && (
             <div className="macro-page__steps">
               <img
-                ref={targetedWeightRef}
                 className="macro-page__image"
                 src={barChartPic}
                 alt="bar-chart-pic"
@@ -901,7 +897,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
           {showSaveMacro && (
             <div className="macro-page__steps">
               <img
-                ref={saveMacroRef}
                 className="macro-page__image"
                 src={meditationPic}
                 alt="meditation-pic"
