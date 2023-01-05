@@ -41,7 +41,6 @@ export default function MacroLisPage({ userProfile, loginState }) {
       axios
         .get(`${API_URL}/macros-list`, headers)
         .then((response) => {
-          console.log(response.data);
           setMacroArr(response.data);
         })
         .catch((error) => console.log(error));

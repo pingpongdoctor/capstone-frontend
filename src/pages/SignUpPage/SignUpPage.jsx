@@ -366,6 +366,9 @@ export default function SignUpPage() {
               inputPlaceholder="Age"
               inputName="age"
               inputType="number"
+              inputOnWheel={(e) => {
+                e.target.blur();
+              }}
               inputClassName={`input-box input-box--signup input-box--signup-age ${ageEr}`}
               inputValue={age}
               inputOnChange={handleAge}
@@ -376,6 +379,9 @@ export default function SignUpPage() {
               inputPlaceholder="Weight in kg"
               inputName="weight"
               inputType="number"
+              inputOnWheel={(e) => {
+                e.target.blur();
+              }}
               inputClassName={`input-box input-box--signup input-box--signup-weight ${weightEr}`}
               inputValue={weight}
               inputOnChange={handleWeight}
@@ -386,6 +392,9 @@ export default function SignUpPage() {
               inputPlaceholder="Height in cm"
               inputName="height"
               inputType="number"
+              inputOnWheel={(e) => {
+                e.target.blur();
+              }}
               inputClassName={`input-box input-box--signup input-box--signup-height ${heightEr}`}
               inputValue={height}
               inputOnChange={handleHeight}

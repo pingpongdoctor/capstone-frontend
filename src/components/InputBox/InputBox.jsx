@@ -8,12 +8,14 @@ export default function InputBox({
   inputType,
   inputName,
   inputPlaceholder,
+  inputOnWheel,
 }) {
   return (
     <input
       className={inputClassName}
       value={inputValue}
       onChange={inputOnChange}
+      onWheel={inputOnWheel}
       id={inputId}
       type={inputType}
       name={inputName}

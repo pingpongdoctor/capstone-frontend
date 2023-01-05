@@ -95,5 +95,5 @@ Since the website authenticates users by using JWT token, you have to log in to 
 
 ## Links
 
-- Link to [Frontend](https://github.com/pingpongdoctor/capstone-frontend)
-- Link to [Backend](https://github.com/pingpongdoctor/capstone-backend)
+- Link to [Frontend](https://github.com/pingpongdoctor/capstone-frontend/tree/main)
+- Link to [Backend](https://github.com/pingpongdoctor/capstone-backend/tree/main)

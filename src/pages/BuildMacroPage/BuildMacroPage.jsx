@@ -583,6 +583,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   <input
                     value={currentWeight}
                     onChange={handleCurrentWeight}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className="macro-page__input-box"
                     id="current-weight"
                     name="weight"
@@ -601,6 +604,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   <input
                     value={height}
                     onChange={handleHeight}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className="macro-page__input-box"
                     name="height"
                     type="number"
@@ -614,6 +620,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                   <input
                     value={age}
                     onChange={handleAge}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                     className="macro-page__input-box"
                     id="age"
                     name="age"
@@ -868,6 +877,9 @@ export default function BuildMacroPage({ userProfile, loginState }) {
                     id="targeted-weight"
                     value={targetedWeight}
                     onChange={handleTargetedWeight}
+                    onWheel={(e) => {
+                      e.target.blur();
+                    }}
                   />
                   <ButtonComponent
                     btnClassName={`btn btn--macro-page ${macroFifthBtnState}`}
