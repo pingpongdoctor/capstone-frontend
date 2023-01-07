@@ -8,7 +8,7 @@ import { API_URL } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
 
-export default function MacroLisPage({ userProfile, loginState }) {
+export default function MacroLisPage({ loginState }) {
   //APPLY THE USE NAVIGATE
   const navigate = useNavigate();
   //FUNCTION TO NAVIGATE TO THE ADD MACRO PAGE
