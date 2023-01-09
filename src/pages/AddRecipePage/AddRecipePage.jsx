@@ -6,6 +6,7 @@ import BackIconComponent from "../../components/BackIconComponent/BackIconCompon
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { handleFilterMinusOperator } from "../../Utils/utils";
+import { CircularProgress } from "@mui/material";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const API_URL = process.env.REACT_APP_API_URL || "";
@@ -42,6 +43,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
   const [readyTimeError, setReadyTimeError] = useState("");
   const [ingreError, setIngreError] = useState("");
   const [stepError, setStepError] = useState("");
+  const [progress, setProgress] = useState(false);
 
   // FUNCTION TO CREATE THE INGREDIENT BOXES' KEY ARRAY
   const handleBoxKeyArr = function (value) {
@@ -197,6 +199,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
       isIngreValid() &&
       isStepValid()
     ) {
+      setProgress(true);
       const formData = new FormData();
       formData.append("file", uploadImage);
       formData.append("upload_preset", UPLOAD_PRESET);
@@ -233,6 +236,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
           });
       });
     } else {
+      setProgress(false);
       alert("You need to fulfill the correct values for all fields");
       if (!recipeName) {
         setNameError("input-box--add-recipe-error");
@@ -394,11 +398,18 @@ export default function AddRecipePage({ loginState, userProfile }) {
                   }}
                 />
               </div>
-              <ButtonComponent
-                btnClassName="btn btn--add-recipe-submit btn--tablet"
-                btnContent="Post to the recipe library"
-                btnType="submit"
-              />
+              <div className="add-recipe__btn-wrapper">
+                <ButtonComponent
+                  btnClassName="btn btn--add-recipe-submit btn--tablet"
+                  btnContent="Post to the recipe library"
+                  btnType="submit"
+                />
+                {progress && (
+                  <div className="add-recipe__progress add-recipe__progress--tablet">
+                    <CircularProgress />
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* FLEX ITEM */}
@@ -461,11 +472,18 @@ export default function AddRecipePage({ loginState, userProfile }) {
               ))}
             </div>
           </div>
-          <ButtonComponent
-            btnClassName="btn btn--add-recipe-submit btn--mobile"
-            btnContent="Post to the recipe library"
-            btnType="submit"
-          />
+          <div className="add-recipe__btn-wrapper">
+            <ButtonComponent
+              btnClassName="btn btn--add-recipe-submit btn--mobile"
+              btnContent="Post to the recipe library"
+              btnType="submit"
+            />
+            {progress && (
+              <div className="add-recipe__progress add-recipe__progress--mobile">
+                <CircularProgress />
+              </div>
+            )}
+          </div>
         </div>
       </form>
     );
