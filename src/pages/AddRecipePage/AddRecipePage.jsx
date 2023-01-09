@@ -65,7 +65,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
     setPreviewFile(newUrl);
   };
 
-  //FUNCTION TO SET THE INGREDIENT STATES
+  //FUNCTION AND USE EFFECT TO SET THE INGREDIENT STATES
   const handleIngredientStateArr = function (event) {
     const indexValue = event.target.id;
     const newArr = [...ingredientArr];
@@ -73,13 +73,33 @@ export default function AddRecipePage({ loginState, userProfile }) {
     setIngredientArr(newArr);
   };
 
-  //FUNCTION TO SET THE INGREDIENT STATES
+  useEffect(() => {
+    if (ingredientArr.length > ingredientBoxCount) {
+      const newArr = ingredientArr.filter(
+        (ele) => ingredientArr.indexOf(ele) <= ingredientBoxCount - 1
+      );
+      setIngredientArr(newArr);
+    }
+    // eslint-disable-next-line
+  }, [ingredientBoxCount]);
+
+  //FUNCTION AND USE EFFECT TO SET THE STEP STATES
   const handleStepStateArr = function (event) {
     const indexValue = event.target.id;
     const newArr = [...stepArr];
     newArr.splice(indexValue, 1, event.target.value);
     setStepArr(newArr);
   };
+
+  useEffect(() => {
+    if (stepArr.length > stepBoxCount) {
+      const newArr = stepArr.filter(
+        (ele) => stepArr.indexOf(ele) <= stepBoxCount - 1
+      );
+      setStepArr(newArr);
+    }
+    // eslint-disable-next-line
+  }, [stepBoxCount]);
 
   //FUNCTION TO SET THE STATES OF READY TIME, DESCRIPTION, LEVEL AND RECIPE NAME
   const handleReadyTime = function (event) {
@@ -124,11 +144,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
   const isIngreValid = function () {
     let atLeastOneValidValue = false;
     ingredientArr.forEach((ingre) => {
-      if (
-        ingre !== "" &&
-        ingre !== undefined &&
-        ingredientArr.indexOf(ingre) + 1 <= ingredientBoxCount
-      ) {
+      if (ingre !== "" && ingre !== undefined) {
         atLeastOneValidValue = true;
       }
     });
@@ -141,11 +157,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
   const isStepValid = function () {
     let atLeastOneValidValue = false;
     [...stepArr].forEach((step) => {
-      if (
-        step !== "" &&
-        step !== undefined &&
-        stepArr.indexOf(step) + 1 <= stepBoxCount
-      ) {
+      if (step !== "" && step !== undefined) {
         atLeastOneValidValue = true;
       }
     });
@@ -170,7 +182,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
     const newStr = newArr.join("");
     return newStr;
   };
-
+  console.log(isIngreValid(), isStepValid());
   //FUNCTION TO SUBMIT AN IMAGE TO CLOUDNARY
   const handleOnSubmitRecipe = function (event) {
     event.preventDefault();
@@ -190,16 +202,10 @@ export default function AddRecipePage({ loginState, userProfile }) {
       formData.append("upload_preset", UPLOAD_PRESET);
 
       const ingredientString = handleReturnString(
-        ingredientArr.filter(
-          (ingredient) =>
-            ingredient !== "" &&
-            ingredientArr.indexOf(ingredient) + 1 <= ingredientBoxCount //The second operand is used to filter out the deleted ingredients
-        )
+        ingredientArr.filter((ingredient) => ingredient !== "")
       );
       const stepString = handleReturnString(
-        stepArr.filter(
-          (step) => step !== "" && stepArr.indexOf(step) + 1 <= stepBoxCount //The second operand is used to filter out the deleted steps
-        )
+        stepArr.filter((step) => step !== "")
       );
 
       axios.post(CLOUD_URL, formData).then((response) => {

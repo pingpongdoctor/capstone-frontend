@@ -48,32 +48,72 @@ export default function EditRecipePage({ loginState, userProfile }) {
   //STATE FOR THE NUMBER OF STEP BOXES
   const [stepBoxNum, setStepBoxNum] = useState("");
   //STATE TO STORE THE INGREDIENT
-  const [ingredient1, setIngredient1] = useState("");
-  const [ingredient2, setIngredient2] = useState("");
-  const [ingredient3, setIngredient3] = useState("");
-  const [ingredient4, setIngredient4] = useState("");
-  const [ingredient5, setIngredient5] = useState("");
-  const [ingredient6, setIngredient6] = useState("");
-  const [ingredient7, setIngredient7] = useState("");
-  const [ingredient8, setIngredient8] = useState("");
-  const [ingredient9, setIngredient9] = useState("");
-  const [ingredient10, setIngredient10] = useState("");
-  const [ingredient11, setIngredient11] = useState("");
-  const [ingredient12, setIngredient12] = useState("");
+  const [ingredientStateArr, setIngredientStateArr] = useState([]);
   //STATE TO STORE THE INGREDIENT
-  const [step1, setStep1] = useState("");
-  const [step2, setStep2] = useState("");
-  const [step3, setStep3] = useState("");
-  const [step4, setStep4] = useState("");
-  const [step5, setStep5] = useState("");
-  const [step6, setStep6] = useState("");
-  const [step7, setStep7] = useState("");
-  const [step8, setStep8] = useState("");
-  const [step9, setStep9] = useState("");
-  const [step10, setStep10] = useState("");
-  const [step11, setStep11] = useState("");
-  const [step12, setStep12] = useState("");
-  //FUNCTION TO SET THE FILE STATE
+  const [stepStateArr, setStepStateArr] = useState([]);
+
+  //FUNCTION TO SET THE INGREDIENT STATE ARR
+  const handleIngredientStateArr = function (event) {
+    const indexValue = event.target.id;
+    const newArr = [...ingredientStateArr];
+    newArr.splice(indexValue, 1, event.target.value);
+    const newArr2 = newArr.map((ele) => {
+      if (newArr.indexOf(ele) < ingreArr.length && !ele) {
+        ele = ingreArr[newArr.indexOf(ele)];
+      }
+      return ele;
+    });
+    setIngredientStateArr(newArr2);
+  };
+
+  useEffect(() => {
+    if (ingredientStateArr.length > ingreBoxNum) {
+      const newArr = ingredientStateArr.filter(
+        (ele) => ingredientStateArr.indexOf(ele) <= ingreBoxNum - 1
+      );
+      setIngredientStateArr(newArr);
+    }
+    if (
+      ingredientStateArr.length < ingreBoxNum &&
+      ingreBoxNum <= ingreArr.length
+    ) {
+      const newArr = [...ingredientStateArr];
+      newArr.push(ingreArr[ingredientStateArr.length]);
+      setIngredientStateArr(newArr);
+    }
+    // eslint-disable-next-line
+  }, [ingreBoxNum]);
+
+  //FUNCTION AND USE EFFECT TO SET THE STEP STATE ARR
+  const handleStepStateArr = function (event) {
+    const indexValue = event.target.id;
+    const newArr = [...stepStateArr];
+    newArr.splice(indexValue, 1, event.target.value);
+    const newArr2 = newArr.map((ele) => {
+      if (newArr.indexOf(ele) < stepArr.length && !ele) {
+        ele = stepArr[newArr.indexOf(ele)];
+      }
+      return ele;
+    });
+    setStepStateArr(newArr2);
+  };
+
+  useEffect(() => {
+    if (stepStateArr.length > stepBoxNum) {
+      const newArr = stepStateArr.filter(
+        (ele) => stepStateArr.indexOf(ele) <= stepBoxNum - 1
+      );
+      setStepStateArr(newArr);
+    }
+    if (stepStateArr.length < stepBoxNum && stepBoxNum <= stepArr.length) {
+      const newArr = [...stepStateArr];
+      newArr.push(stepArr[stepStateArr.length]);
+      setStepStateArr(newArr);
+    }
+    // eslint-disable-next-line
+  }, [stepBoxNum]);
+
+  //FUNCTION AND USE EFFECT TO SET THE FILE STATE
   const handleImage = function (event) {
     setUploadImage(event.target.files[0]);
     const newUrl = window.URL.createObjectURL(event.target.files[0]);
@@ -82,8 +122,20 @@ export default function EditRecipePage({ loginState, userProfile }) {
 
   //FUNCTION TO UPDATE IGREDIENT AND STEP BOX NUMBER
   const handleIncreaseIngreBoxCount = function () {
-    if (ingreBoxNum <= 12) {
+    if (ingreBoxNum < ingreArr.length) {
       setIngreBoxNum(ingreBoxNum + 1);
+    }
+    if (ingreBoxNum >= ingreArr.length && ingredientStateArr[ingreBoxNum - 1]) {
+      setIngreBoxNum(ingreBoxNum + 1);
+    }
+  };
+
+  const handleIncreaseStepBoxCount = function () {
+    if (stepBoxNum < stepArr.length) {
+      setStepBoxNum(stepBoxNum + 1);
+    }
+    if (stepBoxNum >= stepArr.length && stepStateArr[stepBoxNum - 1]) {
+      setStepBoxNum(stepBoxNum + 1);
     }
   };
 
@@ -98,13 +150,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
       setStepBoxNum(stepBoxNum - 1);
     }
   };
-
-  const handleIncreaseStepBoxCount = function () {
-    if (stepBoxNum <= 12) {
-      setStepBoxNum(stepBoxNum + 1);
-    }
-  };
-
   //USE EFFECT TO SET THE INGRE BOX NUMBER STATE
   useEffect(() => {
     if (loginState && ingreArr) {
@@ -118,86 +163,6 @@ export default function EditRecipePage({ loginState, userProfile }) {
       setStepBoxNum(stepArr.length);
     }
   }, [loginState, stepArr]);
-
-  //FUNCTION TO SET THE INGREDIENT STATES
-  const handleIngredientStates = function (event) {
-    if (event.target.classList.contains("edit-recipe__input-1")) {
-      setIngredient1(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-2")) {
-      setIngredient2(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-3")) {
-      setIngredient3(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-4")) {
-      setIngredient4(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-5")) {
-      setIngredient5(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-6")) {
-      setIngredient6(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-7")) {
-      setIngredient7(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-8")) {
-      setIngredient8(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-9")) {
-      setIngredient9(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-10")) {
-      setIngredient10(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-11")) {
-      setIngredient11(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-12")) {
-      setIngredient12(event.target.value);
-    }
-  };
-
-  //FUNCTION TO SET THE STEP STATES
-  const handleStepStates = function (event) {
-    if (event.target.classList.contains("edit-recipe__input-1")) {
-      setStep1(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-2")) {
-      setStep2(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-3")) {
-      setStep3(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-4")) {
-      setStep4(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-5")) {
-      setStep5(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-6")) {
-      setStep6(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-7")) {
-      setStep7(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-8")) {
-      setStep8(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-9")) {
-      setStep9(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-10")) {
-      setStep10(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-11")) {
-      setStep11(event.target.value);
-    }
-    if (event.target.classList.contains("edit-recipe__input-12")) {
-      setStep12(event.target.value);
-    }
-  };
 
   //FUNCTION TO SET THE STATES OF READY TIME, DESCRIPTION, LEVEL AND RECIPE NAME
   const handleReadyTime = function (event) {
@@ -226,50 +191,19 @@ export default function EditRecipePage({ loginState, userProfile }) {
   };
   //FUNCTION TO VALIDATE THE INGREDIENT AND STEP
   const isIngreValid = function () {
-    if (
-      ingredient1 ||
-      ingredient2 ||
-      ingredient3 ||
-      ingredient4 ||
-      ingredient5 ||
-      ingredient6 ||
-      ingredient7 ||
-      ingredient8 ||
-      ingredient9 ||
-      ingredient10 ||
-      ingredient11 ||
-      ingredient12
-    ) {
-      return true;
-    }
-    if (ingreBoxNum < ingreArr.length) {
+    if (ingredientStateArr.toString() !== ingreArr.toString()) {
       return true;
     }
     return false;
   };
 
   const isStepValid = function () {
-    if (
-      step1 ||
-      step2 ||
-      step3 ||
-      step4 ||
-      step5 ||
-      step6 ||
-      step7 ||
-      step8 ||
-      step9 ||
-      step10 ||
-      step11 ||
-      step12
-    ) {
-      return true;
-    }
-    if (stepBoxNum < stepArr.length) {
+    if (stepStateArr.toString() !== stepArr.toString()) {
       return true;
     }
     return false;
   };
+
   // FUNCTION TO CONVERT A NUMBER TO AN ARRAY OF ASCENDING NUMBER ARRAY
   const handleCreateNumArr = function (value) {
     let arr = [];
@@ -330,7 +264,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
     isStepValid,
   ]);
 
-  //FUNCTION TO UPDATE THE RECIPE
+  // FUNCTION TO UPDATE THE RECIPE
   const handleOnSubmitUpdateRecipe = function (event) {
     event.preventDefault();
     if (
@@ -346,57 +280,21 @@ export default function EditRecipePage({ loginState, userProfile }) {
         isIngreValid() ||
         isStepValid())
     ) {
-      const inputIngredientArr = [
-        ingredient1 || ingreArr[0],
-        ingredient2 || ingreArr[1],
-        ingredient3 || ingreArr[2],
-        ingredient4 || ingreArr[3],
-        ingredient5 || ingreArr[4],
-        ingredient6 || ingreArr[5],
-        ingredient7 || ingreArr[6],
-        ingredient8 || ingreArr[7],
-        ingredient9 || ingreArr[8],
-        ingredient10 || ingreArr[9],
-        ingredient11 || ingreArr[10],
-        ingredient12 || ingreArr[11],
-      ];
-      const inputStepArr = [
-        step1 || stepArr[0],
-        step2 || stepArr[1],
-        step3 || stepArr[2],
-        step4 || stepArr[3],
-        step5 || stepArr[4],
-        step6 || stepArr[5],
-        step7 || stepArr[6],
-        step8 || stepArr[7],
-        step9 || stepArr[8],
-        step10 || stepArr[9],
-        step11 || stepArr[10],
-        step12 || stepArr[11],
-      ];
       const inputIngredientStr = handleReturnString(
-        inputIngredientArr.filter(
-          (ingredient) =>
-            ingredient !== "" &&
-            ingredient !== undefined &&
-            inputIngredientArr.indexOf(ingredient) + 1 <= ingreBoxNum //The second operand is used to filter out the deleted ingredients
+        ingredientStateArr.filter(
+          (ingredient) => ingredient !== "" && ingredient !== undefined
         )
       );
       const inputStepStr = handleReturnString(
-        inputStepArr.filter(
-          (step) =>
-            step !== "" &&
-            step !== undefined &&
-            inputStepArr.indexOf(step) + 1 <= stepBoxNum //The second operand is used to filter out the deleted steps
-        )
+        stepStateArr.filter((step) => step !== "" && step !== undefined)
       );
       const uploadObj = {
         recipe_name: recipeName || recipeData.name,
         level: level || recipeData.level,
         ready_time: readyTime || recipeData.ready_time,
         description: description || recipeData.description,
-        ingredients: inputIngredientStr || recipeData.ingredients,
-        directions: inputStepStr || recipeData.directions,
+        ingredients: inputIngredientStr,
+        directions: inputStepStr,
       };
       //IF IMAGE IS EDITED
       if (uploadImage !== null) {
@@ -440,6 +338,8 @@ export default function EditRecipePage({ loginState, userProfile }) {
     if (loginState && recipeData) {
       setStepArr(recipeData.directions.split(";"));
       setIngreArr(recipeData.ingredients.split(";"));
+      setStepStateArr(recipeData.directions.split(";"));
+      setIngredientStateArr(recipeData.ingredients.split(";"));
     }
   }, [loginState, recipeData]);
 
@@ -566,6 +466,47 @@ export default function EditRecipePage({ loginState, userProfile }) {
           <div className="edit-recipe__flex-container">
             {/* FLEX ITEM */}
             <div className="edit-recipe__flex-item">
+              {/* INGREDIENTS */}
+              <div className="edit-recipe__change-num-wrapper">
+                <label className="edit-recipe__label" htmlFor="step">
+                  Ingredients
+                </label>
+                <p
+                  className="edit-recipe__change-num"
+                  onClick={handleIncreaseIngreBoxCount}
+                >
+                  +
+                </p>
+                <p
+                  className="edit-recipe__change-num"
+                  onClick={handleDecreaseIngreBoxCount}
+                >
+                  -
+                </p>
+              </div>
+              {ingreArr &&
+                ingreBoxNum &&
+                handleCreateNumArr(ingreBoxNum).map((ingre, index) => (
+                  <textarea
+                    className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
+                      index + 1
+                    } ${inputError}`}
+                    onChange={handleIngredientStateArr}
+                    key={ingre}
+                    placeholder={ingreArr[index] || `Ingredient ${index + 1}`}
+                    id={index}
+                  ></textarea>
+                ))}
+
+              <ButtonComponent
+                btnClassName="btn btn--edit-recipe-submit btn--tablet"
+                btnContent="Post to the recipe library"
+                btnType="submit"
+              />
+            </div>
+
+            {/* FLEX ITEM */}
+            <div className="edit-recipe__flex-item">
               {/* STEPS */}
               <div>
                 <div className="edit-recipe__change-num-wrapper">
@@ -592,51 +533,13 @@ export default function EditRecipePage({ loginState, userProfile }) {
                       className={`edit-recipe__textarea edit-recipe__step-textarea edit-recipe__input-${
                         index + 1
                       } ${inputError}`}
-                      onChange={handleStepStates}
+                      onChange={handleStepStateArr}
                       key={step}
                       placeholder={stepArr[index] || `Step ${index + 1}`}
+                      id={index}
                     ></textarea>
                   ))}
-                <ButtonComponent
-                  btnClassName="btn btn--edit-recipe-submit btn--tablet"
-                  btnContent="Post to the recipe library"
-                  btnType="submit"
-                />
               </div>
-            </div>
-
-            {/* FLEX ITEM */}
-            <div className="edit-recipe__flex-item">
-              {/* INGREDIENTS */}
-              <div className="edit-recipe__change-num-wrapper">
-                <label className="edit-recipe__label" htmlFor="step">
-                  Ingredients
-                </label>
-                <p
-                  className="edit-recipe__change-num"
-                  onClick={handleIncreaseIngreBoxCount}
-                >
-                  +
-                </p>
-                <p
-                  className="edit-recipe__change-num"
-                  onClick={handleDecreaseIngreBoxCount}
-                >
-                  -
-                </p>
-              </div>
-              {ingreArr &&
-                ingreBoxNum &&
-                handleCreateNumArr(ingreBoxNum).map((ingre, index) => (
-                  <textarea
-                    className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
-                      index + 1
-                    } ${inputError}`}
-                    onChange={handleIngredientStates}
-                    key={ingre}
-                    placeholder={ingreArr[index] || `Ingredient ${index + 1}`}
-                  ></textarea>
-                ))}
             </div>
           </div>
           <ButtonComponent
