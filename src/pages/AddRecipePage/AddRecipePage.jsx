@@ -43,118 +43,63 @@ export default function AddRecipePage({ loginState, userProfile }) {
   const [ingreError, setIngreError] = useState("");
   const [stepError, setStepError] = useState("");
 
+  // FUNCTION TO CREATE THE INGREDIENT BOXES' KEY ARRAY
+  const handleBoxKeyArr = function (value) {
+    let arr = [];
+    for (let i = 1; i <= value; i++) {
+      arr.push(i);
+    }
+    return arr;
+  };
+
   //STATE TO STORE THE INGREDIENT
-  const [ingredient1, setIngredient1] = useState("");
-  const [ingredient2, setIngredient2] = useState("");
-  const [ingredient3, setIngredient3] = useState("");
-  const [ingredient4, setIngredient4] = useState("");
-  const [ingredient5, setIngredient5] = useState("");
-  const [ingredient6, setIngredient6] = useState("");
-  const [ingredient7, setIngredient7] = useState("");
-  const [ingredient8, setIngredient8] = useState("");
-  const [ingredient9, setIngredient9] = useState("");
-  const [ingredient10, setIngredient10] = useState("");
-  const [ingredient11, setIngredient11] = useState("");
-  const [ingredient12, setIngredient12] = useState("");
-  //STATE TO STORE THE INGREDIENT
-  const [step1, setStep1] = useState("");
-  const [step2, setStep2] = useState("");
-  const [step3, setStep3] = useState("");
-  const [step4, setStep4] = useState("");
-  const [step5, setStep5] = useState("");
-  const [step6, setStep6] = useState("");
-  const [step7, setStep7] = useState("");
-  const [step8, setStep8] = useState("");
-  const [step9, setStep9] = useState("");
-  const [step10, setStep10] = useState("");
-  const [step11, setStep11] = useState("");
-  const [step12, setStep12] = useState("");
+  const [ingredientArr, setIngredientArr] = useState([]);
+
+  //STATE TO STORE THE STEPS
+  const [stepArr, setStepArr] = useState([]);
+
   //FUNCTION TO SET THE FILE STATE
   const handleImage = function (event) {
     setUploadImage(event.target.files[0]);
     const newUrl = window.URL.createObjectURL(event.target.files[0]);
     setPreviewFile(newUrl);
   };
-  console.log(step2);
-  //FUNCTION TO SET THE INGREDIENT STATES
-  const handleIngredientStates = function (event) {
-    if (event.target.classList.contains("add-recipe__input-1")) {
-      setIngredient1(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-2")) {
-      setIngredient2(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-3")) {
-      setIngredient3(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-4")) {
-      setIngredient4(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-5")) {
-      setIngredient5(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-6")) {
-      setIngredient6(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-7")) {
-      setIngredient7(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-8")) {
-      setIngredient8(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-9")) {
-      setIngredient9(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-10")) {
-      setIngredient10(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-11")) {
-      setIngredient11(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-12")) {
-      setIngredient12(event.target.value);
-    }
+
+  //FUNCTION AND USE EFFECT TO SET THE INGREDIENT STATES
+  const handleIngredientStateArr = function (event) {
+    const indexValue = event.target.id;
+    const newArr = [...ingredientArr];
+    newArr.splice(indexValue, 1, event.target.value);
+    setIngredientArr(newArr);
   };
 
-  //FUNCTION TO SET THE STEP STATES
-  const handleStepStates = function (event) {
-    if (event.target.classList.contains("add-recipe__input-1")) {
-      setStep1(event.target.value);
+  useEffect(() => {
+    if (ingredientArr.length > ingredientBoxCount) {
+      const newArr = ingredientArr.filter(
+        (ele) => ingredientArr.indexOf(ele) <= ingredientBoxCount - 1
+      );
+      setIngredientArr(newArr);
     }
-    if (event.target.classList.contains("add-recipe__input-2")) {
-      setStep2(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-3")) {
-      setStep3(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-4")) {
-      setStep4(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-5")) {
-      setStep5(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-6")) {
-      setStep6(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-7")) {
-      setStep7(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-8")) {
-      setStep8(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-9")) {
-      setStep9(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-10")) {
-      setStep10(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-11")) {
-      setStep11(event.target.value);
-    }
-    if (event.target.classList.contains("add-recipe__input-12")) {
-      setStep12(event.target.value);
-    }
+    // eslint-disable-next-line
+  }, [ingredientBoxCount]);
+
+  //FUNCTION AND USE EFFECT TO SET THE STEP STATES
+  const handleStepStateArr = function (event) {
+    const indexValue = event.target.id;
+    const newArr = [...stepArr];
+    newArr.splice(indexValue, 1, event.target.value);
+    setStepArr(newArr);
   };
+
+  useEffect(() => {
+    if (stepArr.length > stepBoxCount) {
+      const newArr = stepArr.filter(
+        (ele) => stepArr.indexOf(ele) <= stepBoxCount - 1
+      );
+      setStepArr(newArr);
+    }
+    // eslint-disable-next-line
+  }, [stepBoxCount]);
 
   //FUNCTION TO SET THE STATES OF READY TIME, DESCRIPTION, LEVEL AND RECIPE NAME
   const handleReadyTime = function (event) {
@@ -174,7 +119,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
   };
   //FUNCTION TO UPDATE THE INGREDIENT BOX COUNT
   const handleIncreaseIngreBoxCount = function () {
-    if (ingredientBoxCount <= 12) {
+    if (ingredientArr[ingredientBoxCount - 1]) {
       setIngredientBoxCount(ingredientBoxCount + 1);
     }
   };
@@ -185,7 +130,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
   };
   //FUNCTION TO UPDATE THE STEP BOX COUNT
   const handleIncreaseStepBoxCount = function () {
-    if (stepBoxCount <= 12) {
+    if (stepArr[stepBoxCount - 1]) {
       setStepBoxCount(stepBoxCount + 1);
     }
   };
@@ -194,51 +139,29 @@ export default function AddRecipePage({ loginState, userProfile }) {
       setStepBoxCount(stepBoxCount - 1);
     }
   };
-  // FUNCTION TO CREATE THE INGREDIENT BOXES' KEY ARRAY
-  const handleBoxKeyArr = function (value) {
-    let arr = [];
-    for (let i = 1; i <= value; i++) {
-      arr.push(i);
-    }
-    return arr;
-  };
 
-  //FUNCTION TO VALIDATE THE INGREDIENT AND STEP
+  //FUNCTION TO VALIDATE THE INGREDIENT AND STEP ARRS
   const isIngreValid = function () {
-    if (
-      ingredient1 ||
-      ingredient2 ||
-      ingredient3 ||
-      ingredient4 ||
-      ingredient5 ||
-      ingredient6 ||
-      ingredient7 ||
-      ingredient8 ||
-      ingredient9 ||
-      ingredient10 ||
-      ingredient11 ||
-      ingredient12
-    ) {
+    let atLeastOneValidValue = false;
+    ingredientArr.forEach((ingre) => {
+      if (ingre !== "" && ingre !== undefined) {
+        atLeastOneValidValue = true;
+      }
+    });
+    if (ingredientArr.length > 0 && atLeastOneValidValue) {
       return true;
     }
     return false;
   };
 
   const isStepValid = function () {
-    if (
-      step1 ||
-      step2 ||
-      step3 ||
-      step4 ||
-      step5 ||
-      step6 ||
-      step7 ||
-      step8 ||
-      step9 ||
-      step10 ||
-      step11 ||
-      step12
-    ) {
+    let atLeastOneValidValue = false;
+    [...stepArr].forEach((step) => {
+      if (step !== "" && step !== undefined) {
+        atLeastOneValidValue = true;
+      }
+    });
+    if (stepArr.length > 0 && atLeastOneValidValue) {
       return true;
     }
     return false;
@@ -259,7 +182,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
     const newStr = newArr.join("");
     return newStr;
   };
-
+  console.log(isIngreValid(), isStepValid());
   //FUNCTION TO SUBMIT AN IMAGE TO CLOUDNARY
   const handleOnSubmitRecipe = function (event) {
     event.preventDefault();
@@ -277,45 +200,12 @@ export default function AddRecipePage({ loginState, userProfile }) {
       const formData = new FormData();
       formData.append("file", uploadImage);
       formData.append("upload_preset", UPLOAD_PRESET);
-      const ingredientArr = [
-        ingredient1,
-        ingredient2,
-        ingredient3,
-        ingredient4,
-        ingredient5,
-        ingredient6,
-        ingredient7,
-        ingredient8,
-        ingredient9,
-        ingredient10,
-        ingredient11,
-        ingredient12,
-      ];
-      const stepArr = [
-        step1,
-        step2,
-        step3,
-        step4,
-        step5,
-        step6,
-        step7,
-        step8,
-        step9,
-        step10,
-        step11,
-        step12,
-      ];
+
       const ingredientString = handleReturnString(
-        ingredientArr.filter(
-          (ingredient) =>
-            ingredient !== "" &&
-            ingredientArr.indexOf(ingredient) + 1 <= ingredientBoxCount //The second operand is used to filter out the deleted ingredients
-        )
+        ingredientArr.filter((ingredient) => ingredient !== "")
       );
       const stepString = handleReturnString(
-        stepArr.filter(
-          (step) => step !== "" && stepArr.indexOf(step) + 1 <= stepBoxCount //The second operand is used to filter out the deleted steps
-        )
+        stepArr.filter((step) => step !== "")
       );
 
       axios.post(CLOUD_URL, formData).then((response) => {
@@ -368,7 +258,7 @@ export default function AddRecipePage({ loginState, userProfile }) {
     }
   };
 
-  //USE EFFECT TO CLEAR THE ERROR STATES
+  // USE EFFECT TO CLEAR THE ERROR STATES
   useEffect(() => {
     if (recipeName) {
       setNameError("");
@@ -531,13 +421,13 @@ export default function AddRecipePage({ loginState, userProfile }) {
                   -
                 </p>
               </div>
-              {handleBoxKeyArr(ingredientBoxCount).map((boxKey) => (
+              {handleBoxKeyArr(ingredientBoxCount).map((boxKey, index) => (
                 <textarea
                   className={`add-recipe__textarea add-recipe__ingre-textarea add-recipe__input-${boxKey} ${ingreError}`}
-                  onChange={handleIngredientStates}
+                  onChange={handleIngredientStateArr}
                   key={boxKey}
                   placeholder={`Ingredient ${boxKey}`}
-                  id="ingre"
+                  id={index}
                   wrap="hard"
                 ></textarea>
               ))}
@@ -559,13 +449,13 @@ export default function AddRecipePage({ loginState, userProfile }) {
                   -
                 </p>
               </div>
-              {handleBoxKeyArr(stepBoxCount).map((boxKey) => (
+              {handleBoxKeyArr(stepBoxCount).map((boxKey, index) => (
                 <textarea
                   className={`add-recipe__textarea add-recipe__step-textarea add-recipe__input-${boxKey} ${stepError}`}
-                  onChange={handleStepStates}
+                  onChange={handleStepStateArr}
                   key={boxKey}
                   placeholder={`Step ${boxKey}`}
-                  id="step"
+                  id={index}
                   wrap="hard"
                 ></textarea>
               ))}
