@@ -6,6 +6,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import axios from "axios";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { handleFilterMinusOperator } from "../../Utils/utils";
+import { CircularProgress } from "@mui/material";
 
 const API_URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
@@ -51,7 +52,8 @@ export default function EditRecipePage({ loginState, userProfile }) {
   const [ingredientStateArr, setIngredientStateArr] = useState([]);
   //STATE TO STORE THE INGREDIENT
   const [stepStateArr, setStepStateArr] = useState([]);
-
+  //STATE FOR THE PROGRESSING ICON
+  const [progress, setProgress] = useState(false);
   //FUNCTION TO SET THE INGREDIENT STATE ARR
   const handleIngredientStateArr = function (event) {
     const indexValue = event.target.id;
@@ -280,6 +282,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
         isIngreValid() ||
         isStepValid())
     ) {
+      setProgress(true);
       const inputIngredientStr = handleReturnString(
         ingredientStateArr.filter(
           (ingredient) => ingredient !== "" && ingredient !== undefined
@@ -305,7 +308,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
           const imageURL = response.data.secure_url;
           const newUploadObj = { ...uploadObj, image: imageURL };
           handlePutData(newUploadObj);
-          alert("The recipe is updated");
+          // alert("The recipe is updated");
           navigate("/recipe-library");
         });
       }
@@ -320,6 +323,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
       setInputError("");
     } else {
       alert("Please edit at least 1 field");
+      setProgress(false);
       setError("input-box--edit-recipe-error");
       setInputError("edit-recipe__input-error");
     }
@@ -497,12 +501,19 @@ export default function EditRecipePage({ loginState, userProfile }) {
                     id={index}
                   ></textarea>
                 ))}
+              <div className="edit-recipe__btn-wrapper">
+                <ButtonComponent
+                  btnClassName="btn btn--edit-recipe-submit btn--tablet"
+                  btnContent="Post to the recipe library"
+                  btnType="submit"
+                />
 
-              <ButtonComponent
-                btnClassName="btn btn--edit-recipe-submit btn--tablet"
-                btnContent="Post to the recipe library"
-                btnType="submit"
-              />
+                {progress && (
+                  <div className="edit-recipe__progress edit-recipe__progress--tablet">
+                    <CircularProgress />
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* FLEX ITEM */}
@@ -542,11 +553,19 @@ export default function EditRecipePage({ loginState, userProfile }) {
               </div>
             </div>
           </div>
-          <ButtonComponent
-            btnClassName="btn btn--edit-recipe-submit btn--mobile"
-            btnContent="Post to the recipe library"
-            btnType="submit"
-          />
+          <div className="edit-recipe__btn-wrapper">
+            <ButtonComponent
+              btnClassName="btn btn--edit-recipe-submit btn--mobile"
+              btnContent="Post to the recipe library"
+              btnType="submit"
+            />
+
+            {progress && (
+              <div className="edit-recipe__progress edit-recipe__progress--mobile">
+                <CircularProgress />
+              </div>
+            )}
+          </div>
         </div>
       </form>
     );
