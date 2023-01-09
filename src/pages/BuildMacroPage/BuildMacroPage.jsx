@@ -338,6 +338,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
   //FUNCTION TO VALIDATE THE TARGETED WEIGHT
   const isTargetedWeightValid = function () {
     if (
+      !targetedWeight ||
       (goal.includes("lose") && targetedWeight > currentWeight) ||
       (goal.includes("gain") && targetedWeight < currentWeight) ||
       targetedWeight === currentWeight
