@@ -315,5 +315,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
         )}
       </div>
     );
+  } else {
+    return <h1>Please login to use this feature</h1>;
   }
 }
