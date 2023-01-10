@@ -158,7 +158,7 @@ export default function SignUpPage() {
         username,
         email: sha256(email),
         password: sha256(password),
-        gender: gender === "others" ? "male" : gender,
+        gender,
         age,
         weight,
         height,
