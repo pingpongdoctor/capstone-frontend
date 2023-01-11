@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import closePic from "../../assets/icons/close.png";
-import { handleCapitalizeAWord } from "../../Utils/utils";
+import { handleCapitalize } from "../../Utils/utils";
 import InputBox from "../../components/InputBox/InputBox";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
@@ -214,7 +214,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
               <p className="profile-page__field">Gender: </p>
               <div className="profile-page__small-wrapper">
                 <p className="profile-page__value">
-                  {handleCapitalizeAWord(userProfile.gender)}
+                  {handleCapitalize(userProfile.gender)}
                 </p>
                 <ButtonComponent
                   onClickHandler={handleModalBoxAppear}

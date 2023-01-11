@@ -4,7 +4,7 @@ import heartPic from "../../assets/images/heart.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { handleCapitalizeAWord } from "../../Utils/utils";
+import { handleCapitalize } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeItem({
@@ -15,6 +15,7 @@ export default function RecipeItem({
   recipePosterId,
   id,
 }) {
+  console.log(handleCapitalize("simon"));
   //STATE TO STORE THE NAME OF THE POSTER
   const [recipePosterName, setRecipePosterName] = useState("");
   //STATE FOR THE HIDDEN CLASSNAME
@@ -39,6 +40,7 @@ export default function RecipeItem({
           console.log(error);
         });
     }
+    // eslint-disable-next-line
   }, []);
   if (id) {
     return (
@@ -56,12 +58,12 @@ export default function RecipeItem({
               alt="heart-pic"
             />
           )}
-          <h3 className="recipe-item__name">{recipeName}</h3>
+          <h3 className="recipe-item__name">{handleCapitalize(recipeName)}</h3>
           <div className={`recipe-item__wrapper ${hiddenState}`}>
             <Avatar avatarClassName="avatar--recipe-library" />
             {recipePosterName && (
               <p className="recipe-item__user">
-                {handleCapitalizeAWord(recipePosterName)}
+                {handleCapitalize(recipePosterName)}
               </p>
             )}
           </div>

@@ -12,10 +12,7 @@ import lineChartPic from "../../assets/images/line-chart.png";
 import meditationPic from "../../assets/images/meditation.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { API_URL } from "../../Utils/utils";
-import {
-  handleFilterMinusOperator,
-  handleCapitalizeAWord,
-} from "../../Utils/utils";
+import { handleFilterMinusOperator, handleCapitalize } from "../../Utils/utils";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -567,7 +564,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
 
             {!buildForFriend && gender && (
               <ul className="macro-page__list">
-                <li>Gender: {handleCapitalizeAWord(gender)}</li>
+                <li>Gender: {handleCapitalize(gender)}</li>
                 <li>Age: {age}</li>
                 <li>Height: {height} cm</li>
                 <li>Weight: {currentWeight} kg</li>

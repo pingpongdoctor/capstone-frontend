@@ -32,26 +32,30 @@ export const timeConvDetail = function (timestamp) {
   }
 };
 
-//FUNCTION TO CAPITALIZE ALL FIRST LETTER OF A STRING OF WORDS
-export const handleCapitalize = (value) => {
-  let wordArr = value.split(" ");
-  let newWordArr = [];
-  for (let i = 0; i < wordArr.length; i++) {
-    newWordArr.push(
-      wordArr[i].split("")[0].toUpperCase() + wordArr[i].substring(1)
-    );
-  }
-  const newWord = newWordArr.join(" ");
-  return newWord;
-};
-
-//FUNCTION TO CAPITALIZE THE FIRST LETTER OF A STRING OF A WORD
-export const handleCapitalizeAWord = (word) => {
+//FUNCTION TO CAPITALIZE
+const handleCapitalizeAWord = (word) => {
   const caplitalizedWord = word.replace(
     word.split("")[0],
     word.split("")[0].toUpperCase()
   );
   return caplitalizedWord;
+};
+
+export const handleCapitalize = (value) => {
+  let wordArr = value.split(" ");
+  if (wordArr.length > 1) {
+    let newWordArr = [];
+    for (let i = 0; i < wordArr.length; i++) {
+      newWordArr.push(
+        wordArr[i].split("")[0].toUpperCase() + wordArr[i].substring(1)
+      );
+    }
+    const newWord = newWordArr.join(" ");
+    return newWord;
+  } else if (wordArr.length === 1) {
+    const newWord = handleCapitalizeAWord(value);
+    return newWord;
+  }
 };
 
 //GET JWT TOKEN FROM LOCAL STORAGE

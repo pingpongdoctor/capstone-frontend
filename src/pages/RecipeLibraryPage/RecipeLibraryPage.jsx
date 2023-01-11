@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import heartPic from "../../assets/images/heart.png";
-import { handleCapitalize } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeLibraryPage({ loginState, userProfile }) {
@@ -57,7 +56,7 @@ export default function RecipeLibraryPage({ loginState, userProfile }) {
                 key={recipe.id}
                 id={recipe.id}
                 recipeImage={recipe.image}
-                recipeName={handleCapitalize(recipe.recipe_name)}
+                recipeName={recipe.recipe_name}
                 recipePosterId={recipe.poster_id}
                 loginState={loginState}
                 userProfile={userProfile}
