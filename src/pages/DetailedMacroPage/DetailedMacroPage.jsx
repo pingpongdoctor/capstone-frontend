@@ -2,7 +2,6 @@ import "./DetailedMacroPage.scss";
 import axios from "axios";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
-import { handleCapitalizeAWord } from "../../Utils/utils";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { handleCapitalize } from "../../Utils/utils";
@@ -428,7 +427,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
               {macroObj && (
                 <div className="detail-page__value">
                   <p className="detail-page__field">Body Type: </p>
-                  <p>{handleCapitalizeAWord(macroObj.body_type)}</p>
+                  <p>{handleCapitalize(macroObj.body_type)}</p>
                 </div>
               )}
 

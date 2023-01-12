@@ -3,7 +3,7 @@ import { timeConvDetail } from "../../Utils/utils";
 import { useNavigate, Link } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete.png";
 import editIcon from "../../assets/icons/edit.png";
-import { handleCapitalizeAWord } from "../../Utils/utils";
+import { handleCapitalize } from "../../Utils/utils";
 
 export default function RecipeSavedItem({
   recipeName,
@@ -28,7 +28,7 @@ export default function RecipeSavedItem({
           {readyTime} minutes
         </p>
         <p className="recipe-save-item__text recipe-save-item__text--hidden">
-          {handleCapitalizeAWord(recipeLevel)}
+          {handleCapitalize(recipeLevel)}
         </p>
         <p className="recipe-save-item__text recipe-save-item__text--hidden">
           {timeConvDetail(timeCreate)}

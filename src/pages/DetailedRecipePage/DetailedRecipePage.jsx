@@ -8,7 +8,7 @@ import ingredientPic from "../../assets/images/ingredients.png";
 import stepPic from "../../assets/images/steps.png";
 import RecipeCommentItem from "../../components/RecipeCommentItem/RecipeCommentItem";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
-import { handleCapitalizeAWord, handleCapitalize } from "../../Utils/utils";
+import { handleCapitalize } from "../../Utils/utils";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import EditIconComponent from "../../components/EditIconComponent/EditIconComponent";
 import DeleteIconComponent from "../../components/DeleteIconComponent/DeleteIconComponent";
@@ -255,7 +255,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
           {recipePosterName && (
             <div className="detail-recipe__avatar-wrapper">
               <Avatar avatarClassName="avatar" />
-              <p>Recipe by {handleCapitalizeAWord(recipePosterName)}</p>
+              <p>Recipe by {handleCapitalize(recipePosterName)}</p>
             </div>
           )}
         </div>
@@ -416,7 +416,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
                   <Avatar avatarClassName="avatar" />
 
                   <p className="detail-recipe__comment-poster">
-                    {handleCapitalizeAWord(userProfile.username)}
+                    {handleCapitalize(userProfile.username)}
                   </p>
                 </div>
               )}

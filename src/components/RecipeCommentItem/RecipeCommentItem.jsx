@@ -2,7 +2,7 @@ import "./RecipeCommentItem.scss";
 import Avatar from "../Avatar/Avatar";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { handleCapitalizeAWord } from "../../Utils/utils";
+import { handleCapitalize } from "../../Utils/utils";
 import deleteIcon from "../../assets/icons/close.png";
 import likeIcon from "../../assets/icons/thumb-up.png";
 
@@ -28,6 +28,7 @@ export default function RecipeCommentItem({
         setPosterName(response.data.username);
       });
     }
+    // eslint-disable-next-line
   }, []);
   //FUNCTION TO DELETE THE COMMENTS
   const handleOnclickDelete = function () {
@@ -63,7 +64,7 @@ export default function RecipeCommentItem({
         <Avatar avatarClassName="avatar" />
         {posterName && (
           <p className="recipe-comment__username">
-            {handleCapitalizeAWord(posterName)}
+            {handleCapitalize(posterName)}
           </p>
         )}
         {loginState && userProfile && userProfile.id === userId && (
