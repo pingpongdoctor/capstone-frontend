@@ -80,10 +80,20 @@ function App() {
         })
         .catch((e) => {
           console.log(e);
+          if (e.response.data === "Incorrect email and password") {
+            alert("Incorrect email and password");
+            setLoginErr("input-box--login-err");
+          }
         });
     } else {
       setLoginErr("input-box--login-err");
     }
+  };
+
+  //FUNCTION TO REFRESH EMAIL AND PASSWORD
+  const handleRefreshEmailPassword = function () {
+    setEmail("");
+    setPassword("");
   };
 
   //USE EFFECT TO CLEAR THE ERROR LOGIN STATE
@@ -186,6 +196,7 @@ function App() {
                 loginState={loginState}
                 userProfile={userProfile}
                 loginErr={loginErr}
+                handleRefreshEmailPassword={handleRefreshEmailPassword}
               />
             }
           />
