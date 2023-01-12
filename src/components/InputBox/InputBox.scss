@@ -32,6 +32,10 @@
     }
   }
 
+  &--login-err {
+    border: 1px solid red;
+  }
+
   &--signup {
     padding-left: 3rem;
     margin-bottom: 2rem;

@@ -11,6 +11,7 @@ export default function LoginPage({
   email,
   password,
   loginState,
+  loginErr,
 }) {
   //DEFINE NAVIGATE
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function LoginPage({
 
           <InputBox
             inputId="email"
-            inputClassName="input-box input-box--login input-box--login-email"
+            inputClassName={`input-box input-box--login input-box--login-email ${loginErr} `}
             inputType="text"
             inputName="email"
             inputPlaceholder="Email"
@@ -57,7 +58,7 @@ export default function LoginPage({
           />
 
           <InputBox
-            inputClassName="input-box input-box--login input-box--login-password"
+            inputClassName={`input-box input-box--login input-box--login-password ${loginErr}`}
             inputType="password"
             inputName="password"
             inputId="password"

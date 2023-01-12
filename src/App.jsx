@@ -29,6 +29,8 @@ function App() {
   const [userProfile, setUserProfile] = useState(null);
   //STATE FOR LOGGING IN
   const [loginState, setLoginState] = useState(false);
+  //STATE FOR THE ERROR LOGIN STATE
+  const [loginErr, setLoginErr] = useState("");
   //STATE FOR EMAIL AND PASSWORD
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +41,20 @@ function App() {
   const handlePassword = function (event) {
     setPassword(event.target.value);
   };
+  //FUNCTION TO VALIDATE EMAIL AND PASSWORD
+  const isEmailValid = function () {
+    if (email) {
+      return true;
+    }
+    return false;
+  };
+  const isPasswordValid = function () {
+    if (email) {
+      return true;
+    }
+    return false;
+  };
+
   //FUNCTION TO LOGIN
   const handleLogin = function (event) {
     event.preventDefault();
@@ -46,21 +62,34 @@ function App() {
       email: sha256(email),
       password: sha256(password),
     });
-    axios
-      .post(`${API_URL}/login`, {
-        email: sha256(email),
-        password: sha256(password),
-      })
-      .then((response) => {
-        if (response.data) {
-          localStorage.setItem("jwt_token", response.data);
-          loadProfile(response.data);
-          setEmail("");
-          setPassword("");
-        }
-      })
-      .catch((error) => console.log(error));
+    if (isEmailValid() && isPasswordValid()) {
+      axios
+        .post(`${API_URL}/login`, {
+          email: sha256(email),
+          password: sha256(password),
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data) {
+            localStorage.setItem("jwt_token", response.data);
+            loadProfile(response.data);
+            setEmail("");
+            setPassword("");
+            setLoginErr("");
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      setLoginErr("input-box--login-err");
+    }
   };
+
+  //USE EFFECT TO CLEAR THE ERROR LOGIN STATE
+  useEffect(() => {
+    setLoginErr("");
+  }, [email, password]);
 
   //FUNCTION TO SET THE STATE FOR USER PROFILE
   const loadProfile = function (jwtToken) {
@@ -156,6 +185,7 @@ function App() {
                 loadProfile={loadProfile}
                 loginState={loginState}
                 userProfile={userProfile}
+                loginErr={loginErr}
               />
             }
           />
