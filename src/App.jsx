@@ -80,6 +80,10 @@ function App() {
         })
         .catch((e) => {
           console.log(e);
+          if (e.response.data === "Incorrect email and password") {
+            alert("Incorrect email and password");
+            setLoginErr("input-box--login-err");
+          }
         });
     } else {
       setLoginErr("input-box--login-err");
