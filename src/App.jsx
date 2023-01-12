@@ -86,6 +86,12 @@ function App() {
     }
   };
 
+  //FUNCTION TO REFRESH EMAIL AND PASSWORD
+  const handleRefreshEmailPassword = function () {
+    setEmail("");
+    setPassword("");
+  };
+
   //USE EFFECT TO CLEAR THE ERROR LOGIN STATE
   useEffect(() => {
     setLoginErr("");
@@ -186,6 +192,7 @@ function App() {
                 loginState={loginState}
                 userProfile={userProfile}
                 loginErr={loginErr}
+                handleRefreshEmailPassword={handleRefreshEmailPassword}
               />
             }
           />

@@ -12,6 +12,7 @@ export default function LoginPage({
   password,
   loginState,
   loginErr,
+  handleRefreshEmailPassword,
 }) {
   //DEFINE NAVIGATE
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ export default function LoginPage({
     }
     // eslint-disable-next-line
   }, [loginState]);
+  //USE EFFECT TO REFRESH EMAIL AND PASSWORD
+  useEffect(() => {
+    handleRefreshEmailPassword();
+  }, []);
 
   if (!loginState) {
     return (
