@@ -32,15 +32,6 @@ export const timeConvDetail = function (timestamp) {
   }
 };
 
-//FUNCTION TO CAPITALIZE
-const handleCapitalizeAWord = (word) => {
-  const caplitalizedWord = word.replace(
-    word.split("")[0],
-    word.split("")[0].toUpperCase()
-  );
-  return caplitalizedWord;
-};
-
 export const handleCapitalize = (value) => {
   let wordArr = value.split(" ");
   if (wordArr.length > 1) {
@@ -52,11 +43,18 @@ export const handleCapitalize = (value) => {
     }
     const newWord = newWordArr.join(" ");
     return newWord;
-  } else if (wordArr.length === 1) {
-    const newWord = handleCapitalizeAWord(value);
-    return newWord;
+  } else {
+    const caplitalizedWord = value.replace(
+      value.split("")[0],
+      value.split("")[0].toUpperCase()
+    );
+    return caplitalizedWord;
   }
 };
+const value = "new";
+console.log(
+  value.replace(value.split("")[0], value.split("")[0].toUpperCase())
+);
 
 //GET JWT TOKEN FROM LOCAL STORAGE
 export const jwtToken = localStorage.getItem("jwt_token");

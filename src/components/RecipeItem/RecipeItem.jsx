@@ -15,7 +15,6 @@ export default function RecipeItem({
   recipePosterId,
   id,
 }) {
-  console.log(handleCapitalize("simon"));
   //STATE TO STORE THE NAME OF THE POSTER
   const [recipePosterName, setRecipePosterName] = useState("");
   //STATE FOR THE HIDDEN CLASSNAME
@@ -58,7 +57,11 @@ export default function RecipeItem({
               alt="heart-pic"
             />
           )}
-          <h3 className="recipe-item__name">{handleCapitalize(recipeName)}</h3>
+          {recipeName && (
+            <h3 className="recipe-item__name">
+              {handleCapitalize(recipeName)}
+            </h3>
+          )}
           <div className={`recipe-item__wrapper ${hiddenState}`}>
             <Avatar avatarClassName="avatar--recipe-library" />
             {recipePosterName && (
