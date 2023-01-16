@@ -15,14 +15,14 @@ export default function HomePage({ loginState }) {
         <div className="home-page__wrapper">
           <img className="home-page__img" src={dumbbellPic} alt="dumbbell" />
           <p className="home-page__descript">
-            We are here to help you start your fitness journey
+            We are here to help you start your fitness journey.
           </p>
         </div>
         <div className="home-page__wrapper">
           <img className="home-page__img" src={officePic} alt="office" />
           <p className="home-page__descript">
             Based on your weight, height and age, the website platform can
-            quickly calculate your macronutrients
+            quickly calculate your macronutrients.
           </p>
         </div>
         <div className="home-page__wrapper">
