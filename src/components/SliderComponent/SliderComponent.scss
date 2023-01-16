@@ -34,13 +34,16 @@
 
   &__image {
     width: 100%;
-    height: 32vh;
+    height: 320px;
     object-fit: cover;
     object-position: center;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     transition: filter 1s;
     filter: brightness(0.85);
+    @include tablet {
+      height: 350px;
+    }
   }
 
   &__image--brighter {
