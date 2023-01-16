@@ -2,7 +2,7 @@
 
 # Build Your Diet
 
-https://buildyourdiet.netlify.app/
+[Deployment link](https://buildyourdiet.netlify.app/)
 
 This project is about building a website to help users designing their own diets quickly and effortlessly. Users can calculate their suitable macronutrient ratios and diversify their dishes by refering to the recipe library. All pages are responsive in different breakpoints such as mobile, tablet and desktop breakpoints.
 
