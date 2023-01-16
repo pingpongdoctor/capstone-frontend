@@ -29,6 +29,7 @@ This project is about building a website to help users designing their own diets
 - Fitness Calculator Library - This library helps perform calculations for your BMI, BMR, total daily energy expenditure, and so on.
 - Cloudinary
 - Sha256 - This library is used to hash email and password on the frontend to protect users from being hacked.
+- Material UI
 
 ## Tech Stack Backend
 
