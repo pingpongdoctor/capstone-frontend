@@ -32,6 +32,7 @@ export const timeConvDetail = function (timestamp) {
   }
 };
 
+//FUNCTION TO CAPITALIZE WORDS
 export const handleCapitalize = (value) => {
   let wordArr = value.split(" ");
   if (wordArr.length > 1) {
@@ -99,4 +100,3 @@ export function useWindowSize() {
   }, []);
   return windowSize;
 }
-
