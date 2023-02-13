@@ -11,6 +11,7 @@ import barChartPic from "../../assets/images/bar-chart.png";
 import lineChartPic from "../../assets/images/line-chart.png";
 import meditationPic from "../../assets/images/meditation.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 import { API_URL } from "../../Utils/utils";
 import { handleFilterMinusOperator, handleCapitalize } from "../../Utils/utils";
 import {
@@ -944,10 +945,6 @@ export default function BuildMacroPage({ userProfile, loginState }) {
       </div>
     );
   } else {
-    return (
-      <div>
-        <h1>Please log in to use this function</h1>
-      </div>
-    );
+    return <NotificationComponent />;
   }
 }

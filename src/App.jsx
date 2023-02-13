@@ -1,5 +1,5 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -90,6 +90,28 @@ function App() {
     }
   };
 
+  //FUNCTION TO LOGIN THE EXPERIENCE ACCOUNT
+  const handleLoginExperienceAccount = function () {
+    axios
+      .post(`${API_URL}/login`, {
+        email: sha256("simon@gmail.com"),
+        password: sha256("123456Aa@"),
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          localStorage.setItem("jwt_token", response.data);
+          loadProfile(response.data);
+          setEmail("");
+          setPassword("");
+          setLoginErr("");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   //FUNCTION TO REFRESH EMAIL AND PASSWORD
   const handleRefreshEmailPassword = function () {
     setEmail("");
@@ -139,16 +161,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* HEADER COMPONENT */}
-      <HeaderComponent
-        loginState={loginState}
-        handleLogout={handleLogout}
-        popOutSideMenu={popOutSideMenu}
-      />
+      <div className="App">
+        {/* HEADER COMPONENT */}
+        <HeaderComponent
+          loginState={loginState}
+          handleLogout={handleLogout}
+          popOutSideMenu={popOutSideMenu}
+          handleLoginExperienceAccount={handleLoginExperienceAccount}
+          closeMenu={closeMenu}
+        />
 
-      {/* SIDE MENU */}
-      <SideMenu sideMenuState={sideMenuState} />
-      <div onMouseEnter={closeMenu} className="App">
+        {/* SIDE MENU */}
+        <SideMenu sideMenuState={sideMenuState} />
         <Routes>
           {/* HOMEPAGE ROUTE */}
           <Route
@@ -158,6 +182,7 @@ function App() {
                 userProfile={userProfile}
                 handleLogout={handleLogout}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -166,7 +191,11 @@ function App() {
           <Route
             path="/sign-up"
             element={
-              <SignUpPage loginState={loginState} userProfile={userProfile} />
+              <SignUpPage
+                loginState={loginState}
+                userProfile={userProfile}
+                handleLoginExperienceAccount={handleLoginExperienceAccount}
+              />
             }
           />
 
@@ -197,6 +226,7 @@ function App() {
                 userProfile={userProfile}
                 loginErr={loginErr}
                 handleRefreshEmailPassword={handleRefreshEmailPassword}
+                handleLoginExperienceAccount={handleLoginExperienceAccount}
               />
             }
           />
@@ -309,8 +339,8 @@ function App() {
             }
           />
         </Routes>
+        <FooterComponent closeMenu={closeMenu} />
       </div>
-      <FooterComponent />
     </BrowserRouter>
   );
 }

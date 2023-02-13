@@ -13,6 +13,7 @@ export default function LoginPage({
   loginState,
   loginErr,
   handleRefreshEmailPassword,
+  handleLoginExperienceAccount,
 }) {
   //DEFINE NAVIGATE
   const navigate = useNavigate();
@@ -32,6 +33,12 @@ export default function LoginPage({
     return (
       <div className="login-page">
         <div className="login-page__wrapper">
+          <p
+            onClick={handleLoginExperienceAccount}
+            className="login-page__text"
+          >
+            Demo Account
+          </p>
           <p
             onClick={() => {
               navigate("/sign-up");
