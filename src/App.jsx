@@ -139,16 +139,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* HEADER COMPONENT */}
-      <HeaderComponent
-        loginState={loginState}
-        handleLogout={handleLogout}
-        popOutSideMenu={popOutSideMenu}
-      />
-
-      {/* SIDE MENU */}
-      <SideMenu sideMenuState={sideMenuState} />
       <div onMouseEnter={closeMenu} className="App">
+        {/* HEADER COMPONENT */}
+        <HeaderComponent
+          loginState={loginState}
+          handleLogout={handleLogout}
+          popOutSideMenu={popOutSideMenu}
+        />
+
+        {/* SIDE MENU */}
+        <SideMenu sideMenuState={sideMenuState} />
         <Routes>
           {/* HOMEPAGE ROUTE */}
           <Route
@@ -309,8 +309,8 @@ function App() {
             }
           />
         </Routes>
+        <FooterComponent />
       </div>
-      <FooterComponent />
     </BrowserRouter>
   );
 }

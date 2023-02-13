@@ -50,7 +50,7 @@ export default function EditRecipePage({ loginState, userProfile }) {
   const [stepBoxNum, setStepBoxNum] = useState("");
   //STATE TO STORE THE INGREDIENT
   const [ingredientStateArr, setIngredientStateArr] = useState([]);
-  //STATE TO STORE THE INGREDIENT
+  //STATE TO STORE THE STEP
   const [stepStateArr, setStepStateArr] = useState([]);
   //STATE FOR THE PROGRESSING ICON
   const [progress, setProgress] = useState(false);
