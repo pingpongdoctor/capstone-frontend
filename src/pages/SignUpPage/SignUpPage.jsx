@@ -9,7 +9,10 @@ import { sha256 } from "js-sha256";
 import { API_URL } from "../../Utils/utils";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 
-export default function SignUpPage() {
+export default function SignUpPage({
+  loginState,
+  handleLoginExperienceAccount,
+}) {
   //USE USENAVIGATE
   const navigate = useNavigate();
   //STATES FOR ALL INPUT BOXES
@@ -231,183 +234,193 @@ export default function SignUpPage() {
     // eslint-disable-next-line
   }, [email, password, passwordConfirm, username, gender, age, weight, height]);
 
-  return (
-    <div className="signup-page">
-      <div className="signup-page__container">
-        <div className="signup-page__links">
-          <p
-            onClick={() => {
-              navigate("/login");
-            }}
-            className="signup-page__link"
-          >
-            Login
-          </p>
-          <p
-            onClick={() => {
-              navigate("/");
-            }}
-            className="signup-page__link"
-          >
-            Homepage
-          </p>
-        </div>
-        <h1 className="signup-page__heading signup-page__heading--tablet">
-          Sign Up
-        </h1>
-        <form onSubmit={handleSubmit} className="signup-page__form">
-          <div className="signup-page__flex-container">
-            <h1 className="signup-page__heading signup-page__heading--mobile">
-              Sign Up
-            </h1>
-            {/* EMAIL */}
-            <InputBox
-              inputName="email"
-              inputType="text"
-              inputClassName={`input-box input-box--signup input-box--signup-email ${emailEr}`}
-              inputPlaceholder="Email"
-              inputValue={email}
-              inputOnChange={handleEmail}
-            />
-            <div className="signup-page__wrapper">
-              <div className="signup-page__small-wrapper">
-                {/* PASSWORD */}
-                <InputBox
-                  inputPlaceholder="Password"
-                  inputName="password"
-                  inputType="password"
-                  inputClassName={`input-box input-box--signup input-box--signup-password ${passwordEr}`}
-                  inputValue={password}
-                  inputOnChange={handlePassword}
-                />
-                <img
-                  onMouseEnter={handleMouseEnterPasswordText}
-                  className="signup-page__ques-img"
-                  src={questionIcon}
-                  alt="question-icon"
-                />
-              </div>
-              {passwordTextAppear && (
-                <p
-                  onMouseLeave={handleMouseLeavePasswordText}
-                  className="signup-page__text"
-                >
-                  At least 1 lower-case letter, 1 upper-case letter, 1 number, 1
-                  special syntax. 6 to 15 letters.
-                </p>
-              )}
-            </div>
-            {/* CONFIRM PASSWORD */}
-            <InputBox
-              inputPlaceholder="Confirm Password"
-              inputName="confirm-password"
-              inputType="password"
-              inputClassName={`input-box input-box--signup input-box--signup-password-confirm ${passwordConfirmEr}`}
-              inputValue={passwordConfirm}
-              inputOnChange={handlePasswordConfirm}
-            />
-            <div className="signup-page__wrapper">
-              <div className="signup-page__small-wrapper">
-                {/* USER NAME */}
-                <InputBox
-                  inputPlaceholder="Username"
-                  inputName="username"
-                  inputType="text"
-                  inputClassName={`input-box input-box--signup input-box--signup-username ${usernameEr}`}
-                  inputValue={username}
-                  inputOnChange={handleUsername}
-                />
-                <img
-                  onMouseEnter={handleMouseEnterUsernameText}
-                  className="signup-page__ques-img"
-                  src={questionIcon}
-                  alt="question-icon"
-                />
-              </div>
-              {usernameTextAppear && (
-                <p
-                  onMouseLeave={handleMouseLeaveUsernameText}
-                  className="signup-page__text"
-                >
-                  Username requires at least 6 characters.
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="signup-page__flex-container">
-            {/* GENDER */}
-            <select
-              onChange={handleGender}
-              value={gender}
-              className={`signup-page__select ${genderEr}`}
+  if (!loginState) {
+    return (
+      <div className="signup-page">
+        <div className="signup-page__container">
+          <div className="signup-page__links">
+            <p
+              onClick={handleLoginExperienceAccount}
+              className="signup-page__demo-text"
             >
-              <option value="">
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choose
-                your gender here
-              </option>
-              <option value="male">
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Male
-              </option>
-              <option value="female">
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Female
-              </option>
-              <option value="others">
-                {" "}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Others
-              </option>
-            </select>
-
-            {/* AGE  */}
-            <InputBox
-              inputPlaceholder="Age"
-              inputName="age"
-              inputType="number"
-              inputOnWheel={(e) => {
-                e.target.blur();
+              Demo Account
+            </p>
+            <p
+              onClick={() => {
+                navigate("/login");
               }}
-              inputClassName={`input-box input-box--signup input-box--signup-age ${ageEr}`}
-              inputValue={age}
-              inputOnChange={handleAge}
-            />
-
-            {/* WEIGHT  */}
-            <InputBox
-              inputPlaceholder="Weight in kg"
-              inputName="weight"
-              inputType="number"
-              inputOnWheel={(e) => {
-                e.target.blur();
+              className="signup-page__link"
+            >
+              Login
+            </p>
+            <p
+              onClick={() => {
+                navigate("/");
               }}
-              inputClassName={`input-box input-box--signup input-box--signup-weight ${weightEr}`}
-              inputValue={weight}
-              inputOnChange={handleWeight}
-            />
-
-            {/* HEIGHT  */}
-            <InputBox
-              inputPlaceholder="Height in cm"
-              inputName="height"
-              inputType="number"
-              inputOnWheel={(e) => {
-                e.target.blur();
-              }}
-              inputClassName={`input-box input-box--signup input-box--signup-height ${heightEr}`}
-              inputValue={height}
-              inputOnChange={handleHeight}
-            />
-
-            <ButtonComponent
-              btnClassName="btn btn--signup"
-              btnType="submit"
-              btnContent="Sign-up"
-            />
+              className="signup-page__link"
+            >
+              Homepage
+            </p>
           </div>
-        </form>
+          <h1 className="signup-page__heading signup-page__heading--tablet">
+            Sign Up
+          </h1>
+          <form onSubmit={handleSubmit} className="signup-page__form">
+            <div className="signup-page__flex-container">
+              <h1 className="signup-page__heading signup-page__heading--mobile">
+                Sign Up
+              </h1>
+              {/* EMAIL */}
+              <InputBox
+                inputName="email"
+                inputType="text"
+                inputClassName={`input-box input-box--signup input-box--signup-email ${emailEr}`}
+                inputPlaceholder="Email"
+                inputValue={email}
+                inputOnChange={handleEmail}
+              />
+              <div className="signup-page__wrapper">
+                <div className="signup-page__small-wrapper">
+                  {/* PASSWORD */}
+                  <InputBox
+                    inputPlaceholder="Password"
+                    inputName="password"
+                    inputType="password"
+                    inputClassName={`input-box input-box--signup input-box--signup-password ${passwordEr}`}
+                    inputValue={password}
+                    inputOnChange={handlePassword}
+                  />
+                  <img
+                    onMouseEnter={handleMouseEnterPasswordText}
+                    className="signup-page__ques-img"
+                    src={questionIcon}
+                    alt="question-icon"
+                  />
+                </div>
+                {passwordTextAppear && (
+                  <p
+                    onMouseLeave={handleMouseLeavePasswordText}
+                    className="signup-page__text"
+                  >
+                    At least 1 lower-case letter, 1 upper-case letter, 1 number,
+                    1 special syntax. 6 to 15 letters.
+                  </p>
+                )}
+              </div>
+              {/* CONFIRM PASSWORD */}
+              <InputBox
+                inputPlaceholder="Confirm Password"
+                inputName="confirm-password"
+                inputType="password"
+                inputClassName={`input-box input-box--signup input-box--signup-password-confirm ${passwordConfirmEr}`}
+                inputValue={passwordConfirm}
+                inputOnChange={handlePasswordConfirm}
+              />
+              <div className="signup-page__wrapper">
+                <div className="signup-page__small-wrapper">
+                  {/* USER NAME */}
+                  <InputBox
+                    inputPlaceholder="Username"
+                    inputName="username"
+                    inputType="text"
+                    inputClassName={`input-box input-box--signup input-box--signup-username ${usernameEr}`}
+                    inputValue={username}
+                    inputOnChange={handleUsername}
+                  />
+                  <img
+                    onMouseEnter={handleMouseEnterUsernameText}
+                    className="signup-page__ques-img"
+                    src={questionIcon}
+                    alt="question-icon"
+                  />
+                </div>
+                {usernameTextAppear && (
+                  <p
+                    onMouseLeave={handleMouseLeaveUsernameText}
+                    className="signup-page__text"
+                  >
+                    Username requires at least 6 characters.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="signup-page__flex-container">
+              {/* GENDER */}
+              <select
+                onChange={handleGender}
+                value={gender}
+                className={`signup-page__select ${genderEr}`}
+              >
+                <option value="">
+                  {" "}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choose
+                  your gender here
+                </option>
+                <option value="male">
+                  {" "}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Male
+                </option>
+                <option value="female">
+                  {" "}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Female
+                </option>
+                <option value="others">
+                  {" "}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Others
+                </option>
+              </select>
+
+              {/* AGE  */}
+              <InputBox
+                inputPlaceholder="Age"
+                inputName="age"
+                inputType="number"
+                inputOnWheel={(e) => {
+                  e.target.blur();
+                }}
+                inputClassName={`input-box input-box--signup input-box--signup-age ${ageEr}`}
+                inputValue={age}
+                inputOnChange={handleAge}
+              />
+
+              {/* WEIGHT  */}
+              <InputBox
+                inputPlaceholder="Weight in kg"
+                inputName="weight"
+                inputType="number"
+                inputOnWheel={(e) => {
+                  e.target.blur();
+                }}
+                inputClassName={`input-box input-box--signup input-box--signup-weight ${weightEr}`}
+                inputValue={weight}
+                inputOnChange={handleWeight}
+              />
+
+              {/* HEIGHT  */}
+              <InputBox
+                inputPlaceholder="Height in cm"
+                inputName="height"
+                inputType="number"
+                inputOnWheel={(e) => {
+                  e.target.blur();
+                }}
+                inputClassName={`input-box input-box--signup input-box--signup-height ${heightEr}`}
+                inputValue={height}
+                inputOnChange={handleHeight}
+              />
+
+              <ButtonComponent
+                btnClassName="btn btn--signup"
+                btnType="submit"
+                btnContent="Sign-up"
+              />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    navigate("/");
+  }
 }

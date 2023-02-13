@@ -33,12 +33,15 @@
 
   &--header-page {
     margin: 0 auto;
-    width: 130px;
+    width: 100px;
+    @include small-mobile {
+      width: 135px;
+    }
     @include tablet {
       width: 170px;
     }
     @include desktop {
-      width: 190px;
+      width: 200px;
     }
   }
 }

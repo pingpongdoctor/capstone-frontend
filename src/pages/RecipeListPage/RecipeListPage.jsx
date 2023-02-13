@@ -5,6 +5,7 @@ import ModalBox from "../../components/ModalBox/ModalBox";
 import axios from "axios";
 import { API_URL } from "../../Utils/utils";
 import RecipeSavedItem from "../../components/RecipeSavedItem/RecipeSavedItem";
+import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 export default function RecipeListPage({ loginState, userProfile }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
@@ -191,6 +192,6 @@ export default function RecipeListPage({ loginState, userProfile }) {
       </div>
     );
   } else {
-    return <h1>Please log in to use this function</h1>;
+    return <NotificationComponent />;
   }
 }

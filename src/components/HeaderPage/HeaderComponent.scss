@@ -29,17 +29,17 @@
 
   &__wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     gap: 1rem;
     align-items: center;
-    width: 100px;
+    width: 150px;
     @include tablet {
-      width: 120px;
+      width: 270px;
     }
   }
 
   &__profile-link {
-    width: 30%;
+    width: 36px;
   }
 
   &__build-macro,
@@ -65,13 +65,28 @@
   &__link:visited {
     text-decoration: none;
     color: #ffffff;
+    cursor: pointer;
+    @include tablet {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__text {
+    color: #ffffff;
+    cursor: pointer;
+    @include tablet {
+      font-size: 1.1rem;
+    }
   }
 
   &__menu {
     width: 35px;
-    margin-right: 65px;
+    margin-right: 5px;
+    @include small-mobile {
+      margin-right: 115px;
+    }
     @include tablet {
-      margin-right: 80px;
+      margin-right: 230px;
       width: 40px;
     }
   }

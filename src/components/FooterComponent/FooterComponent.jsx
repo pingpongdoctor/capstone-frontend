@@ -3,14 +3,14 @@ import Logo from "../Logo/Logo";
 import phoneIcon from "../../assets/icons/phone-call.png";
 import emailIcon from "../../assets/icons/gmail.png";
 import { useLocation } from "react-router-dom";
-export default function FooterComponent() {
+export default function FooterComponent({ closeMenu }) {
   //GET THE CURRENT ROUTE
   const location = useLocation();
   const currentRoute = location.pathname;
 
   if (currentRoute !== "/login" && currentRoute !== "/sign-up") {
     return (
-      <div className="site-footer">
+      <div onMouseEnter={closeMenu} className="site-footer">
         <div className="site-footer__container">
           <Logo logoClassName="logo logo--site-footer-tablet" />
           <div className="site-footer__flex-container">

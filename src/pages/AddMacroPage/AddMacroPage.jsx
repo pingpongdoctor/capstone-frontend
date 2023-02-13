@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { handleFilterMinusOperator } from "../../Utils/utils";
+import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile }) {
@@ -550,6 +551,6 @@ export default function AddMacroPage({ loginState, userProfile }) {
       </div>
     );
   } else {
-    return <h1>Please log in to use this function</h1>;
+    return <NotificationComponent />;
   }
 }

@@ -6,10 +6,10 @@ import cookingPic from "../../assets/images/cooking2.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import "./HomePage.scss";
 
-export default function HomePage({ loginState }) {
+export default function HomePage({ loginState, closeMenu }) {
   const navigate = useNavigate();
   return (
-    <div className="home-page">
+    <div onMouseEnter={closeMenu} className="home-page">
       <SliderComponent loginState={loginState} />
       <div className="home-page__infor">
         <div className="home-page__wrapper">
