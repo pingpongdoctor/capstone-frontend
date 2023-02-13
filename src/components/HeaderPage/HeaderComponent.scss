@@ -34,7 +34,7 @@
     align-items: center;
     width: 150px;
     @include tablet {
-      width: 270px;
+      width: 280px;
     }
   }
 
@@ -75,7 +75,7 @@
     color: #ffffff;
     cursor: pointer;
     @include tablet {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -86,7 +86,7 @@
       margin-right: 115px;
     }
     @include tablet {
-      margin-right: 230px;
+      margin-right: 240px;
       width: 40px;
     }
   }
