@@ -2,22 +2,29 @@
 @use "../../styles/partials/mixins" as *;
 
 .signup-page {
+  background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.2)),
+    url("../../assets/images/pexels-lukas-616401.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include tablet {
+    height: 100vh;
+  }
   &__container {
-    background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.2)),
-      url("../../assets/images/pexels-lukas-616401.jpg");
-    background-position: center;
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    height: 100vh;
+    margin-top: 4rem;
     @include tablet {
       gap: 1rem;
-      padding: 2rem;
+      margin-top: 0;
     }
     @include desktop {
       gap: 4rem;
+      padding: 2rem;
     }
   }
 
@@ -139,10 +146,17 @@
   }
 
   &__link {
-    font-size: 1.3rem;
+    font-size: 1rem;
     cursor: pointer;
     &:hover {
       color: ivory;
     }
+    @include tablet {
+      font-size: 1.3rem;
+    }
+  }
+
+  &__demo-text {
+    @extend .signup-page__link;
   }
 }

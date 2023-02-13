@@ -7,6 +7,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { API_URL } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
+import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 
 export default function MacroLisPage({ loginState }) {
   //APPLY THE USE NAVIGATE
@@ -212,6 +213,6 @@ export default function MacroLisPage({ loginState }) {
       </div>
     );
   } else {
-    return <h1>Please log in to use this function</h1>;
+    return <NotificationComponent />;
   }
 }

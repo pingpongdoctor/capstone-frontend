@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 import { CircularProgress } from "@mui/material";
+import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const API_URL = process.env.REACT_APP_API_URL || "";
@@ -488,10 +489,6 @@ export default function AddRecipePage({ loginState, userProfile }) {
       </form>
     );
   } else {
-    return (
-      <div>
-        <h1>You have to login to use this function</h1>
-      </div>
-    );
+    return <NotificationComponent />;
   }
 }

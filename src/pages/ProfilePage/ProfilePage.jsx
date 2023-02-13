@@ -8,6 +8,7 @@ import closePic from "../../assets/icons/close.png";
 import { handleCapitalize } from "../../Utils/utils";
 import InputBox from "../../components/InputBox/InputBox";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
+import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function ProfilePage({ loginState, userProfile, loadProfile }) {
@@ -316,6 +317,6 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
       </div>
     );
   } else {
-    return <h1>Please login to use this feature</h1>;
+    return <NotificationComponent />;
   }
 }

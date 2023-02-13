@@ -2,20 +2,27 @@ import "./HeaderComponent.scss";
 import menu from "../../assets/icons/white-menu.png";
 import userProfile from "../../assets/icons/user-profile.png";
 import Logo from "../Logo/Logo";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function HeaderComponent({
   loginState,
   handleLogout,
   popOutSideMenu,
+  handleLoginExperienceAccount,
+  closeMenu,
 }) {
   //GET THE CURRENT ROUTE
   const location = useLocation();
   const currentRoute = location.pathname;
-
+  //FUNCTION TO LOGIN DEMO ACCOUNT AND COME BACK TO HOMEPAGE
+  const navigate = useNavigate();
+  const handleLoginDemoAccountAndBackToHome = function () {
+    handleLoginExperienceAccount();
+    navigate("/");
+  };
   if (currentRoute !== "/login" && currentRoute !== "/sign-up") {
     return (
-      <div className="header-page header-page--login">
+      <div onMouseEnter={closeMenu} className="header-page header-page--login">
         <div className="header-page__container">
           <img
             onMouseEnter={popOutSideMenu}
@@ -26,6 +33,14 @@ export default function HeaderComponent({
           {/* <img className="logo logo--header-page" src={logo} alt="logo" /> */}
           <Logo logoClassName="logo logo--header-page" />
           <div className="header-page__wrapper">
+            {!loginState && (
+              <p
+                onClick={handleLoginDemoAccountAndBackToHome}
+                className="header-page__text"
+              >
+                Demo Account
+              </p>
+            )}
             {!loginState && (
               <Link to={"/sign-up"} className="header-page__link">
                 Sign Up
