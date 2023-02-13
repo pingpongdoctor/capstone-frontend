@@ -1,7 +1,7 @@
 import "./SideMenu.scss";
 import { Link } from "react-router-dom";
 
-export default function SiteMenu({ sideMenuState }) {
+export default function SideMenu({ sideMenuState }) {
   return (
     <div className={`side-menu ${sideMenuState}`}>
       <ul className="side-menu__list">
