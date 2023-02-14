@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../Utils/utils";
 import RecipeSavedItem from "../../components/RecipeSavedItem/RecipeSavedItem";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
-export default function RecipeListPage({ loginState, userProfile }) {
+export default function RecipeListPage({ loginState, userProfile, closeMenu }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -108,7 +108,7 @@ export default function RecipeListPage({ loginState, userProfile }) {
 
   if (loginState) {
     return (
-      <div className="recipe-list">
+      <div onMouseEnter={closeMenu} className="recipe-list">
         <div className="recipe-list__container">
           <h1 className="recipe-list__heading">Recipe List</h1>
           {recipeArr.length > 0 && (

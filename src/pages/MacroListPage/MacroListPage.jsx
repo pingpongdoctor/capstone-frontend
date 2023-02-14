@@ -9,7 +9,7 @@ import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 
-export default function MacroLisPage({ loginState }) {
+export default function MacroLisPage({ loginState, closeMenu }) {
   //APPLY THE USE NAVIGATE
   const navigate = useNavigate();
   //FUNCTION TO NAVIGATE TO THE ADD MACRO PAGE
@@ -124,7 +124,7 @@ export default function MacroLisPage({ loginState }) {
 
   if (loginState) {
     return (
-      <div className="macro-list">
+      <div onMouseEnter={closeMenu} className="macro-list">
         <div className="macro-list__container">
           <div className="macro-list__wrapper">
             <h1 className="macro-list__heading">Macro List</h1>

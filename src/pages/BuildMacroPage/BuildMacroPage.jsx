@@ -39,7 +39,7 @@ ChartJS.register(
 );
 const fitnessCalculatorFunctions = require("fitness-calculator");
 
-export default function BuildMacroPage({ userProfile, loginState }) {
+export default function BuildMacroPage({ userProfile, loginState, closeMenu }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -534,7 +534,7 @@ export default function BuildMacroPage({ userProfile, loginState }) {
 
   if (loginState) {
     return (
-      <div className="macro-page">
+      <div onMouseEnter={closeMenu} className="macro-page">
         <div className="macro-page__container">
           <div className="macro-page__welcome">
             <h2>
