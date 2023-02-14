@@ -29,7 +29,11 @@ ChartJS.register(
 );
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function DetailedMacroPage({ loginState, userProfile }) {
+export default function DetailedMacroPage({
+  loginState,
+  userProfile,
+  closeMenu,
+}) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -326,7 +330,7 @@ export default function DetailedMacroPage({ loginState, userProfile }) {
 
   if (loginState) {
     return (
-      <div className="detail-page">
+      <div onMouseEnter={closeMenu} className="detail-page">
         <div className="detail-page__huge-container">
           <div className="detail-page__heading-wrap">
             <div className="detail-page__back-icon-wrapper">

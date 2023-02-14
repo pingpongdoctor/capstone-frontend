@@ -7,7 +7,11 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import heartPic from "../../assets/images/heart.png";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function RecipeLibraryPage({ loginState, userProfile }) {
+export default function RecipeLibraryPage({
+  loginState,
+  userProfile,
+  closeMenu,
+}) {
   //USE USENAVIGATE
   const navigate = useNavigate();
   //STATE TO GET DATA OF ALL RECIPES AND THE CORRESPONDING INGREDIENTS
@@ -24,7 +28,7 @@ export default function RecipeLibraryPage({ loginState, userProfile }) {
       });
   }, []);
   return (
-    <div className="recipe-library">
+    <div onMouseEnter={closeMenu} className="recipe-library">
       <div className="recipe-library__container">
         <div className="recipe-library__wrapper">
           <h1 className="recipe-library__heading">Recipe Library</h1>

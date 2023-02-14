@@ -8,7 +8,7 @@ import { handleFilterMinusOperator } from "../../Utils/utils";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function AddMacroPage({ loginState, userProfile }) {
+export default function AddMacroPage({ loginState, userProfile, closeMenu }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -310,7 +310,7 @@ export default function AddMacroPage({ loginState, userProfile }) {
 
   if (loginState) {
     return (
-      <div className="add-macro">
+      <div onMouseEnter={closeMenu} className="add-macro">
         <div className="add-macro__container">
           <div className="add-macro__heading-wrapper">
             <BackIconComponent

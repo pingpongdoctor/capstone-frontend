@@ -17,7 +17,11 @@ import savedIcon from "../../assets/icons/save.png";
 import unSavedIcon from "../../assets/icons/unsave.png";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function DetailedRecipePage({ loginState, userProfile }) {
+export default function DetailedRecipePage({
+  loginState,
+  userProfile,
+  closeMenu,
+}) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -244,7 +248,7 @@ export default function DetailedRecipePage({ loginState, userProfile }) {
 
   if (recipeData) {
     return (
-      <div className="detail-recipe">
+      <div onMouseEnter={closeMenu} className="detail-recipe">
         {/* FIRST BIG WRAP */}
         <div className="detail-recipe__first-wrapper">
           <img

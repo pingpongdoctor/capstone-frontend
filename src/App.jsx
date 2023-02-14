@@ -1,5 +1,5 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -207,6 +207,7 @@ function App() {
                 loadProfile={loadProfile}
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -239,6 +240,7 @@ function App() {
               <BuildMacroPage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -250,6 +252,7 @@ function App() {
               <MacroListPage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -261,6 +264,7 @@ function App() {
               <DetailedMacroPage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -269,7 +273,11 @@ function App() {
           <Route
             path="/add-macro"
             element={
-              <AddMacroPage userProfile={userProfile} loginState={loginState} />
+              <AddMacroPage
+                userProfile={userProfile}
+                loginState={loginState}
+                closeMenu={closeMenu}
+              />
             }
           />
 
@@ -280,6 +288,7 @@ function App() {
               <EditMacroPage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -291,6 +300,7 @@ function App() {
               <RecipeLibraryPage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -302,6 +312,7 @@ function App() {
               <DetailRecipePage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -313,6 +324,7 @@ function App() {
               <AddRecipePage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -324,6 +336,7 @@ function App() {
               <EditRecipePage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
@@ -335,6 +348,7 @@ function App() {
               <RecipeListPage
                 userProfile={userProfile}
                 loginState={loginState}
+                closeMenu={closeMenu}
               />
             }
           />
