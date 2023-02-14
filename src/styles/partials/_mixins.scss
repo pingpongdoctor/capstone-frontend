@@ -18,6 +18,12 @@
   }
 }
 
+@mixin breakpoint($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
 @keyframes animate {
   0% {
     opacity: 0;

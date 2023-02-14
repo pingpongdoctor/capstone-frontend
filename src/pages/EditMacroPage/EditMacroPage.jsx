@@ -8,7 +8,7 @@ import BackIconComponent from "../../components/BackIconComponent/BackIconCompon
 import { handleFilterMinusOperator } from "../../Utils/utils";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function EditMacroPage({ loginState }) {
+export default function EditMacroPage({ loginState, closeMenu }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -172,7 +172,7 @@ export default function EditMacroPage({ loginState }) {
 
   if (loginState && macroObj) {
     return (
-      <div className="edit-macro">
+      <div onMouseEnter={closeMenu} className="edit-macro">
         <div className="edit-macro__container">
           <div className="edit-macro__heading-wrapper">
             <BackIconComponent

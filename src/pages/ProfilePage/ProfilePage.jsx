@@ -11,7 +11,12 @@ import BackIconComponent from "../../components/BackIconComponent/BackIconCompon
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function ProfilePage({ loginState, userProfile, loadProfile }) {
+export default function ProfilePage({
+  loginState,
+  userProfile,
+  loadProfile,
+  closeMenu,
+}) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -147,7 +152,7 @@ export default function ProfilePage({ loginState, userProfile, loadProfile }) {
 
   if (loginState) {
     return (
-      <div className="profile-page">
+      <div onMouseEnter={closeMenu} className="profile-page">
         <div className="profile-page__container">
           <div className="profile-page__wrapper">
             <BackIconComponent

@@ -12,7 +12,7 @@ const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const API_URL = process.env.REACT_APP_API_URL || "";
 
-export default function AddRecipePage({ loginState, userProfile }) {
+export default function AddRecipePage({ loginState, userProfile, closeMenu }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -298,7 +298,11 @@ export default function AddRecipePage({ loginState, userProfile }) {
 
   if (loginState) {
     return (
-      <form onSubmit={handleOnSubmitRecipe} className="add-recipe">
+      <form
+        onMouseEnter={closeMenu}
+        onSubmit={handleOnSubmitRecipe}
+        className="add-recipe"
+      >
         <div className="add-recipe__container">
           <div className="add-recipe__heading-wrapper">
             <BackIconComponent
