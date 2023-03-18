@@ -58,10 +58,6 @@ function App() {
   //FUNCTION TO LOGIN
   const handleLogin = function (event) {
     event.preventDefault();
-    console.log({
-      email: sha256(email),
-      password: sha256(password),
-    });
     if (isEmailValid() && isPasswordValid()) {
       axios
         .post(`${API_URL}/login`, {
@@ -98,7 +94,6 @@ function App() {
         password: sha256("123456Aa@"),
       })
       .then((response) => {
-        console.log(response);
         if (response.data) {
           localStorage.setItem("jwt_token", response.data);
           loadProfile(response.data);

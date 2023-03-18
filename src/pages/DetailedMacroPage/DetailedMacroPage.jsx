@@ -70,7 +70,7 @@ export default function DetailedMacroPage({
   const [activateSecondBox, setActivateSecondBox] = useState("");
   const [activateThirdBox, setActivateThirdBox] = useState("");
   const [activateLastBox, setActivateLastBox] = useState("");
-  console.log(macroObj);
+
   //GET DATA OF A DETAILED MACRO
   useEffect(() => {
     if (loginState) {
