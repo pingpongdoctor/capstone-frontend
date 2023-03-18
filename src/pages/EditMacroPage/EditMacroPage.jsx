@@ -52,7 +52,7 @@ export default function EditMacroPage({ loginState, closeMenu }) {
     }
     // eslint-disable-next-line
   }, [loginState, jwtToken]);
-  console.log(targetedWeight);
+
   //USE EFFECT TO SET THE CAPITALIZED NAME PLACEHOLDER
   useEffect(() => {
     if (macroObj) {
@@ -151,8 +151,6 @@ export default function EditMacroPage({ loginState, closeMenu }) {
         weight: currentWeight || macroObj.weight,
         age: age || macroObj.age,
       };
-
-      console.log(valueObject);
 
       axios
         .put(`${API_URL}/macros-list/${macroId}`, valueObject, headers)

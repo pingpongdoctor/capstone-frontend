@@ -185,7 +185,6 @@ export default function AddRecipePage({ loginState, userProfile, closeMenu }) {
     const newStr = newArr.join("");
     return newStr;
   };
-  console.log(isIngreValid(), isStepValid());
   //FUNCTION TO SUBMIT AN IMAGE TO CLOUDNARY
   const handleOnSubmitRecipe = function (event) {
     event.preventDefault();

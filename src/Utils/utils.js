@@ -52,10 +52,6 @@ export const handleCapitalize = (value) => {
     return caplitalizedWord;
   }
 };
-const value = "new";
-console.log(
-  value.replace(value.split("")[0], value.split("")[0].toUpperCase())
-);
 
 //GET JWT TOKEN FROM LOCAL STORAGE
 export const jwtToken = localStorage.getItem("jwt_token");

@@ -437,7 +437,7 @@ export default function BuildMacroPage({ userProfile, loginState, closeMenu }) {
       setMacroSecondBtnState("btn--macro-page--error");
     }
   };
-  console.log(gender);
+
   //FUNCTION TO POST A NEW MACRO
   const handlePostNewMacro = function () {
     if (
