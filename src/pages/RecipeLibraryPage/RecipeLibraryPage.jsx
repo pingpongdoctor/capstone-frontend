@@ -33,12 +33,12 @@ export default function RecipeLibraryPage({
 
   //USEEFFECT TO SET DISPLAYNONECLASS FOR THE LOADING PAGE
   useEffect(() => {
-    if (loginState && recipes.length > 0) {
+    if (recipes.length > 0) {
       setTimeout(() => {
         setDisplayNoneClass("loading-component__display-none");
       }, 2000);
     }
-  }, [loginState, recipes.length]);
+  }, [recipes.length]);
 
   return (
     <div onMouseEnter={closeMenu} className="recipe-library">
