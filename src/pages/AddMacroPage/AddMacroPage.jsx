@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function AddMacroPage({ loginState, userProfile, closeMenu }) {
@@ -19,6 +20,8 @@ export default function AddMacroPage({ loginState, userProfile, closeMenu }) {
   };
   //USE USENAVIGATE
   const navigate = useNavigate();
+  //STATE TO CONTROL THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //STATES FOR ALL INPUT BOXES
   const [macroName, setMacroName] = useState("");
   const [goal, setGoal] = useState("");
@@ -308,9 +311,15 @@ export default function AddMacroPage({ loginState, userProfile, closeMenu }) {
     }
   };
 
+  //SET THE DISPLAYNONECLASS STATE FOR THE LOADING PAGE
+  setTimeout(() => {
+    setDisplayNoneClass("loading-component__display-none");
+  }, 1200);
+
   if (loginState) {
     return (
       <div onMouseEnter={closeMenu} className="add-macro">
+        <LoadingComponent displayNoneClass={displayNoneClass} />
         <div className="add-macro__container">
           <div className="add-macro__heading-wrapper">
             <BackIconComponent

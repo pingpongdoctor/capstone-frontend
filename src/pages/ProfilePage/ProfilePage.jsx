@@ -17,6 +17,7 @@ export default function ProfilePage({
   loadProfile,
   closeMenu,
 }) {
+  console.log(userProfile);
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
   //DEFINE HEADERS
@@ -220,7 +221,8 @@ export default function ProfilePage({
               <p className="profile-page__field">Gender: </p>
               <div className="profile-page__small-wrapper">
                 <p className="profile-page__value">
-                  {handleCapitalize(userProfile.gender)}
+                  {/* {handleCapitalize(userProfile.gender)} */}
+                  {userProfile.gender}
                 </p>
                 <ButtonComponent
                   onClickHandler={handleModalBoxAppear}

@@ -172,14 +172,7 @@ function App() {
           {/* HOMEPAGE ROUTE */}
           <Route
             path="/"
-            element={
-              <HomePage
-                userProfile={userProfile}
-                handleLogout={handleLogout}
-                loginState={loginState}
-                closeMenu={closeMenu}
-              />
-            }
+            element={<HomePage loginState={loginState} closeMenu={closeMenu} />}
           />
 
           {/* SIGN UP PAGE */}

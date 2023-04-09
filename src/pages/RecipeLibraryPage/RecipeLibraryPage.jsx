@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import heartPic from "../../assets/images/heart.png";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function RecipeLibraryPage({
@@ -16,6 +17,8 @@ export default function RecipeLibraryPage({
   const navigate = useNavigate();
   //STATE TO GET DATA OF ALL RECIPES AND THE CORRESPONDING INGREDIENTS
   const [recipes, setRecipes] = useState("");
+  //STATE TO MANIPULATE THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //USE EFFECT TO GET THE RECIPE DATA
   useEffect(() => {
     axios
@@ -27,8 +30,19 @@ export default function RecipeLibraryPage({
         console.log(error);
       });
   }, []);
+
+  //USEEFFECT TO SET DISPLAYNONECLASS FOR THE LOADING PAGE
+  useEffect(() => {
+    if (loginState && recipes.length > 0) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 2000);
+    }
+  }, [loginState, recipes.length]);
+
   return (
     <div onMouseEnter={closeMenu} className="recipe-library">
+      <LoadingComponent displayNoneClass={displayNoneClass} />
       <div className="recipe-library__container">
         <div className="recipe-library__wrapper">
           <h1 className="recipe-library__heading">Recipe Library</h1>

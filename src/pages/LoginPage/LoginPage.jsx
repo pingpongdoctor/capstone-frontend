@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import InputBox from "../../components/InputBox/InputBox";
+import { useState } from "react";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 
 export default function LoginPage({
   handleLogin,
@@ -17,6 +19,8 @@ export default function LoginPage({
 }) {
   //DEFINE NAVIGATE
   const navigate = useNavigate();
+  //STATE TO CONTROL THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //USE EFFECT TO NAVIGATE TO HOMEPAGE WHEN USERS SUCCESSFULLY LOG IN
   useEffect(() => {
     if (loginState) {
@@ -29,9 +33,30 @@ export default function LoginPage({
     handleRefreshEmailPassword();
   }, []);
 
+  //CHECK IF THE BACKGROUND IMAGE IS LOADED
+  const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
+  useEffect(() => {
+    if (!loginState) {
+      const getPage = document.querySelector(".login-page");
+      if (getPage) {
+        setBackgroundImageLoaded(true);
+      }
+    }
+  }, [loginState]);
+
+  //USEEFFECT TO SET THE DISPLAYNONECLASS STATE FOR THE LOADING PAGE
+  useEffect(() => {
+    if (!loginState && backgroundImageLoaded) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 1200);
+    }
+  }, [loginState, backgroundImageLoaded]);
+
   if (!loginState) {
     return (
       <div className="login-page">
+        <LoadingComponent displayNoneClass={displayNoneClass} />
         <div className="login-page__wrapper">
           <p
             onClick={handleLoginExperienceAccount}
