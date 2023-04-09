@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 import { CircularProgress } from "@mui/material";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDNARY_UPLOAD_PRESET;
 const API_URL = process.env.REACT_APP_API_URL || "";
@@ -23,6 +24,8 @@ export default function AddRecipePage({ loginState, userProfile, closeMenu }) {
   };
   //USE USENAVIGATE
   const navigate = useNavigate();
+  //STATE TO CONTROL THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //STATE TO STORE THE FILE
   const [uploadImage, setUploadImage] = useState(null);
   //SET STATE TO SHOW PREVIEWED IMAGE AFTER CHOOSING AN UPLOADED FILE
@@ -295,6 +298,11 @@ export default function AddRecipePage({ loginState, userProfile, closeMenu }) {
     isIngreValid,
   ]);
 
+  //SET THE DISPLAYNONECLASS STATE FOR THE LOADING PAGE
+  setTimeout(() => {
+    setDisplayNoneClass("loading-component__display-none");
+  }, 1200);
+
   if (loginState) {
     return (
       <form
@@ -302,6 +310,7 @@ export default function AddRecipePage({ loginState, userProfile, closeMenu }) {
         onSubmit={handleOnSubmitRecipe}
         className="add-recipe"
       >
+        <LoadingComponent displayNoneClass={displayNoneClass} />
         <div className="add-recipe__container">
           <div className="add-recipe__heading-wrapper">
             <BackIconComponent

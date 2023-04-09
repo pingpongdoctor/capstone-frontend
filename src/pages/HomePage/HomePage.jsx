@@ -5,12 +5,26 @@ import officePic from "../../assets/images/office.png";
 import cookingPic from "../../assets/images/cooking2.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import "./HomePage.scss";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
+import { useEffect, useState } from "react";
 
 export default function HomePage({ loginState, closeMenu }) {
   const navigate = useNavigate();
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
+  setTimeout(() => {
+    setDisplayNoneClass("loading-component__display-none");
+  }, 2000);
+  //SCROLL TO THE TOP WHEN RELOADING THE PAGE
+  useEffect(() => {
+    //CHANGE THE BROWSER MEMORY BEFORE THE PAGE IS UNLOADED
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+  }, []);
   return (
     <div onMouseEnter={closeMenu} className="home-page">
-      <SliderComponent loginState={loginState} />
+      <LoadingComponent displayNoneClass={displayNoneClass} />
+      <SliderComponent />
       <div className="home-page__infor">
         <div className="home-page__wrapper">
           <img className="home-page__img" src={dumbbellPic} alt="dumbbell" />

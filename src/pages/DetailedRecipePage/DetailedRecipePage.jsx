@@ -15,6 +15,7 @@ import DeleteIconComponent from "../../components/DeleteIconComponent/DeleteIcon
 import ModalBox from "../../components/ModalBox/ModalBox";
 import savedIcon from "../../assets/icons/save.png";
 import unSavedIcon from "../../assets/icons/unsave.png";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 const API_URL = process.env.REACT_APP_API_URL || "";
 
 export default function DetailedRecipePage({
@@ -32,6 +33,8 @@ export default function DetailedRecipePage({
   };
   //USE NAVIGATE
   const navigate = useNavigate();
+  //STATE TO CONTROL THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //STATE TO STORE THE SINGLE RECIPE DATA
   const [recipeData, setRecipeData] = useState(null);
   //STATE TO STORE RECIPE-USER DATA
@@ -246,240 +249,252 @@ export default function DetailedRecipePage({
     }
   };
 
-  if (recipeData) {
-    return (
-      <div onMouseEnter={closeMenu} className="detail-recipe">
-        {/* FIRST BIG WRAP */}
-        <div className="detail-recipe__first-wrapper">
-          <img
-            className="detail-recipe__img"
-            src={recipeData.image}
-            alt="recipe-img"
-          />
-          {recipePosterName && (
-            <div className="detail-recipe__avatar-wrapper">
-              <Avatar avatarClassName="avatar" />
-              <p>Recipe by {handleCapitalize(recipePosterName)}</p>
+  //USEEFFECT TO SET THE LOADING PAGE
+  useEffect(() => {
+    if (recipeData) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 1200);
+    }
+  }, [recipeData]);
+
+  return (
+    <div>
+      <LoadingComponent displayNoneClass={displayNoneClass} />
+      {recipeData && (
+        <div onMouseEnter={closeMenu} className="detail-recipe">
+          {/* FIRST BIG WRAP */}
+          <div className="detail-recipe__first-wrapper">
+            <img
+              className="detail-recipe__img"
+              src={recipeData.image}
+              alt="recipe-img"
+            />
+            {recipePosterName && (
+              <div className="detail-recipe__avatar-wrapper">
+                <Avatar avatarClassName="avatar" />
+                <p>Recipe by {handleCapitalize(recipePosterName)}</p>
+              </div>
+            )}
+          </div>
+
+          {/* SECOND BIG WRAP */}
+          <div className="detail-recipe__second-wrapper">
+            <div className="detail-recipe__second-wrapper-container">
+              {/* RECIPE NAME */}
+              <div className="detail-recipe__heading-wrapper">
+                <div className="detail-recipe__back-icon-wrapper">
+                  <BackIconComponent
+                    onClickHandler={() => {
+                      navigate("/recipe-library");
+                    }}
+                    backClassName="back-icon back-icon--detail-recipe"
+                  />
+                  <h2 className="detail-recipe__heading">
+                    {handleCapitalize(recipeData.recipe_name)}
+                  </h2>
+                </div>
+                <div className="detail-recipe__edit-icon-wrapper">
+                  {loginState && !savedRecipe && (
+                    <img
+                      onClick={handleOnClickSaveRecipe}
+                      className="detail-recipe__save"
+                      src={unSavedIcon}
+                      alt="unsave-icon"
+                    />
+                  )}
+                  {loginState && savedRecipe && (
+                    <img
+                      onClick={handleOnClickUnSaveRecipe}
+                      className="detail-recipe__save"
+                      src={savedIcon}
+                      alt="save-icon"
+                    />
+                  )}
+                  {loginState &&
+                    userProfile &&
+                    recipeData &&
+                    userProfile.id === recipeData.poster_id && (
+                      <EditIconComponent
+                        onClickHandler={() => {
+                          navigate(`/edit-recipe/${recipeData.id}`);
+                        }}
+                        editClassName="edit-icon"
+                      />
+                    )}
+                  {loginState &&
+                    userProfile &&
+                    recipeData &&
+                    userProfile.id === recipeData.poster_id && (
+                      <DeleteIconComponent
+                        onClickHandler={handleAppearBox}
+                        delClassName="del-icon"
+                      />
+                    )}
+                </div>
+              </div>
+              {/* DESCRIPTION */}
+              <p className="detail-recipe__text">
+                <span className="detail-recipe__small-text">
+                  Recipe Description:
+                </span>{" "}
+                {recipeData.description}
+              </p>
+
+              <div className="detail-recipe__recipe-infor">
+                {/* READY TIME INFOR */}
+                <p className="detail-recipe__ready-time">
+                  <span className="detail-recipe__small-text">Ready time:</span>{" "}
+                  {recipeData.ready_time} minutes
+                </p>
+                {/* LIKES INFOR */}
+                <div className="detail-recipe__like-infor">
+                  <p>
+                    <span className="detail-recipe__small-text">Likes:</span>{" "}
+                    {recipeData.likes}
+                  </p>
+                  <img
+                    onClick={handleOnclickLikeRecipe}
+                    className="detail-recipe__like-icon"
+                    src={likeIcon}
+                    alt="like-icon"
+                  />
+                </div>
+              </div>
+
+              <div className="detail-recipe__ingre-step-boxes">
+                <div className="detail-recipe__ingre-step-box">
+                  <img
+                    className="detail-recipe__ingredient-pic"
+                    src={ingredientPic}
+                    alt="ingredient-pic"
+                  />
+                  {/* INGREDIENT NUMBER */}
+                  <div className="detail-recipe__ingredients-infor-wrapper">
+                    <h3>Ingredients:</h3>
+                    {ingredientArr.length > 0 && (
+                      <p className="detail-recipe__num">
+                        {ingredientArr.length} ingredients
+                      </p>
+                    )}
+                  </div>
+                  {/* INGREDIENTS */}
+                  <ul className="detail-recipe__ingredients">
+                    {ingredientArr.length > 0 &&
+                      ingredientArr.map((ingredient) => (
+                        <li
+                          key={ingredient}
+                          className="detail-recipe__ingredient"
+                        >
+                          {ingredient}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+
+                <div className="detail-recipe__ingre-step-box">
+                  <img
+                    className="detail-recipe__step-pic"
+                    src={stepPic}
+                    alt="steps-pic"
+                  />
+                  {/* DIRECTION NUMBER */}
+                  <div className="detail-recipe__directions-infor-wrapper">
+                    <h3>Steps to do:</h3>
+                    {directionsArr.length > 0 && (
+                      <p className="detail-recipe__num">
+                        {directionsArr.length} steps
+                      </p>
+                    )}
+                  </div>
+                  {/* DIRECTIONS */}
+                  <ul className="detail-recipe__steps">
+                    {directionsArr.length > 0 &&
+                      directionsArr.map((step) => (
+                        <li key={step} className="detail-recipe__step">
+                          {step}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* COMMENT SECTION */}
+          <form
+            onSubmit={handleOnSubmitComment}
+            className="detail-recipe__comment-form"
+          >
+            <div className="detail-recipe__comment-form-container">
+              <h3>Comments</h3>
+              <div className="detail-recipe__comment-flex-container">
+                {loginState && userProfile && (
+                  <div className="detail-recipe__comment-wrapper">
+                    <Avatar avatarClassName="avatar" />
+
+                    <p className="detail-recipe__comment-poster">
+                      {handleCapitalize(userProfile.username)}
+                    </p>
+                  </div>
+                )}
+                <div className="detail-recipe__comment-flex-item">
+                  {loginState && (
+                    <textarea
+                      name="comment-box"
+                      className="detail-recipe__comment-textarea"
+                      wrap="hard"
+                      onChange={handleCommentInput}
+                      value={commentInput}
+                      placeholder="Comment here..."
+                    ></textarea>
+                  )}
+                  {loginState && (
+                    <ButtonComponent
+                      btnClassName="btn btn--recipe-comment"
+                      btnContent="Comment"
+                      btnType="submit"
+                    />
+                  )}
+                </div>
+              </div>
+
+              <ul className="detail-recipe__comment-list">
+                {commentData.length > 0 &&
+                  commentData
+                    .sort(
+                      (a, b) =>
+                        new Date(b.updated_at).getTime() -
+                        new Date(a.updated_at).getTime()
+                    )
+                    .map((comment) => (
+                      <RecipeCommentItem
+                        key={comment.id}
+                        commentId={comment.id}
+                        commentText={comment.comment}
+                        commentLike={comment.likes}
+                        userId={comment.user_id}
+                        headers={headers}
+                        recipeId={recipeData.id}
+                        getCommentData={getCommentData}
+                        userProfile={userProfile}
+                        loginState={loginState}
+                      />
+                    ))}
+              </ul>
+            </div>
+          </form>
+
+          {boxAppear && (
+            <ModalBox
+              modalBoxContent="Delete this recipe?"
+              modalBtnContent="Delete"
+              modalOnClickHandler={handleDeleteRecipe}
+              modalCloseOnClickHandler={handleCloseBox}
+            />
           )}
         </div>
-
-        {/* SECOND BIG WRAP */}
-        <div className="detail-recipe__second-wrapper">
-          <div className="detail-recipe__second-wrapper-container">
-            {/* RECIPE NAME */}
-            <div className="detail-recipe__heading-wrapper">
-              <div className="detail-recipe__back-icon-wrapper">
-                <BackIconComponent
-                  onClickHandler={() => {
-                    navigate("/recipe-library");
-                  }}
-                  backClassName="back-icon back-icon--detail-recipe"
-                />
-                <h2 className="detail-recipe__heading">
-                  {handleCapitalize(recipeData.recipe_name)}
-                </h2>
-              </div>
-              <div className="detail-recipe__edit-icon-wrapper">
-                {loginState && !savedRecipe && (
-                  <img
-                    onClick={handleOnClickSaveRecipe}
-                    className="detail-recipe__save"
-                    src={unSavedIcon}
-                    alt="unsave-icon"
-                  />
-                )}
-                {loginState && savedRecipe && (
-                  <img
-                    onClick={handleOnClickUnSaveRecipe}
-                    className="detail-recipe__save"
-                    src={savedIcon}
-                    alt="save-icon"
-                  />
-                )}
-                {loginState &&
-                  userProfile &&
-                  recipeData &&
-                  userProfile.id === recipeData.poster_id && (
-                    <EditIconComponent
-                      onClickHandler={() => {
-                        navigate(`/edit-recipe/${recipeData.id}`);
-                      }}
-                      editClassName="edit-icon"
-                    />
-                  )}
-                {loginState &&
-                  userProfile &&
-                  recipeData &&
-                  userProfile.id === recipeData.poster_id && (
-                    <DeleteIconComponent
-                      onClickHandler={handleAppearBox}
-                      delClassName="del-icon"
-                    />
-                  )}
-              </div>
-            </div>
-            {/* DESCRIPTION */}
-            <p className="detail-recipe__text">
-              <span className="detail-recipe__small-text">
-                Recipe Description:
-              </span>{" "}
-              {recipeData.description}
-            </p>
-
-            <div className="detail-recipe__recipe-infor">
-              {/* READY TIME INFOR */}
-              <p className="detail-recipe__ready-time">
-                <span className="detail-recipe__small-text">Ready time:</span>{" "}
-                {recipeData.ready_time} minutes
-              </p>
-              {/* LIKES INFOR */}
-              <div className="detail-recipe__like-infor">
-                <p>
-                  <span className="detail-recipe__small-text">Likes:</span>{" "}
-                  {recipeData.likes}
-                </p>
-                <img
-                  onClick={handleOnclickLikeRecipe}
-                  className="detail-recipe__like-icon"
-                  src={likeIcon}
-                  alt="like-icon"
-                />
-              </div>
-            </div>
-
-            <div className="detail-recipe__ingre-step-boxes">
-              <div className="detail-recipe__ingre-step-box">
-                <img
-                  className="detail-recipe__ingredient-pic"
-                  src={ingredientPic}
-                  alt="ingredient-pic"
-                />
-                {/* INGREDIENT NUMBER */}
-                <div className="detail-recipe__ingredients-infor-wrapper">
-                  <h3>Ingredients:</h3>
-                  {ingredientArr.length > 0 && (
-                    <p className="detail-recipe__num">
-                      {ingredientArr.length} ingredients
-                    </p>
-                  )}
-                </div>
-                {/* INGREDIENTS */}
-                <ul className="detail-recipe__ingredients">
-                  {ingredientArr.length > 0 &&
-                    ingredientArr.map((ingredient) => (
-                      <li
-                        key={ingredient}
-                        className="detail-recipe__ingredient"
-                      >
-                        {ingredient}
-                      </li>
-                    ))}
-                </ul>
-              </div>
-
-              <div className="detail-recipe__ingre-step-box">
-                <img
-                  className="detail-recipe__step-pic"
-                  src={stepPic}
-                  alt="steps-pic"
-                />
-                {/* DIRECTION NUMBER */}
-                <div className="detail-recipe__directions-infor-wrapper">
-                  <h3>Steps to do:</h3>
-                  {directionsArr.length > 0 && (
-                    <p className="detail-recipe__num">
-                      {directionsArr.length} steps
-                    </p>
-                  )}
-                </div>
-                {/* DIRECTIONS */}
-                <ul className="detail-recipe__steps">
-                  {directionsArr.length > 0 &&
-                    directionsArr.map((step) => (
-                      <li key={step} className="detail-recipe__step">
-                        {step}
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* COMMENT SECTION */}
-        <form
-          onSubmit={handleOnSubmitComment}
-          className="detail-recipe__comment-form"
-        >
-          <div className="detail-recipe__comment-form-container">
-            <h3>Comments</h3>
-            <div className="detail-recipe__comment-flex-container">
-              {loginState && userProfile && (
-                <div className="detail-recipe__comment-wrapper">
-                  <Avatar avatarClassName="avatar" />
-
-                  <p className="detail-recipe__comment-poster">
-                    {handleCapitalize(userProfile.username)}
-                  </p>
-                </div>
-              )}
-              <div className="detail-recipe__comment-flex-item">
-                {loginState && (
-                  <textarea
-                    name="comment-box"
-                    className="detail-recipe__comment-textarea"
-                    wrap="hard"
-                    onChange={handleCommentInput}
-                    value={commentInput}
-                    placeholder="Comment here..."
-                  ></textarea>
-                )}
-                {loginState && (
-                  <ButtonComponent
-                    btnClassName="btn btn--recipe-comment"
-                    btnContent="Comment"
-                    btnType="submit"
-                  />
-                )}
-              </div>
-            </div>
-
-            <ul className="detail-recipe__comment-list">
-              {commentData.length > 0 &&
-                commentData
-                  .sort(
-                    (a, b) =>
-                      new Date(b.updated_at).getTime() -
-                      new Date(a.updated_at).getTime()
-                  )
-                  .map((comment) => (
-                    <RecipeCommentItem
-                      key={comment.id}
-                      commentId={comment.id}
-                      commentText={comment.comment}
-                      commentLike={comment.likes}
-                      userId={comment.user_id}
-                      headers={headers}
-                      recipeId={recipeData.id}
-                      getCommentData={getCommentData}
-                      userProfile={userProfile}
-                      loginState={loginState}
-                    />
-                  ))}
-            </ul>
-          </div>
-        </form>
-
-        {boxAppear && (
-          <ModalBox
-            modalBoxContent="Delete this recipe?"
-            modalBtnContent="Delete"
-            modalOnClickHandler={handleDeleteRecipe}
-            modalCloseOnClickHandler={handleCloseBox}
-          />
-        )}
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
