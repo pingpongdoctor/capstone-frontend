@@ -10,7 +10,7 @@ export default function HomePage({ loginState, closeMenu }) {
   const navigate = useNavigate();
   return (
     <div onMouseEnter={closeMenu} className="home-page">
-      <SliderComponent loginState={loginState} />
+      <SliderComponent />
       <div className="home-page__infor">
         <div className="home-page__wrapper">
           <img className="home-page__img" src={dumbbellPic} alt="dumbbell" />

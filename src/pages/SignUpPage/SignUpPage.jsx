@@ -176,6 +176,7 @@ export default function SignUpPage({
         .catch((error) => {
           if (error.response.data === "This email already exists") {
             alert("This email already exists");
+            console.log(error);
           }
         });
     } else {

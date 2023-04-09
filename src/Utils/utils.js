@@ -34,6 +34,7 @@ export const timeConvDetail = function (timestamp) {
 
 //FUNCTION TO CAPITALIZE WORDS
 export const handleCapitalize = (value) => {
+  console.log(value);
   let wordArr = value.split(" ");
   if (wordArr.length > 1) {
     let newWordArr = [];
