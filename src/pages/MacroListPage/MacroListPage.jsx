@@ -8,6 +8,7 @@ import { API_URL } from "../../Utils/utils";
 import ModalBox from "../../components/ModalBox/ModalBox";
 import InputBox from "../../components/InputBox/InputBox";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 
 export default function MacroLisPage({ loginState, closeMenu }) {
   //APPLY THE USE NAVIGATE
@@ -30,6 +31,8 @@ export default function MacroLisPage({ loginState, closeMenu }) {
   const [deleteMacroId, setDeleteMacroId] = useState("");
   //STATE FOR THE INPUT DATA OF THE SEARCH BOX
   const [searchData, setSearchData] = useState("");
+  //STATE TO MANIPULATE THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //FUNCTION TO HANDLE THE SEARCH DATA
   const handleSearchData = function (event) {
     setSearchData(event.target.value);
@@ -122,9 +125,19 @@ export default function MacroLisPage({ loginState, closeMenu }) {
     }
   };
 
+  //USEEFFECT TO SET DISPLAYNONECLASS FOR THE LOADING PAGE
+  useEffect(() => {
+    if (loginState && macroArr.length > 0) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 1200);
+    }
+  }, [loginState, macroArr.length]);
+
   if (loginState) {
     return (
       <div onMouseEnter={closeMenu} className="macro-list">
+        <LoadingComponent displayNoneClass={displayNoneClass} />
         <div className="macro-list__container">
           <div className="macro-list__wrapper">
             <h1 className="macro-list__heading">Macro List</h1>

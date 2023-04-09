@@ -12,6 +12,7 @@ import lineChartPic from "../../assets/images/line-chart.png";
 import meditationPic from "../../assets/images/meditation.png";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 import { API_URL } from "../../Utils/utils";
 import { handleFilterMinusOperator, handleCapitalize } from "../../Utils/utils";
 import {
@@ -48,6 +49,8 @@ export default function BuildMacroPage({ userProfile, loginState, closeMenu }) {
       Authorization: `Bearer ${jwtToken}`,
     },
   };
+  //STATE TO CONTROL THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //THE STATES FOR WEIGHT, HEIGHT, AGE, GENDER
   const [currentWeight, setCurrentWeight] = useState("");
   const [age, setAge] = useState("");
@@ -532,9 +535,19 @@ export default function BuildMacroPage({ userProfile, loginState, closeMenu }) {
     ],
   };
 
+  //USEEFFECT TO SET THE DISPLAYNONECLASS STATE FOR THE LOADING PAGE
+  useEffect(() => {
+    if (loginState && userProfile) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 1200);
+    }
+  }, [loginState, userProfile]);
+
   if (loginState) {
     return (
       <div onMouseEnter={closeMenu} className="macro-page">
+        <LoadingComponent displayNoneClass={displayNoneClass} />
         <div className="macro-page__container">
           <div className="macro-page__welcome">
             <h2>

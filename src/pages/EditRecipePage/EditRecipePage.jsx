@@ -7,6 +7,7 @@ import axios from "axios";
 import BackIconComponent from "../../components/BackIconComponent/BackIconComponent";
 import { handleFilterMinusOperator } from "../../Utils/utils";
 import { CircularProgress } from "@mui/material";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 
 const API_URL = process.env.REACT_APP_API_URL || "";
 const CLOUD_URL = process.env.REACT_APP_CLOUDNARY_URL;
@@ -25,6 +26,8 @@ export default function EditRecipePage({ loginState, userProfile, closeMenu }) {
   const navigate = useNavigate();
   //GET RECIPE ID FROM THE USE PARAMS
   const { recipeId } = useParams();
+  //STATE TO CONTROL THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //STATE TO STORE THE POSTER NAME
   const [posterName, setPosterName] = useState("");
   //STATE TO STORE THE RECIPE DATA
@@ -361,217 +364,243 @@ export default function EditRecipePage({ loginState, userProfile, closeMenu }) {
     }
   }, [recipeData]);
 
-  if (
-    loginState &&
-    userProfile &&
-    recipeData &&
-    userProfile.id === recipeData.poster_id
-  ) {
+  //USEEFFECT TO SET THE DISPLAYNONE STATE OF THE LOADING PAGE
+  useEffect(() => {
+    if (
+      loginState &&
+      userProfile &&
+      recipeData &&
+      userProfile.id === recipeData.poster_id
+    ) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 1200);
+    }
+  }, [loginState, userProfile, recipeData]);
+
+  if (loginState) {
     return (
-      <form
-        onMouseEnter={closeMenu}
-        onSubmit={handleOnSubmitUpdateRecipe}
-        className="edit-recipe"
-      >
-        <div className="edit-recipe__container">
-          <div className="edit-recipe__back-icon-wrapper">
-            <BackIconComponent
-              onClickHandler={() => {
-                navigate(`/recipe-library/${recipeId}`);
-              }}
-              backClassName="back-icon"
-            />
-            <h1>Edit Recipe</h1>
-          </div>
-          <h3 className="edit-recipe__sub-heading">Author: {posterName}</h3>
-          <div className="edit-recipe__big-container">
-            {/* RECIPE IMAGE */}
-            <div className="edit-recipe__wrapper">
-              <label className="edit-recipe__label" htmlFor="uploaded-image">
-                Edit recipe image
-              </label>
-
-              <img
-                className="edit-recipe__previewed-image"
-                src={previewFile || recipeData.image}
-                alt="uploaded-pic"
-              />
-              <input
-                className={`edit-recipe__file-input ${inputError}`}
-                onChange={handleImage}
-                id="uploaded-image"
-                name="uploaded-image"
-                type="file"
-              />
-            </div>
-
-            <div className="edit-recipe__fields-wrapper">
-              {/* RECIPE NAME */}
-              <div className="edit-recipe__field">
-                <label className="edit-recipe__label" htmlFor="name">
-                  Recipe name
-                </label>
-                <InputBox
-                  inputValue={recipeName}
-                  inputOnChange={handleRecipeName}
-                  inputClassName={`input-box ${error}`}
-                  inputName="name"
-                  inputPlaceholder={recipeData.recipe_name}
-                  inputType="text"
-                />
-              </div>
-              {/* DESCRIPTION */}
-              <div className="edit-recipe__field">
-                <label className="edit-recipe__label" htmlFor="descrittion">
-                  Description
-                </label>
-                <textarea
-                  value={description}
-                  onChange={handleDescription}
-                  className={`edit-recipe__descript-textarea edit-recipe__textarea ${inputError}`}
-                  placeholder={recipeData.description}
-                  name="description"
-                  id="description"
-                  wrap="hard"
-                ></textarea>
-              </div>
-              {/* DIFFICULTY LEVEL */}
-              <div className="edit-recipe__field">
-                <label className="edit-recipe__label" htmlFor="level">
-                  Difficulty level
-                </label>
-                <select
-                  value={level || recipeData.level}
-                  onChange={handleLevel}
-                  className={`edit-recipe__select ${inputError}`}
-                  name="level"
-                  id="level"
-                >
-                  <option value="">Choose here</option>
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                </select>
-              </div>
-              {/* READY TIME */}
-              <div className="edit-recipe__field">
-                <label className="edit-recipe__label" htmlFor="time">
-                  Ready time
-                </label>
-                <InputBox
-                  inputValue={readyTime}
-                  inputOnChange={handleReadyTime}
-                  inputClassName={`input-box ${error}`}
-                  inputName="time"
-                  inputPlaceholder={`${recipeData.ready_time} minutes`}
-                  inputType="number"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* FLEX CONTAINER */}
-          <div className="edit-recipe__flex-container">
-            {/* FLEX ITEM */}
-            <div className="edit-recipe__flex-item">
-              {/* INGREDIENTS */}
-              <div className="edit-recipe__change-num-wrapper">
-                <label className="edit-recipe__label" htmlFor="step">
-                  Ingredients
-                </label>
-                <p
-                  className="edit-recipe__change-num"
-                  onClick={handleIncreaseIngreBoxCount}
-                >
-                  +
-                </p>
-                <p
-                  className="edit-recipe__change-num"
-                  onClick={handleDecreaseIngreBoxCount}
-                >
-                  -
-                </p>
-              </div>
-              {ingreArr &&
-                ingreBoxNum &&
-                handleCreateNumArr(ingreBoxNum).map((ingre, index) => (
-                  <textarea
-                    className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
-                      index + 1
-                    } ${inputError}`}
-                    onChange={handleIngredientStateArr}
-                    key={ingre}
-                    placeholder={ingreArr[index] || `Ingredient ${index + 1}`}
-                    id={index}
-                  ></textarea>
-                ))}
-              <div className="edit-recipe__btn-wrapper">
-                <ButtonComponent
-                  btnClassName="btn btn--edit-recipe-submit btn--tablet"
-                  btnContent="Post to the recipe library"
-                  btnType="submit"
-                />
-
-                {progress && (
-                  <div className="edit-recipe__progress edit-recipe__progress--tablet">
-                    <CircularProgress />
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* FLEX ITEM */}
-            <div className="edit-recipe__flex-item">
-              {/* STEPS */}
-              <div>
-                <div className="edit-recipe__change-num-wrapper">
-                  <label className="edit-recipe__label" htmlFor="step">
-                    Steps
-                  </label>
-                  <p
-                    className="edit-recipe__change-num"
-                    onClick={handleIncreaseStepBoxCount}
-                  >
-                    +
-                  </p>
-                  <p
-                    className="edit-recipe__change-num"
-                    onClick={handleDecreaseStepBoxCount}
-                  >
-                    -
-                  </p>
+      <div>
+        <LoadingComponent displayNoneClass={displayNoneClass} />
+        {userProfile &&
+          recipeData &&
+          userProfile.id === recipeData.poster_id && (
+            <form
+              onMouseEnter={closeMenu}
+              onSubmit={handleOnSubmitUpdateRecipe}
+              className="edit-recipe"
+            >
+              <div className="edit-recipe__container">
+                <div className="edit-recipe__back-icon-wrapper">
+                  <BackIconComponent
+                    onClickHandler={() => {
+                      navigate(`/recipe-library/${recipeId}`);
+                    }}
+                    backClassName="back-icon"
+                  />
+                  <h1>Edit Recipe</h1>
                 </div>
-                {stepArr &&
-                  stepBoxNum &&
-                  handleCreateNumArr(stepBoxNum).map((step, index) => (
-                    <textarea
-                      className={`edit-recipe__textarea edit-recipe__step-textarea edit-recipe__input-${
-                        index + 1
-                      } ${inputError}`}
-                      onChange={handleStepStateArr}
-                      key={step}
-                      placeholder={stepArr[index] || `Step ${index + 1}`}
-                      id={index}
-                    ></textarea>
-                  ))}
-              </div>
-            </div>
-          </div>
-          <div className="edit-recipe__btn-wrapper">
-            <ButtonComponent
-              btnClassName="btn btn--edit-recipe-submit btn--mobile"
-              btnContent="Post to the recipe library"
-              btnType="submit"
-            />
+                <h3 className="edit-recipe__sub-heading">
+                  Author: {posterName}
+                </h3>
+                <div className="edit-recipe__big-container">
+                  {/* RECIPE IMAGE */}
+                  <div className="edit-recipe__wrapper">
+                    <label
+                      className="edit-recipe__label"
+                      htmlFor="uploaded-image"
+                    >
+                      Edit recipe image
+                    </label>
 
-            {progress && (
-              <div className="edit-recipe__progress edit-recipe__progress--mobile">
-                <CircularProgress />
+                    <img
+                      className="edit-recipe__previewed-image"
+                      src={previewFile || recipeData.image}
+                      alt="uploaded-pic"
+                    />
+                    <input
+                      className={`edit-recipe__file-input ${inputError}`}
+                      onChange={handleImage}
+                      id="uploaded-image"
+                      name="uploaded-image"
+                      type="file"
+                    />
+                  </div>
+
+                  <div className="edit-recipe__fields-wrapper">
+                    {/* RECIPE NAME */}
+                    <div className="edit-recipe__field">
+                      <label className="edit-recipe__label" htmlFor="name">
+                        Recipe name
+                      </label>
+                      <InputBox
+                        inputValue={recipeName}
+                        inputOnChange={handleRecipeName}
+                        inputClassName={`input-box ${error}`}
+                        inputName="name"
+                        inputPlaceholder={recipeData.recipe_name}
+                        inputType="text"
+                      />
+                    </div>
+                    {/* DESCRIPTION */}
+                    <div className="edit-recipe__field">
+                      <label
+                        className="edit-recipe__label"
+                        htmlFor="descrittion"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                        value={description}
+                        onChange={handleDescription}
+                        className={`edit-recipe__descript-textarea edit-recipe__textarea ${inputError}`}
+                        placeholder={recipeData.description}
+                        name="description"
+                        id="description"
+                        wrap="hard"
+                      ></textarea>
+                    </div>
+                    {/* DIFFICULTY LEVEL */}
+                    <div className="edit-recipe__field">
+                      <label className="edit-recipe__label" htmlFor="level">
+                        Difficulty level
+                      </label>
+                      <select
+                        value={level || recipeData.level}
+                        onChange={handleLevel}
+                        className={`edit-recipe__select ${inputError}`}
+                        name="level"
+                        id="level"
+                      >
+                        <option value="">Choose here</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                      </select>
+                    </div>
+                    {/* READY TIME */}
+                    <div className="edit-recipe__field">
+                      <label className="edit-recipe__label" htmlFor="time">
+                        Ready time
+                      </label>
+                      <InputBox
+                        inputValue={readyTime}
+                        inputOnChange={handleReadyTime}
+                        inputClassName={`input-box ${error}`}
+                        inputName="time"
+                        inputPlaceholder={`${recipeData.ready_time} minutes`}
+                        inputType="number"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* FLEX CONTAINER */}
+                <div className="edit-recipe__flex-container">
+                  {/* FLEX ITEM */}
+                  <div className="edit-recipe__flex-item">
+                    {/* INGREDIENTS */}
+                    <div className="edit-recipe__change-num-wrapper">
+                      <label className="edit-recipe__label" htmlFor="step">
+                        Ingredients
+                      </label>
+                      <p
+                        className="edit-recipe__change-num"
+                        onClick={handleIncreaseIngreBoxCount}
+                      >
+                        +
+                      </p>
+                      <p
+                        className="edit-recipe__change-num"
+                        onClick={handleDecreaseIngreBoxCount}
+                      >
+                        -
+                      </p>
+                    </div>
+                    {ingreArr &&
+                      ingreBoxNum &&
+                      handleCreateNumArr(ingreBoxNum).map((ingre, index) => (
+                        <textarea
+                          className={`edit-recipe__textarea edit-recipe__ingre-textarea edit-recipe__input-${
+                            index + 1
+                          } ${inputError}`}
+                          onChange={handleIngredientStateArr}
+                          key={ingre}
+                          placeholder={
+                            ingreArr[index] || `Ingredient ${index + 1}`
+                          }
+                          id={index}
+                        ></textarea>
+                      ))}
+                    <div className="edit-recipe__btn-wrapper">
+                      <ButtonComponent
+                        btnClassName="btn btn--edit-recipe-submit btn--tablet"
+                        btnContent="Post to the recipe library"
+                        btnType="submit"
+                      />
+
+                      {progress && (
+                        <div className="edit-recipe__progress edit-recipe__progress--tablet">
+                          <CircularProgress />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* FLEX ITEM */}
+                  <div className="edit-recipe__flex-item">
+                    {/* STEPS */}
+                    <div>
+                      <div className="edit-recipe__change-num-wrapper">
+                        <label className="edit-recipe__label" htmlFor="step">
+                          Steps
+                        </label>
+                        <p
+                          className="edit-recipe__change-num"
+                          onClick={handleIncreaseStepBoxCount}
+                        >
+                          +
+                        </p>
+                        <p
+                          className="edit-recipe__change-num"
+                          onClick={handleDecreaseStepBoxCount}
+                        >
+                          -
+                        </p>
+                      </div>
+                      {stepArr &&
+                        stepBoxNum &&
+                        handleCreateNumArr(stepBoxNum).map((step, index) => (
+                          <textarea
+                            className={`edit-recipe__textarea edit-recipe__step-textarea edit-recipe__input-${
+                              index + 1
+                            } ${inputError}`}
+                            onChange={handleStepStateArr}
+                            key={step}
+                            placeholder={stepArr[index] || `Step ${index + 1}`}
+                            id={index}
+                          ></textarea>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="edit-recipe__btn-wrapper">
+                  <ButtonComponent
+                    btnClassName="btn btn--edit-recipe-submit btn--mobile"
+                    btnContent="Post to the recipe library"
+                    btnType="submit"
+                  />
+
+                  {progress && (
+                    <div className="edit-recipe__progress edit-recipe__progress--mobile">
+                      <CircularProgress />
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-      </form>
+            </form>
+          )}
+      </div>
     );
   }
 }

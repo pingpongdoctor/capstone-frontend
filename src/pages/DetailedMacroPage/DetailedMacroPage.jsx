@@ -17,6 +17,7 @@ import {
   LineElement,
   Title,
 } from "chart.js";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 ChartJS.register(
   ArcElement,
   CategoryScale,
