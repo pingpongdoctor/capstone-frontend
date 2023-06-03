@@ -14,23 +14,23 @@
   background-color: rgb(233, 231, 91);
   z-index: 3;
   margin: 0;
-}
 
-.loading-component__text {
-  color: #e26e5cfe;
-  font-size: 3rem;
-  font-family: "Delicious Handrawn", cursive;
-  span {
-    font-size: 4rem;
+  &__text {
+    color: #e26e5cfe;
+    font-size: 3rem;
+    font-family: "Delicious Handrawn", cursive;
+    span {
+      font-size: 4rem;
+      @include breakpoint-maxwidth(500px) {
+        font-size: 3rem;
+      }
+    }
     @include breakpoint-maxwidth(500px) {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
-  @include breakpoint-maxwidth(500px) {
-    font-size: 2rem;
-  }
-}
 
-.loading-component__display-none {
-  display: none;
+  &__display-none {
+    display: none;
+  }
 }
