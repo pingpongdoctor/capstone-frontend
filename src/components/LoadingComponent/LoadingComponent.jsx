@@ -3,11 +3,16 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useWindowSize } from "../../Utils/utils";
+import { useLocation } from "react-router-dom";
 export default function LoadingComponent({ displayNoneClass }) {
+  //GET CURRENT PATH
+  const currentPath = useLocation().pathname;
   //LOADING PERCENT STATE
   const [loadPercent, setLoadPercent] = useState(0);
   //LOADING COMPONENT SIZE
   const [size, setSize] = useState(80);
+  //SHOW LOADING PERCENT STATE
+  const [showPercent, setShowPercent] = useState(false);
   //LOADING DOT TEXT
   const [dotText, setDotText] = useState(".");
   //GET THE CURRENT WIDHT OF THE VIEWPORT
@@ -36,6 +41,15 @@ export default function LoadingComponent({ displayNoneClass }) {
     }
   }, 700);
 
+  //USEEFFECT TO SET SHOWPERCENT STATE
+  useEffect(() => {
+    if (currentPath === "/" || currentPath === "/recipe-library") {
+      setShowPercent(true);
+    } else {
+      setShowPercent(false);
+    }
+  }, [currentPath]);
+
   return (
     <div className={`loading-component ${displayNoneClass}`}>
       <div>
@@ -49,11 +63,9 @@ export default function LoadingComponent({ displayNoneClass }) {
 
       <p className="loading-component__text">{`LOADING${dotText}`}</p>
 
-      {showPercent && (
-        <p className="loading-component__text">
-          LOADING <span>{loadPercent}%</span>
-        </p>
-      )}
+      <p className="loading-component__text">
+        LOADING <span>{loadPercent}%</span>
+      </p>
     </div>
   );
 }
