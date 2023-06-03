@@ -18,7 +18,9 @@ export default function HeaderComponent({
   const navigate = useNavigate();
   const handleLoginDemoAccountAndBackToHome = function () {
     handleLoginExperienceAccount();
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
   if (currentRoute !== "/login" && currentRoute !== "/sign-up") {
     return (

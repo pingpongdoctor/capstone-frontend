@@ -100,6 +100,7 @@ function App() {
           setEmail("");
           setPassword("");
           setLoginErr("");
+          alert("You are logged in with demo account");
         }
       })
       .catch((e) => {
