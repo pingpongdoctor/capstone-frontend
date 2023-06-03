@@ -6,6 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../Utils/utils";
 import RecipeSavedItem from "../../components/RecipeSavedItem/RecipeSavedItem";
 import NotificationComponent from "../../components/NotificationComponent/NotificationComponent";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 export default function RecipeListPage({ loginState, userProfile, closeMenu }) {
   //GET JWT TOKEN FROM LOCAL STORAGE
   const jwtToken = localStorage.getItem("jwt_token");
