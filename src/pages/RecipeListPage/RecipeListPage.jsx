@@ -23,6 +23,8 @@ export default function RecipeListPage({ loginState, userProfile, closeMenu }) {
   const [boxAppear, setBoxAppear] = useState(false);
   //STATE TO STORE THE DELETED RECIPE ID
   const [deletedRecipeId, setDeletedRecipeId] = useState("");
+  //STATE TO MANIPULATE THE LOADING PAGE
+  const [displayNoneClass, setDisplayNoneClass] = useState("");
   //FUNCTION TO SET THE STATE OF SEARCH DATA
   const handleSearchData = function (event) {
     setSearchData(event.target.value);
@@ -106,9 +108,19 @@ export default function RecipeListPage({ loginState, userProfile, closeMenu }) {
     setRecipeArr(newArr);
   };
 
+  //USEEFFECT TO SET DISPLAYNONECLASS FOR THE LOADING PAGE
+  useEffect(() => {
+    if (loginState && recipeArr.length > 0) {
+      setTimeout(() => {
+        setDisplayNoneClass("loading-component__display-none");
+      }, 1200);
+    }
+  }, [loginState, recipeArr.length]);
+
   if (loginState) {
     return (
       <div onMouseEnter={closeMenu} className="recipe-list">
+        <LoadingComponent displayNoneClass={displayNoneClass} />
         <div className="recipe-list__container">
           <h1 className="recipe-list__heading">Recipe List</h1>
           {recipeArr.length > 0 && (
