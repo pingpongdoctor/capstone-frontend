@@ -9,22 +9,22 @@ export default function SideMenu({ sideMenuState }) {
           <li>HomePage</li>
         </Link>
         <Link to={"/build-macro"} className="side-menu__item">
-          <li>Build Macronutrients</li>
+          <li>Build Macros</li>
         </Link>
         <Link to={"/macro-list"} className="side-menu__item">
-          <li>Macro List</li>
+          <li>Your Macros</li>
         </Link>
         <Link to={"/add-macro"} className="side-menu__item">
-          <li>Add New Macro</li>
+          <li>Add Macro</li>
         </Link>
         <Link to={"/recipe-library"} className="side-menu__item">
           <li>Recipe Library</li>
         </Link>
         <Link to={"/recipe-list"} className="side-menu__item">
-          <li>Recipe List</li>
+          <li>Your Recipes</li>
         </Link>
         <Link to={"/add-recipe"} className="side-menu__item">
-          <li>Add New Recipe</li>
+          <li>Add Recipe</li>
         </Link>
         {/* <li className="side-menu__item">Track Body Indexes</li> */}
         {/* <li className="side-menu__item">Nutritional Facts</li>
